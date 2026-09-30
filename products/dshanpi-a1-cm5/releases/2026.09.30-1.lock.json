@@ -5,7 +5,7 @@
   "revision": "25.11.0-trunk.20260930.1",
   "sources": {
     "armbianos": {
-      "commit": "93fad06e5a8879b751ee9fed4fc3663a49c8c97d"
+      "commit": "4a0114be3c666305ad3463caecc95a82b8238d08"
     },
     "dspi_config": {
       "commit": "02315f9948179ab5c5149acd5bab4e3138de7b48"
