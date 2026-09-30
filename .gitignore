@@ -1,0 +1,4 @@
+/output/
+/work/
+*.local.json
+__pycache__/

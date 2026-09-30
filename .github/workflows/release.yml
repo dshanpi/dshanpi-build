@@ -1,0 +1,95 @@
+name: Build and publish DShanPI product
+
+on:
+  workflow_dispatch:
+    inputs:
+      product:
+        description: Product directory name
+        required: true
+        default: dshanpi-a1-cm5
+      version:
+        description: Release version (YYYY.MM.DD-N)
+        required: true
+      channel:
+        description: Build testing or promote the exact tested release
+        required: true
+        type: choice
+        options: [testing, stable]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: apt-${{ inputs.channel }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 720
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install release tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y dpkg-dev jq patchelf rsync sshpass xz-utils
+
+      - name: Configure APT signing key
+        env:
+          APT_GPG_PRIVATE_KEY: ${{ secrets.APT_GPG_PRIVATE_KEY }}
+          APT_GPG_KEY_FINGERPRINT: ${{ secrets.APT_GPG_KEY_FINGERPRINT }}
+        run: |
+          set -euo pipefail
+          printf '%s' "$APT_GPG_PRIVATE_KEY" | gpg --batch --import
+          test "$(gpg --batch --with-colons --list-secret-keys "$APT_GPG_KEY_FINGERPRINT" | awk -F: '$1 == "fpr" {print $10; exit}')" = "$APT_GPG_KEY_FINGERPRINT"
+          mkdir -p output
+          gpg --batch --armor --export "$APT_GPG_KEY_FINGERPRINT" > output/dshanpi-archive.asc
+
+      - name: Fetch current immutable APT state
+        env:
+          SSHPASS: ${{ secrets.DL_PASSWORD }}
+          DL_HOST: ${{ secrets.DL_HOST }}
+          DL_PORT: ${{ secrets.DL_PORT }}
+          DL_USERNAME: ${{ secrets.DL_USERNAME }}
+          DL_KNOWN_HOSTS: ${{ secrets.DL_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          printf '%s\n' "$DL_KNOWN_HOSTS" > output/known_hosts
+          mkdir -p output/repository
+          sshpass -e rsync -azL -e "ssh -p $DL_PORT -o StrictHostKeyChecking=yes -o UserKnownHostsFile=$PWD/output/known_hosts" \
+            "$DL_USERNAME@$DL_HOST:/home1/dlfile/apt/" output/repository/
+
+      - name: Build product release
+        if: ${{ inputs.channel == 'testing' }}
+        env:
+          APT_PUBLIC_KEY_FILE: ${{ github.workspace }}/output/dshanpi-archive.asc
+        run: |
+          scripts/build-product.sh "${{ inputs.product }}" \
+            "products/${{ inputs.product }}/releases/${{ inputs.version }}.lock.json"
+
+      - name: Build signed testing repository
+        if: ${{ inputs.channel == 'testing' }}
+        env:
+          APT_GPG_KEY_FINGERPRINT: ${{ secrets.APT_GPG_KEY_FINGERPRINT }}
+        run: |
+          scripts/build-apt-repository.sh testing "${{ inputs.product }}" "${{ inputs.version }}" \
+            "output/${{ inputs.product }}/${{ inputs.version }}/packages" output/repository \
+            "$APT_GPG_KEY_FINGERPRINT"
+
+      - name: Promote exact testing cohort
+        if: ${{ inputs.channel == 'stable' }}
+        env:
+          APT_GPG_KEY_FINGERPRINT: ${{ secrets.APT_GPG_KEY_FINGERPRINT }}
+        run: |
+          scripts/promote-apt-release.sh "${{ inputs.product }}" "${{ inputs.version }}" \
+            output/repository "$APT_GPG_KEY_FINGERPRINT"
+
+      - name: Publish verified repository candidate
+        env:
+          DL_HOST: ${{ secrets.DL_HOST }}
+          DL_PORT: ${{ secrets.DL_PORT }}
+          DL_USERNAME: ${{ secrets.DL_USERNAME }}
+          DL_PASSWORD: ${{ secrets.DL_PASSWORD }}
+          DL_KNOWN_HOSTS: ${{ github.workspace }}/output/known_hosts
+        run: scripts/publish-apt.sh output/repository

@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "product": "dshanpi-a1-cm5",
+  "distribution": "ubuntu",
+  "codename": "noble",
+  "testing_suite": "noble-testing",
+  "component": "dshanpi-a1-cm5",
+  "architectures": ["arm64", "all"],
+  "sources": {
+    "armbianos": "https://github.com/dshanpi/ArmBianOS.git",
+    "dspi_config": "https://github.com/dshanpi/dspi-config.git"
+  },
+  "armbian": {
+    "board": "dshanpi-a1-cm5",
+    "branch": "vendor",
+    "release": "noble",
+    "desktop_environment": "gnome",
+    "desktop_config": "config_base"
+  },
+  "common_packages": [
+    "dshanpi-archive-keyring",
+    "dspi-config"
+  ],
+  "required_packages": [
+    {"name": "base-files", "arch": "arm64"},
+    {"name": "armbian-bsp-cli-dshanpi-a1-cm5-vendor", "arch": "arm64"},
+    {"name": "armbian-bsp-desktop-dshanpi-a1-cm5-vendor", "arch": "arm64"},
+    {"name": "linux-image-vendor-rk3576-dshanpi-a1-cm5", "arch": "arm64"},
+    {"name": "linux-dtb-vendor-rk3576-dshanpi-a1-cm5", "arch": "arm64"},
+    {"name": "linux-headers-vendor-rk3576-dshanpi-a1-cm5", "arch": "arm64"},
+    {"name": "aic8800-firmware", "arch": "all"},
+    {"name": "aic8800-sdio-dkms", "arch": "all"},
+    {"name": "camera-engine-rkaiq", "arch": "arm64"},
+    {"name": "gstreamer1.0-rockchip1", "arch": "arm64"},
+    {"name": "librockchip-mpp1", "arch": "arm64"},
+    {"name": "librockchip-mpp-dev", "arch": "arm64"},
+    {"name": "librockchip-vpu0", "arch": "arm64"},
+    {"name": "rockchip-mpp-demos", "arch": "arm64"},
+    {"name": "librga2", "arch": "arm64"},
+    {"name": "librga-dev", "arch": "arm64"},
+    {"name": "dshanpi-archive-keyring", "arch": "all"},
+    {"name": "dshanpi-a1-cm5-repository", "arch": "all"},
+    {"name": "dspi-config", "arch": "all"}
+  ],
+  "release_meta": {
+    "core": "dshanpi-a1-cm5-release-core",
+    "desktop": "dshanpi-a1-cm5-release-desktop",
+    "desktop_only_dependencies": ["armbian-bsp-desktop-dshanpi-a1-cm5-vendor"]
+  },
+  "forbidden_package_patterns": [
+    "^linux-u-boot-",
+    "^linux-libc-dev-"
+  ]
+}
