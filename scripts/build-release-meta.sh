@@ -56,7 +56,13 @@ join_dependencies() {
 core_package=$(jq -r .release_meta.core "$product_config")
 desktop_package=$(jq -r .release_meta.desktop "$product_config")
 core_depends=$(join_dependencies "${core_dependencies[@]}")
-desktop_depends=$(join_dependencies "$core_package (= $release_version)" "${desktop_dependencies[@]}")
+# Keep both release markers independently installable while an image is being
+# assembled.  The product APT repository is intentionally not enabled until
+# the final image stage, so making the desktop marker depend on the core marker
+# would require an unpublished package to be discoverable by APT.  Expanding
+# the tested core cohort here preserves the same exact-version lock without
+# introducing that bootstrap dependency.
+desktop_depends=$(join_dependencies "${core_dependencies[@]}" "${desktop_dependencies[@]}")
 
 build_meta() {
 	local package=$1 depends=$2 description=$3 root="$work_dir/$package"

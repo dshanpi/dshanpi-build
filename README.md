@@ -37,7 +37,7 @@
 # 构建 dspi-config、APT 客户端、ArmBian 包和 CLI/Desktop 镜像
 scripts/build-product.sh dshanpi-a1-cm5 path/to/release.lock.json
 
-# 从完整包目录生成精确依赖的 core/desktop 元包
+# 从完整包目录生成精确依赖且可独立安装的 core/desktop 元包
 scripts/build-release-meta.sh dshanpi-a1-cm5 2026.09.30-1 packages/
 
 # 在已有仓库副本上加入 testing 候选并重新生成/签名 APT

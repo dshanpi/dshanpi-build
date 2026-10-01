@@ -64,6 +64,13 @@ dpkg-deb -f "$packages/dshanpi-a1-cm5-release-core_2026.09.30-1_all.deb" Depends
 	grep -F 'linux-image-vendor-rk3576-dshanpi-a1-cm5 (= 1.0.0-1)' >/dev/null
 dpkg-deb -f "$packages/dshanpi-a1-cm5-release-core_2026.09.30-1_all.deb" Depends |
 	grep -F 'armbian-bsp-desktop' && { echo 'desktop dependency leaked into core meta' >&2; exit 1; } || true
+desktop_depends=$(dpkg-deb -f "$packages/dshanpi-a1-cm5-release-desktop_2026.09.30-1_all.deb" Depends)
+grep -F 'linux-image-vendor-rk3576-dshanpi-a1-cm5 (= 1.0.0-1)' <<<"$desktop_depends" >/dev/null
+grep -F 'armbian-bsp-desktop-dshanpi-a1-cm5-vendor (= 1.0.0-1)' <<<"$desktop_depends" >/dev/null
+grep -F 'dshanpi-a1-cm5-release-core' <<<"$desktop_depends" && {
+	echo 'desktop meta must be independently installable during image assembly' >&2
+	exit 1
+} || true
 
 repository="$test_root/repository"
 "$source_root/scripts/build-apt-repository.sh" testing dshanpi-a1-cm5 2026.09.30-1 \
