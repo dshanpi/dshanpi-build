@@ -77,6 +77,7 @@ common_args=(build "BOARD=$board" "BRANCH=$branch" "RELEASE=$release" \
 
 "$script_dir/collect-packages.sh" "$product" "$output_root/packages" \
 	"$armbian_dir/output/debs" "$armbian_dir/output/dshanpi-packages" \
+	"$armbian_dir/debs/mpp" "$armbian_dir/debs/rga" "$armbian_dir/debs/gsteamer" \
 	"$output_root/client" "$dspi_output"
 "$script_dir/build-release-meta.sh" "$product" "$version" "$output_root/packages"
 core_meta=$(find "$output_root/packages" -maxdepth 1 -name "${product}-release-core_${version}_all.deb" -print -quit)
