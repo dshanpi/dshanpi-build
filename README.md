@@ -58,6 +58,7 @@ scripts/publish-apt.sh repository/
 
 APT 地址统一为 `https://dl.100ask.net/apt`。stable suite 为 `noble`，testing suite 为
 `noble-testing`；公共包位于 `common` component，板卡包位于产品同名 component。
+testing 设置 `NotAutomatic`，不会被普通升级命令误装；stable 保持正常 APT 优先级。
 所有历史版本默认保留。U-Boot 和 `linux-libc-dev` 不进入在线升级集合。
 
 ## 发布门禁

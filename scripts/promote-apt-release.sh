@@ -17,7 +17,8 @@ base_state=none
 python3 "$script_dir/repository_tool.py" promote "$product_config" "$version" "$repository_dir"
 python3 "$script_dir/repository_tool.py" render "$repository_dir" \
 	--ensure-suite "$suite" --ensure-suite "$testing_suite" \
-	--ensure-component common --ensure-component "$component"
+	--ensure-component common --ensure-component "$component" \
+	--manual-suite "$testing_suite"
 cat > "$repository_dir/PUBLICATION.json" <<- EOF
 {
   "schema_version": 1,

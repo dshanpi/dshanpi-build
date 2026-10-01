@@ -294,9 +294,9 @@ def render(args: argparse.Namespace) -> None:
             f"Architectures: {' '.join(sorted(architectures))}",
             f"Components: {' '.join(sorted(components))}",
             "Description: DShanPI signed platform packages",
-            "NotAutomatic: yes",
-            "ButAutomaticUpgrades: no",
         ]
+        if suite in args.manual_suite:
+            fields.extend(["NotAutomatic: yes", "ButAutomaticUpgrades: no"])
         indexed = sorted(
             path for path in dist.rglob("*")
             if path.is_file() and path.name not in {"Release", "InRelease", "Release.gpg"}
@@ -332,6 +332,7 @@ def main() -> None:
     render_command.add_argument("repository", type=Path)
     render_command.add_argument("--ensure-suite", action="append", default=[])
     render_command.add_argument("--ensure-component", action="append", default=[])
+    render_command.add_argument("--manual-suite", action="append", default=[])
     render_command.set_defaults(func=render)
     args = parser.parse_args()
     args.func(args)

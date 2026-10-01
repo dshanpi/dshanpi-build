@@ -77,6 +77,12 @@ repository="$test_root/repository"
 	"$packages" "$repository" "$fingerprint" >/dev/null
 gpg --batch --yes --dearmor --output "$test_root/public.gpg" "$test_root/public.asc"
 gpgv --keyring "$test_root/public.gpg" "$repository/dists/noble-testing/InRelease" >/dev/null 2>&1
+grep -Fx 'NotAutomatic: yes' "$repository/dists/noble-testing/Release" >/dev/null
+grep -Fx 'ButAutomaticUpgrades: no' "$repository/dists/noble-testing/Release" >/dev/null
+if grep -Eq '^(NotAutomatic|ButAutomaticUpgrades):' "$repository/dists/noble/Release"; then
+	echo 'stable suite unexpectedly disables automatic upgrades' >&2
+	exit 1
+fi
 xz -dc "$repository/dists/noble-testing/dshanpi-a1-cm5/binary-arm64/Packages.xz" |
 	grep -Fx 'Package: linux-image-vendor-rk3576-dshanpi-a1-cm5' >/dev/null
 xz -dc "$repository/dists/noble-testing/common/binary-all/Packages.xz" |
@@ -88,11 +94,20 @@ if [[ -n "${DL_APT_VERIFY_SCRIPT:-}" ]]; then
 fi
 
 before=$(sha256sum "$repository/pool/dshanpi-a1-cm5"/*/*/*.deb | sha256sum | awk '{print $1}')
+testing_state="$test_root/testing-state"
+cp -a "$repository" "$testing_state"
 "$source_root/scripts/promote-apt-release.sh" dshanpi-a1-cm5 2026.09.30-1 \
 	"$repository" "$fingerprint" >/dev/null
 after=$(sha256sum "$repository/pool/dshanpi-a1-cm5"/*/*/*.deb | sha256sum | awk '{print $1}')
 [[ "$before" == "$after" ]]
 gpgv --keyring "$test_root/public.gpg" "$repository/dists/noble/InRelease" >/dev/null 2>&1
+if grep -Eq '^(NotAutomatic|ButAutomaticUpgrades):' "$repository/dists/noble/Release"; then
+	echo 'promoted stable suite unexpectedly disables automatic upgrades' >&2
+	exit 1
+fi
+if [[ -n "${DL_APT_VERIFY_SCRIPT:-}" ]]; then
+	python3 "$DL_APT_VERIFY_SCRIPT" "$repository" "$test_root/public.gpg" "$testing_state" >/dev/null
+fi
 xz -dc "$repository/dists/noble/dshanpi-a1-cm5/binary-all/Packages.xz" |
 	grep -Fx 'Package: dshanpi-a1-cm5-release-core' >/dev/null
 
