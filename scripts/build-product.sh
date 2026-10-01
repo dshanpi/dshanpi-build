@@ -66,7 +66,7 @@ dspi_deb=$(find "$dspi_output" -maxdepth 1 -type f -name 'dspi-config_*_all.deb'
 	"${DSHANPI_APT_BASE_URL:-https://dl.100ask.net}" "$output_root/client"
 
 common_args=(build "BOARD=$board" "BRANCH=$branch" "RELEASE=$release" \
-	"REVISION=$revision" KERNEL_CONFIGURE=no PREFER_DOCKER=no \
+	"REVISION=$revision" KERNEL_CONFIGURE=no PREFER_DOCKER=no BUILD_MINIMAL=no \
 	"DSHANPI_DSPI_CONFIG_DEB=$dspi_deb" \
 	"DSHANPI_REPO_CLIENT_PACKAGES_DIR=$output_root/client")
 
