@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "product": "avaota-a1",
+  "distribution": "ubuntu",
+  "codename": "noble",
+  "testing_suite": "noble-testing",
+  "component": "avaota-a1",
+  "architectures": ["arm64", "all"],
+  "sources": {
+    "armbianos": "https://github.com/dshanpi/ArmBianOS.git",
+    "dspi_config": "https://github.com/dshanpi/dspi-config.git"
+  },
+  "armbian": {
+    "board": "avaota-a1",
+    "branch": "legacy",
+    "release": "noble",
+    "desktop_environment": "gnome",
+    "desktop_config": "config_base"
+  },
+  "package_search_paths": ["output/debs"],
+  "common_packages": [
+    "armbian-firmware",
+    "dshanpi-archive-keyring",
+    "dspi-config"
+  ],
+  "required_packages": [
+    {"name": "base-files", "arch": "arm64"},
+    {"name": "armbian-bsp-cli-avaota-a1-legacy", "arch": "arm64"},
+    {"name": "armbian-bsp-desktop-avaota-a1-legacy", "arch": "arm64"},
+    {"name": "linux-image-legacy-sun55iw3-syterkit", "arch": "arm64"},
+    {"name": "linux-dtb-legacy-sun55iw3-syterkit", "arch": "arm64"},
+    {"name": "linux-headers-legacy-sun55iw3-syterkit", "arch": "arm64"},
+    {"name": "armbian-firmware", "arch": "all"},
+    {"name": "dshanpi-archive-keyring", "arch": "all"},
+    {"name": "avaota-a1-repository", "arch": "all"},
+    {"name": "dspi-config", "arch": "all"}
+  ],
+  "release_meta": {
+    "core": "avaota-a1-release-core",
+    "desktop": "avaota-a1-release-desktop",
+    "desktop_only_dependencies": ["armbian-bsp-desktop-avaota-a1-legacy"]
+  },
+  "forbidden_package_patterns": [
+    "^linux-u-boot-",
+    "^linux-libc-dev-"
+  ]
+}

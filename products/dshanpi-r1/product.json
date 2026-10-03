@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "product": "dshanpi-r1",
+  "distribution": "ubuntu",
+  "codename": "noble",
+  "testing_suite": "noble-testing",
+  "component": "dshanpi-r1",
+  "architectures": ["arm64", "all"],
+  "sources": {
+    "armbianos": "https://github.com/dshanpi/ArmBianOS.git",
+    "dspi_config": "https://github.com/dshanpi/dspi-config.git"
+  },
+  "armbian": {
+    "board": "dshanpi-r1",
+    "branch": "vendor",
+    "release": "noble",
+    "desktop_environment": "gnome",
+    "desktop_config": "config_base"
+  },
+  "package_search_paths": ["output/debs"],
+  "common_packages": [
+    "dshanpi-archive-keyring",
+    "dspi-config"
+  ],
+  "required_packages": [
+    {"name": "base-files", "arch": "arm64"},
+    {"name": "armbian-bsp-cli-dshanpi-r1-vendor", "arch": "arm64"},
+    {"name": "armbian-bsp-desktop-dshanpi-r1-vendor", "arch": "arm64"},
+    {"name": "linux-image-vendor-rk35xx", "arch": "arm64"},
+    {"name": "linux-dtb-vendor-rk35xx", "arch": "arm64"},
+    {"name": "linux-headers-vendor-rk35xx", "arch": "arm64"},
+    {"name": "dshanpi-archive-keyring", "arch": "all"},
+    {"name": "dshanpi-r1-repository", "arch": "all"},
+    {"name": "dspi-config", "arch": "all"}
+  ],
+  "release_meta": {
+    "core": "dshanpi-r1-release-core",
+    "desktop": "dshanpi-r1-release-desktop",
+    "desktop_only_dependencies": ["armbian-bsp-desktop-dshanpi-r1-vendor"]
+  },
+  "forbidden_package_patterns": [
+    "^linux-u-boot-",
+    "^linux-libc-dev-"
+  ]
+}

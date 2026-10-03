@@ -19,6 +19,7 @@ desktop_environment=$(jq -r .armbian.desktop_environment "$product_config")
 desktop_config=$(jq -r .armbian.desktop_config "$product_config")
 work_root=${DSHANPI_WORK_ROOT:-$repo_root/work/$product/$version}
 output_root=${DSHANPI_OUTPUT_ROOT:-$repo_root/output/$product/$version}
+release_extensions=dshanpi-product-profile,dshanpi-dspi-config,dshanpi-repository
 
 if [[ "$mode" == --print-plan ]]; then
 	cat <<- EOF
@@ -29,6 +30,7 @@ if [[ "$mode" == --print-plan ]]; then
 	branch=$branch
 	release=$release
 	variants=cli desktop
+	armbian_extensions=$release_extensions,dshanpi-release-meta
 	armbianos_commit=$(jq -r .sources.armbianos.commit "$lock")
 	dspi_config_commit=$(jq -r .sources.dspi_config.commit "$lock")
 	EOF
@@ -67,27 +69,32 @@ dspi_deb=$(find "$dspi_output" -maxdepth 1 -type f -name 'dspi-config_*_all.deb'
 
 common_args=(build "BOARD=$board" "BRANCH=$branch" "RELEASE=$release" \
 	"REVISION=$revision" KERNEL_CONFIGURE=no PREFER_DOCKER=no BUILD_MINIMAL=no \
+	"DSHANPI_PRODUCT=$product" \
 	"DSHANPI_DSPI_CONFIG_DEB=$dspi_deb" \
 	"DSHANPI_REPO_CLIENT_PACKAGES_DIR=$output_root/client")
 
 # Artifact pass: create every board-owned package before the release meta-package.
-(cd "$armbian_dir" && ./compile.sh "${common_args[@]}" BUILD_DESKTOP=yes \
+(cd "$armbian_dir" && ./compile.sh "${common_args[@]}" "EXT=$release_extensions" BUILD_DESKTOP=yes \
 	DESKTOP_APPGROUPS_SELECTED= "DESKTOP_ENVIRONMENT=$desktop_environment" \
 	"DESKTOP_ENVIRONMENT_CONFIG_NAME=$desktop_config")
 
-"$script_dir/collect-packages.sh" "$product" "$output_root/packages" \
-	"$armbian_dir/output/debs" "$armbian_dir/output/dshanpi-packages" \
-	"$armbian_dir/debs/mpp" "$armbian_dir/debs/rga" "$armbian_dir/debs/gsteamer" \
-	"$output_root/client" "$dspi_output"
+package_search_roots=()
+while IFS= read -r relative_path; do
+	[[ "$relative_path" =~ ^[A-Za-z0-9._/-]+$ && "$relative_path" != /* && "$relative_path" != *..* ]] ||
+		die "unsafe package search path in product configuration: $relative_path"
+	[[ -d "$armbian_dir/$relative_path" ]] && package_search_roots+=("$armbian_dir/$relative_path")
+done < <(jq -r '.package_search_paths[]' "$product_config")
+package_search_roots+=("$output_root/client" "$dspi_output")
+"$script_dir/collect-packages.sh" "$product" "$output_root/packages" "${package_search_roots[@]}"
 "$script_dir/build-release-meta.sh" "$product" "$version" "$output_root/packages"
 core_meta=$(find "$output_root/packages" -maxdepth 1 -name "${product}-release-core_${version}_all.deb" -print -quit)
 desktop_meta=$(find "$output_root/packages" -maxdepth 1 -name "${product}-release-desktop_${version}_all.deb" -print -quit)
 [[ -n "$core_meta" && -n "$desktop_meta" ]] || die "release meta-package build failed"
 
 # Final images carry a release identity from first boot.
-(cd "$armbian_dir" && ./compile.sh "${common_args[@]}" BUILD_DESKTOP=no \
+(cd "$armbian_dir" && ./compile.sh "${common_args[@]}" "EXT=$release_extensions,dshanpi-release-meta" BUILD_DESKTOP=no \
 	"DSHANPI_RELEASE_META_DEB=$core_meta")
-(cd "$armbian_dir" && ./compile.sh "${common_args[@]}" BUILD_DESKTOP=yes \
+(cd "$armbian_dir" && ./compile.sh "${common_args[@]}" "EXT=$release_extensions,dshanpi-release-meta" BUILD_DESKTOP=yes \
 	DESKTOP_APPGROUPS_SELECTED= "DESKTOP_ENVIRONMENT=$desktop_environment" \
 	"DESKTOP_ENVIRONMENT_CONFIG_NAME=$desktop_config" \
 	"DSHANPI_RELEASE_META_DEB=$desktop_meta")

@@ -26,6 +26,8 @@ cat > "$lock" <<'EOF'
 EOF
 "$source_root/scripts/validate-config.sh" dshanpi-a1-cm5 "$lock" >/dev/null
 "$source_root/scripts/build-product.sh" dshanpi-a1-cm5 "$lock" --print-plan | grep -Fx 'variants=cli desktop' >/dev/null
+"$source_root/scripts/build-product.sh" dshanpi-a1-cm5 "$lock" --print-plan |
+	grep -Fx 'armbian_extensions=dshanpi-product-profile,dshanpi-dspi-config,dshanpi-repository,dshanpi-release-meta' >/dev/null
 
 raw="$test_root/raw"
 mkdir -p "$raw"
@@ -143,5 +145,56 @@ if "$source_root/scripts/build-apt-repository.sh" testing dshanpi-a1-cm5 2026.09
 	echo "forbidden U-Boot package unexpectedly passed" >&2
 	exit 1
 fi
+
+# Every additional board uses the same generic client/meta/repository pipeline.
+# Add all three to one repository fixture to catch cross-product component and
+# common-package identity conflicts.
+multi_repository="$test_root/multi-repository"
+for product in dshanpi-a1 dshanpi-r1 avaota-a1; do
+	version=2026.10.02-1
+	product_lock="$test_root/$product.lock.json"
+	cat > "$product_lock" <<- EOF
+	{
+	  "schema_version": 1,
+	  "product": "$product",
+	  "version": "$version",
+	  "revision": "25.11.0-trunk.20261002.1",
+	  "sources": {
+	    "armbianos": {"commit": "3333333333333333333333333333333333333333"},
+	    "dspi_config": {"commit": "4444444444444444444444444444444444444444"}
+	  }
+	}
+	EOF
+	"$source_root/scripts/validate-config.sh" "$product" "$product_lock" >/dev/null
+	"$source_root/scripts/build-product.sh" "$product" "$product_lock" --print-plan |
+		grep -Fx "product=$product" >/dev/null
+
+	raw="$test_root/raw-$product"
+	mkdir -p "$raw"
+	while IFS=$'\t' read -r package arch; do
+		case "$package" in
+			dshanpi-archive-keyring | "$product-repository" | dspi-config) continue ;;
+		esac
+		build_dummy "$package" "$arch"
+	done < <(jq -r '.required_packages[] | [.name, .arch] | @tsv' "$source_root/products/$product/product.json")
+
+	client="$test_root/client-$product"
+	"$source_root/scripts/build-client-packages.sh" "$product" "$version" \
+		"$test_root/public.asc" https://dl.100ask.net "$client" >/dev/null
+	build_dummy dspi-config all 1.0.1-1
+	packages="$test_root/packages-$product"
+	"$source_root/scripts/collect-packages.sh" "$product" "$packages" "$raw" "$client" >/dev/null
+	"$source_root/scripts/build-release-meta.sh" "$product" "$version" "$packages" >/dev/null
+	[[ $(dpkg-deb -f "$packages/${product}-release-core_${version}_all.deb" Package) == "${product}-release-core" ]]
+	"$source_root/scripts/build-apt-repository.sh" testing "$product" "$version" \
+		"$packages" "$multi_repository" "$fingerprint" >/dev/null
+	xz -dc "$multi_repository/dists/noble-testing/$product/binary-all/Packages.xz" |
+		grep -Fx "Package: ${product}-release-core" >/dev/null
+done
+
+for component in common dshanpi-a1 dshanpi-r1 avaota-a1; do
+	grep -Eq "^Components:.*[[:space:]]$component([[:space:]]|$)" "$multi_repository/dists/noble-testing/Release"
+done
+gpgv --keyring "$test_root/public.gpg" "$multi_repository/dists/noble-testing/InRelease" >/dev/null 2>&1
 
 echo "dshanpi-build tests passed"
