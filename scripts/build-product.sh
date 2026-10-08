@@ -69,7 +69,7 @@ dspi_deb=$(find "$dspi_output" -maxdepth 1 -type f -name 'dspi-config_*_all.deb'
 
 common_args=(build "BOARD=$board" "BRANCH=$branch" "RELEASE=$release" \
 	"REVISION=$revision" KERNEL_CONFIGURE=no PREFER_DOCKER=no BUILD_MINIMAL=no \
-	DEB_COMPRESS=xz "MAKE_FOLDERS=dshanpi-$version" \
+	DEB_COMPRESS=xz COLUMNS=160 "MAKE_FOLDERS=dshanpi-$version" \
 	"DSHANPI_PRODUCT=$product" \
 	"DSHANPI_DSPI_CONFIG_DEB=$dspi_deb" \
 	"DSHANPI_REPO_CLIENT_PACKAGES_DIR=$output_root/client")
