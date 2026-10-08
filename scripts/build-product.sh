@@ -69,6 +69,7 @@ dspi_deb=$(find "$dspi_output" -maxdepth 1 -type f -name 'dspi-config_*_all.deb'
 
 common_args=(build "BOARD=$board" "BRANCH=$branch" "RELEASE=$release" \
 	"REVISION=$revision" KERNEL_CONFIGURE=no PREFER_DOCKER=no BUILD_MINIMAL=no \
+	DEB_COMPRESS=xz "MAKE_FOLDERS=dshanpi-$version" \
 	"DSHANPI_PRODUCT=$product" \
 	"DSHANPI_DSPI_CONFIG_DEB=$dspi_deb" \
 	"DSHANPI_REPO_CLIENT_PACKAGES_DIR=$output_root/client")
@@ -78,14 +79,46 @@ common_args=(build "BOARD=$board" "BRANCH=$branch" "RELEASE=$release" \
 	DESKTOP_APPGROUPS_SELECTED= "DESKTOP_ENVIRONMENT=$desktop_environment" \
 	"DESKTOP_ENVIRONMENT_CONFIG_NAME=$desktop_config")
 
+while IFS= read -r adapter; do
+	case "$adapter" in
+		rkaiq-reviewed)
+			"$armbian_dir/packages/bsp/dshanpi-a1-cm5/repack-camera-engine.sh" \
+				"$armbian_dir/debs/camera/camera_engine_rkaiq_rk3576_arm64.deb" \
+				"$armbian_dir/output/dshanpi-packages" 6.6.3+dshanpi1 ;;
+		*) die "unknown product package adapter: $adapter" ;;
+	esac
+done < <(jq -r '.package_adapters // [] | .[]' "$product_config")
+
 package_search_roots=()
+generated_packages="$output_root/generated-packages"
+mkdir -p "$generated_packages"
 while IFS= read -r relative_path; do
 	[[ "$relative_path" =~ ^[A-Za-z0-9._/-]+$ && "$relative_path" != /* && "$relative_path" != *..* ]] ||
 		die "unsafe package search path in product configuration: $relative_path"
-	[[ -d "$armbian_dir/$relative_path" ]] && package_search_roots+=("$armbian_dir/$relative_path")
+	if [[ "$relative_path" == output/debs ]]; then
+		# Armbian's cache also contains older revisions and unrelated boards.
+		# Retain strict duplicate checks within this release's revision.
+		while IFS= read -r -d '' deb; do
+			package_version=$(package_field "$deb" Version)
+			[[ "$package_version" == "$revision" || "$package_version" == "$revision-"* ]] || continue
+			cp -- "$deb" "$generated_packages/"
+		done < <(find "$armbian_dir/$relative_path" -type f -name "*_${revision}*.deb" -print0)
+		package_search_roots+=("$generated_packages")
+	elif [[ -d "$armbian_dir/$relative_path" ]]; then
+		package_search_roots+=("$armbian_dir/$relative_path")
+	fi
 done < <(jq -r '.package_search_paths[]' "$product_config")
 package_search_roots+=("$output_root/client" "$dspi_output")
 "$script_dir/collect-packages.sh" "$product" "$output_root/packages" "${package_search_roots[@]}"
+# Cached Armbian artifacts can still use uncompressed tar members even when
+# DEB_COMPRESS=xz was requested. Normalize only these unpublished copies.
+for deb in "$output_root/packages"/*.deb; do
+	if ar t "$deb" | grep -Fxq data.tar; then
+		"$script_dir/compress-deb.sh" "$deb" "$deb.compressed"
+		mv "$deb.compressed" "$deb"
+	fi
+done
+"$script_dir/audit-packages.sh" "$output_root/packages"
 "$script_dir/build-release-meta.sh" "$product" "$version" "$output_root/packages"
 core_meta=$(find "$output_root/packages" -maxdepth 1 -name "${product}-release-core_${version}_all.deb" -print -quit)
 desktop_meta=$(find "$output_root/packages" -maxdepth 1 -name "${product}-release-desktop_${version}_all.deb" -print -quit)
@@ -93,13 +126,21 @@ desktop_meta=$(find "$output_root/packages" -maxdepth 1 -name "${product}-releas
 
 # Final images carry a release identity from first boot.
 (cd "$armbian_dir" && ./compile.sh "${common_args[@]}" "EXT=$release_extensions,dshanpi-release-meta" BUILD_DESKTOP=no \
+	"DSHANPI_RELEASE_PACKAGES_DIR=$output_root/packages" \
 	"DSHANPI_RELEASE_META_DEB=$core_meta")
 (cd "$armbian_dir" && ./compile.sh "${common_args[@]}" "EXT=$release_extensions,dshanpi-release-meta" BUILD_DESKTOP=yes \
 	DESKTOP_APPGROUPS_SELECTED= "DESKTOP_ENVIRONMENT=$desktop_environment" \
 	"DESKTOP_ENVIRONMENT_CONFIG_NAME=$desktop_config" \
+	"DSHANPI_RELEASE_PACKAGES_DIR=$output_root/packages" \
 	"DSHANPI_RELEASE_META_DEB=$desktop_meta")
 
-find "$armbian_dir/output/images" -maxdepth 1 -type f \
+image_count=0
+while IFS= read -r -d '' image; do
+    sudo "$script_dir/verify-image.sh" "$product" "$version" "$image"
+    image_count=$((image_count + 1))
+done < <(find "$armbian_dir/output/images/$board/dshanpi-$version" -maxdepth 1 -type f -name '*.img' -print0)
+[[ "$image_count" -eq 2 ]] || die "expected exactly two verified CLI/Desktop images, found $image_count"
+find "$armbian_dir/output/images/$board/dshanpi-$version" -maxdepth 1 -type f \
 	\( -name '*.img' -o -name '*.img.sha' -o -name '*.img.gz' \) -exec cp -- {} "$output_root/images/" \;
 find "$output_root/packages" -maxdepth 1 -type f -name '*.deb' -print0 | sort -z | xargs -0 sha256sum > "$output_root/packages/SHA256SUMS"
 echo "built $product $version into $output_root"

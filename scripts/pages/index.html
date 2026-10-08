@@ -1,13 +1,18 @@
 <!doctype html>
 <html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>DShanPI APT 软件仓库</title>
-<style>body{font:17px/1.7 system-ui,sans-serif;max-width:850px;margin:60px auto;padding:0 24px;color:#233047;background:#f6f8fc}h1{font-size:36px}pre{overflow:auto;background:#e8edf5;padding:18px;border-radius:8px}a{color:#245bbc}code{font-family:monospace}</style>
+<style>body{font:17px/1.7 system-ui,sans-serif;max-width:850px;margin:60px auto;padding:0 24px;color:#233047;background:#f6f8fc}h1{font-size:36px}pre{overflow:auto;background:#e8edf5;padding:18px;border-radius:8px}a{color:#245bbc}code{font-family:monospace}select,input{font:inherit;padding:6px;max-width:100%}th,td{text-align:left;padding:6px 12px;border-bottom:1px solid #d5dce5;white-space:nowrap}</style>
 <h1>DShanPI APT 软件仓库</h1>
 <p>为 DShanPI 系统提供经过 GPG 签名的软件包。当前平台候选通过 <code>noble-testing</code> 提供，完成真机验证后才晋级 <code>noble</code>。</p>
 <p><a href="archive-key.asc">签名公钥</a> · <a href="SHA256SUMS">文件校验清单</a> · <a href="SHA256SUMS.asc">清单签名</a> · <a href="PUBLICATION.json">最近发布记录</a> · <a href="https://github.com/dshanpi/dshanpi-build">构建与发布源码</a></p>
+<h2>软件包与版本</h2>
+<p><label>板卡 <select id="product"></select></label> <label>版本 <select id="release"></select></label></p>
+<p id="release-status">正在读取已发布的软件包清单……</p>
+<p><input id="search" type="search" placeholder="搜索软件包名称" aria-label="搜索软件包名称"></p>
+<div style="overflow:auto"><table><thead><tr><th>软件包</th><th>版本</th><th>架构</th><th>下载</th></tr></thead><tbody id="packages"></tbody></table></div>
 <h2>添加软件源</h2>
-<p>当前已提供 A1 CM5 的 testing 候选。安装前请与 GitHub 源码仓库中的公钥指纹核对。</p>
-<pre>curl -fsS https://apt.100ask.net/dshanpi-archive-keyring.gpg \
+<p>先选择实际板卡，再使用下方命令。testing 是待真机验证的候选版本。安装前请核对公钥指纹：<code>476B F598 CA47 F121 46EF 1862 0F6E DF1B 5C41 F3EC</code>。</p>
+<pre id="setup">curl -fsS https://apt.100ask.net/dshanpi-archive-keyring.gpg \
   -o /tmp/dshanpi-archive-keyring.gpg
 gpg --show-keys --with-fingerprint /tmp/dshanpi-archive-keyring.gpg
 sudo install -m 0644 /tmp/dshanpi-archive-keyring.gpg /usr/share/keyrings/
@@ -23,11 +28,54 @@ sudo apt update
 sudo apt install dspi-config</pre>
 <h2>管理系统版本</h2>
 <p>初次使用平台版本管理前，安装适合当前板卡和 CLI／桌面环境的 release 元包。它会安装精确版本的内核、DTB、BSP 和驱动，请先在测试板上验证。</p>
-<pre>apt-cache policy dshanpi-a1-cm5-release-core
+<pre id="upgrade">apt-cache policy dshanpi-a1-cm5-release-core
 # 桌面镜像使用 dshanpi-a1-cm5-release-desktop
 sudo apt install -t noble-testing dshanpi-a1-cm5-release-core
 dspi-config update list
 sudo dspi-config update install &lt;版本&gt;
 sudo dspi-config update rollback</pre>
 <p>回滚要求仓库中存在更早版本。测试通道不会随普通系统升级自动选入；U-Boot 不在在线升级集合中。</p>
+<h2>维护与发布</h2>
+<p><a href="https://github.com/dshanpi/dshanpi-build/actions/workflows/release.yml">构建、晋级和撤回</a>由 GitHub Actions 执行。stable 晋级需要真机验证记录；撤回 testing 保留历史文件。<a href="https://github.com/dshanpi/dspi-config">设备端配置工具源码</a></p>
+<script>
+const product = document.querySelector('#product'), release = document.querySelector('#release');
+const setup = document.querySelector('#setup'), upgrade = document.querySelector('#upgrade');
+const setupTemplate = setup.textContent, upgradeTemplate = upgrade.textContent;
+let products = [];
+function render() {
+  const chosen = products.find(p => p.product === product.value);
+  const cohort = chosen.releases.find(r => r.version === release.value);
+  setup.textContent = setupTemplate.replaceAll('dshanpi-a1-cm5', chosen.product);
+  upgrade.textContent = upgradeTemplate.replaceAll('dshanpi-a1-cm5', chosen.product);
+  document.querySelector('#release-status').textContent = cohort.version + ' · ' +
+    (cohort.testing ? 'testing 可用' : 'testing 已撤回') + ' · ' +
+    (cohort.stable ? 'stable 已发布' : '尚未晋级 stable');
+  const rows = document.querySelector('#packages'); rows.replaceChildren();
+  const query = document.querySelector('#search').value.toLowerCase();
+  for (const pkg of cohort.packages.filter(p => p.package.toLowerCase().includes(query))) {
+    const row = document.createElement('tr');
+    for (const value of [pkg.package, pkg.version, pkg.architecture]) {
+      const cell = document.createElement('td'); cell.textContent = value; row.append(cell);
+    }
+    const cell = document.createElement('td'), link = document.createElement('a');
+    link.href = pkg.filename; link.textContent = '.deb'; link.title = 'SHA256: ' + pkg.sha256;
+    cell.append(link); row.append(cell); rows.append(row);
+  }
+}
+function chooseProduct() {
+  release.replaceChildren();
+  for (const entry of products.find(p => p.product === product.value).releases) {
+    release.add(new Option(entry.version, entry.version));
+  }
+  render();
+}
+fetch('repository.json').then(r => { if (!r.ok) throw Error(); return r.json(); }).then(data => {
+  products = data.products;
+  for (const entry of products) product.add(new Option(entry.product, entry.product));
+  if (!products.length) throw Error();
+  chooseProduct();
+}).catch(() => { document.querySelector('#release-status').textContent = '清单读取失败，请查看下方发布记录或稍后重试。'; });
+product.addEventListener('change', chooseProduct); release.addEventListener('change', render);
+document.querySelector('#search').addEventListener('input', () => { if (products.length) render(); });
+</script>
 </html>

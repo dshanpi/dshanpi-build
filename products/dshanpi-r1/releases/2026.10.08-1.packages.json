@@ -1,0 +1,143 @@
+{
+  "product": "dshanpi-r1",
+  "channel": "testing",
+  "version": "2026.10.08-1",
+  "note": "Kernel and BSP artifacts assembled at revision 25.11.0-trunk.20261008.3; base-files and Avaota firmware reuse recorded September artifacts. Uncompressed unpublished packages were compressed without changing tar payloads. Hardware validation pending.",
+  "sources": {
+    "armbianos": "1bb69ccdcefab0956805acdd8b46846892374ac0",
+    "dspi_config": "b92173a4dd7685f0124a9c6417553dae47c973fc"
+  },
+  "packages": [
+    {
+      "package": "armbian-bsp-cli-dshanpi-r1-vendor",
+      "version": "25.11.0-trunk.20261008.3",
+      "architecture": "arm64",
+      "sha256": "d4141cdc03ce0abcf6836e7a114a0c02a2b4ccb80fd24064e0494c3cc68580a8"
+    },
+    {
+      "package": "armbian-bsp-desktop-dshanpi-r1-vendor",
+      "version": "25.11.0-trunk.20261008.3",
+      "architecture": "arm64",
+      "sha256": "7ba5c81407a105f8167516f43f3ab2004ab8f9c12eabfe5223f30fee0d4a87a6"
+    },
+    {
+      "package": "base-files",
+      "version": "25.11.0-trunk.20260929.1-13ubuntu10-noble",
+      "architecture": "arm64",
+      "sha256": "828810aa47019d453e48146d447e78e5c34aabd140dd5ab6dd15e73e6e88d8e9"
+    },
+    {
+      "package": "dshanpi-archive-keyring",
+      "version": "1:2026.10.08-1",
+      "architecture": "all",
+      "sha256": "629e0a1c034daf862d937de3f349ec36533af6f0a6d059bf9fd0dd533d375133"
+    },
+    {
+      "package": "dshanpi-r1-release-core",
+      "version": "2026.10.08-1",
+      "architecture": "all",
+      "sha256": "5c9d94e3f805369ad05449b98177124dd8797985467167879a5408514f9c24a2"
+    },
+    {
+      "package": "dshanpi-r1-release-desktop",
+      "version": "2026.10.08-1",
+      "architecture": "all",
+      "sha256": "a1c9e6869dcb8a6dc5425c0601e9a921ebe51bc819ad50f01cbc373102083817"
+    },
+    {
+      "package": "dshanpi-r1-repository",
+      "version": "1:2026.10.08-1",
+      "architecture": "all",
+      "sha256": "8f1f2d3f3289cbb013b8630970f93f57661b2bd0a2f9467b9987b052727a3aa0"
+    },
+    {
+      "package": "dspi-config",
+      "version": "1.0.2-1",
+      "architecture": "all",
+      "sha256": "5be496494b048343438f7fcd8d40203e30d2cd4141e15de9d5a206e22bba96d0"
+    },
+    {
+      "package": "linux-dtb-vendor-rk35xx",
+      "version": "25.11.0-trunk.20261008.3",
+      "architecture": "arm64",
+      "sha256": "586a40831514ef972e3d4429d258f288efbe620d10e89f588fce822ca3efed94"
+    },
+    {
+      "package": "linux-headers-vendor-rk35xx",
+      "version": "25.11.0-trunk.20261008.3",
+      "architecture": "arm64",
+      "sha256": "cb3f6cf03f4e3e4145bccdb05429d61b074327e9e9f7c383221bbb19cb4949e8"
+    },
+    {
+      "package": "linux-image-vendor-rk35xx",
+      "version": "25.11.0-trunk.20261008.3",
+      "architecture": "arm64",
+      "sha256": "0a5c9ff1a481b82b653610efa738b3d0b9df90f2ab61173432b7eaedf87ea0c4"
+    }
+  ],
+  "inputs": [
+    {
+      "package": "base-files",
+      "input": "output/pages-cm5/final-packages-2/base-files_25.11.0-trunk.20260929.1-13ubuntu10-noble_arm64.deb",
+      "input_sha256": "828810aa47019d453e48146d447e78e5c34aabd140dd5ab6dd15e73e6e88d8e9",
+      "sha256": "828810aa47019d453e48146d447e78e5c34aabd140dd5ab6dd15e73e6e88d8e9",
+      "filename": "base-files_25.11.0-trunk.20260929.1-13ubuntu10-noble_arm64.deb"
+    },
+    {
+      "package": "armbian-bsp-cli-dshanpi-r1-vendor",
+      "input": "output/debs/armbian-bsp-cli-dshanpi-r1-vendor_25.11.0-trunk.20261008.3_arm64__1-PC9b3f-Vdf50-H3abc-B1e5d-Rf36a.deb",
+      "input_sha256": "868618ba00f18913a8fef2e940ce6c34a8707d3fc69d8055b9aba5f535cc9662",
+      "sha256": "d4141cdc03ce0abcf6836e7a114a0c02a2b4ccb80fd24064e0494c3cc68580a8",
+      "filename": "armbian-bsp-cli-dshanpi-r1-vendor_25.11.0-trunk.20261008.3_arm64__1-PC9b3f-Vdf50-H3abc-B1e5d-Rf36a.deb"
+    },
+    {
+      "package": "armbian-bsp-desktop-dshanpi-r1-vendor",
+      "input": "output/debs/extra/noble-desktop/armbian-bsp-desktop-dshanpi-r1-vendor_25.11.0-trunk.20261008.3_arm64__1-B8091-R448a.deb",
+      "input_sha256": "7ba5c81407a105f8167516f43f3ab2004ab8f9c12eabfe5223f30fee0d4a87a6",
+      "sha256": "7ba5c81407a105f8167516f43f3ab2004ab8f9c12eabfe5223f30fee0d4a87a6",
+      "filename": "armbian-bsp-desktop-dshanpi-r1-vendor_25.11.0-trunk.20261008.3_arm64__1-B8091-R448a.deb"
+    },
+    {
+      "package": "linux-image-vendor-rk35xx",
+      "input": "output/debs/linux-image-vendor-rk35xx_25.11.0-trunk.20261008.3_arm64__6.1.115-S710b-D0b5d-P09c0-C2265H2313-HK01ba-Vc222-Bd200-R448a.deb",
+      "input_sha256": "466926992a24bb8b34bb5fa3921a400d3d92bf91907b1e7f4414e2fbdc47bc34",
+      "sha256": "0a5c9ff1a481b82b653610efa738b3d0b9df90f2ab61173432b7eaedf87ea0c4",
+      "filename": "linux-image-vendor-rk35xx_25.11.0-trunk.20261008.3_arm64__6.1.115-S710b-D0b5d-P09c0-C2265H2313-HK01ba-Vc222-Bd200-R448a.deb"
+    },
+    {
+      "package": "linux-dtb-vendor-rk35xx",
+      "input": "output/debs/linux-dtb-vendor-rk35xx_25.11.0-trunk.20261008.3_arm64__6.1.115-S710b-D0b5d-P09c0-C2265H2313-HK01ba-Vc222-Bd200-R448a.deb",
+      "input_sha256": "1807ccc69c1dd56af232210d471577d6dfcfb68acd1a03bda1ce144ef2ac197c",
+      "sha256": "586a40831514ef972e3d4429d258f288efbe620d10e89f588fce822ca3efed94",
+      "filename": "linux-dtb-vendor-rk35xx_25.11.0-trunk.20261008.3_arm64__6.1.115-S710b-D0b5d-P09c0-C2265H2313-HK01ba-Vc222-Bd200-R448a.deb"
+    },
+    {
+      "package": "linux-headers-vendor-rk35xx",
+      "input": "output/debs/linux-headers-vendor-rk35xx_25.11.0-trunk.20261008.3_arm64__6.1.115-S710b-D0b5d-P09c0-C2265H2313-HK01ba-Vc222-Bd200-R448a.deb",
+      "input_sha256": "3961a69e7132630adc4f66d321b475c63059604a1e3b4e06003f83063b5a5864",
+      "sha256": "cb3f6cf03f4e3e4145bccdb05429d61b074327e9e9f7c383221bbb19cb4949e8",
+      "filename": "linux-headers-vendor-rk35xx_25.11.0-trunk.20261008.3_arm64__6.1.115-S710b-D0b5d-P09c0-C2265H2313-HK01ba-Vc222-Bd200-R448a.deb"
+    },
+    {
+      "package": "dshanpi-archive-keyring",
+      "input": "output/completion-20261008/dshanpi-r1/client/dshanpi-archive-keyring_1:2026.10.08-1_all.deb",
+      "input_sha256": "629e0a1c034daf862d937de3f349ec36533af6f0a6d059bf9fd0dd533d375133",
+      "sha256": "629e0a1c034daf862d937de3f349ec36533af6f0a6d059bf9fd0dd533d375133",
+      "filename": "dshanpi-archive-keyring_1:2026.10.08-1_all.deb"
+    },
+    {
+      "package": "dshanpi-r1-repository",
+      "input": "output/completion-20261008/dshanpi-r1/client/dshanpi-r1-repository_1:2026.10.08-1_all.deb",
+      "input_sha256": "8f1f2d3f3289cbb013b8630970f93f57661b2bd0a2f9467b9987b052727a3aa0",
+      "sha256": "8f1f2d3f3289cbb013b8630970f93f57661b2bd0a2f9467b9987b052727a3aa0",
+      "filename": "dshanpi-r1-repository_1:2026.10.08-1_all.deb"
+    },
+    {
+      "package": "dspi-config",
+      "input": "output/pages-cm5/final-packages-2/dspi-config_1.0.2-1_all.deb",
+      "input_sha256": "5be496494b048343438f7fcd8d40203e30d2cd4141e15de9d5a206e22bba96d0",
+      "sha256": "5be496494b048343438f7fcd8d40203e30d2cd4141e15de9d5a206e22bba96d0",
+      "filename": "dspi-config_1.0.2-1_all.deb"
+    }
+  ]
+}

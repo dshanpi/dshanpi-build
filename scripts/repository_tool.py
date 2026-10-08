@@ -185,6 +185,8 @@ def promote_release(args: argparse.Namespace) -> None:
     manifest = json.loads(manifest_path.read_text())
     if manifest.get("product") != product or manifest.get("version") != args.version:
         fail("testing release manifest identity mismatch")
+    if manifest.get("withdrawn_from") == config["testing_suite"]:
+        fail("withdrawn testing release cannot be promoted")
     stable_suite = config["codename"]
     grouped: dict[str, list[dict[str, str]]] = {}
     for package in manifest["packages"]:
@@ -214,6 +216,18 @@ def withdraw_release(args: argparse.Namespace) -> None:
         for package in manifest.get("packages", [])
         if package.get("component") == component
     }
+    # Kernel/BSP versions can be shared by multiple release meta-packages.
+    # Withdrawing one candidate must not break the remaining candidates.
+    for other_path in manifest_path.parent.glob("*.json"):
+        if other_path == manifest_path:
+            continue
+        other = json.loads(other_path.read_text())
+        if other.get("suite") != suite or other.get("withdrawn_from") == suite:
+            continue
+        remove.difference_update(
+            identity(package) for package in other.get("packages", [])
+            if package.get("component") == component
+        )
     catalog_path = repo / "catalog" / "suites" / suite / f"{component}.tsv"
     remaining = [entry for entry in read_catalog(catalog_path) if identity(entry) not in remove]
     write_catalog(catalog_path, remaining)

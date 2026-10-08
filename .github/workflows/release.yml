@@ -11,10 +11,13 @@ on:
         description: Release version (YYYY.MM.DD-N)
         required: true
       channel:
-        description: Build testing or promote the exact tested release
+        description: Build testing, promote a tested release, or withdraw testing
         required: true
         type: choice
-        options: [testing, stable]
+        options: [testing, stable, withdraw]
+      hardware_evidence:
+        description: Required for stable; URL or reference to the board validation report
+        required: false
       backend:
         description: Repository hosting
         required: true
@@ -36,6 +39,22 @@ jobs:
     timeout-minutes: 720
     steps:
       - uses: actions/checkout@v4
+
+      - name: Validate release request
+        env:
+          PRODUCT: ${{ inputs.product }}
+          VERSION: ${{ inputs.version }}
+          OPERATION: ${{ inputs.channel }}
+          HARDWARE_EVIDENCE: ${{ inputs.hardware_evidence }}
+        run: |
+          set -euo pipefail
+          [[ "$PRODUCT" =~ ^[a-z0-9][a-z0-9-]*$ ]]
+          [[ "$VERSION" =~ ^[0-9]{4}\.[0-9]{2}\.[0-9]{2}-[1-9][0-9]*$ ]]
+          test -f "products/$PRODUCT/product.json"
+          if [[ "$OPERATION" == stable ]]; then
+            test -n "$HARDWARE_EVIDENCE" || { echo 'Stable requires a hardware validation report'; exit 1; }
+            printf 'Hardware validation: %s\n' "$HARDWARE_EVIDENCE" >> "$GITHUB_STEP_SUMMARY"
+          fi
 
       - name: Install release tools
         run: |
@@ -104,6 +123,26 @@ jobs:
           scripts/promote-apt-release.sh "${{ inputs.product }}" "${{ inputs.version }}" \
             output/repository "$APT_GPG_KEY_FINGERPRINT"
 
+      - name: Withdraw testing cohort
+        if: ${{ inputs.channel == 'withdraw' }}
+        env:
+          APT_GPG_KEY_FINGERPRINT: ${{ secrets.APT_GPG_KEY_FINGERPRINT }}
+        run: |
+          scripts/withdraw-testing-release.sh "${{ inputs.product }}" "${{ inputs.version }}" \
+            output/repository "$APT_GPG_KEY_FINGERPRINT"
+
+      - name: Retain built images and package provenance
+        if: ${{ inputs.channel == 'testing' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ inputs.product }}-${{ inputs.version }}
+          path: |
+            output/${{ inputs.product }}/${{ inputs.version }}/images/
+            output/${{ inputs.product }}/${{ inputs.version }}/packages/SHA256SUMS
+            products/${{ inputs.product }}/releases/${{ inputs.version }}.lock.json
+          if-no-files-found: error
+          retention-days: 7
+
       - name: Publish verified repository candidate
         if: ${{ inputs.backend == 'ssh' }}
         env:
@@ -124,6 +163,7 @@ jobs:
         run: |
           cp output/dshanpi-archive.asc output/repository/archive-key.asc
           gpg --batch --yes --dearmor --output output/repository/dshanpi-archive-keyring.gpg output/dshanpi-archive.asc
+          python3 scripts/pages/catalog.py output/repository
           cp scripts/pages/index.html output/repository/
           touch output/repository/.nojekyll
       - uses: actions/configure-pages@v5
