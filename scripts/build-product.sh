@@ -64,8 +64,8 @@ dspi_output="$output_root/dspi"
 "$dspi_dir/packaging/build-deb.sh" "$dspi_output"
 dspi_deb=$(find "$dspi_output" -maxdepth 1 -type f -name 'dspi-config_*_all.deb' -print -quit)
 [[ -n "$dspi_deb" ]] || die "dspi-config build did not produce a package"
-"$script_dir/build-client-packages.sh" "$product" "$version" "$APT_PUBLIC_KEY_FILE" \
-	"${DSHANPI_APT_BASE_URL:-https://dl.100ask.net}" "$output_root/client"
+"$script_dir/build-client-packages.sh" "$product" "1:$version" "$APT_PUBLIC_KEY_FILE" \
+	"${DSHANPI_APT_BASE_URL:-https://apt.100ask.net}" "$output_root/client"
 
 common_args=(build "BOARD=$board" "BRANCH=$branch" "RELEASE=$release" \
 	"REVISION=$revision" KERNEL_CONFIGURE=no PREFER_DOCKER=no BUILD_MINIMAL=no \

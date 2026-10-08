@@ -15,12 +15,19 @@ on:
         required: true
         type: choice
         options: [testing, stable]
+      backend:
+        description: Repository hosting
+        required: true
+        type: choice
+        options: [github-pages, ssh]
 
 permissions:
-  contents: read
+  contents: write
+  pages: write
+  id-token: write
 
 concurrency:
-  group: apt-${{ inputs.channel }}
+  group: apt-repository-publication
   cancel-in-progress: false
 
 jobs:
@@ -46,7 +53,19 @@ jobs:
           mkdir -p output
           gpg --batch --armor --export "$APT_GPG_KEY_FINGERPRINT" > output/dshanpi-archive.asc
 
+      - name: Configure GitHub repository authentication
+        if: ${{ inputs.backend == 'github-pages' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config --global http.https://github.com/.extraheader "AUTHORIZATION: basic $(printf 'x-access-token:%s' "$GH_TOKEN" | base64 -w0)"
+
+      - name: Fetch signed GitHub Pages state
+        if: ${{ inputs.backend == 'github-pages' }}
+        run: scripts/fetch-pages.sh output/repository output/dshanpi-archive.asc
+
       - name: Fetch current immutable APT state
+        if: ${{ inputs.backend == 'ssh' }}
         env:
           SSHPASS: ${{ secrets.DL_PASSWORD }}
           DL_HOST: ${{ secrets.DL_HOST }}
@@ -86,6 +105,7 @@ jobs:
             output/repository "$APT_GPG_KEY_FINGERPRINT"
 
       - name: Publish verified repository candidate
+        if: ${{ inputs.backend == 'ssh' }}
         env:
           DL_HOST: ${{ secrets.DL_HOST }}
           DL_PORT: ${{ secrets.DL_PORT }}
@@ -93,3 +113,32 @@ jobs:
           DL_PASSWORD: ${{ secrets.DL_PASSWORD }}
           DL_KNOWN_HOSTS: ${{ github.workspace }}/output/known_hosts
         run: scripts/publish-apt.sh output/repository
+
+      - name: Publish signed GitHub Pages snapshot
+        if: ${{ inputs.backend == 'github-pages' }}
+        run: scripts/publish-pages.sh output/repository output/dshanpi-archive.asc
+
+      # GITHUB_TOKEN pushes do not start another workflow; deploy in this run.
+      - name: Prepare Pages artifact
+        if: ${{ inputs.backend == 'github-pages' }}
+        run: |
+          cp output/dshanpi-archive.asc output/repository/archive-key.asc
+          gpg --batch --yes --dearmor --output output/repository/dshanpi-archive-keyring.gpg output/dshanpi-archive.asc
+          cp scripts/pages/index.html output/repository/
+          touch output/repository/.nojekyll
+      - uses: actions/configure-pages@v5
+        if: ${{ inputs.backend == 'github-pages' }}
+      - uses: actions/upload-pages-artifact@v4
+        if: ${{ inputs.backend == 'github-pages' }}
+        with:
+          path: output/repository
+  deploy:
+    if: ${{ inputs.backend == 'github-pages' }}
+    needs: release
+    runs-on: ubuntu-24.04
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/deploy-pages@v4
+        id: deployment

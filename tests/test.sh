@@ -56,7 +56,9 @@ done < <(jq -r '.required_packages[] | [.name, .arch] | @tsv' "$source_root/prod
 
 client="$test_root/client"
 "$source_root/scripts/build-client-packages.sh" dshanpi-a1-cm5 2026.09.30-1 \
-	"$test_root/public.asc" https://dl.100ask.net "$client" >/dev/null
+	"$test_root/public.asc" https://apt.100ask.net "$client" >/dev/null
+dpkg-deb -x "$client/dshanpi-a1-cm5-repository_2026.09.30-1_all.deb" "$test_root/client-extracted"
+grep -Fx 'URIs: https://apt.100ask.net' "$test_root/client-extracted/etc/apt/sources.list.d/dshanpi.sources" >/dev/null
 build_dummy dspi-config all 1.0.0-1
 
 packages="$test_root/packages"
@@ -180,7 +182,9 @@ for product in dshanpi-a1 dshanpi-r1 avaota-a1; do
 
 	client="$test_root/client-$product"
 	"$source_root/scripts/build-client-packages.sh" "$product" "$version" \
-		"$test_root/public.asc" https://dl.100ask.net "$client" >/dev/null
+		"$test_root/public.asc" https://apt.100ask.net/ "$client" >/dev/null
+	dpkg-deb -x "$client/${product}-repository_${version}_all.deb" "$test_root/client-$product-extracted"
+	grep -Fx 'URIs: https://apt.100ask.net' "$test_root/client-$product-extracted/etc/apt/sources.list.d/dshanpi.sources" >/dev/null
 	build_dummy dspi-config all 1.0.1-1
 	packages="$test_root/packages-$product"
 	"$source_root/scripts/collect-packages.sh" "$product" "$packages" "$raw" "$client" >/dev/null

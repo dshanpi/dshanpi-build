@@ -9,7 +9,8 @@
 - `ArmBianOS`：板卡、Kernel/U-Boot DTS、DTBO、BSP 和系统镜像构建引擎。
 - `dspi-config`：设备端 overlay、软件源和系统版本管理工具及其 deb。
 - `dshanpi-build`：固定源码 commit、调用构建、选择包、制作元包、生成并签名 APT。
-- `dlfilewebsite`：验签、原子导入和静态提供 `https://dl.100ask.net/apt`。
+- GitHub Pages：当前托管 `https://apt.100ask.net` 的签名仓库。
+- `dlfilewebsite`：可选的自建服务器接收端；保留验签与原子导入接口。
 
 ## 产品配置
 
@@ -76,10 +77,15 @@ scripts/withdraw-testing-release.sh dshanpi-a1-cm5 2026.09.30-1 \
 scripts/publish-apt.sh repository/
 ```
 
-APT 地址统一为 `https://dl.100ask.net/apt`。stable suite 为 `noble`，testing suite 为
+APT 地址统一为 `https://apt.100ask.net`。stable suite 为 `noble`，testing suite 为
 `noble-testing`；公共包位于 `common` component，板卡包位于产品同名 component。
 testing 设置 `NotAutomatic`，不会被普通升级命令误装；stable 保持正常 APT 优先级。
 所有历史版本默认保留。U-Boot 和 `linux-libc-dev` 不进入在线升级集合。
+
+`DSHANPI_APT_BASE_URL` 表示完整仓库根地址，默认 `https://apt.100ask.net`；
+`build-client-packages.sh` 的 `BASE_URL` 参数使用同样语义，不再自动追加 `/apt`。
+下载站独立 APT 虚拟主机将该域名的 `/dists/`、`/pool/` 和 `/catalog/` 映射到已有仓库。
+域名变更后的客户端包必须使用新的发行版本；历史 release lock 和已发布 deb 不应覆盖。
 
 构建镜像时，本仓库通过 Armbian 的 `EXT` 接口追加板卡 profile、`dspi-config`、产品软件
 源和 release 元包安装扩展，不覆盖板卡原有的相机、多媒体或固件扩展。产品 profile 随
@@ -88,6 +94,35 @@ testing 设置 `NotAutomatic`，不会被普通升级命令误装；stable 保�
 `<product>-release-desktop`。
 
 ## 发布门禁
+
+### GitHub Pages 发布
+
+仓库为 `dshanpi/dshanpi-build`。域名 DNS 配置为 `apt` CNAME → `dshanpi.github.io`，
+Pages 使用 Actions 部署，Custom domain 设置为 `apt.100ask.net`。
+
+```bash
+# 公钥和指纹纳入源码，私钥只保存在受保护签名环境与 Actions Secrets。
+scripts/fetch-pages.sh output/repository keys/dshanpi-archive.asc
+# 按上面的 build-apt-repository / promote 命令修改并签名该副本，然后：
+scripts/publish-pages.sh output/repository keys/dshanpi-archive.asc
+```
+
+`feature/apt-pages-state` 分支保存完整签名仓库快照。大文件按 64 MiB 分块存储，
+Actions 重组后验证 GPG、各级元数据及每个 deb 的 SHA-256，再部署到 Pages。
+发布前检查旧状态哈希与历史 pool 不变性，普通 Git push 拒绝并发覆盖。
+快照不依赖会过期的 Actions artifacts；Pages 内容预算为 950 MB，超限直接停止。
+这适用于首阶段闭环；更多板卡和长期版本历史增长后应切换大容量托管。
+
+Actions `Build and publish DShanPI product` 的 `backend` 选择 `github-pages`，即可全程
+使用 GitHub；`ssh` 保留原服务器通道。GitHub 分支部署策略需允许运行发布工作流的源码分支，
+以及 `feature/apt-pages-state`。testing 与 stable 的构建发布共用串行队列。
+
+签名公钥：[`keys/dshanpi-archive.asc`](keys/dshanpi-archive.asc)，
+指纹：[`keys/dshanpi-archive.fingerprint`](keys/dshanpi-archive.fingerprint)。
+本次 `2026.10.08-1` / `2026.10.08-2` CM5 候选的精确输入记录在
+`products/dshanpi-a1-cm5/releases/*.packages.json`；复用已记录的 9 月 30 日内核产物，
+新增包含板卡 profile 的 BSP 和独立域名客户端。两组候选分别使用 dspi-config
+`1.0.1-2` / `1.0.2-1`，保留真实升级与降级路径；它们均不代表真机验证已完成。
 
 testing 发布必须先通过包集、身份冲突、权限、RPATH、签名和本地 APT 客户端测试。
 stable 只能读取 testing 的候选清单并复用相同 SHA-256。硬件启动、显示、相机、无线、
