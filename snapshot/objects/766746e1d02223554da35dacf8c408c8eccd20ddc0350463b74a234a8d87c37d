@@ -36,42 +36,42 @@
     {
       "architecture": "all",
       "component": "dshanpi-a1",
-      "filename": "pool/dshanpi-a1/d/dshanpi-a1-release-core/dshanpi-a1-release-core_2026.10.08-2_all.deb",
+      "filename": "pool/dshanpi-a1/d/dshanpi-a1-release-core/dshanpi-a1-release-core_2026.10.08-3_all.deb",
       "package": "dshanpi-a1-release-core",
-      "sha256": "166bf2aff8415e6ad9f811cdd16600da0fe68f5b1cb88aa9f4b41356185c8719",
-      "version": "2026.10.08-2"
+      "sha256": "83e9b508b05276981f89f134eee96be186a5cc7501b1b70e7859c3611778113d",
+      "version": "2026.10.08-3"
     },
     {
       "architecture": "all",
       "component": "dshanpi-a1",
-      "filename": "pool/dshanpi-a1/d/dshanpi-a1-release-desktop/dshanpi-a1-release-desktop_2026.10.08-2_all.deb",
+      "filename": "pool/dshanpi-a1/d/dshanpi-a1-release-desktop/dshanpi-a1-release-desktop_2026.10.08-3_all.deb",
       "package": "dshanpi-a1-release-desktop",
-      "sha256": "f572f4b1b230ece94e16ba4af922deed7371125bdd2aef7afc2c3eac5bc1da9a",
-      "version": "2026.10.08-2"
+      "sha256": "8ee1b16be1f59e1d0c7ff08c0719c9a9304624696d17809088575519e496c552",
+      "version": "2026.10.08-3"
     },
     {
       "architecture": "all",
       "component": "dshanpi-a1",
-      "filename": "pool/dshanpi-a1/d/dshanpi-a1-repository/dshanpi-a1-repository_1:2026.10.08-2_all.deb",
+      "filename": "pool/dshanpi-a1/d/dshanpi-a1-repository/dshanpi-a1-repository_1:2026.10.08-3_all.deb",
       "package": "dshanpi-a1-repository",
-      "sha256": "be44f0b9e814c5db294a5209f8099bce8f091c54c9c4e1604d7d760f30cef4b7",
-      "version": "1:2026.10.08-2"
+      "sha256": "f55be1ed3a878edb25476734557dcd87d855b287be0e200da07cf744e01316e7",
+      "version": "1:2026.10.08-3"
     },
     {
       "architecture": "all",
       "component": "common",
-      "filename": "pool/common/d/dshanpi-archive-keyring/dshanpi-archive-keyring_1:2026.10.08-2_all.deb",
+      "filename": "pool/common/d/dshanpi-archive-keyring/dshanpi-archive-keyring_1:2026.10.08-3_all.deb",
       "package": "dshanpi-archive-keyring",
-      "sha256": "523b43cd40905f0278a21f5f8eb93b0b65b74051c9655b8e692ea6e59c567070",
-      "version": "1:2026.10.08-2"
+      "sha256": "75e59bf61acf74d3f24bb9dec7b8937b13941111443348140510f9aff472ee76",
+      "version": "1:2026.10.08-3"
     },
     {
       "architecture": "all",
       "component": "common",
-      "filename": "pool/common/d/dspi-config/dspi-config_1.0.2-1_all.deb",
+      "filename": "pool/common/d/dspi-config/dspi-config_1.0.2-2_all.deb",
       "package": "dspi-config",
-      "sha256": "5be496494b048343438f7fcd8d40203e30d2cd4141e15de9d5a206e22bba96d0",
-      "version": "1.0.2-1"
+      "sha256": "74a02715f1b024deab22921a2d2d114cbfcad06e7d306328bb5c65cb5ea46d6d",
+      "version": "1.0.2-2"
     },
     {
       "architecture": "arm64",
@@ -157,5 +157,5 @@
   "product": "dshanpi-a1",
   "schema_version": 1,
   "suite": "noble-testing",
-  "version": "2026.10.08-2"
+  "version": "2026.10.08-3"
 }

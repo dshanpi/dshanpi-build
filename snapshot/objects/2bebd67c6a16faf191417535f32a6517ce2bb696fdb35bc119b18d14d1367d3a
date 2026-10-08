@@ -89,3 +89,19 @@ MD5sum: e051be68dfec2d081c6c358068497543
 SHA1: 64278a541f7e33fb1d91c88be1e10bc5501430fc
 SHA256: 5be496494b048343438f7fcd8d40203e30d2cd4141e15de9d5a206e22bba96d0
 
+Package: dspi-config
+Version: 1.0.2-2
+Architecture: all
+Maintainer: DShanPI <support@dshanpi.com>
+Depends: apt, bash, coreutils, dpkg, util-linux, whiptail
+Section: admin
+Priority: optional
+Description: DShanPI device-tree and system configuration utility
+ Manage board-specific device-tree overlays, signed software sources and
+ release meta-package upgrades from a terminal menu or command line.
+Filename: pool/common/d/dspi-config/dspi-config_1.0.2-2_all.deb
+Size: 7410
+MD5sum: 7c1d3abf9dc2458b8441ca1334408c48
+SHA1: 28bc6cfe5e0565d5613a0c4a6080f2dd90b49e84
+SHA256: 74a02715f1b024deab22921a2d2d114cbfcad06e7d306328bb5c65cb5ea46d6d
+
