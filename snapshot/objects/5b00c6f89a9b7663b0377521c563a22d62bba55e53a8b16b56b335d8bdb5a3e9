@@ -1,6 +1,3 @@
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA256
-
 Origin: DShanPI
 Label: DShanPI
 Suite: noble-testing
@@ -18,18 +15,18 @@ MD5Sum:
  d026c436ce33544f5bbd272c511d6f7e             7059 avaota-a1/binary-arm64/Packages
  22e73157533e606a629fedc5a9642817             2283 avaota-a1/binary-arm64/Packages.gz
  94a3aad4e0ea52a81adc856ffaef8f42             2304 avaota-a1/binary-arm64/Packages.xz
- 9f58f08ccefcd8ed14483ddd92a6ff53             4287 common/binary-all/Packages
- 51adeb6fde0da939af5716e2387cbdc5             1390 common/binary-all/Packages.gz
- 2a0bd9949b56f4ccb97e74c707477ecb             1404 common/binary-all/Packages.xz
+ 6dd597203a9464c29619a35b738102c9             4813 common/binary-all/Packages
+ 956e22148e62fba78c09c09b9ac280b4             1495 common/binary-all/Packages.gz
+ 362a8280ea46888f8505cae5c305cb5a             1492 common/binary-all/Packages.xz
  d41d8cd98f00b204e9800998ecf8427e                0 common/binary-arm64/Packages
  fa9ac5a217b5547bc7dd4e6e894fe135               20 common/binary-arm64/Packages.gz
  8dc5aea5b03dff8595f096f9e368e888               32 common/binary-arm64/Packages.xz
- cf3b6690278b342966322b687dffa45b             6328 dshanpi-a1/binary-all/Packages
- 15a2952414d125e369ee9230cf762f0b             1308 dshanpi-a1/binary-all/Packages.gz
- c68af4d33fab5fbb75c5e6fa50726ce7             1308 dshanpi-a1/binary-all/Packages.xz
- 9628c4ad284f53535d3a8d0926fda8f4            18799 dshanpi-a1/binary-arm64/Packages
- 911afd187026940222079ea33d0fe02f             4510 dshanpi-a1/binary-arm64/Packages.gz
- b3e2ae50e49682ef7972e1f938e47819             4292 dshanpi-a1/binary-arm64/Packages.xz
+ 97bf46d4ffefef3ac91effd7ecedc65b             6328 dshanpi-a1/binary-all/Packages
+ 17aee12b2344d89c2cab1d84cef32845             1308 dshanpi-a1/binary-all/Packages.gz
+ 952a4c9cb2a89e01f776e31a00be25cb             1308 dshanpi-a1/binary-all/Packages.xz
+ 22f7dc375873a4331f9eb873352959d1            19595 dshanpi-a1/binary-arm64/Packages
+ 8b7cec0c7d784f288257739ec26ee2fa             4620 dshanpi-a1/binary-arm64/Packages.gz
+ 0470fd33da79157095ff1860971a4f8b             4380 dshanpi-a1/binary-arm64/Packages.xz
  7e026736da4dc28888b28f16f85e984e            11509 dshanpi-a1-cm5/binary-all/Packages
  eb6ce40ad58fb386b79e5a5cdfb237c3             2084 dshanpi-a1-cm5/binary-all/Packages.gz
  da89f36cc7ca5517fe61b4e3d583c241             2004 dshanpi-a1-cm5/binary-all/Packages.xz
@@ -49,18 +46,18 @@ SHA1:
  be148d5c5765c8579edcfe47f2267ebd6578e0c7             7059 avaota-a1/binary-arm64/Packages
  f6cf29ec8c6e9aaa35bed8528da0d1cee822f5ae             2283 avaota-a1/binary-arm64/Packages.gz
  756ef81df4163f20acef7bb046eb25861ea05b23             2304 avaota-a1/binary-arm64/Packages.xz
- 67416f2740b597f6e2286202b7a3029aa68101ca             4287 common/binary-all/Packages
- 36a1ad4ee810986f541009a85999b4bef02763b1             1390 common/binary-all/Packages.gz
- c7bd74c55f9f29ed21f25960bc820eb4450bd032             1404 common/binary-all/Packages.xz
+ 71dfc3b1b6748f7f2c77faafe8b714a8cd8aab0b             4813 common/binary-all/Packages
+ 5d249d443bb87690c6aa54bb6c2edf8785015617             1495 common/binary-all/Packages.gz
+ ac4ca1ff186d3c7e8e4e2f3e84f069a4ce891201             1492 common/binary-all/Packages.xz
  da39a3ee5e6b4b0d3255bfef95601890afd80709                0 common/binary-arm64/Packages
  89892054d65b8b0dd6a081b33a97b6f2bd1fa267               20 common/binary-arm64/Packages.gz
  9746882f4236fa1c3a8f86be2f1d9c46680c0b10               32 common/binary-arm64/Packages.xz
- eb3d58dfa12504cef4de91d7d9a25122d4e06d27             6328 dshanpi-a1/binary-all/Packages
- bbaa3b039fde6400c568b11adcdadf736013d344             1308 dshanpi-a1/binary-all/Packages.gz
- fe4a41a8a71b0ddea60e3669891625dc0f2cc1b3             1308 dshanpi-a1/binary-all/Packages.xz
- bc28ceba3b5eec20f8905331fd974a2bf5ca5f08            18799 dshanpi-a1/binary-arm64/Packages
- 7488d788108fb9944530aaabb38cdd146f91eab0             4510 dshanpi-a1/binary-arm64/Packages.gz
- b067b8750c6dcdaaeccb2fb78409acff330a7a34             4292 dshanpi-a1/binary-arm64/Packages.xz
+ 43e02769a56dc17f427d58e98e246c09dbd22f04             6328 dshanpi-a1/binary-all/Packages
+ b6d0843f23cd0e3028440f2fa4d6f9427e9b3dce             1308 dshanpi-a1/binary-all/Packages.gz
+ 1715e36684d607d976bea6cbf68e0100a694892f             1308 dshanpi-a1/binary-all/Packages.xz
+ e62b1f7c53fca75765872d8a4d2fd0202516f44a            19595 dshanpi-a1/binary-arm64/Packages
+ 88163d8ae3811cbcb039caf1607f0606ff5752a9             4620 dshanpi-a1/binary-arm64/Packages.gz
+ 72aca2387d08287546214d7e243f5402d35a03f5             4380 dshanpi-a1/binary-arm64/Packages.xz
  a7f7ad34aa2987aaeb383df20fc92075db981975            11509 dshanpi-a1-cm5/binary-all/Packages
  a431e0e69aab33d16c7ed16627b20ac732d9da7c             2084 dshanpi-a1-cm5/binary-all/Packages.gz
  8a4c33d8afdec17a576ca0ff8d5fd5f417a313b5             2004 dshanpi-a1-cm5/binary-all/Packages.xz
@@ -80,18 +77,18 @@ SHA256:
  5f7e97951662e39ff53100a4b639ec09f1b4d2c5ceb13eb931d0c2a0f37950ad             7059 avaota-a1/binary-arm64/Packages
  6d3fd363456738a25432f1b57fd5fe26a6f7d4f2546fe4f07880b1b0a4c0788c             2283 avaota-a1/binary-arm64/Packages.gz
  bb24003e5576aad546e8971e25fd5315c9f407da9a27247f35fa80fa76a3ac92             2304 avaota-a1/binary-arm64/Packages.xz
- 2bebd67c6a16faf191417535f32a6517ce2bb696fdb35bc119b18d14d1367d3a             4287 common/binary-all/Packages
- a017b6a312794c0534f4c7e10dafef5ce9f6c21b0a4b7932fab270179592718c             1390 common/binary-all/Packages.gz
- 90d134afd1dbe142264f02cc6e9f63b6714a984d2cfef7a2b5fc3eb34305b6b9             1404 common/binary-all/Packages.xz
+ 272d072f00a983935ec3ab7bad7041be53610709ca2aa14902699f942c8b3e7b             4813 common/binary-all/Packages
+ ff08387781cdde7242b301f8c670e201a295434d4a921d09d4404501faf65fab             1495 common/binary-all/Packages.gz
+ bc4e95d3d442869f8412f5c9fc7834662c75687bcb2ff65c5ef496b5d829c568             1492 common/binary-all/Packages.xz
  e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855                0 common/binary-arm64/Packages
  9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64               20 common/binary-arm64/Packages.gz
  0040f94d11d0039505328a90b2ff48968db873e9e7967307631bf40ef5679275               32 common/binary-arm64/Packages.xz
- b166b0d934adf9aae002ed1d2a2e7c63562ac53e02891b772d3dbff30a813527             6328 dshanpi-a1/binary-all/Packages
- 76bca2bf29bcf00079ce080794ecb01ec42d1e8d5fdd4f39b00d7f5dee497a4d             1308 dshanpi-a1/binary-all/Packages.gz
- b635b08a8898239d8a8d97f68ee8d2d210953af17a1fb5b317be52b4d1e47dac             1308 dshanpi-a1/binary-all/Packages.xz
- f3bfff936dd7cc71c5428a8a3c28a139f4f8a12ee44660edc444a5696ca470f2            18799 dshanpi-a1/binary-arm64/Packages
- d80b323dbd55a64ca733448b36e9f77c2db6eb86654fee2e4f94972c693b5634             4510 dshanpi-a1/binary-arm64/Packages.gz
- eda421ded169089bf6c506c61f2181aae7d49ebca4f71a37bbb16276f2378eb6             4292 dshanpi-a1/binary-arm64/Packages.xz
+ 1cef524067ae9119df443a3d7fe6a127e34fca28ddc2495a9e6c5a3008eb5f62             6328 dshanpi-a1/binary-all/Packages
+ 07ad1e4a1d3f8b380bf4af09c823b37015cf39c0f9cd989b490e12c5374b7310             1308 dshanpi-a1/binary-all/Packages.gz
+ 3f8d4c572e4a31dcf7de8c55e37c87927dd6f1c82fd3333e72bff6d08fa38222             1308 dshanpi-a1/binary-all/Packages.xz
+ 44f1bfe67bd4f1bf7bb20723e46509addb61e92a10c25606b8587e7394031f5f            19595 dshanpi-a1/binary-arm64/Packages
+ fcd6249e40b49c4df7ea3a3af00a7669b9ef608743c8878763efe6170ec29191             4620 dshanpi-a1/binary-arm64/Packages.gz
+ 2d252d5adf3f9637034c1f85ec55addbb1fa8fd67e0565accd026dc2b547e8c4             4380 dshanpi-a1/binary-arm64/Packages.xz
  406cf4fea2357b8acd4ab000d8746541ba48a27a1fdae1c001b4bb5cb2a4574e            11509 dshanpi-a1-cm5/binary-all/Packages
  357555a1cc110433bcc9d4018154fe4e30d95c8ba6649c6a498045d361f1150f             2084 dshanpi-a1-cm5/binary-all/Packages.gz
  f09318aefa2bdcf92b1b9eb5e4fc72e5f66ebb62ec2720c372aa8ceda40b3e64             2004 dshanpi-a1-cm5/binary-all/Packages.xz
@@ -104,19 +101,3 @@ SHA256:
  25fae98683065bf515724e81d13d23348b3cd2d8e84908a0e9d0b710f004b73d             6889 dshanpi-r1/binary-arm64/Packages
  976bc3425e8122a30a387da63f665c31a12f666060065a1fff04af7213271cc8             2280 dshanpi-r1/binary-arm64/Packages.gz
  9bbc07c4cc64f393bdb1d4b7b81cd0a16c51b671bd4f63469481ca27bd65c91a             2304 dshanpi-r1/binary-arm64/Packages.xz
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEER2v1mMpH8SFG7xhiD27fG1xB8+wFAmrHhwEACgkQD27fG1xB
-8+yeOhAApgRx924Wg969Kncrbr+pNibzfCkF7LM5DXr2Idawubhjj1J4ORnUUBgx
-Uxw13VxbdFU92ChW1WmppxtT5v+CK9V04V/ri+F7q18LB9m4n2wlnxK6j5UPf7CB
-D84k/jIn54gELukuq+GG8VwwJ5LN2Kxebpg2nMpEDK7O2LXp2JwnsBjk1Puzn4NV
-v5LbOYLxjyf9F4Xj9nf9qtw5D2JqRdrretNXVNwl7jCGsV4qU8Y6ITcGfNNKI5eV
-BjCi+hFsd8uDT/F7IuQBwyVCbzAOIEmEihTCnfsqgwC0wrxTfIZZ6Z7d+nsG2i5m
-ymvnGgv0S7NFwaRHoBkode+WHIW0ui/Oo0Pmu9+C9eCIYEHAYnLb8j2O9tzVhCsl
-EhZisKb8RcDvcj045FVcPDh6llfaYJr9u7vZYJQwvMlCgJlnK1IBxzUYI+aUpxli
-e8RcXFf5wpQwO0w8bEAbTffAYTUTbb78b8hECwTgS5hG/FwNqBkNLbiES7xPaQk7
-4GCzzAY18JCT6p38KRIf6dpdXFPNCJW7tgtAG3kQRNlCyF9IbBy8v0j4xIeXMq8f
-543Cu6SCUD6t9grxFZBhelrshmUaT6o37NjkIhvx2hmLPp9spCnu1umou8mHg3O6
-dUjtLMZxCqlpgiHkSKCzjy+Y91gMUB81GVsLW5TYfEO8VSevh+4=
-=e5H3
------END PGP SIGNATURE-----

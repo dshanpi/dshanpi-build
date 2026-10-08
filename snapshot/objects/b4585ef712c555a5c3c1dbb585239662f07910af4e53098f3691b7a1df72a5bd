@@ -5,12 +5,13 @@ armbian-bsp-desktop-dshanpi-a1-vendor	25.11.0-trunk.20261008.4	arm64	pool/dshanp
 base-files	25.11.0-trunk.20260929.1-13ubuntu10-noble	arm64	pool/dshanpi-a1/b/base-files/base-files_25.11.0-trunk.20260929.1-13ubuntu10-noble_arm64.deb	828810aa47019d453e48146d447e78e5c34aabd140dd5ab6dd15e73e6e88d8e9
 base-files	25.11.0-trunk.20261008.4-13ubuntu10-noble	arm64	pool/dshanpi-a1/b/base-files/base-files_25.11.0-trunk.20261008.4-13ubuntu10-noble_arm64__1-noble-1armbian1-Baa17-U13ubuntu10-R55fa.deb	114c0373deb3623b6777ccd214cc4b07becc8f03e679041c37a51846f69c4ae7
 camera-engine-rkaiq	6.6.3+dshanpi1	arm64	pool/dshanpi-a1/c/camera-engine-rkaiq/camera-engine-rkaiq_6.6.3+dshanpi1_arm64.deb	7c27705fe52070c7400b001dea9bb30c1f211c9253949883bf53a1368888aee8
+camera-engine-rkaiq	6.6.3+dshanpi2	arm64	pool/dshanpi-a1/c/camera-engine-rkaiq/camera-engine-rkaiq_6.6.3+dshanpi2_arm64.deb	2735ad9eb32073544991b5c4a541cd90fa1b57d0180be4b2887ea567c6612e2e
 dshanpi-a1-release-core	2026.10.08-1	all	pool/dshanpi-a1/d/dshanpi-a1-release-core/dshanpi-a1-release-core_2026.10.08-1_all.deb	b230a3ca416682683ceea7ea6781070d75516ddcba642ff3ff132b77fd133202
-dshanpi-a1-release-core	2026.10.08-3	all	pool/dshanpi-a1/d/dshanpi-a1-release-core/dshanpi-a1-release-core_2026.10.08-3_all.deb	83e9b508b05276981f89f134eee96be186a5cc7501b1b70e7859c3611778113d
+dshanpi-a1-release-core	2026.10.08-4	all	pool/dshanpi-a1/d/dshanpi-a1-release-core/dshanpi-a1-release-core_2026.10.08-4_all.deb	a778773d569c2180e8abb48396f4ccffb8f5004671b69b2eedef48b6ce60ff86
 dshanpi-a1-release-desktop	2026.10.08-1	all	pool/dshanpi-a1/d/dshanpi-a1-release-desktop/dshanpi-a1-release-desktop_2026.10.08-1_all.deb	82ee5cfbb3d79d823a29966ff152b4ad45cbfa26b5277a812c39f5d5553bd782
-dshanpi-a1-release-desktop	2026.10.08-3	all	pool/dshanpi-a1/d/dshanpi-a1-release-desktop/dshanpi-a1-release-desktop_2026.10.08-3_all.deb	8ee1b16be1f59e1d0c7ff08c0719c9a9304624696d17809088575519e496c552
+dshanpi-a1-release-desktop	2026.10.08-4	all	pool/dshanpi-a1/d/dshanpi-a1-release-desktop/dshanpi-a1-release-desktop_2026.10.08-4_all.deb	3d3aa7fcf3bee7fdbdda9f61dbb1a2ee218afb093bd7ad39094d5de49125dd99
 dshanpi-a1-repository	1:2026.10.08-1	all	pool/dshanpi-a1/d/dshanpi-a1-repository/dshanpi-a1-repository_1:2026.10.08-1_all.deb	3ca260b1d911e73b0b8d91e6461c75041160a065630fc4631909ef3e03665b55
-dshanpi-a1-repository	1:2026.10.08-3	all	pool/dshanpi-a1/d/dshanpi-a1-repository/dshanpi-a1-repository_1:2026.10.08-3_all.deb	f55be1ed3a878edb25476734557dcd87d855b287be0e200da07cf744e01316e7
+dshanpi-a1-repository	1:2026.10.08-4	all	pool/dshanpi-a1/d/dshanpi-a1-repository/dshanpi-a1-repository_1:2026.10.08-4_all.deb	5e6f01e65f26e04b8de33f56568c84dc8ee3d34bda09e3a3bc180c54d7976c45
 gstreamer1.0-rockchip1	1.14-4	arm64	pool/dshanpi-a1/g/gstreamer1.0-rockchip1/gstreamer1.0-rockchip1_1.14-4_arm64.deb	975854ff09d5143353a6931612202b500e27f02223ba0bd43fe54cb5a644730f
 librga-dev	2.2.0-1	arm64	pool/dshanpi-a1/libr/librga-dev/librga-dev_2.2.0-1_arm64.deb	f3f32028a15b7af3f9f55dbadf3d362904c7e15159544288852c96f9b5029dfd
 librga2	2.2.0-1	arm64	pool/dshanpi-a1/libr/librga2/librga2_2.2.0-1_arm64.deb	a4d0476061cfb7e84687eefd93a4974186e00d764bdf06f4ea8ef3d47f4427a8

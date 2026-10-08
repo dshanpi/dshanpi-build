@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "channel": "testing",
+  "suite": "noble-testing",
+  "product": "dshanpi-a1",
+  "component": "dshanpi-a1",
+  "version": "2026.10.08-4",
+  "expected_base_state_sha256": "fb12fe4f48fddacdc172efe55c1c8c23c5c2950f571b776f8519d65e1a97512d",
+  "supersedes_withdrawn_release": "2026.10.08-3",
+  "reason": "Repair legacy camera directory permissions during package upgrades"
+}

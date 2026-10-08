@@ -57,6 +57,20 @@ MD5sum: 20feb0dd90619455f9d177f12520adc5
 SHA1: 34a7e0b8fb3b69d201d4bdd5f339576810784307
 SHA256: 75e59bf61acf74d3f24bb9dec7b8937b13941111443348140510f9aff472ee76
 
+Package: dshanpi-archive-keyring
+Version: 1:2026.10.08-4
+Architecture: all
+Maintainer: DShanPI <support@dshanpi.com>
+Section: misc
+Priority: optional
+Description: DShanPI APT archive signing key
+ Public key used to authenticate packages from apt.100ask.net.
+Filename: pool/common/d/dshanpi-archive-keyring/dshanpi-archive-keyring_1:2026.10.08-4_all.deb
+Size: 1824
+MD5sum: 00903907d820d581cd365449a6f58941
+SHA1: a129f2a2a86baea6748567e0429684e4df588fef
+SHA256: 4dfe74b2a003dc061acdb697a9f1b81ee061e9021850fa6b28e6e8800420125f
+
 Package: dspi-config
 Version: 1.0.1-2
 Architecture: all
