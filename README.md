@@ -151,6 +151,10 @@ USB/PCIe、DKMS、重启和回滚未验证前不得晋级 stable。
 已经固定输入 SHA-256 的清理脚本，不修改原 A1 板卡配置或相机安装扩展。
 
 最终镜像从本地安装 release 元包及其所有精确依赖，不要求候选先出现在公开源。
+构建时可设置 `DSHANPI_PUBLISHED_REPOSITORY` 指向已签名的历史仓库；Actions 自动传入。
+工具验证签名后，对相同版本、相同安装内容的软件包复用已发布文件，仅容许
+`Installed-Size` 和校验清单排序等打包元数据差异。安装文件、权限、依赖或维护脚本
+发生变化仍会拒绝复用，必须提高软件包版本号。
 `verify-image.sh PRODUCT VERSION IMAGE.img` 只读挂载镜像，检查元包、每个依赖的
 已安装版本、板卡身份、DTB、配置工具 profile、域名和签名配置。CLI 和 Desktop
 都通过后才复制到本次发行的输出目录。Actions 构建产物保留 7 天；长期镜像托管
