@@ -1,0 +1,19 @@
+name: Validate APT tooling
+on:
+  push:
+    branches: [main, feature/github-pages-apt]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install package tools
+        run: sudo apt-get update && sudo apt-get install -y jq patchelf dpkg-dev gnupg xz-utils
+      - name: Check scripts and snapshot integrity
+        run: |
+          bash -n scripts/*.sh tests/*.sh
+          python3 -m unittest discover -s tests -p 'test_*.py'
+          bash tests/test.sh

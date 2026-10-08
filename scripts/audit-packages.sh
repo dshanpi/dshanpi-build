@@ -5,7 +5,7 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/lib.sh"
 [[ $# -eq 1 ]] || die "usage: $0 PACKAGE_DIRECTORY"
 package_dir=$(safe_realpath "$1")
 require_command dpkg-deb
-require_command file
+require_command python3
 require_command patchelf
 shopt -s nullglob
 debs=("$package_dir"/*.deb)
@@ -33,13 +33,25 @@ for deb in "${debs[@]}"; do
 	audit_dir=$(mktemp -d)
 	dpkg-deb --extract "$deb" "$audit_dir"
 	while IFS= read -r -d '' payload; do
-		file --brief "$payload" | grep -q '^ELF ' || continue
 		rpath=$(patchelf --print-rpath "$payload" 2>/dev/null || true)
 		[[ ! "$rpath" =~ (^|:)/(home|tmp|build)(/|:|$) ]] || {
 			rm -rf -- "$audit_dir"
 			die "build-host RPATH in $package:${payload#${audit_dir}}: $rpath"
 		}
-	done < <(find "$audit_dir" -type f -print0)
+	done < <(python3 - "$audit_dir" <<'PY'
+import os
+from pathlib import Path
+import sys
+for directory, _, names in os.walk(sys.argv[1]):
+    for name in names:
+        path = Path(directory) / name
+        if path.is_symlink() or not path.is_file():
+            continue
+        with path.open('rb') as stream:
+            if stream.read(4) == b'\x7fELF':
+                sys.stdout.buffer.write(os.fsencode(path) + b'\0')
+PY
+)
 	rm -rf -- "$audit_dir"
 done
 

@@ -39,7 +39,7 @@ Maintainer: DShanPI <support@dshanpi.com>
 Section: misc
 Priority: optional
 Description: DShanPI APT archive signing key
- Public key used to authenticate packages from dl.100ask.net/apt.
+ Public key used to authenticate packages from apt.100ask.net.
 EOF
 build_deb "$key_root" "$output_dir/dshanpi-archive-keyring_${version}_all.deb"
 
@@ -58,12 +58,13 @@ Description: DShanPI $product signed APT source
 EOF
 cat > "$source_root/etc/apt/sources.list.d/dshanpi.sources" <<- EOF
 Types: deb
-URIs: ${base_url}/apt
+URIs: ${base_url}
 Suites: ${codename}
 Components: ${components}
 Architectures: arm64 all
 Signed-By: /usr/share/keyrings/dshanpi-archive-keyring.gpg
 EOF
+printf '%s\n' /etc/apt/sources.list.d/dshanpi.sources > "$source_root/DEBIAN/conffiles"
 build_deb "$source_root" "$output_dir/${repository_package}_${version}_all.deb"
 
 sha256sum "$output_dir/dshanpi-archive-keyring_${version}_all.deb" \
