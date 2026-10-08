@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "channel": "testing",
+  "suite": "noble-testing",
+  "product": "dshanpi-a1-cm5",
+  "component": "dshanpi-a1-cm5",
+  "version": "2026.10.08-2",
+  "expected_base_state_sha256": "none"
+}

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DShanPI APT 软件仓库</title>
+<style>body{font:17px/1.7 system-ui,sans-serif;max-width:850px;margin:60px auto;padding:0 24px;color:#233047;background:#f6f8fc}h1{font-size:36px}pre{overflow:auto;background:#e8edf5;padding:18px;border-radius:8px}a{color:#245bbc}code{font-family:monospace}</style>
+<h1>DShanPI APT 软件仓库</h1>
+<p>为 DShanPI 系统提供经过 GPG 签名的软件包。当前平台候选通过 <code>noble-testing</code> 提供，完成真机验证后才晋级 <code>noble</code>。</p>
+<p><a href="archive-key.asc">签名公钥</a> · <a href="SHA256SUMS">文件校验清单</a> · <a href="SHA256SUMS.asc">清单签名</a> · <a href="PUBLICATION.json">最近发布记录</a> · <a href="https://github.com/dshanpi/dshanpi-build">构建与发布源码</a></p>
+<h2>添加软件源</h2>
+<p>当前已提供 A1 CM5 的 testing 候选。安装前请与 GitHub 源码仓库中的公钥指纹核对。</p>
+<pre>curl -fsS https://apt.100ask.net/dshanpi-archive-keyring.gpg \
+  -o /tmp/dshanpi-archive-keyring.gpg
+gpg --show-keys --with-fingerprint /tmp/dshanpi-archive-keyring.gpg
+sudo install -m 0644 /tmp/dshanpi-archive-keyring.gpg /usr/share/keyrings/
+sudo tee /etc/apt/sources.list.d/dshanpi.sources &lt;&lt;'EOF'
+Types: deb
+URIs: https://apt.100ask.net
+Suites: noble-testing
+Components: common dshanpi-a1-cm5
+Architectures: arm64 all
+Signed-By: /usr/share/keyrings/dshanpi-archive-keyring.gpg
+EOF
+sudo apt update
+sudo apt install dspi-config</pre>
+<h2>管理系统版本</h2>
+<p>初次使用平台版本管理前，安装适合当前板卡和 CLI／桌面环境的 release 元包。它会安装精确版本的内核、DTB、BSP 和驱动，请先在测试板上验证。</p>
+<pre>apt-cache policy dshanpi-a1-cm5-release-core
+# 桌面镜像使用 dshanpi-a1-cm5-release-desktop
+sudo apt install -t noble-testing dshanpi-a1-cm5-release-core
+dspi-config update list
+sudo dspi-config update install &lt;版本&gt;
+sudo dspi-config update rollback</pre>
+<p>回滚要求仓库中存在更早版本。测试通道不会随普通系统升级自动选入；U-Boot 不在在线升级集合中。</p>
+</html>

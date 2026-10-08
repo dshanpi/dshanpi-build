@@ -1,0 +1,68 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA256
+
+Origin: DShanPI
+Label: DShanPI
+Suite: noble-testing
+Codename: noble-testing
+Date: Wed, 30 Sep 2026 00:00:00 +0000
+Architectures: all arm64
+Components: common dshanpi-a1-cm5
+Description: DShanPI signed platform packages
+NotAutomatic: yes
+ButAutomaticUpgrades: no
+MD5Sum:
+ 7a6ef6b27f7fa000d86d42517bf871a4             1796 common/binary-all/Packages
+ 406bb1135323d04148c31fa012890207              768 common/binary-all/Packages.gz
+ d7fd36297a69b5a401ec9aa6c39c12bc              828 common/binary-all/Packages.xz
+ d41d8cd98f00b204e9800998ecf8427e                0 common/binary-arm64/Packages
+ fa9ac5a217b5547bc7dd4e6e894fe135               20 common/binary-arm64/Packages.gz
+ 8dc5aea5b03dff8595f096f9e368e888               32 common/binary-arm64/Packages.xz
+ e2ae830e0cc1e6cee60ea975e35f27db             7977 dshanpi-a1-cm5/binary-all/Packages
+ 36e31192856e8a6d231a68ebd1e49372             1723 dshanpi-a1-cm5/binary-all/Packages.gz
+ 39e2346a187b5fc4d4a07e15b40afa94             1712 dshanpi-a1-cm5/binary-all/Packages.xz
+ 9c55669653b4519ab822f27cd208a01c            11965 dshanpi-a1-cm5/binary-arm64/Packages
+ 122ca59db47e4b7e7649eb0458d83265             3798 dshanpi-a1-cm5/binary-arm64/Packages.gz
+ 68104677298df44ac0c062463830f35a             3700 dshanpi-a1-cm5/binary-arm64/Packages.xz
+SHA1:
+ cf88a6e1391bb51552864701be5c7380c29abaaa             1796 common/binary-all/Packages
+ 17a7fc6ed2ccec0e526d63551509da3b3bfc0fd7              768 common/binary-all/Packages.gz
+ 762636381c3ced6faadb7e9996a87de16d1011e5              828 common/binary-all/Packages.xz
+ da39a3ee5e6b4b0d3255bfef95601890afd80709                0 common/binary-arm64/Packages
+ 89892054d65b8b0dd6a081b33a97b6f2bd1fa267               20 common/binary-arm64/Packages.gz
+ 9746882f4236fa1c3a8f86be2f1d9c46680c0b10               32 common/binary-arm64/Packages.xz
+ 2fb90d71038ab80346ee8c17764331032ffb0a86             7977 dshanpi-a1-cm5/binary-all/Packages
+ 28f9466be4fab73145fe61a231d2baf4c807e940             1723 dshanpi-a1-cm5/binary-all/Packages.gz
+ a20c90a72117c15efd2c11f91ff5316b6ed3b0cc             1712 dshanpi-a1-cm5/binary-all/Packages.xz
+ 3692da159599554389370b1b30eeb085a92b315d            11965 dshanpi-a1-cm5/binary-arm64/Packages
+ c05dae77f258199595829f8eb9cba9dad1b4bcdf             3798 dshanpi-a1-cm5/binary-arm64/Packages.gz
+ 66ae0984fdf18caf08cbc5295c41bbbc6ac76c53             3700 dshanpi-a1-cm5/binary-arm64/Packages.xz
+SHA256:
+ b8ea42cf1fd2009a247e6e5d6910b20c88b58136b275d0394d97b1cf089310e8             1796 common/binary-all/Packages
+ 81c9f7a35302a6a09f1ea3ab9e263db04313884b4d8e649846145ad6906318a6              768 common/binary-all/Packages.gz
+ 3819a41bc9c57395108dd2b24860c7ac2ae865da441180215a2c671f284e5955              828 common/binary-all/Packages.xz
+ e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855                0 common/binary-arm64/Packages
+ 9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64               20 common/binary-arm64/Packages.gz
+ 0040f94d11d0039505328a90b2ff48968db873e9e7967307631bf40ef5679275               32 common/binary-arm64/Packages.xz
+ bfc38aecf77bb66578150395e8d0a7687ba43b4e00695cfd2daad27b50d5e915             7977 dshanpi-a1-cm5/binary-all/Packages
+ 647ea2cfb702a0916f4b9fe58839177702325e43e7eaef36ce03d91fa9df489c             1723 dshanpi-a1-cm5/binary-all/Packages.gz
+ 0a3acd99223e448542a4d26e72d385b8721ecae7c2185b53d206ff93bdb3001c             1712 dshanpi-a1-cm5/binary-all/Packages.xz
+ 6e9cc5c6708f79cd3b75bcce811d4f73b0c124abd98a3628866bbfff1904497d            11965 dshanpi-a1-cm5/binary-arm64/Packages
+ 296eeb55a13a04aa71180028ccd2d9903ed8dde7a974aea90942882b4c98ad51             3798 dshanpi-a1-cm5/binary-arm64/Packages.gz
+ 4f1722e6fbfbe6641918538c44fdba3a07b504bc9c5a1104e0efc71bd7208e2d             3700 dshanpi-a1-cm5/binary-arm64/Packages.xz
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEER2v1mMpH8SFG7xhiD27fG1xB8+wFAmrHTdcACgkQD27fG1xB
+8+zRYBAAljAtuu6oG5cWxN0JXKOlVxtzxwS+KDgnoZht9yF+JuQ7ID454ep99lSe
+ObC1W9pR/5XoKQFUEq1/WMLj1OliRec6DxkC8i+1lcglj1pIFgpMCxMNevNQR7oC
+knRAB32I+Hbc2oqoFUfcP4Xro2LGMaKsIcVYojIyunUiggNH6ijIWapJoB3SUCZJ
+uldJdoqWVZLj3wcOpNZoSbjQZ2Aq16l9alwTJ9uwOI+zRyW+Cia+Ww608JSIVdVG
+Gj3RWdEZ8QGxxgG7xluoEoQw3oFbNomJZn89N42MVZEKoiQ9hCGAQV/mxrS51Lt6
+5F+7gu7DGqbToZTTZnrMGqD+JHFcv9BXVVh4FtkA3NCfQJBewAe8/uEbMHfa1kTX
+2xAVob2LO3WWs4SzsT2HLkqAeRVuAHXHbDwuxsidgOlOLoU94OF1umwCX+oethn+
+tL+4tKPJfZF0SBKUq7hz+QbxMEcwR9WTBBojgVQNeB+3xZqP1EVHBXBMn5re8TRP
+435Av3qo/QMBxAfP19B2rChve92AmXrDy04K/0JFt8xbr7QhfygxoaX+awSOLWPy
+8SfW490miwOI35qS1uC0YHID/stHcr5pZAFiunrDT/P2MqRD6p0wESOew1SlavMc
+XmwzO3c4x7v3qMvA5qD8oF1uFXWJyB3tJED1d1s9+xpj5kTyB3g=
+=r/Wq
+-----END PGP SIGNATURE-----
