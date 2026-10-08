@@ -102,6 +102,7 @@ jobs:
         if: ${{ inputs.channel == 'testing' }}
         env:
           APT_PUBLIC_KEY_FILE: ${{ github.workspace }}/output/dshanpi-archive.asc
+          DSHANPI_PUBLISHED_REPOSITORY: ${{ github.workspace }}/output/repository
         run: |
           scripts/build-product.sh "${{ inputs.product }}" \
             "products/${{ inputs.product }}/releases/${{ inputs.version }}.lock.json"
