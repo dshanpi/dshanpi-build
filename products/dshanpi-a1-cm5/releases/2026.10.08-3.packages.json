@@ -1,0 +1,140 @@
+{
+  "product": "dshanpi-a1-cm5",
+  "channel": "testing",
+  "version": "2026.10.08-3",
+  "revision": "25.11.0-trunk.20261008.2",
+  "note": "Full image pipeline candidate. Kernel and BSP use locked Armbian artifact revisions; existing camera package reused byte-for-byte after verifying identical payload tar and equivalent control metadata. Hardware validation pending.",
+  "sources": {
+    "armbianos": "6fdd5fdf96c25dfe53c5dcdf443eda6173133ace",
+    "dspi_config": "b92173a4dd7685f0124a9c6417553dae47c973fc"
+  },
+  "apt_state_commit": "1407520760ef1fe94e223ef733933d85eb2d7b28",
+  "packages": [
+    {
+      "package": "aic8800-firmware",
+      "version": "5.0+git20260123.5f7be68d-8",
+      "architecture": "all",
+      "sha256": "5f58bc002f4e43c683e36a40cbd1fb9fb26633bfe998ffee5b1fbd42a0400eb7"
+    },
+    {
+      "package": "aic8800-sdio-dkms",
+      "version": "5.0+git20260123.5f7be68d-8",
+      "architecture": "all",
+      "sha256": "ffe5ffd3ece88ec15b61afebeeda19f35b1024e4975fb14f59734bdbc0df72e9"
+    },
+    {
+      "package": "armbian-bsp-cli-dshanpi-a1-cm5-vendor",
+      "version": "25.11.0-trunk.20261008.2",
+      "architecture": "arm64",
+      "sha256": "cb2c5eabf263b2fb483cac6f21734c22a8b5a0188d73168468ca232919e57133"
+    },
+    {
+      "package": "armbian-bsp-desktop-dshanpi-a1-cm5-vendor",
+      "version": "25.11.0-trunk.20261008.2",
+      "architecture": "arm64",
+      "sha256": "61843e86dcf161a05e66eed869a5be1fab40d4d3aa17346336118765cb836454"
+    },
+    {
+      "package": "base-files",
+      "version": "25.11.0-trunk.20261008.2-13ubuntu10-noble",
+      "architecture": "arm64",
+      "sha256": "516c7af51694c412a02318d28e7ab821ebbe85f2e3c7d822a7b6d581d3e25355"
+    },
+    {
+      "package": "camera-engine-rkaiq",
+      "version": "6.6.3+dshanpi1",
+      "architecture": "arm64",
+      "sha256": "7c27705fe52070c7400b001dea9bb30c1f211c9253949883bf53a1368888aee8"
+    },
+    {
+      "package": "dshanpi-a1-cm5-release-core",
+      "version": "2026.10.08-3",
+      "architecture": "all",
+      "sha256": "397122b4b561a16de60823eed18a67573d814f1f14e3e3ef66c590dd54e5a774"
+    },
+    {
+      "package": "dshanpi-a1-cm5-release-desktop",
+      "version": "2026.10.08-3",
+      "architecture": "all",
+      "sha256": "76718140e182399eecbde3f62b462568279c5f5a0846c4b5f107518c7828292d"
+    },
+    {
+      "package": "dshanpi-a1-cm5-repository",
+      "version": "1:2026.10.08-3",
+      "architecture": "all",
+      "sha256": "a68daf595438e7fd24cea8848dbc0ecaaff15538fbbc9011f0891c3c78d0a1bc"
+    },
+    {
+      "package": "dshanpi-archive-keyring",
+      "version": "1:2026.10.08-3",
+      "architecture": "all",
+      "sha256": "75e59bf61acf74d3f24bb9dec7b8937b13941111443348140510f9aff472ee76"
+    },
+    {
+      "package": "dspi-config",
+      "version": "1.0.2-1",
+      "architecture": "all",
+      "sha256": "5be496494b048343438f7fcd8d40203e30d2cd4141e15de9d5a206e22bba96d0"
+    },
+    {
+      "package": "gstreamer1.0-rockchip1",
+      "version": "1.14-4",
+      "architecture": "arm64",
+      "sha256": "975854ff09d5143353a6931612202b500e27f02223ba0bd43fe54cb5a644730f"
+    },
+    {
+      "package": "librga-dev",
+      "version": "2.2.0-1",
+      "architecture": "arm64",
+      "sha256": "f3f32028a15b7af3f9f55dbadf3d362904c7e15159544288852c96f9b5029dfd"
+    },
+    {
+      "package": "librga2",
+      "version": "2.2.0-1",
+      "architecture": "arm64",
+      "sha256": "a4d0476061cfb7e84687eefd93a4974186e00d764bdf06f4ea8ef3d47f4427a8"
+    },
+    {
+      "package": "librockchip-mpp-dev",
+      "version": "1.5.0-1",
+      "architecture": "arm64",
+      "sha256": "125930e8db00e4cd5a52579f5dcfdc3d56eda565635ba65e8c96944ca547990d"
+    },
+    {
+      "package": "librockchip-mpp1",
+      "version": "1.5.0-1",
+      "architecture": "arm64",
+      "sha256": "82f7b6a452453d6bdbc527d936e664ea61b396a64fa157d2dec2df827c9f70cc"
+    },
+    {
+      "package": "librockchip-vpu0",
+      "version": "1.5.0-1",
+      "architecture": "arm64",
+      "sha256": "43cf9767be03acb243f5cc19115008687dbb85235e995d54f3c7718be0c1c0c5"
+    },
+    {
+      "package": "linux-dtb-vendor-rk3576-dshanpi-a1-cm5",
+      "version": "25.11.0-trunk.20261008.2",
+      "architecture": "arm64",
+      "sha256": "45945fc526bbab05002fc09cef0aa15d67e1c689c70c5a50b6ae6cf77ade5331"
+    },
+    {
+      "package": "linux-headers-vendor-rk3576-dshanpi-a1-cm5",
+      "version": "25.11.0-trunk.20261008.2",
+      "architecture": "arm64",
+      "sha256": "b9484a1f5070bc1dafd454f6ce931bfafb98e26346a878c5694bc6e0ee6d0f8d"
+    },
+    {
+      "package": "linux-image-vendor-rk3576-dshanpi-a1-cm5",
+      "version": "25.11.0-trunk.20261008.2",
+      "architecture": "arm64",
+      "sha256": "2fe7171f0a076b09f8b892fcf59ef42bc119928aee45dbf5a53da52966151ac2"
+    },
+    {
+      "package": "rockchip-mpp-demos",
+      "version": "1.5.0-1",
+      "architecture": "arm64",
+      "sha256": "26476ac7830e0a26357f9d4bbc7229963a2344ea824917cdc919c18e13bcd7e6"
+    }
+  ]
+}

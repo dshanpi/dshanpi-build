@@ -124,10 +124,20 @@ Actions `Build and publish DShanPI product` 的 `backend` 选择 `github-pages`�
 新增包含板卡 profile 的 BSP 和独立域名客户端。两组候选分别使用 dspi-config
 `1.0.1-2` / `1.0.2-1`，保留真实升级与降级路径；它们均不代表真机验证已完成。
 
-下次从源码完整构建可在 Actions 中选择 `product=dshanpi-a1-cm5`、
-`version=2026.10.08-3`、`channel=testing`、`backend=github-pages`。
-对应 release lock 已固定当前板级源码和新版 dspi-config 的提交；该版本尚未构建或发布。
-完整新内核包可能触及 Pages 容量预算，门禁会保留已发布历史并停止超限发布。
+CM5 `2026.10.08-3` 的 21 个软件包已发布到 testing，精确文件校验值记录在
+`products/dshanpi-a1-cm5/releases/2026.10.08-3.packages.json`。A1、R1 和 Avaota A1
+也分别提供 `2026.10.08-1` 候选；网站支持按板卡、版本和 CLI／桌面类型生成整组
+精确安装命令。HTTPS、签名、四款板卡页面和全部 12 组版本／类型依赖解析均已验证。
+
+CM5 `2026.10.08-3` 的 CLI 和 GNOME 桌面镜像已完成构建及只读验收，原始镜像与
+gzip 压缩包的校验值见 `products/dshanpi-a1-cm5/releases/2026.10.08-3.images.json`。
+验收包括完整精确依赖、启动 DTB、AIC8800 模块、三路相机节点、IQ 文件和签名源配置。
+本次镜像保存在构建工作区 `output/dshanpi-a1-cm5/2026.10.08-3/images/`，未上传 GitHub
+Release；实际硬件启动、外设和升级／重启／回滚测试仍待完成。
+
+后续构建先提交新的 release lock，使用尚未发布的版本号和单调递增的 Armbian revision，
+再在 Actions 中选择对应 `product`、`version`、`channel=testing`、`backend=github-pages`。
+不要复用已发布版本号写入不同内容。Pages 预算检查会保留历史并停止超限发布。
 
 testing 发布必须先通过包集、身份冲突、权限、RPATH、签名和本地 APT 客户端测试。
 stable 只能读取 testing 的候选清单并复用相同 SHA-256。硬件启动、显示、相机、无线、
