@@ -1,0 +1,123 @@
+Package: armbian-bsp-cli-dshanpi-r1-vendor
+Version: 25.11.0-trunk.20261008.3
+Architecture: arm64
+Maintainer: John Doe <john.doe@somewhere.on.planet>
+Section: kernel
+Priority: optional
+Recommends: bsdutils, parted, util-linux, toilet
+Description: Armbian CLI BSP for board 'dshanpi-r1' branch 'vendor' 
+Installed-Size: 1407
+Armbian-Original-Hash: 1-PC9b3f-Vdf50-H3abc-B1e5d-Rf36a
+Depends: bash, linux-base, u-boot-tools, initramfs-tools, lsb-release, fping, device-tree-compiler, base-files (>= 25.11.0-trunk.20261008.3)
+Replaces: zram-config, armbian-bsp-cli-dshanpi-r1 (<< 25.11.0-trunk.20261008.3)
+Breaks: armbian-bsp-cli-dshanpi-r1 (<< 25.11.0-trunk.20261008.3)
+Provides: armbian-bsp-cli
+Filename: pool/dshanpi-r1/a/armbian-bsp-cli-dshanpi-r1-vendor/armbian-bsp-cli-dshanpi-r1-vendor_25.11.0-trunk.20261008.3_arm64__1-PC9b3f-Vdf50-H3abc-B1e5d-Rf36a.deb
+Size: 433552
+MD5sum: cf6de38c3d137b1313c1725d543dac72
+SHA1: 047fb90835bc48bb387b00a3425ab7be8082b46a
+SHA256: d4141cdc03ce0abcf6836e7a114a0c02a2b4ccb80fd24064e0494c3cc68580a8
+
+Package: armbian-bsp-desktop-dshanpi-r1-vendor
+Version: 25.11.0-trunk.20261008.3
+Architecture: arm64
+Maintainer: Armbian Linux <info@armbian.com>
+Section: xorg
+Priority: optional
+Provides: armbian-bsp-desktop, armbian-bsp-desktop-dshanpi-r1
+Description: Armbian bsp-desktop for release noble, common for all desktop environments on arm64 dshanpi-r1 machines on vendor branch
+Installed-Size: 2
+Armbian-Original-Hash: 1-B8091-R448a
+Filename: pool/dshanpi-r1/a/armbian-bsp-desktop-dshanpi-r1-vendor/armbian-bsp-desktop-dshanpi-r1-vendor_25.11.0-trunk.20261008.3_arm64__1-B8091-R448a.deb
+Size: 1576
+MD5sum: 5924e8f7108f996c47dc9667238d7c62
+SHA1: 285811e41c7d643dbe79993b80ff8d550938517b
+SHA256: 7ba5c81407a105f8167516f43f3ab2004ab8f9c12eabfe5223f30fee0d4a87a6
+
+Maintainer: Armbian Linux <info@armbian.com>
+Version: 25.11.0-trunk.20260929.1-13ubuntu10-noble
+Package: base-files
+Architecture: arm64
+Essential: yes
+Pre-Depends: awk
+Depends: libc6 (>= 2.34), libcrypt1 (>= 1:4.4.10-10ubuntu3)
+Breaks: debian-security-support (<< 2019.04.25), initscripts (<< 2.88dsf-13.3), sendfile (<< 2.1b.20080616-5.2~), ubuntu-server (<< 1.453)
+Replaces: base, dpkg (<= 1.15.0), miscutils
+Provides: base, usr-is-merged
+Section: admin
+Priority: required
+Multi-Arch: foreign
+Description: Armbian base system miscellaneous files
+ This package contains the basic filesystem hierarchy of a Armbian system, and
+ several important miscellaneous files, such as /etc/debian_version,
+ /etc/host.conf, /etc/issue, /etc/motd, /etc/profile, and others,
+ and the text of several common licenses in use on Armbian systems.
+Original-Maintainer: Santiago Vila <sanvila@debian.org>
+Installed-Size: 350
+Armbian-Original-Hash: 1-noble-1armbian1-Baa17-U13ubuntu10-R55fa
+Filename: pool/dshanpi-r1/b/base-files/base-files_25.11.0-trunk.20260929.1-13ubuntu10-noble_arm64.deb
+Size: 69052
+MD5sum: 57ededb461d48951e91e44f036133657
+SHA1: 757faed48abd37ec3cbeb8b788df5c29bc2806fb
+SHA256: 828810aa47019d453e48146d447e78e5c34aabd140dd5ab6dd15e73e6e88d8e9
+
+Version: 25.11.0-trunk.20261008.3
+Maintainer: John Doe <john.doe@somewhere.on.planet>
+Section: kernel
+Package: linux-dtb-vendor-rk35xx
+Architecture: arm64
+Priority: optional
+Provides: linux-dtb, linux-dtb-armbian, armbian-vendor
+Description: Armbian Linux vendor DTBs in /boot/dtb-6.1.115-vendor-rk35xx
+ This package contains device tree blobs from the Linux kernel, version 6.1.115-vendor-rk35xx
+ version "6.1.115" git revision "710b52bf89794b837e03638605067e40b9754f85" codename "Curry Ramen" drivers hash "0b5d7236_c3161803" patches hash "09c0dd8eb8cfe4fd" .config hash "22655be9a9b6cffa" .config hook hash "231397204c6da625" variables hash "c22207b66dc5dd57157df2cd7b9c20559b2ed8ac44b9c3c3b9704002c06b8921" framework bash hash "d200829f3fc8e18d"
+Installed-Size: 83792
+Armbian-Original-Hash: 6.1.115-S710b-D0b5d-P09c0-C2265H2313-HK01ba-Vc222-Bd200-R448a
+Filename: pool/dshanpi-r1/l/linux-dtb-vendor-rk35xx/linux-dtb-vendor-rk35xx_25.11.0-trunk.20261008.3_arm64__6.1.115-S710b-D0b5d-P09c0-C2265H2313-HK01ba-Vc222-Bd200-R448a.deb
+Size: 2427960
+MD5sum: 5d6a9ed46e5fe8c5d5cdcfcfa6bff874
+SHA1: 9616ccd228ea413105cd9d58932812decc71fc3b
+SHA256: 586a40831514ef972e3d4429d258f288efbe620d10e89f588fce822ca3efed94
+
+Version: 25.11.0-trunk.20261008.3
+Maintainer: John Doe <john.doe@somewhere.on.planet>
+Section: devel
+Package: linux-headers-vendor-rk35xx
+Architecture: arm64
+Priority: optional
+Provides: linux-headers, linux-headers-armbian, armbian-vendor
+Depends: make, gcc, libc6-dev, bison, flex, libssl-dev, libelf-dev
+Description: Armbian Linux vendor headers 6.1.115-vendor-rk35xx
+ This package provides kernel header files for 6.1.115-vendor-rk35xx
+ .
+ This is useful for DKMS and building of external modules.
+ version "6.1.115" git revision "710b52bf89794b837e03638605067e40b9754f85" codename "Curry Ramen" drivers hash "0b5d7236_c3161803" patches hash "09c0dd8eb8cfe4fd" .config hash "22655be9a9b6cffa" .config hook hash "231397204c6da625" variables hash "c22207b66dc5dd57157df2cd7b9c20559b2ed8ac44b9c3c3b9704002c06b8921" framework bash hash "d200829f3fc8e18d"
+Installed-Size: 74410
+Armbian-Original-Hash: 6.1.115-S710b-D0b5d-P09c0-C2265H2313-HK01ba-Vc222-Bd200-R448a
+Filename: pool/dshanpi-r1/l/linux-headers-vendor-rk35xx/linux-headers-vendor-rk35xx_25.11.0-trunk.20261008.3_arm64__6.1.115-S710b-D0b5d-P09c0-C2265H2313-HK01ba-Vc222-Bd200-R448a.deb
+Size: 14006216
+MD5sum: 09e960efe66efb95d0e7a480163bfc27
+SHA1: 3e70cc52a5d63d5d618b459247bd029b1c3c16d6
+SHA256: cb3f6cf03f4e3e4145bccdb05429d61b074327e9e9f7c383221bbb19cb4949e8
+
+Package: linux-image-vendor-rk35xx
+Version: 25.11.0-trunk.20261008.3
+Source: linux-6.1.115
+Armbian-Kernel-Version: 6.1.115
+Armbian-Kernel-Version-Family: 6.1.115-vendor-rk35xx
+Architecture: arm64
+Maintainer: John Doe <john.doe@somewhere.on.planet>
+Section: kernel
+Priority: optional
+Provides: linux-image, linux-image-armbian, armbian-vendor, wireguard-modules
+Description: Armbian Linux vendor kernel image 6.1.115-vendor-rk35xx
+ This package contains the Linux kernel, modules and corresponding other files.
+ version "6.1.115" git revision "710b52bf89794b837e03638605067e40b9754f85" codename "Curry Ramen" drivers hash "0b5d7236_c3161803" patches hash "09c0dd8eb8cfe4fd" .config hash "22655be9a9b6cffa" .config hook hash "231397204c6da625" variables hash "c22207b66dc5dd57157df2cd7b9c20559b2ed8ac44b9c3c3b9704002c06b8921" framework bash hash "d200829f3fc8e18d"
+Installed-Size: 272074
+Armbian-Original-Hash: 6.1.115-S710b-D0b5d-P09c0-C2265H2313-HK01ba-Vc222-Bd200-R448a
+Filename: pool/dshanpi-r1/l/linux-image-vendor-rk35xx/linux-image-vendor-rk35xx_25.11.0-trunk.20261008.3_arm64__6.1.115-S710b-D0b5d-P09c0-C2265H2313-HK01ba-Vc222-Bd200-R448a.deb
+Size: 36907800
+MD5sum: 07b370b2896b8f6c9da59f21f6d173d1
+SHA1: 01294a0b84bfa6235b6ac17850db4c3d15afe6ea
+SHA256: 0a5c9ff1a481b82b653610efa738b3d0b9df90f2ab61173432b7eaedf87ea0c4
+

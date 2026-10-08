@@ -1,0 +1,47 @@
+Package: dshanpi-r1-release-core
+Version: 2026.10.08-1
+Architecture: all
+Maintainer: DShanPI <support@dshanpi.com>
+Depends: base-files (= 25.11.0-trunk.20260929.1-13ubuntu10-noble), armbian-bsp-cli-dshanpi-r1-vendor (= 25.11.0-trunk.20261008.3), linux-image-vendor-rk35xx (= 25.11.0-trunk.20261008.3), linux-dtb-vendor-rk35xx (= 25.11.0-trunk.20261008.3), linux-headers-vendor-rk35xx (= 25.11.0-trunk.20261008.3), dshanpi-archive-keyring (= 1:2026.10.08-1), dshanpi-r1-repository (= 1:2026.10.08-1), dspi-config (= 1.0.2-1)
+Section: metapackages
+Priority: optional
+Description: DShanPI dshanpi-r1 tested core system release
+ Locks one tested DShanPI platform package cohort for controlled upgrade
+ and rollback through dspi-config.
+Filename: pool/dshanpi-r1/d/dshanpi-r1-release-core/dshanpi-r1-release-core_2026.10.08-1_all.deb
+Size: 738
+MD5sum: 333a7ab17e32da8f933f5544839d8614
+SHA1: 35859d28cf9fa332cf0d6a7e40e504b27b2c94dd
+SHA256: 5c9d94e3f805369ad05449b98177124dd8797985467167879a5408514f9c24a2
+
+Package: dshanpi-r1-release-desktop
+Version: 2026.10.08-1
+Architecture: all
+Maintainer: DShanPI <support@dshanpi.com>
+Depends: base-files (= 25.11.0-trunk.20260929.1-13ubuntu10-noble), armbian-bsp-cli-dshanpi-r1-vendor (= 25.11.0-trunk.20261008.3), linux-image-vendor-rk35xx (= 25.11.0-trunk.20261008.3), linux-dtb-vendor-rk35xx (= 25.11.0-trunk.20261008.3), linux-headers-vendor-rk35xx (= 25.11.0-trunk.20261008.3), dshanpi-archive-keyring (= 1:2026.10.08-1), dshanpi-r1-repository (= 1:2026.10.08-1), dspi-config (= 1.0.2-1), armbian-bsp-desktop-dshanpi-r1-vendor (= 25.11.0-trunk.20261008.3)
+Section: metapackages
+Priority: optional
+Description: DShanPI dshanpi-r1 tested desktop system release
+ Locks one tested DShanPI platform package cohort for controlled upgrade
+ and rollback through dspi-config.
+Filename: pool/dshanpi-r1/d/dshanpi-r1-release-desktop/dshanpi-r1-release-desktop_2026.10.08-1_all.deb
+Size: 744
+MD5sum: 02b24499f8c839237d3ec305a1a8caf8
+SHA1: f5a3b01453eb1842f45c6032fe5d5db044443c0c
+SHA256: a1c9e6869dcb8a6dc5425c0601e9a921ebe51bc819ad50f01cbc373102083817
+
+Package: dshanpi-r1-repository
+Version: 1:2026.10.08-1
+Architecture: all
+Maintainer: DShanPI <support@dshanpi.com>
+Depends: dshanpi-archive-keyring (= 1:2026.10.08-1)
+Section: misc
+Priority: optional
+Description: DShanPI dshanpi-r1 signed APT source
+ Installs the signed stable source for the DShanPI product platform stack.
+Filename: pool/dshanpi-r1/d/dshanpi-r1-repository/dshanpi-r1-repository_1:2026.10.08-1_all.deb
+Size: 822
+MD5sum: 076f7f22740b0abeab4b7770a0dd9027
+SHA1: 384440131fd9c05c93b5d7f01b3d7b1c6f5bb74e
+SHA256: 8f1f2d3f3289cbb013b8630970f93f57661b2bd0a2f9467b9987b052727a3aa0
+

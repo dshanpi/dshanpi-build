@@ -1,0 +1,161 @@
+{
+  "channel": "testing",
+  "packages": [
+    {
+      "architecture": "arm64",
+      "component": "dshanpi-a1",
+      "filename": "pool/dshanpi-a1/a/armbian-bsp-cli-dshanpi-a1-vendor/armbian-bsp-cli-dshanpi-a1-vendor_25.11.0-trunk.20261008.3_arm64__1-PC9b3f-Vb3d8-H3abc-B1e5d-Rf36a.deb",
+      "package": "armbian-bsp-cli-dshanpi-a1-vendor",
+      "sha256": "7a8736a2e6d32f41b4d2d80b30a426c377ec5037346e995b71364e032cf2ca4b",
+      "version": "25.11.0-trunk.20261008.3"
+    },
+    {
+      "architecture": "arm64",
+      "component": "dshanpi-a1",
+      "filename": "pool/dshanpi-a1/a/armbian-bsp-desktop-dshanpi-a1-vendor/armbian-bsp-desktop-dshanpi-a1-vendor_25.11.0-trunk.20261008.3_arm64__1-B8091-R448a.deb",
+      "package": "armbian-bsp-desktop-dshanpi-a1-vendor",
+      "sha256": "3bf02b0b7d76057598a21b7ae48fbb73ac9829ae572565ceb52522f50a221b81",
+      "version": "25.11.0-trunk.20261008.3"
+    },
+    {
+      "architecture": "arm64",
+      "component": "dshanpi-a1",
+      "filename": "pool/dshanpi-a1/b/base-files/base-files_25.11.0-trunk.20260929.1-13ubuntu10-noble_arm64.deb",
+      "package": "base-files",
+      "sha256": "828810aa47019d453e48146d447e78e5c34aabd140dd5ab6dd15e73e6e88d8e9",
+      "version": "25.11.0-trunk.20260929.1-13ubuntu10-noble"
+    },
+    {
+      "architecture": "arm64",
+      "component": "dshanpi-a1",
+      "filename": "pool/dshanpi-a1/c/camera-engine-rkaiq/camera-engine-rkaiq_6.6.3+dshanpi1_arm64.deb",
+      "package": "camera-engine-rkaiq",
+      "sha256": "7c27705fe52070c7400b001dea9bb30c1f211c9253949883bf53a1368888aee8",
+      "version": "6.6.3+dshanpi1"
+    },
+    {
+      "architecture": "all",
+      "component": "dshanpi-a1",
+      "filename": "pool/dshanpi-a1/d/dshanpi-a1-release-core/dshanpi-a1-release-core_2026.10.08-1_all.deb",
+      "package": "dshanpi-a1-release-core",
+      "sha256": "b230a3ca416682683ceea7ea6781070d75516ddcba642ff3ff132b77fd133202",
+      "version": "2026.10.08-1"
+    },
+    {
+      "architecture": "all",
+      "component": "dshanpi-a1",
+      "filename": "pool/dshanpi-a1/d/dshanpi-a1-release-desktop/dshanpi-a1-release-desktop_2026.10.08-1_all.deb",
+      "package": "dshanpi-a1-release-desktop",
+      "sha256": "82ee5cfbb3d79d823a29966ff152b4ad45cbfa26b5277a812c39f5d5553bd782",
+      "version": "2026.10.08-1"
+    },
+    {
+      "architecture": "all",
+      "component": "dshanpi-a1",
+      "filename": "pool/dshanpi-a1/d/dshanpi-a1-repository/dshanpi-a1-repository_1:2026.10.08-1_all.deb",
+      "package": "dshanpi-a1-repository",
+      "sha256": "3ca260b1d911e73b0b8d91e6461c75041160a065630fc4631909ef3e03665b55",
+      "version": "1:2026.10.08-1"
+    },
+    {
+      "architecture": "all",
+      "component": "common",
+      "filename": "pool/common/d/dshanpi-archive-keyring/dshanpi-archive-keyring_1:2026.10.08-1_all.deb",
+      "package": "dshanpi-archive-keyring",
+      "sha256": "629e0a1c034daf862d937de3f349ec36533af6f0a6d059bf9fd0dd533d375133",
+      "version": "1:2026.10.08-1"
+    },
+    {
+      "architecture": "all",
+      "component": "common",
+      "filename": "pool/common/d/dspi-config/dspi-config_1.0.2-1_all.deb",
+      "package": "dspi-config",
+      "sha256": "5be496494b048343438f7fcd8d40203e30d2cd4141e15de9d5a206e22bba96d0",
+      "version": "1.0.2-1"
+    },
+    {
+      "architecture": "arm64",
+      "component": "dshanpi-a1",
+      "filename": "pool/dshanpi-a1/g/gstreamer1.0-rockchip1/gstreamer1.0-rockchip1_1.14-4_arm64.deb",
+      "package": "gstreamer1.0-rockchip1",
+      "sha256": "975854ff09d5143353a6931612202b500e27f02223ba0bd43fe54cb5a644730f",
+      "version": "1.14-4"
+    },
+    {
+      "architecture": "arm64",
+      "component": "dshanpi-a1",
+      "filename": "pool/dshanpi-a1/libr/librga-dev/librga-dev_2.2.0-1_arm64.deb",
+      "package": "librga-dev",
+      "sha256": "f3f32028a15b7af3f9f55dbadf3d362904c7e15159544288852c96f9b5029dfd",
+      "version": "2.2.0-1"
+    },
+    {
+      "architecture": "arm64",
+      "component": "dshanpi-a1",
+      "filename": "pool/dshanpi-a1/libr/librga2/librga2_2.2.0-1_arm64.deb",
+      "package": "librga2",
+      "sha256": "a4d0476061cfb7e84687eefd93a4974186e00d764bdf06f4ea8ef3d47f4427a8",
+      "version": "2.2.0-1"
+    },
+    {
+      "architecture": "arm64",
+      "component": "dshanpi-a1",
+      "filename": "pool/dshanpi-a1/libr/librockchip-mpp-dev/librockchip-mpp-dev_1.5.0-1_arm64.deb",
+      "package": "librockchip-mpp-dev",
+      "sha256": "125930e8db00e4cd5a52579f5dcfdc3d56eda565635ba65e8c96944ca547990d",
+      "version": "1.5.0-1"
+    },
+    {
+      "architecture": "arm64",
+      "component": "dshanpi-a1",
+      "filename": "pool/dshanpi-a1/libr/librockchip-mpp1/librockchip-mpp1_1.5.0-1_arm64.deb",
+      "package": "librockchip-mpp1",
+      "sha256": "82f7b6a452453d6bdbc527d936e664ea61b396a64fa157d2dec2df827c9f70cc",
+      "version": "1.5.0-1"
+    },
+    {
+      "architecture": "arm64",
+      "component": "dshanpi-a1",
+      "filename": "pool/dshanpi-a1/libr/librockchip-vpu0/librockchip-vpu0_1.5.0-1_arm64.deb",
+      "package": "librockchip-vpu0",
+      "sha256": "43cf9767be03acb243f5cc19115008687dbb85235e995d54f3c7718be0c1c0c5",
+      "version": "1.5.0-1"
+    },
+    {
+      "architecture": "arm64",
+      "component": "dshanpi-a1",
+      "filename": "pool/dshanpi-a1/l/linux-dtb-vendor-rk35xx/linux-dtb-vendor-rk35xx_25.11.0-trunk.20261008.3_arm64__6.1.115-S710b-D0b5d-P09c0-C2265H2313-HK01ba-Vc222-Bd200-R448a.deb",
+      "package": "linux-dtb-vendor-rk35xx",
+      "sha256": "586a40831514ef972e3d4429d258f288efbe620d10e89f588fce822ca3efed94",
+      "version": "25.11.0-trunk.20261008.3"
+    },
+    {
+      "architecture": "arm64",
+      "component": "dshanpi-a1",
+      "filename": "pool/dshanpi-a1/l/linux-headers-vendor-rk35xx/linux-headers-vendor-rk35xx_25.11.0-trunk.20261008.3_arm64__6.1.115-S710b-D0b5d-P09c0-C2265H2313-HK01ba-Vc222-Bd200-R448a.deb",
+      "package": "linux-headers-vendor-rk35xx",
+      "sha256": "cb3f6cf03f4e3e4145bccdb05429d61b074327e9e9f7c383221bbb19cb4949e8",
+      "version": "25.11.0-trunk.20261008.3"
+    },
+    {
+      "architecture": "arm64",
+      "component": "dshanpi-a1",
+      "filename": "pool/dshanpi-a1/l/linux-image-vendor-rk35xx/linux-image-vendor-rk35xx_25.11.0-trunk.20261008.3_arm64__6.1.115-S710b-D0b5d-P09c0-C2265H2313-HK01ba-Vc222-Bd200-R448a.deb",
+      "package": "linux-image-vendor-rk35xx",
+      "sha256": "0a5c9ff1a481b82b653610efa738b3d0b9df90f2ab61173432b7eaedf87ea0c4",
+      "version": "25.11.0-trunk.20261008.3"
+    },
+    {
+      "architecture": "arm64",
+      "component": "dshanpi-a1",
+      "filename": "pool/dshanpi-a1/r/rockchip-mpp-demos/rockchip-mpp-demos_1.5.0-1_arm64.deb",
+      "package": "rockchip-mpp-demos",
+      "sha256": "26476ac7830e0a26357f9d4bbc7229963a2344ea824917cdc919c18e13bcd7e6",
+      "version": "1.5.0-1"
+    }
+  ],
+  "product": "dshanpi-a1",
+  "schema_version": 1,
+  "suite": "noble-testing",
+  "version": "2026.10.08-1"
+}

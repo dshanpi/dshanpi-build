@@ -1,0 +1,260 @@
+Package: armbian-bsp-cli-dshanpi-a1-vendor
+Version: 25.11.0-trunk.20261008.3
+Architecture: arm64
+Maintainer: John Doe <john.doe@somewhere.on.planet>
+Section: kernel
+Priority: optional
+Recommends: bsdutils, parted, util-linux, toilet
+Description: Armbian CLI BSP for board 'dshanpi-a1' branch 'vendor' 
+Installed-Size: 1407
+Armbian-Original-Hash: 1-PC9b3f-Vb3d8-H3abc-B1e5d-Rf36a
+Depends: bash, linux-base, u-boot-tools, initramfs-tools, lsb-release, fping, device-tree-compiler, base-files (>= 25.11.0-trunk.20261008.3)
+Replaces: zram-config, armbian-bsp-cli-dshanpi-a1 (<< 25.11.0-trunk.20261008.3)
+Breaks: armbian-bsp-cli-dshanpi-a1 (<< 25.11.0-trunk.20261008.3)
+Provides: armbian-bsp-cli
+Filename: pool/dshanpi-a1/a/armbian-bsp-cli-dshanpi-a1-vendor/armbian-bsp-cli-dshanpi-a1-vendor_25.11.0-trunk.20261008.3_arm64__1-PC9b3f-Vb3d8-H3abc-B1e5d-Rf36a.deb
+Size: 433772
+MD5sum: 244aab1a4fd8c0a9944af911e05dc4bd
+SHA1: 5490f9766c258a367370ca8af53d3e94598838fe
+SHA256: 7a8736a2e6d32f41b4d2d80b30a426c377ec5037346e995b71364e032cf2ca4b
+
+Package: armbian-bsp-desktop-dshanpi-a1-vendor
+Version: 25.11.0-trunk.20261008.3
+Architecture: arm64
+Maintainer: Armbian Linux <info@armbian.com>
+Section: xorg
+Priority: optional
+Provides: armbian-bsp-desktop, armbian-bsp-desktop-dshanpi-a1
+Description: Armbian bsp-desktop for release noble, common for all desktop environments on arm64 dshanpi-a1 machines on vendor branch
+Installed-Size: 2
+Armbian-Original-Hash: 1-B8091-R448a
+Filename: pool/dshanpi-a1/a/armbian-bsp-desktop-dshanpi-a1-vendor/armbian-bsp-desktop-dshanpi-a1-vendor_25.11.0-trunk.20261008.3_arm64__1-B8091-R448a.deb
+Size: 1580
+MD5sum: 646eec9fee0595c9525e8ea7b10d82a7
+SHA1: 01e4d6d1eebbbde219f46eb3a638d6cd8c4960a1
+SHA256: 3bf02b0b7d76057598a21b7ae48fbb73ac9829ae572565ceb52522f50a221b81
+
+Maintainer: Armbian Linux <info@armbian.com>
+Version: 25.11.0-trunk.20260929.1-13ubuntu10-noble
+Package: base-files
+Architecture: arm64
+Essential: yes
+Pre-Depends: awk
+Depends: libc6 (>= 2.34), libcrypt1 (>= 1:4.4.10-10ubuntu3)
+Breaks: debian-security-support (<< 2019.04.25), initscripts (<< 2.88dsf-13.3), sendfile (<< 2.1b.20080616-5.2~), ubuntu-server (<< 1.453)
+Replaces: base, dpkg (<= 1.15.0), miscutils
+Provides: base, usr-is-merged
+Section: admin
+Priority: required
+Multi-Arch: foreign
+Description: Armbian base system miscellaneous files
+ This package contains the basic filesystem hierarchy of a Armbian system, and
+ several important miscellaneous files, such as /etc/debian_version,
+ /etc/host.conf, /etc/issue, /etc/motd, /etc/profile, and others,
+ and the text of several common licenses in use on Armbian systems.
+Original-Maintainer: Santiago Vila <sanvila@debian.org>
+Installed-Size: 350
+Armbian-Original-Hash: 1-noble-1armbian1-Baa17-U13ubuntu10-R55fa
+Filename: pool/dshanpi-a1/b/base-files/base-files_25.11.0-trunk.20260929.1-13ubuntu10-noble_arm64.deb
+Size: 69052
+MD5sum: 57ededb461d48951e91e44f036133657
+SHA1: 757faed48abd37ec3cbeb8b788df5c29bc2806fb
+SHA256: 828810aa47019d453e48146d447e78e5c34aabd140dd5ab6dd15e73e6e88d8e9
+
+Package: camera-engine-rkaiq
+Source: camera-engine-rkaiq
+Version: 6.6.3+dshanpi1
+Architecture: arm64
+Maintainer: DShanPI <support@dshanpi.com>
+Installed-Size: 19272
+Depends: libc6, libdrm2, libgcc-s1, libstdc++6, systemd
+Section: libs
+Priority: optional
+Homepage: https://github.com/rockchip-linux/camera_engine_rkaiq
+Description: Rockchip RK3576 RKAIQ camera engine (DShanPI repack)
+ Vendor RKAIQ runtime, development files and camera service for RK3576,
+ repackaged with safe filesystem modes and sanitized runtime metadata.
+Filename: pool/dshanpi-a1/c/camera-engine-rkaiq/camera-engine-rkaiq_6.6.3+dshanpi1_arm64.deb
+Size: 1561080
+MD5sum: af3f02e7d4ecb9d286fd5cc880a0cf61
+SHA1: d034795f64107f849580a9b482adf5c846a7c53f
+SHA256: 7c27705fe52070c7400b001dea9bb30c1f211c9253949883bf53a1368888aee8
+
+Package: gstreamer1.0-rockchip1
+Source: gstreamer1.0-rockchip
+Version: 1.14-4
+Architecture: arm64
+Maintainer: Jeffy Chen <jeffy.chen@rock-chips.com>
+Installed-Size: 348
+Depends: libc6 (>= 2.33), libdrm2 (>= 2.4.108), libglib2.0-0t64 (>= 2.79.0), libgstreamer-plugins-base1.0-0 (>= 1.14), libgstreamer1.0-0 (>= 1.14), librga2, librockchip-mpp1, libx11-6
+Section: libs
+Priority: optional
+Homepage: https://github.com/rockchip-linux/gstreamer-rockchip
+Description: The Gstreamer plugins for Rockchip platforms.
+Filename: pool/dshanpi-a1/g/gstreamer1.0-rockchip1/gstreamer1.0-rockchip1_1.14-4_arm64.deb
+Size: 73052
+MD5sum: cebec8ba1762181db461e40e09ded651
+SHA1: 67cec75e1473abb90235b145cf19756cdf388137
+SHA256: 975854ff09d5143353a6931612202b500e27f02223ba0bd43fe54cb5a644730f
+
+Package: librga-dev
+Source: librga
+Version: 2.2.0-1
+Architecture: arm64
+Maintainer: Putin Lee <putin.li@rock-chips.com>
+Installed-Size: 138
+Section: libdevel
+Priority: optional
+Homepage: https://github.com/rockchip-linux/linux-rga
+Description: Userspace interface to Rockchip RGA 2D accelerator
+Filename: pool/dshanpi-a1/libr/librga-dev/librga-dev_2.2.0-1_arm64.deb
+Size: 18434
+MD5sum: 386ff18e243b6cb665a27deb76b76c6f
+SHA1: e9e3f4bccbc38782c6553dc3b45ae5749d268653
+SHA256: f3f32028a15b7af3f9f55dbadf3d362904c7e15159544288852c96f9b5029dfd
+
+Package: librga2
+Source: librga
+Version: 2.2.0-1
+Architecture: arm64
+Maintainer: Putin Lee <putin.li@rock-chips.com>
+Installed-Size: 211
+Depends: libc6 (>= 2.38), libgcc-s1 (>= 3.3.1), libstdc++6 (>= 11)
+Section: libs
+Priority: optional
+Homepage: https://github.com/rockchip-linux/linux-rga
+Description: Userspace interface to Rockchip RGA 2D accelerator
+Filename: pool/dshanpi-a1/libr/librga2/librga2_2.2.0-1_arm64.deb
+Size: 74054
+MD5sum: 614a654eb7839d72607310e2bde7f574
+SHA1: 8e440e2642902ef274cc71e73de43fab537f1507
+SHA256: a4d0476061cfb7e84687eefd93a4974186e00d764bdf06f4ea8ef3d47f4427a8
+
+Package: librockchip-mpp-dev
+Source: mpp
+Version: 1.5.0-1
+Architecture: arm64
+Maintainer: Randy Li <randy.li@rock-chips.com>
+Installed-Size: 249
+Depends: librockchip-mpp1 (= 1.5.0-1)
+Section: libdevel
+Priority: optional
+Homepage: http://www.rock-chips.com
+Description: Media Process Platform
+Filename: pool/dshanpi-a1/libr/librockchip-mpp-dev/librockchip-mpp-dev_1.5.0-1_arm64.deb
+Size: 50080
+MD5sum: 467e3e94820964f5c14012f8029593a3
+SHA1: ac50d5abca23a1d99d23441b3beb4227720b6323
+SHA256: 125930e8db00e4cd5a52579f5dcfdc3d56eda565635ba65e8c96944ca547990d
+
+Package: librockchip-mpp1
+Source: mpp
+Version: 1.5.0-1
+Architecture: arm64
+Maintainer: Randy Li <randy.li@rock-chips.com>
+Installed-Size: 2525
+Depends: libc6 (>= 2.38), libgcc-s1 (>= 3.0), libstdc++6 (>= 5)
+Section: libs
+Priority: optional
+Homepage: http://www.rock-chips.com
+Description: Media Process Platform
+Filename: pool/dshanpi-a1/libr/librockchip-mpp1/librockchip-mpp1_1.5.0-1_arm64.deb
+Size: 1018418
+MD5sum: bdba0227e80c21982a691ccfcdcf87c9
+SHA1: 5e22a095fce28ba9d8669dc8071c0a8a44d80b59
+SHA256: 82f7b6a452453d6bdbc527d936e664ea61b396a64fa157d2dec2df827c9f70cc
+
+Package: librockchip-vpu0
+Source: mpp
+Version: 1.5.0-1
+Architecture: arm64
+Maintainer: Randy Li <randy.li@rock-chips.com>
+Installed-Size: 149
+Depends: libc6 (>= 2.34), librockchip-mpp1, libstdc++6 (>= 5)
+Section: libs
+Priority: optional
+Homepage: http://www.rock-chips.com
+Description: Media Process Platform
+Filename: pool/dshanpi-a1/libr/librockchip-vpu0/librockchip-vpu0_1.5.0-1_arm64.deb
+Size: 31906
+MD5sum: 17287098e497010bbe725ca786259656
+SHA1: be5752f6ca5af4aa6a92a5f708a837563b6a495e
+SHA256: 43cf9767be03acb243f5cc19115008687dbb85235e995d54f3c7718be0c1c0c5
+
+Version: 25.11.0-trunk.20261008.3
+Maintainer: John Doe <john.doe@somewhere.on.planet>
+Section: kernel
+Package: linux-dtb-vendor-rk35xx
+Architecture: arm64
+Priority: optional
+Provides: linux-dtb, linux-dtb-armbian, armbian-vendor
+Description: Armbian Linux vendor DTBs in /boot/dtb-6.1.115-vendor-rk35xx
+ This package contains device tree blobs from the Linux kernel, version 6.1.115-vendor-rk35xx
+ version "6.1.115" git revision "710b52bf89794b837e03638605067e40b9754f85" codename "Curry Ramen" drivers hash "0b5d7236_c3161803" patches hash "09c0dd8eb8cfe4fd" .config hash "22655be9a9b6cffa" .config hook hash "231397204c6da625" variables hash "c22207b66dc5dd57157df2cd7b9c20559b2ed8ac44b9c3c3b9704002c06b8921" framework bash hash "d200829f3fc8e18d"
+Installed-Size: 83792
+Armbian-Original-Hash: 6.1.115-S710b-D0b5d-P09c0-C2265H2313-HK01ba-Vc222-Bd200-R448a
+Filename: pool/dshanpi-a1/l/linux-dtb-vendor-rk35xx/linux-dtb-vendor-rk35xx_25.11.0-trunk.20261008.3_arm64__6.1.115-S710b-D0b5d-P09c0-C2265H2313-HK01ba-Vc222-Bd200-R448a.deb
+Size: 2427960
+MD5sum: 5d6a9ed46e5fe8c5d5cdcfcfa6bff874
+SHA1: 9616ccd228ea413105cd9d58932812decc71fc3b
+SHA256: 586a40831514ef972e3d4429d258f288efbe620d10e89f588fce822ca3efed94
+
+Version: 25.11.0-trunk.20261008.3
+Maintainer: John Doe <john.doe@somewhere.on.planet>
+Section: devel
+Package: linux-headers-vendor-rk35xx
+Architecture: arm64
+Priority: optional
+Provides: linux-headers, linux-headers-armbian, armbian-vendor
+Depends: make, gcc, libc6-dev, bison, flex, libssl-dev, libelf-dev
+Description: Armbian Linux vendor headers 6.1.115-vendor-rk35xx
+ This package provides kernel header files for 6.1.115-vendor-rk35xx
+ .
+ This is useful for DKMS and building of external modules.
+ version "6.1.115" git revision "710b52bf89794b837e03638605067e40b9754f85" codename "Curry Ramen" drivers hash "0b5d7236_c3161803" patches hash "09c0dd8eb8cfe4fd" .config hash "22655be9a9b6cffa" .config hook hash "231397204c6da625" variables hash "c22207b66dc5dd57157df2cd7b9c20559b2ed8ac44b9c3c3b9704002c06b8921" framework bash hash "d200829f3fc8e18d"
+Installed-Size: 74410
+Armbian-Original-Hash: 6.1.115-S710b-D0b5d-P09c0-C2265H2313-HK01ba-Vc222-Bd200-R448a
+Filename: pool/dshanpi-a1/l/linux-headers-vendor-rk35xx/linux-headers-vendor-rk35xx_25.11.0-trunk.20261008.3_arm64__6.1.115-S710b-D0b5d-P09c0-C2265H2313-HK01ba-Vc222-Bd200-R448a.deb
+Size: 14006216
+MD5sum: 09e960efe66efb95d0e7a480163bfc27
+SHA1: 3e70cc52a5d63d5d618b459247bd029b1c3c16d6
+SHA256: cb3f6cf03f4e3e4145bccdb05429d61b074327e9e9f7c383221bbb19cb4949e8
+
+Package: linux-image-vendor-rk35xx
+Version: 25.11.0-trunk.20261008.3
+Source: linux-6.1.115
+Armbian-Kernel-Version: 6.1.115
+Armbian-Kernel-Version-Family: 6.1.115-vendor-rk35xx
+Architecture: arm64
+Maintainer: John Doe <john.doe@somewhere.on.planet>
+Section: kernel
+Priority: optional
+Provides: linux-image, linux-image-armbian, armbian-vendor, wireguard-modules
+Description: Armbian Linux vendor kernel image 6.1.115-vendor-rk35xx
+ This package contains the Linux kernel, modules and corresponding other files.
+ version "6.1.115" git revision "710b52bf89794b837e03638605067e40b9754f85" codename "Curry Ramen" drivers hash "0b5d7236_c3161803" patches hash "09c0dd8eb8cfe4fd" .config hash "22655be9a9b6cffa" .config hook hash "231397204c6da625" variables hash "c22207b66dc5dd57157df2cd7b9c20559b2ed8ac44b9c3c3b9704002c06b8921" framework bash hash "d200829f3fc8e18d"
+Installed-Size: 272074
+Armbian-Original-Hash: 6.1.115-S710b-D0b5d-P09c0-C2265H2313-HK01ba-Vc222-Bd200-R448a
+Filename: pool/dshanpi-a1/l/linux-image-vendor-rk35xx/linux-image-vendor-rk35xx_25.11.0-trunk.20261008.3_arm64__6.1.115-S710b-D0b5d-P09c0-C2265H2313-HK01ba-Vc222-Bd200-R448a.deb
+Size: 36907800
+MD5sum: 07b370b2896b8f6c9da59f21f6d173d1
+SHA1: 01294a0b84bfa6235b6ac17850db4c3d15afe6ea
+SHA256: 0a5c9ff1a481b82b653610efa738b3d0b9df90f2ab61173432b7eaedf87ea0c4
+
+Package: rockchip-mpp-demos
+Source: mpp
+Version: 1.5.0-1
+Architecture: arm64
+Maintainer: Randy Li <randy.li@rock-chips.com>
+Installed-Size: 3000
+Depends: librockchip-mpp1 (= 1.5.0-1), librockchip-vpu0 (= 1.5.0-1)
+Section: libs
+Priority: optional
+Homepage: http://www.rock-chips.com
+Description: Media Process Platform Demos
+Filename: pool/dshanpi-a1/r/rockchip-mpp-demos/rockchip-mpp-demos_1.5.0-1_arm64.deb
+Size: 175172
+MD5sum: 57ea7570088721903c771a0ab5860a65
+SHA1: fb2293f0c38c393b60eec9c45ab6d304535247a4
+SHA256: 26476ac7830e0a26357f9d4bbc7229963a2344ea824917cdc919c18e13bcd7e6
+

@@ -1,0 +1,97 @@
+{
+  "channel": "testing",
+  "packages": [
+    {
+      "architecture": "arm64",
+      "component": "dshanpi-r1",
+      "filename": "pool/dshanpi-r1/a/armbian-bsp-cli-dshanpi-r1-vendor/armbian-bsp-cli-dshanpi-r1-vendor_25.11.0-trunk.20261008.3_arm64__1-PC9b3f-Vdf50-H3abc-B1e5d-Rf36a.deb",
+      "package": "armbian-bsp-cli-dshanpi-r1-vendor",
+      "sha256": "d4141cdc03ce0abcf6836e7a114a0c02a2b4ccb80fd24064e0494c3cc68580a8",
+      "version": "25.11.0-trunk.20261008.3"
+    },
+    {
+      "architecture": "arm64",
+      "component": "dshanpi-r1",
+      "filename": "pool/dshanpi-r1/a/armbian-bsp-desktop-dshanpi-r1-vendor/armbian-bsp-desktop-dshanpi-r1-vendor_25.11.0-trunk.20261008.3_arm64__1-B8091-R448a.deb",
+      "package": "armbian-bsp-desktop-dshanpi-r1-vendor",
+      "sha256": "7ba5c81407a105f8167516f43f3ab2004ab8f9c12eabfe5223f30fee0d4a87a6",
+      "version": "25.11.0-trunk.20261008.3"
+    },
+    {
+      "architecture": "arm64",
+      "component": "dshanpi-r1",
+      "filename": "pool/dshanpi-r1/b/base-files/base-files_25.11.0-trunk.20260929.1-13ubuntu10-noble_arm64.deb",
+      "package": "base-files",
+      "sha256": "828810aa47019d453e48146d447e78e5c34aabd140dd5ab6dd15e73e6e88d8e9",
+      "version": "25.11.0-trunk.20260929.1-13ubuntu10-noble"
+    },
+    {
+      "architecture": "all",
+      "component": "common",
+      "filename": "pool/common/d/dshanpi-archive-keyring/dshanpi-archive-keyring_1:2026.10.08-1_all.deb",
+      "package": "dshanpi-archive-keyring",
+      "sha256": "629e0a1c034daf862d937de3f349ec36533af6f0a6d059bf9fd0dd533d375133",
+      "version": "1:2026.10.08-1"
+    },
+    {
+      "architecture": "all",
+      "component": "dshanpi-r1",
+      "filename": "pool/dshanpi-r1/d/dshanpi-r1-release-core/dshanpi-r1-release-core_2026.10.08-1_all.deb",
+      "package": "dshanpi-r1-release-core",
+      "sha256": "5c9d94e3f805369ad05449b98177124dd8797985467167879a5408514f9c24a2",
+      "version": "2026.10.08-1"
+    },
+    {
+      "architecture": "all",
+      "component": "dshanpi-r1",
+      "filename": "pool/dshanpi-r1/d/dshanpi-r1-release-desktop/dshanpi-r1-release-desktop_2026.10.08-1_all.deb",
+      "package": "dshanpi-r1-release-desktop",
+      "sha256": "a1c9e6869dcb8a6dc5425c0601e9a921ebe51bc819ad50f01cbc373102083817",
+      "version": "2026.10.08-1"
+    },
+    {
+      "architecture": "all",
+      "component": "dshanpi-r1",
+      "filename": "pool/dshanpi-r1/d/dshanpi-r1-repository/dshanpi-r1-repository_1:2026.10.08-1_all.deb",
+      "package": "dshanpi-r1-repository",
+      "sha256": "8f1f2d3f3289cbb013b8630970f93f57661b2bd0a2f9467b9987b052727a3aa0",
+      "version": "1:2026.10.08-1"
+    },
+    {
+      "architecture": "all",
+      "component": "common",
+      "filename": "pool/common/d/dspi-config/dspi-config_1.0.2-1_all.deb",
+      "package": "dspi-config",
+      "sha256": "5be496494b048343438f7fcd8d40203e30d2cd4141e15de9d5a206e22bba96d0",
+      "version": "1.0.2-1"
+    },
+    {
+      "architecture": "arm64",
+      "component": "dshanpi-r1",
+      "filename": "pool/dshanpi-r1/l/linux-dtb-vendor-rk35xx/linux-dtb-vendor-rk35xx_25.11.0-trunk.20261008.3_arm64__6.1.115-S710b-D0b5d-P09c0-C2265H2313-HK01ba-Vc222-Bd200-R448a.deb",
+      "package": "linux-dtb-vendor-rk35xx",
+      "sha256": "586a40831514ef972e3d4429d258f288efbe620d10e89f588fce822ca3efed94",
+      "version": "25.11.0-trunk.20261008.3"
+    },
+    {
+      "architecture": "arm64",
+      "component": "dshanpi-r1",
+      "filename": "pool/dshanpi-r1/l/linux-headers-vendor-rk35xx/linux-headers-vendor-rk35xx_25.11.0-trunk.20261008.3_arm64__6.1.115-S710b-D0b5d-P09c0-C2265H2313-HK01ba-Vc222-Bd200-R448a.deb",
+      "package": "linux-headers-vendor-rk35xx",
+      "sha256": "cb3f6cf03f4e3e4145bccdb05429d61b074327e9e9f7c383221bbb19cb4949e8",
+      "version": "25.11.0-trunk.20261008.3"
+    },
+    {
+      "architecture": "arm64",
+      "component": "dshanpi-r1",
+      "filename": "pool/dshanpi-r1/l/linux-image-vendor-rk35xx/linux-image-vendor-rk35xx_25.11.0-trunk.20261008.3_arm64__6.1.115-S710b-D0b5d-P09c0-C2265H2313-HK01ba-Vc222-Bd200-R448a.deb",
+      "package": "linux-image-vendor-rk35xx",
+      "sha256": "0a5c9ff1a481b82b653610efa738b3d0b9df90f2ab61173432b7eaedf87ea0c4",
+      "version": "25.11.0-trunk.20261008.3"
+    }
+  ],
+  "product": "dshanpi-r1",
+  "schema_version": 1,
+  "suite": "noble-testing",
+  "version": "2026.10.08-1"
+}
