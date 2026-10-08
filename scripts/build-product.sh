@@ -82,9 +82,7 @@ common_args=(build "BOARD=$board" "BRANCH=$branch" "RELEASE=$release" \
 while IFS= read -r adapter; do
 	case "$adapter" in
 		rkaiq-reviewed)
-			"$armbian_dir/packages/bsp/dshanpi-a1-cm5/repack-camera-engine.sh" \
-				"$armbian_dir/debs/camera/camera_engine_rkaiq_rk3576_arm64.deb" \
-				"$armbian_dir/output/dshanpi-packages" 6.6.3+dshanpi1 ;;
+			"$script_dir/build-reviewed-camera.sh" "$armbian_dir" "$output_root/adapters" ;;
 		*) die "unknown product package adapter: $adapter" ;;
 	esac
 done < <(jq -r '.package_adapters // [] | .[]' "$product_config")
@@ -104,6 +102,9 @@ while IFS= read -r relative_path; do
 			cp -- "$deb" "$generated_packages/"
 		done < <(find "$armbian_dir/$relative_path" -type f -name "*_${revision}*.deb" -print0)
 		package_search_roots+=("$generated_packages")
+	elif [[ "$relative_path" == output/dshanpi-packages ]] &&
+		jq -e '.package_adapters // [] | index("rkaiq-reviewed") != null' "$product_config" >/dev/null; then
+		package_search_roots+=("$output_root/adapters")
 	elif [[ -d "$armbian_dir/$relative_path" ]]; then
 		package_search_roots+=("$armbian_dir/$relative_path")
 	fi

@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "product": "dshanpi-a1",
+  "version": "2026.10.08-3",
+  "revision": "25.11.0-trunk.20261008.4",
+  "sources": {
+    "armbianos": {
+      "commit": "6fdd5fdf96c25dfe53c5dcdf443eda6173133ace"
+    },
+    "dspi_config": {
+      "commit": "269cd96bce6780a10d98b2fafe4cee99e6c15a25"
+    }
+  }
+}

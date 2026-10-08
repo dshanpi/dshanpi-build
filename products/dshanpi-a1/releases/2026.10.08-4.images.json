@@ -1,0 +1,63 @@
+{
+  "product": "dshanpi-a1",
+  "version": "2026.10.08-4",
+  "revision": "25.11.0-trunk.20261008.4",
+  "channel": "testing",
+  "hardware_validation": "pending",
+  "armbianos_commit": "6fdd5fdf96c25dfe53c5dcdf443eda6173133ace",
+  "dspi_config_commit": "269cd96bce6780a10d98b2fafe4cee99e6c15a25",
+  "apt_state_commit": "a2eba26a553c1ff834b2c0300710c04266904357",
+  "assembly": {
+    "method": "Offline upgrade of verified 2026.10.08-2 base images to the exact 2026.10.08-4 cohort",
+    "updated_packages": [
+      "camera-engine-rkaiq",
+      "dspi-config",
+      "dshanpi-archive-keyring",
+      "dshanpi-a1-repository",
+      "variant release meta-package"
+    ],
+    "cohort_update_script_sha256": "d889b134a328ad6879f51dbe7a8c3a0c3fc7782069cf8ad44d579ce72677dc58"
+  },
+  "images": [
+    {
+      "variant": "cli",
+      "build_uuid": "a2cb301a-3bb5-4a1b-9bf9-09874721e759",
+      "base_image_sha256": "78b74e121eb8fa935317284a56ff4fcfc61895be94af0e6a44375a01339b5639",
+      "exact_platform_versions_verified": true,
+      "a1_payload_and_camera_modes_verified": true,
+      "rollback_dependency_simulation_verified": true,
+      "files": [
+        {
+          "filename": "Armbian-unofficial_25.11.0-trunk.20261008.4_Dshanpi-a1_noble_vendor_6.1.115.img",
+          "bytes": 3678404608,
+          "sha256": "9a20e0b6ef96fd20b87eee4ee38064fc370ffb90a068bae1bb13ad03d30077c9"
+        },
+        {
+          "filename": "Armbian-unofficial_25.11.0-trunk.20261008.4_Dshanpi-a1_noble_vendor_6.1.115.img.gz",
+          "bytes": 1193876669,
+          "sha256": "391da6f345fc0fbaf5e99286aef4d36d2ab1063364809219c711314005dae1b5"
+        }
+      ]
+    },
+    {
+      "variant": "desktop",
+      "build_uuid": "b72da8c7-c3d1-4841-adbd-f19a47b7a754",
+      "base_image_sha256": "45887e3a8a6edd59376544911f999504c889edc2376fb9d1550d1ec118a99f6a",
+      "exact_platform_versions_verified": true,
+      "a1_payload_and_camera_modes_verified": true,
+      "rollback_dependency_simulation_verified": true,
+      "files": [
+        {
+          "filename": "Armbian-unofficial_25.11.0-trunk.20261008.4_Dshanpi-a1_noble_vendor_6.1.115_gnome_desktop.img",
+          "bytes": 5033164800,
+          "sha256": "c89cca244e849124add49433edc2f13524d49b18f9ace291efda3dcc3f35716c"
+        },
+        {
+          "filename": "Armbian-unofficial_25.11.0-trunk.20261008.4_Dshanpi-a1_noble_vendor_6.1.115_gnome_desktop.img.gz",
+          "bytes": 1588930076,
+          "sha256": "b4d2ae395a361a858a5da8468c47e7c66caaba3caea425026c6ec02354fbe0de"
+        }
+      ]
+    }
+  ]
+}
