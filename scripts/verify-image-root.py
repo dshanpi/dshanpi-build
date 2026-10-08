@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Verify a mounted release image against its exact platform meta-package."""
 import argparse
+import json
 from pathlib import Path
 import re
 
@@ -49,6 +50,7 @@ require((root / 'usr/share/keyrings/dshanpi-archive-keyring.gpg').stat().st_size
 board_release = (root / 'etc/armbian-release').read_text()
 require(re.search(r'^BOARD=[\"\']?' + re.escape(args.product) + r'[\"\']?$', board_release, re.M), 'board identity mismatch')
 env = dict(line.split('=', 1) for line in (root / 'boot/armbianEnv.txt').read_text().splitlines() if '=' in line and not line.startswith('#'))
-require(bool(env.get('fdtfile')), 'boot device tree is not configured')
+config = json.loads((Path(__file__).resolve().parents[1] / 'products' / args.product / 'product.json').read_text())
+require(env.get('fdtfile') == config['armbian']['boot_fdt_file'], 'wrong boot device tree for product')
 require((root / 'boot/dtb' / env['fdtfile']).is_file(), 'boot device tree is missing')
 print('Verified', args.product, args.version, meta['Package'], 'and all exact platform dependencies')

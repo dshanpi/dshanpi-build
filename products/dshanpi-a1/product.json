@@ -15,7 +15,8 @@
     "branch": "vendor",
     "release": "noble",
     "desktop_environment": "gnome",
-    "desktop_config": "config_base"
+    "desktop_config": "config_base",
+    "boot_fdt_file": "rockchip/rk3576-100ask-dshanpi-a1.dtb"
   },
   "package_search_paths": [
     "output/debs",
