@@ -14,6 +14,6 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y jq patchelf dpkg-dev gnupg xz-utils
       - name: Check scripts and snapshot integrity
         run: |
-          bash -n scripts/*.sh tests/*.sh
+          for script in scripts/*.sh tests/*.sh; do bash -n "$script"; done
           python3 -m unittest discover -s tests -p 'test_*.py'
           bash tests/test.sh
