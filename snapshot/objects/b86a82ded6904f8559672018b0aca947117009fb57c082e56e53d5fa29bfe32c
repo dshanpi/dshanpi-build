@@ -5,7 +5,7 @@
   "product": "avaota-a1",
   "component": "avaota-a1",
   "version": "2026.10.08-1",
-  "expected_base_state_sha256": "1eefeb29b737916a322186eef7cfb2a5a356075d3f9910f3844f9f64fd4e6696",
+  "expected_base_state_sha256": "81b703347ea69f3819aaca07ba82ae55725771644b70ac1c3b975209c780bf26",
   "releases": [
     {
       "product": "dshanpi-a1",
@@ -19,5 +19,6 @@
       "product": "avaota-a1",
       "version": "2026.10.08-1"
     }
-  ]
+  ],
+  "operation": "site-refresh"
 }
