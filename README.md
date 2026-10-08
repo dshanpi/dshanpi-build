@@ -135,3 +135,31 @@ USB/PCIe、DKMS、重启和回滚未验证前不得晋级 stable。
 
 生产私钥只放在本仓库 GitHub Actions Secrets 中；下载站只安装公钥。首版 Debian
 源码包为可选项，DShanPI 自研源码包门禁将在后续版本启用。
+
+## 发行管理与镜像验收
+
+网站 `apt.100ask.net` 根据已验签的发布清单生成板卡、版本和软件包列表。
+仓库管理员从 Actions 的 **Build and publish DShanPI product** 选择产品和版本：
+
+- `testing`：按 release lock 构建包和 CLI/Desktop 镜像，再发布候选。
+- `stable`：填写真机验证记录，仅晋级已经发布的相同包；不重新编译。
+- `withdraw`：撤回指定 testing 候选，保留其他版本仍需要的依赖和所有历史 pool 文件。
+
+完整构建只收集当前 `REVISION` 的生成包，继续拒绝同一版本的多个候选，
+不会从缓存里猜选“最新”包。未发布的无压缩 deb 会转为 xz；控制 tar 和数据 tar
+分别核对 SHA-256，不改文件内容，也不重写已发布的包。A1 的 RKAIQ 适配器使用
+已经固定输入 SHA-256 的清理脚本，不修改原 A1 板卡配置或相机安装扩展。
+
+最终镜像从本地安装 release 元包及其所有精确依赖，不要求候选先出现在公开源。
+`verify-image.sh PRODUCT VERSION IMAGE.img` 只读挂载镜像，检查元包、每个依赖的
+已安装版本、板卡身份、DTB、配置工具 profile、域名和签名配置。CLI 和 Desktop
+都通过后才复制到本次发行的输出目录。Actions 构建产物保留 7 天；长期镜像托管
+仍使用独立下载渠道，不计入 Pages 的 1 GB 配额。
+
+示例：
+
+```bash
+sudo scripts/verify-image.sh dshanpi-a1-cm5 2026.10.08-3 /absolute/path/to/image.img
+```
+
+镜像内容检查和 APT 安装测试不能替代真机启动、外设、升级后重启和回滚验证。

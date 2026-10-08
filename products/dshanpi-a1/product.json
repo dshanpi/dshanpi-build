@@ -19,11 +19,12 @@
   },
   "package_search_paths": [
     "output/debs",
-    "debs/camera",
+    "output/dshanpi-packages",
     "debs/mpp",
     "debs/rga",
     "debs/gsteamer"
   ],
+  "package_adapters": ["rkaiq-reviewed"],
   "common_packages": [
     "dshanpi-archive-keyring",
     "dspi-config"

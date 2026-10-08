@@ -24,6 +24,7 @@ jobs:
           python3 tools/verify-repository.py --snapshot public archive-key.asc public
           cp archive-key.asc public/
           gpg --batch --yes --dearmor --output public/dshanpi-archive-keyring.gpg archive-key.asc
+          python3 tools/catalog.py public
           cp site/* public/
           touch public/.nojekyll
       - uses: actions/configure-pages@v5

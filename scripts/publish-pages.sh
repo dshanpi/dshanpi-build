@@ -39,7 +39,7 @@ for path in (old / 'pool').rglob('*'):
 PY
 python3 "$script_dir/pages/snapshot.py" encode "$repository" "$temporary/checkout/snapshot"
 mkdir -p "$temporary/checkout/tools" "$temporary/checkout/.github/workflows" "$temporary/checkout/site"
-cp "$script_dir/pages/snapshot.py" "$script_dir/verify-repository.py" "$temporary/checkout/tools/"
+cp "$script_dir/pages/snapshot.py" "$script_dir/verify-repository.py" "$script_dir/pages/catalog.py" "$temporary/checkout/tools/"
 cp "$script_dir/pages/deploy.yml" "$temporary/checkout/.github/workflows/deploy.yml"
 cp "$script_dir/pages/index.html" "$temporary/checkout/site/"
 cp "$public_key" "$temporary/checkout/archive-key.asc"
