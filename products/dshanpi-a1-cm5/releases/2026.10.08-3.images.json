@@ -1,0 +1,48 @@
+{
+  "product": "dshanpi-a1-cm5",
+  "version": "2026.10.08-3",
+  "revision": "25.11.0-trunk.20261008.2",
+  "channel": "testing",
+  "hardware_validation": "pending",
+  "armbianos_commit": "6fdd5fdf96c25dfe53c5dcdf443eda6173133ace",
+  "dspi_config_commit": "b92173a4dd7685f0124a9c6417553dae47c973fc",
+  "apt_state_commit": "1407520760ef1fe94e223ef733933d85eb2d7b28",
+  "images": [
+    {
+      "variant": "cli",
+      "build_uuid": "ad1fa765-3201-463d-83f7-3aa048bc8da8",
+      "exact_platform_versions_verified": true,
+      "cm5_hardware_payload_verified": true,
+      "files": [
+        {
+          "filename": "Armbian-unofficial_25.11.0-trunk.20261008.2_Dshanpi-a1-cm5_noble_vendor_6.1.115.img",
+          "bytes": 3745513472,
+          "sha256": "75d3984ecfd77aab0f147f044c3b04eb41237d09e42f3d3af921985c67ee6115"
+        },
+        {
+          "filename": "Armbian-unofficial_25.11.0-trunk.20261008.2_Dshanpi-a1-cm5_noble_vendor_6.1.115.img.gz",
+          "bytes": 1211786742,
+          "sha256": "17c5eff5534ff1f7bc87f80714ca1d2fb6bf3c898600f9180fc19084200c28a7"
+        }
+      ]
+    },
+    {
+      "variant": "desktop",
+      "build_uuid": "7d31ec93-d7b3-4a1b-93ed-5d29c8f1377a",
+      "exact_platform_versions_verified": true,
+      "cm5_hardware_payload_verified": true,
+      "files": [
+        {
+          "filename": "Armbian-unofficial_25.11.0-trunk.20261008.2_Dshanpi-a1-cm5_noble_vendor_6.1.115_gnome_desktop.img",
+          "bytes": 5091885056,
+          "sha256": "30d6d9ae256cb370d54fa00ce2d60cba1dab855664fd0f7bb7a473b5b7d68904"
+        },
+        {
+          "filename": "Armbian-unofficial_25.11.0-trunk.20261008.2_Dshanpi-a1-cm5_noble_vendor_6.1.115_gnome_desktop.img.gz",
+          "bytes": 1605236887,
+          "sha256": "1c066fdcb34f694ff31726f2338df97220b56e89ff43dcb24619143aa0579e9f"
+        }
+      ]
+    }
+  ]
+}
