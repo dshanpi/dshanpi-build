@@ -124,6 +124,11 @@ Actions `Build and publish DShanPI product` 的 `backend` 选择 `github-pages`�
 新增包含板卡 profile 的 BSP 和独立域名客户端。两组候选分别使用 dspi-config
 `1.0.1-2` / `1.0.2-1`，保留真实升级与降级路径；它们均不代表真机验证已完成。
 
+下次从源码完整构建可在 Actions 中选择 `product=dshanpi-a1-cm5`、
+`version=2026.10.08-3`、`channel=testing`、`backend=github-pages`。
+对应 release lock 已固定当前板级源码和新版 dspi-config 的提交；该版本尚未构建或发布。
+完整新内核包可能触及 Pages 容量预算，门禁会保留已发布历史并停止超限发布。
+
 testing 发布必须先通过包集、身份冲突、权限、RPATH、签名和本地 APT 客户端测试。
 stable 只能读取 testing 的候选清单并复用相同 SHA-256。硬件启动、显示、相机、无线、
 USB/PCIe、DKMS、重启和回滚未验证前不得晋级 stable。
