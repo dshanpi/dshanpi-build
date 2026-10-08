@@ -201,4 +201,19 @@ for component in common dshanpi-a1 dshanpi-r1 avaota-a1; do
 done
 gpgv --keyring "$test_root/public.gpg" "$multi_repository/dists/noble-testing/InRelease" >/dev/null 2>&1
 
+python3 "$source_root/scripts/pages/catalog.py" "$multi_repository" "$test_root/browser-catalog.json"
+python3 - "$test_root/browser-catalog.json" <<'PYTEST'
+import json, sys
+products = json.load(open(sys.argv[1]))['products']
+assert len(products) == 3
+for product in products:
+    release = product['releases'][0]
+    for variant in ('core', 'desktop'):
+        arguments = release['install'][variant]
+        assert arguments[0] == product['product'] + '-release-' + variant + '=' + release['version']
+        assert all('=' in argument for argument in arguments)
+        has_desktop = any(argument.startswith('armbian-bsp-desktop-') for argument in arguments)
+        assert has_desktop == (variant == 'desktop')
+PYTEST
+
 echo "dshanpi-build tests passed"

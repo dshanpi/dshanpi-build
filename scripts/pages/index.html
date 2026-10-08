@@ -11,6 +11,7 @@
 <p><input id="search" type="search" placeholder="搜索软件包名称" aria-label="搜索软件包名称"></p>
 <div style="overflow:auto"><table><thead><tr><th>软件包</th><th>版本</th><th>架构</th><th>下载</th></tr></thead><tbody id="packages"></tbody></table></div>
 <h2>添加软件源</h2>
+<p id="transport-status"></p>
 <p>先选择实际板卡，再使用下方命令。testing 是待真机验证的候选版本。安装前请核对公钥指纹：<code>476B F598 CA47 F121 46EF 1862 0F6E DF1B 5C41 F3EC</code>。</p>
 <pre id="setup">curl -fsS https://apt.100ask.net/dshanpi-archive-keyring.gpg \
   -o /tmp/dshanpi-archive-keyring.gpg
@@ -28,9 +29,10 @@ sudo apt update
 sudo apt install dspi-config</pre>
 <h2>管理系统版本</h2>
 <p>初次使用平台版本管理前，安装适合当前板卡和 CLI／桌面环境的 release 元包。它会安装精确版本的内核、DTB、BSP 和驱动，请先在测试板上验证。</p>
+<p><label>系统类型 <select id="variant"><option value="core">CLI</option><option value="desktop">桌面</option></select></label></p>
+<pre id="install"></pre>
 <pre id="upgrade">apt-cache policy dshanpi-a1-cm5-release-core
 # 桌面镜像使用 dshanpi-a1-cm5-release-desktop
-sudo apt install -t noble-testing dshanpi-a1-cm5-release-core
 dspi-config update list
 sudo dspi-config update install &lt;版本&gt;
 sudo dspi-config update rollback</pre>
@@ -38,6 +40,7 @@ sudo dspi-config update rollback</pre>
 <h2>维护与发布</h2>
 <p><a href="https://github.com/dshanpi/dshanpi-build/actions/workflows/release.yml">构建、晋级和撤回</a>由 GitHub Actions 执行。stable 晋级需要真机验证记录；撤回 testing 保留历史文件。<a href="https://github.com/dshanpi/dspi-config">设备端配置工具源码</a></p>
 <script>
+if (location.protocol !== 'https:') document.querySelector('#transport-status').textContent = '当前通过 HTTP 浏览。执行接入命令前，请先确认 https://apt.100ask.net 能正常打开；证书未就绪时暂勿执行。';
 const product = document.querySelector('#product'), release = document.querySelector('#release');
 const setup = document.querySelector('#setup'), upgrade = document.querySelector('#upgrade');
 const setupTemplate = setup.textContent, upgradeTemplate = upgrade.textContent;
@@ -47,6 +50,10 @@ function render() {
   const cohort = chosen.releases.find(r => r.version === release.value);
   setup.textContent = setupTemplate.replaceAll('dshanpi-a1-cm5', chosen.product);
   upgrade.textContent = upgradeTemplate.replaceAll('dshanpi-a1-cm5', chosen.product);
+  const variant = document.querySelector('#variant').value;
+  document.querySelector('#install').textContent = cohort.testing ?
+    'sudo apt install --allow-downgrades -t noble-testing \\\n  ' + cohort.install[variant].join(' \\\n  ') :
+    '此 testing 版本已撤回，请选择其他版本。';
   document.querySelector('#release-status').textContent = cohort.version + ' · ' +
     (cohort.testing ? 'testing 可用' : 'testing 已撤回') + ' · ' +
     (cohort.stable ? 'stable 已发布' : '尚未晋级 stable');
@@ -75,6 +82,7 @@ fetch('repository.json').then(r => { if (!r.ok) throw Error(); return r.json(); 
   if (!products.length) throw Error();
   chooseProduct();
 }).catch(() => { document.querySelector('#release-status').textContent = '清单读取失败，请查看下方发布记录或稍后重试。'; });
+document.querySelector('#variant').addEventListener('change', render);
 product.addEventListener('change', chooseProduct); release.addEventListener('change', render);
 document.querySelector('#search').addEventListener('input', () => { if (products.length) render(); });
 </script>
