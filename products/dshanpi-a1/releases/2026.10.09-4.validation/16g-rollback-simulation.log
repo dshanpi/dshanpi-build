@@ -1,0 +1,27 @@
+NOTE: This is only a simulation!
+      apt-get needs root privileges for real execution.
+      Keep also in mind that locking is deactivated,
+      so don't depend on the relevance to the real current situation!
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following packages will be REMOVED:
+  dshanpi-a1-axcl-16g dshanpi-axcl-dkms-16g dshanpi-axcl-firmware-16g
+  dshanpi-axcl-runtime-16g
+The following NEW packages will be installed:
+  dshanpi-a1-axcl dshanpi-axcl-dkms dshanpi-axcl-runtime
+The following packages will be DOWNGRADED:
+  dshanpi-a1-release-core
+0 upgraded, 3 newly installed, 1 downgraded, 4 to remove and 2 not upgraded.
+Remv dshanpi-a1-axcl-16g [3.16.0+dshanpi2]
+Remv dshanpi-axcl-dkms-16g [3.16.0+dshanpi2]
+Remv dshanpi-axcl-firmware-16g [3.16.0+dshanpi2]
+Remv dshanpi-axcl-runtime-16g [3.16.0+dshanpi2]
+Inst dshanpi-axcl-runtime (3.16.0+dshanpi1 DShanPI:noble-testing [arm64])
+Inst dshanpi-axcl-dkms (3.16.0+dshanpi1 DShanPI:noble-testing [arm64])
+Inst dshanpi-a1-axcl (3.16.0+dshanpi1 DShanPI:noble-testing [arm64])
+Inst dshanpi-a1-release-core [2026.10.09-4] (2026.10.09-3 DShanPI:noble-testing [all])
+Conf dshanpi-axcl-runtime (3.16.0+dshanpi1 DShanPI:noble-testing [arm64])
+Conf dshanpi-axcl-dkms (3.16.0+dshanpi1 DShanPI:noble-testing [arm64])
+Conf dshanpi-a1-axcl (3.16.0+dshanpi1 DShanPI:noble-testing [arm64])
+Conf dshanpi-a1-release-core (2026.10.09-3 DShanPI:noble-testing [all])
