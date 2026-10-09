@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "version": "6.4.3.0+dshanpi1",
+  "source_archive": "packages/aic8800d80/vendor/aic8800d80.tar.gz",
+  "sha256": "336a5538039336d5291f8f43389de978411d1e0917fa2774bb03b6a95939c3b7",
+  "provenance": "User-supplied AX8850 adapter AIC8800D80 archive; original archive retained unchanged",
+  "driver_banner": "6.4.3.0; 2025_1231_b3b80d09",
+  "bus": "usb",
+  "product": "dshanpi-a1",
+  "kernel_release": "6.1.115-vendor-rk35xx",
+  "kernel_package_version": "25.11.0-trunk.20261008.4",
+  "source_date_epoch": 1791504000
+}

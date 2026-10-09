@@ -24,6 +24,7 @@ class OptionalPackagesTests(unittest.TestCase):
                           release_meta=dict(core='a1-release-core', desktop='a1-release-desktop'))
             if enabled:
                 config['optional_package_sets'] = {'axcl': [dict(name=p, arch='arm64') for p in ('runtime', 'driver', 'axcl')]}
+                config['optional_package_sets']['aic8800d80'] = [dict(name=p, arch='arm64') for p in ('aic-dkms', 'aic-firmware', 'aic-meta')]
             config_path.write_text(json.dumps(config))
             packages = root / 'packages'
             packages.mkdir()
@@ -48,6 +49,13 @@ class OptionalPackagesTests(unittest.TestCase):
     def test_partial_optional_set_is_rejected(self):
         with self.assertRaisesRegex(SystemExit, 'incomplete'):
             self.exercise(['runtime'])
+
+    def test_both_optional_hardware_sets_can_coexist(self):
+        self.assertEqual(len(self.exercise(['runtime', 'driver', 'axcl', 'aic-dkms', 'aic-firmware', 'aic-meta'])), 9)
+
+    def test_aic_driver_without_firmware_is_rejected(self):
+        with self.assertRaisesRegex(SystemExit, 'incomplete.*aic8800d80'):
+            self.exercise(['runtime', 'driver', 'axcl', 'aic-dkms', 'aic-meta'])
 
     def test_other_board_cannot_publish_unconfigured_hardware(self):
         with self.assertRaisesRegex(SystemExit, 'unexpected'):
