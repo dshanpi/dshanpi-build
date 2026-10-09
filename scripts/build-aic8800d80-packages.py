@@ -100,8 +100,7 @@ esac
 ''', 0o755)
         # Prefer the vendor's AIC-specific Bluetooth driver before generic
         # btusb; do not globally blacklist Bluetooth or load modules here.
-        write(driver, 'etc/modprobe.d/dshanpi-aic8800d80.conf', 'softdep btusb pre: aic_btusb\n')
-        write(driver, 'DEBIAN/conffiles', '/etc/modprobe.d/dshanpi-aic8800d80.conf\n')
+        write(driver, 'lib/modprobe.d/dshanpi-aic8800d80.conf', 'softdep btusb pre: aic_btusb\n')
         fwdir = firmware / 'lib/firmware/dshanpi-aic8800d80/aic8800D80'
         shutil.copytree(original / 'fw', fwdir)
         write(firmware, 'DEBIAN/conffiles', ''.join('/lib/firmware/dshanpi-aic8800d80/aic8800D80/' + p.name + '\n' for p in sorted(fwdir.glob('*.txt'))))
