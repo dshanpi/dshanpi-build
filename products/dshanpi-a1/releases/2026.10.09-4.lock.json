@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "product": "dshanpi-a1",
+  "version": "2026.10.09-4",
+  "revision": "25.11.0-trunk.20261008.4",
+  "sources": {
+    "armbianos": {
+      "commit": "c83ae0e5f3e371d4e796433db2c020f7fd552fab"
+    },
+    "dspi_config": {
+      "commit": "2412c456ea9001f1d4703b0ecd54bea9bca24d80"
+    }
+  },
+  "maintenance_adapter": "axcl-16g",
+  "base_release": "2026.10.09-3",
+  "base_manifest_sha256": "e4aa412b062c96c1765233ab4c3d06015b8d76258e951f38bf89e7301f58f5f9",
+  "image_policy": "Package maintenance release; use existing 2026.10.08-4 A1 image then update via APT.",
+  "hardware_validation": "16GB capacity confirmed by user; testing only until real A1 inference and six-stream validation complete",
+  "axcl_16g_lock": "packages/axcl-16g/upstream.lock.json",
+  "axcl_16g_lock_sha256": "6f3b47044d2db129e870d205d2086cd2a36c02993702b92a80fc939b76e77137"
+}

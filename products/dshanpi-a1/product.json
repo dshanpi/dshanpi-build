@@ -55,6 +55,12 @@
       {"name": "dshanpi-axcl-dkms", "arch": "arm64"},
       {"name": "dshanpi-a1-axcl", "arch": "arm64"}
     ],
+    "axcl-16g": [
+      {"name": "dshanpi-axcl-runtime-16g", "arch": "arm64"},
+      {"name": "dshanpi-axcl-dkms-16g", "arch": "arm64"},
+      {"name": "dshanpi-axcl-firmware-16g", "arch": "arm64"},
+      {"name": "dshanpi-a1-axcl-16g", "arch": "arm64"}
+    ],
     "aic8800d80": [
       {"name": "dshanpi-aic8800d80-dkms", "arch": "arm64"},
       {"name": "dshanpi-aic8800d80-firmware", "arch": "arm64"},
