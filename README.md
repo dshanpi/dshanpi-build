@@ -55,6 +55,9 @@ release 元包均按产品隔离。`avaotaa1` 不是内部标识；配置、包�
 不要求重新制作镜像。安装、DKMS 内核约束和配套 PAC 的验收边界见
 [A1 AXCL 软件包说明](packages/axcl/README.md)。
 
+AX8850 转接板的 USB Wi-Fi/蓝牙可选包见
+[A1 AIC8800D80 安装与用户测试说明](packages/aic8800d80/README.md)。
+
 ```bash
 # 构建 dspi-config、APT 客户端、ArmBian 包和 CLI/Desktop 镜像
 scripts/build-product.sh dshanpi-a1-cm5 path/to/release.lock.json

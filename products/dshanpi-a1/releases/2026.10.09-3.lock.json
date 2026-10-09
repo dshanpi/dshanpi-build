@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "product": "dshanpi-a1",
+  "version": "2026.10.09-3",
+  "revision": "25.11.0-trunk.20261008.4",
+  "sources": {
+    "armbianos": {
+      "commit": "c83ae0e5f3e371d4e796433db2c020f7fd552fab"
+    },
+    "dspi_config": {
+      "commit": "2412c456ea9001f1d4703b0ecd54bea9bca24d80"
+    }
+  },
+  "maintenance_adapter": "aic8800d80",
+  "base_release": "2026.10.09-2",
+  "base_manifest_sha256": "52064d0a5f0060190187f066e37bf272f3c441ebe8368f39806f634ce19e1ff5",
+  "image_policy": "Package maintenance release; use existing 2026.10.08-4 A1 image then update via APT.",
+  "hardware_validation": "Wi-Fi and Bluetooth functional tests reserved for user; packaging and native module compilation verified separately",
+  "aic8800d80_lock": "packages/aic8800d80/upstream.lock.json",
+  "aic8800d80_lock_sha256": "b6204ce7c1b0a863f6031bf2131f20d004d91ccaad80ba09464ccd7c90381e98"
+}
