@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/lib.sh"
+python3 "$repo_root/tools/check-delivery-policy.py" >/dev/null
 
 [[ $# -eq 1 ]] || die "usage: $0 SIGNED_REPOSITORY_DIRECTORY"
 repository=$(safe_realpath "$1")

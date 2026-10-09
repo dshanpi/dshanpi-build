@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/lib.sh"
+python3 "$repo_root/tools/check-delivery-policy.py" >/dev/null
 
 [[ $# -eq 2 ]] || die "usage: $0 PRODUCT RELEASE_LOCK"
 require_command jq
