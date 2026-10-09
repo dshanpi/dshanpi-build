@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "product": "dshanpi-a1",
+  "version": "2026.10.09-2",
+  "revision": "25.11.0-trunk.20261008.4",
+  "sources": {
+    "armbianos": {
+      "commit": "f966bb2469de96ef58d183f388be19a0c9f4bc1d"
+    },
+    "dspi_config": {
+      "commit": "39ee3b0d2b4428aacaf91e11a14a2d2e697b813e"
+    }
+  },
+  "maintenance_adapter": "axcl",
+  "base_release": "2026.10.09-1",
+  "base_manifest_sha256": "ddb361073e310b9956322f7f5fdef83c5ce17f8da3bec1a841676f6019f83b50",
+  "axcl_lock": "packages/axcl/upstream.lock.json",
+  "image_policy": "Package maintenance release; use existing 2026.10.08-4 A1 image then update via APT.",
+  "hardware_validation": "pending: AX650 PCIe device and exact card PAC not yet available",
+  "axcl_lock_sha256": "0100dd60b77b43ff425a90235e20d7c3d2fe8ac5d00ab5eb3c3250dd574e6b18"
+}

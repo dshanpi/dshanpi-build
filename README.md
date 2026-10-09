@@ -51,6 +51,10 @@ release 元包均按产品隔离。`avaotaa1` 不是内部标识；配置、包�
 
 ## 常用命令
 
+原版 A1 的 AX650N/AX8850 可选软件包由独立的包维护工作流构建、签名和发布，
+不要求重新制作镜像。安装、DKMS 内核约束和配套 PAC 的验收边界见
+[A1 AXCL 软件包说明](packages/axcl/README.md)。
+
 ```bash
 # 构建 dspi-config、APT 客户端、ArmBian 包和 CLI/Desktop 镜像
 scripts/build-product.sh dshanpi-a1-cm5 path/to/release.lock.json

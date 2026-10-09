@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "version": "3.16.0+dshanpi1",
+  "upstream_version": "3.16.0",
+  "upstream_commit": "133bc60f1280a5f200921e28bb5777296c0f76df",
+  "url": "https://huggingface.co/AXERA-TECH/AXCL/resolve/133bc60f1280a5f200921e28bb5777296c0f76df/V3.16.0_8G/axcl_host_aarch64_V3.16.0_20260731020156_NO5288.deb",
+  "sha256": "332d6a4043d39f31446e80b73e113dafbc2e30448e50a99e41e96ddf584aa33c",
+  "product": "dshanpi-a1",
+  "kernel_release": "6.1.115-vendor-rk35xx",
+  "kernel_package_version": "25.11.0-trunk.20261008.4",
+  "source_date_epoch": 1791504000,
+  "firmware_policy": "PAC is deliberately excluded: the card-specific 8GB/16GB PAC must be independently identified, hashed and packaged before hardware acceptance."
+}

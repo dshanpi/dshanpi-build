@@ -49,6 +49,13 @@
     {"name": "dshanpi-a1-repository", "arch": "all"},
     {"name": "dspi-config", "arch": "all"}
   ],
+  "optional_package_sets": {
+    "axcl": [
+      {"name": "dshanpi-axcl-runtime", "arch": "arm64"},
+      {"name": "dshanpi-axcl-dkms", "arch": "arm64"},
+      {"name": "dshanpi-a1-axcl", "arch": "arm64"}
+    ]
+  },
   "release_meta": {
     "core": "dshanpi-a1-release-core",
     "desktop": "dshanpi-a1-release-desktop",
