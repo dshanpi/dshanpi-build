@@ -3,26 +3,26 @@
   "files": [
     {
       "path": "PUBLICATION.json",
-      "size": 263,
-      "sha256": "f510b685e8b065f7544c9f1aee676993e8aad8568bb0d605dea9684cc4b32f59",
+      "size": 338,
+      "sha256": "74f163d434f0d26f6a767c9beeba026c69bccba60f3ae1a7de541903856aa198",
       "parts": [
-        "f510b685e8b065f7544c9f1aee676993e8aad8568bb0d605dea9684cc4b32f59"
+        "74f163d434f0d26f6a767c9beeba026c69bccba60f3ae1a7de541903856aa198"
       ]
     },
     {
       "path": "SHA256SUMS",
-      "size": 27235,
-      "sha256": "d19e07ffcc1678451fbfd52e10105b8603b590b13d1ee388cdff4ee42146cf2b",
+      "size": 28879,
+      "sha256": "4ad74ef04616b83e34edb22c5fd6691c041dad89706aca021028289e9250d131",
       "parts": [
-        "d19e07ffcc1678451fbfd52e10105b8603b590b13d1ee388cdff4ee42146cf2b"
+        "4ad74ef04616b83e34edb22c5fd6691c041dad89706aca021028289e9250d131"
       ]
     },
     {
       "path": "SHA256SUMS.asc",
       "size": 833,
-      "sha256": "aa814b7bf365db22d78026b4711b753c69f44676876ed405aeab961cd7f18fba",
+      "sha256": "63e593cdd76c7708c1b3b518e77cfaed0b2da0918161f1f6c1d877b8aae47878",
       "parts": [
-        "aa814b7bf365db22d78026b4711b753c69f44676876ed405aeab961cd7f18fba"
+        "63e593cdd76c7708c1b3b518e77cfaed0b2da0918161f1f6c1d877b8aae47878"
       ]
     },
     {
@@ -36,9 +36,25 @@
     {
       "path": "catalog/releases/avaota-a1/2026.10.08-1.json.asc",
       "size": 833,
-      "sha256": "b79c469da6797c0124f77d3d046d533ed64a461ad540a76f51a5d1fc9b11808f",
+      "sha256": "07d583bca3465f185d761eca7f8ac50a40f7a9637e3dba6f7d69aeee3cc4b1e7",
       "parts": [
-        "b79c469da6797c0124f77d3d046d533ed64a461ad540a76f51a5d1fc9b11808f"
+        "07d583bca3465f185d761eca7f8ac50a40f7a9637e3dba6f7d69aeee3cc4b1e7"
+      ]
+    },
+    {
+      "path": "catalog/releases/avaota-a1/2026.10.09-1.json",
+      "size": 4795,
+      "sha256": "93682c4948ea9be980d5be6b3b6cf73a37459a6ddc3efe969fbaff2797c1bc64",
+      "parts": [
+        "93682c4948ea9be980d5be6b3b6cf73a37459a6ddc3efe969fbaff2797c1bc64"
+      ]
+    },
+    {
+      "path": "catalog/releases/avaota-a1/2026.10.09-1.json.asc",
+      "size": 833,
+      "sha256": "136028382b54c48dad781439a0927e2adb0c1e356002086d8f047bbf5006c870",
+      "parts": [
+        "136028382b54c48dad781439a0927e2adb0c1e356002086d8f047bbf5006c870"
       ]
     },
     {
@@ -52,9 +68,9 @@
     {
       "path": "catalog/releases/dshanpi-a1/2026.10.08-1.json.asc",
       "size": 833,
-      "sha256": "1a56aa21615472ad667b800cbd0b932332aa2d2f6ae758c4eacf5651eef090b5",
+      "sha256": "7af76a3bb7d026b8ab551b3b07152823e07eaacdb1b53512956536e8d78d5c91",
       "parts": [
-        "1a56aa21615472ad667b800cbd0b932332aa2d2f6ae758c4eacf5651eef090b5"
+        "7af76a3bb7d026b8ab551b3b07152823e07eaacdb1b53512956536e8d78d5c91"
       ]
     },
     {
@@ -68,9 +84,9 @@
     {
       "path": "catalog/releases/dshanpi-a1/2026.10.08-2.json.asc",
       "size": 833,
-      "sha256": "55357a687d99304f13a3f6c530e46787b9cc7726a6da4bdab61ee4d3ad1bbb08",
+      "sha256": "fa9569955fe8232c2b1586940e76c0f97a0112c61dfefab6e95cf839a31a65a3",
       "parts": [
-        "55357a687d99304f13a3f6c530e46787b9cc7726a6da4bdab61ee4d3ad1bbb08"
+        "fa9569955fe8232c2b1586940e76c0f97a0112c61dfefab6e95cf839a31a65a3"
       ]
     },
     {
@@ -84,9 +100,9 @@
     {
       "path": "catalog/releases/dshanpi-a1/2026.10.08-3.json.asc",
       "size": 833,
-      "sha256": "a9fde6cc7d1daa6197238449a559f86e9782c6af32199c0ec25f917dc93b9ee4",
+      "sha256": "a2b3e298ba870bd540b341145d9955f8a4d86fd7cb6e419b281df80798c5f577",
       "parts": [
-        "a9fde6cc7d1daa6197238449a559f86e9782c6af32199c0ec25f917dc93b9ee4"
+        "a2b3e298ba870bd540b341145d9955f8a4d86fd7cb6e419b281df80798c5f577"
       ]
     },
     {
@@ -100,9 +116,9 @@
     {
       "path": "catalog/releases/dshanpi-a1/2026.10.08-4.json.asc",
       "size": 833,
-      "sha256": "ec3df3e8cc1a3778bebda5318622f3775b5721c3fa01d50c036e2b19c36fd0ee",
+      "sha256": "a96469cfbb6d705ba90129e1bb1d9e58e8d34823b808adb17a6dc06ec63b9383",
       "parts": [
-        "ec3df3e8cc1a3778bebda5318622f3775b5721c3fa01d50c036e2b19c36fd0ee"
+        "a96469cfbb6d705ba90129e1bb1d9e58e8d34823b808adb17a6dc06ec63b9383"
       ]
     },
     {
@@ -116,9 +132,9 @@
     {
       "path": "catalog/releases/dshanpi-a1/2026.10.09-1.json.asc",
       "size": 833,
-      "sha256": "2944916d20a58247f775f29b04fa4fc37974f83297d96c0dee0bd2e91f2c2108",
+      "sha256": "52ced6e82c0468de6a2078126ea2e67d18fbcd22bbfb88dd7efd21e0209d679d",
       "parts": [
-        "2944916d20a58247f775f29b04fa4fc37974f83297d96c0dee0bd2e91f2c2108"
+        "52ced6e82c0468de6a2078126ea2e67d18fbcd22bbfb88dd7efd21e0209d679d"
       ]
     },
     {
@@ -132,9 +148,9 @@
     {
       "path": "catalog/releases/dshanpi-a1-cm5/2026.10.08-1.json.asc",
       "size": 833,
-      "sha256": "c3816dd7151b2495b1da2156d824e0d5f98c4b16e32471f7112507c53cc81bf7",
+      "sha256": "5b52817088834a1ac0a2b58080e4c021bb89ad3f33fcb0f10fc1b0efd54c3102",
       "parts": [
-        "c3816dd7151b2495b1da2156d824e0d5f98c4b16e32471f7112507c53cc81bf7"
+        "5b52817088834a1ac0a2b58080e4c021bb89ad3f33fcb0f10fc1b0efd54c3102"
       ]
     },
     {
@@ -148,9 +164,9 @@
     {
       "path": "catalog/releases/dshanpi-a1-cm5/2026.10.08-2.json.asc",
       "size": 833,
-      "sha256": "1123cae6de7edc1dd260bc21d709ebbb72cdf919a1d0be2cadb11f426560fc63",
+      "sha256": "9f6398d25e25636ac88afae4ef13d2b42cd7cf4cd21c6dd8f46e6fb1394e3179",
       "parts": [
-        "1123cae6de7edc1dd260bc21d709ebbb72cdf919a1d0be2cadb11f426560fc63"
+        "9f6398d25e25636ac88afae4ef13d2b42cd7cf4cd21c6dd8f46e6fb1394e3179"
       ]
     },
     {
@@ -164,9 +180,25 @@
     {
       "path": "catalog/releases/dshanpi-a1-cm5/2026.10.08-3.json.asc",
       "size": 833,
-      "sha256": "1f7b174b56b4bd127811a601af58926c0b8fe0db03680b4a5123476324518bd2",
+      "sha256": "ad279cf35a8246ee70e658752e2e9c7722ad0718d4007a111f4760ad7ce7264c",
       "parts": [
-        "1f7b174b56b4bd127811a601af58926c0b8fe0db03680b4a5123476324518bd2"
+        "ad279cf35a8246ee70e658752e2e9c7722ad0718d4007a111f4760ad7ce7264c"
+      ]
+    },
+    {
+      "path": "catalog/releases/dshanpi-a1-cm5/2026.10.09-1.json",
+      "size": 8016,
+      "sha256": "8964369c96328b91c77b80d72eeb0aa192e78779a2b3f16a780a058de070a533",
+      "parts": [
+        "8964369c96328b91c77b80d72eeb0aa192e78779a2b3f16a780a058de070a533"
+      ]
+    },
+    {
+      "path": "catalog/releases/dshanpi-a1-cm5/2026.10.09-1.json.asc",
+      "size": 833,
+      "sha256": "7b7bfe845eab824501a39f96304e8a93e06f0b7e67baa3b1c3945eb2951ad3a0",
+      "parts": [
+        "7b7bfe845eab824501a39f96304e8a93e06f0b7e67baa3b1c3945eb2951ad3a0"
       ]
     },
     {
@@ -180,9 +212,25 @@
     {
       "path": "catalog/releases/dshanpi-r1/2026.10.08-1.json.asc",
       "size": 833,
-      "sha256": "b761bd32bba09cd5cfe754a2e5ab10015e5e6677c7081f213a416f43561a777f",
+      "sha256": "5df33cf493a6a5fcd1a54b5b686d5b6c6786f4331c55be1a6c3c8f8d231ad8d9",
       "parts": [
-        "b761bd32bba09cd5cfe754a2e5ab10015e5e6677c7081f213a416f43561a777f"
+        "5df33cf493a6a5fcd1a54b5b686d5b6c6786f4331c55be1a6c3c8f8d231ad8d9"
+      ]
+    },
+    {
+      "path": "catalog/releases/dshanpi-r1/2026.10.09-1.json",
+      "size": 4367,
+      "sha256": "eb0cdd426a4a288d554f81162410facd7fa3a62870a5a0031497071124ba233c",
+      "parts": [
+        "eb0cdd426a4a288d554f81162410facd7fa3a62870a5a0031497071124ba233c"
+      ]
+    },
+    {
+      "path": "catalog/releases/dshanpi-r1/2026.10.09-1.json.asc",
+      "size": 833,
+      "sha256": "75e58677309096d7eb0efa09e6131a486754d81ced269d722263924d05123cb4",
+      "parts": [
+        "75e58677309096d7eb0efa09e6131a486754d81ced269d722263924d05123cb4"
       ]
     },
     {
@@ -217,10 +265,10 @@
     },
     {
       "path": "catalog/suites/noble-testing/avaota-a1.tsv",
-      "size": 2313,
-      "sha256": "3ac000796eb3b0c3e66dfff0a636d80aab4da4a4418fdd6ca08f59381838609c",
+      "size": 2700,
+      "sha256": "ccc1fdb1dce89008ed519472ecaf7ba86318094f47524a4624996ad16e613293",
       "parts": [
-        "3ac000796eb3b0c3e66dfff0a636d80aab4da4a4418fdd6ca08f59381838609c"
+        "ccc1fdb1dce89008ed519472ecaf7ba86318094f47524a4624996ad16e613293"
       ]
     },
     {
@@ -233,10 +281,10 @@
     },
     {
       "path": "catalog/suites/noble-testing/dshanpi-a1-cm5.tsv",
-      "size": 6959,
-      "sha256": "c9e1c7f6b39db032dde1b468846e1a59f20f780a9520fc871f73acb765593da9",
+      "size": 7386,
+      "sha256": "ceb5d89edeea032945ee23c1c696d98dbda6ea634a3808f9383a3f62025a7275",
       "parts": [
-        "c9e1c7f6b39db032dde1b468846e1a59f20f780a9520fc871f73acb765593da9"
+        "ceb5d89edeea032945ee23c1c696d98dbda6ea634a3808f9383a3f62025a7275"
       ]
     },
     {
@@ -249,18 +297,18 @@
     },
     {
       "path": "catalog/suites/noble-testing/dshanpi-r1.tsv",
-      "size": 2235,
-      "sha256": "4439ed646c5b69e3c20ddad27dcadb206e4ea71b5f808a0f548115c884354c9c",
+      "size": 2630,
+      "sha256": "0fb3ea4280ea2a587bca0e0390c873f93a1df483f5700488eddaaae5e6cc9b99",
       "parts": [
-        "4439ed646c5b69e3c20ddad27dcadb206e4ea71b5f808a0f548115c884354c9c"
+        "0fb3ea4280ea2a587bca0e0390c873f93a1df483f5700488eddaaae5e6cc9b99"
       ]
     },
     {
       "path": "dists/noble/InRelease",
       "size": 9971,
-      "sha256": "0b636ef400c129cc55be7eb8c682942a57ffb21ed01c7a74447c3bb0cb073cb8",
+      "sha256": "66686eccde72180051690e20c86f335bc6e33285e63e7800e0eacdc5ed101039",
       "parts": [
-        "0b636ef400c129cc55be7eb8c682942a57ffb21ed01c7a74447c3bb0cb073cb8"
+        "66686eccde72180051690e20c86f335bc6e33285e63e7800e0eacdc5ed101039"
       ]
     },
     {
@@ -274,9 +322,9 @@
     {
       "path": "dists/noble/Release.gpg",
       "size": 833,
-      "sha256": "9d8fdd90b07b5756be0075bceac304685df57220add553b132559841735cd4d8",
+      "sha256": "ac60b5fa229f2f5c8803ff762f3fed72df9140172a8c18af607cf972e4a44ecb",
       "parts": [
-        "9d8fdd90b07b5756be0075bceac304685df57220add553b132559841735cd4d8"
+        "ac60b5fa229f2f5c8803ff762f3fed72df9140172a8c18af607cf972e4a44ecb"
       ]
     },
     {
@@ -502,49 +550,49 @@
     {
       "path": "dists/noble-testing/InRelease",
       "size": 10030,
-      "sha256": "27f197b83c6f5f7972d23650ef1c05709d2ebd6eca06d0a1c09b8cf83c5597a6",
+      "sha256": "33706914deab22f8d776364ea159e421312c0e4f9e597b56b1c72c9b220d1d78",
       "parts": [
-        "27f197b83c6f5f7972d23650ef1c05709d2ebd6eca06d0a1c09b8cf83c5597a6"
+        "33706914deab22f8d776364ea159e421312c0e4f9e597b56b1c72c9b220d1d78"
       ]
     },
     {
       "path": "dists/noble-testing/Release",
       "size": 9148,
-      "sha256": "15508ccd40c00825265cb70f2f1d90208c2dbefacf0c7f6fae57169c09a16f61",
+      "sha256": "32a9ba2060ae61323d73632f70743d5cbbc82cccb16e31992f392448f4e7febc",
       "parts": [
-        "15508ccd40c00825265cb70f2f1d90208c2dbefacf0c7f6fae57169c09a16f61"
+        "32a9ba2060ae61323d73632f70743d5cbbc82cccb16e31992f392448f4e7febc"
       ]
     },
     {
       "path": "dists/noble-testing/Release.gpg",
       "size": 833,
-      "sha256": "22bf26a27c835cd55891f13b42ca4825d37aa17bf6bac147a33ae9c95a759608",
+      "sha256": "89303a2a22d9dedae90b412ec6fc644a9086067e134eb26f46d58cac2fd95838",
       "parts": [
-        "22bf26a27c835cd55891f13b42ca4825d37aa17bf6bac147a33ae9c95a759608"
+        "89303a2a22d9dedae90b412ec6fc644a9086067e134eb26f46d58cac2fd95838"
       ]
     },
     {
       "path": "dists/noble-testing/avaota-a1/binary-all/Packages",
-      "size": 2814,
-      "sha256": "42eed83738737cdd7d2128587aef436064059768716d25aeccaf8c94066e91dd",
+      "size": 5041,
+      "sha256": "aa376aab66dd3b2a94cacc1361094ec39ecb0e149885dcd134aed8e942fb910f",
       "parts": [
-        "42eed83738737cdd7d2128587aef436064059768716d25aeccaf8c94066e91dd"
+        "aa376aab66dd3b2a94cacc1361094ec39ecb0e149885dcd134aed8e942fb910f"
       ]
     },
     {
       "path": "dists/noble-testing/avaota-a1/binary-all/Packages.gz",
-      "size": 884,
-      "sha256": "e666a057c401297bec4d1dde54483a35b57d1c550d91ab91bee96591b59b79d1",
+      "size": 1114,
+      "sha256": "dddc5d1c47a7f43eb37ccd747af36180abe7014a7add2a51bb19ce963d0e21d6",
       "parts": [
-        "e666a057c401297bec4d1dde54483a35b57d1c550d91ab91bee96591b59b79d1"
+        "dddc5d1c47a7f43eb37ccd747af36180abe7014a7add2a51bb19ce963d0e21d6"
       ]
     },
     {
       "path": "dists/noble-testing/avaota-a1/binary-all/Packages.xz",
-      "size": 944,
-      "sha256": "aa286e7c2948628a79ee637ad92b994ea13c21fd1217f20e5f0d829d3c741289",
+      "size": 1132,
+      "sha256": "af87e12b081778692ad6d24ccd2b2ab43ebe05902441c330c45f2949dfeb5748",
       "parts": [
-        "aa286e7c2948628a79ee637ad92b994ea13c21fd1217f20e5f0d829d3c741289"
+        "af87e12b081778692ad6d24ccd2b2ab43ebe05902441c330c45f2949dfeb5748"
       ]
     },
     {
@@ -667,26 +715,26 @@
     },
     {
       "path": "dists/noble-testing/dshanpi-a1-cm5/binary-all/Packages",
-      "size": 11509,
-      "sha256": "406cf4fea2357b8acd4ab000d8746541ba48a27a1fdae1c001b4bb5cb2a4574e",
+      "size": 14429,
+      "sha256": "bee4b924d4859be248f9cc0dc437f53d98bd98269d06b4c4512cc1697839d787",
       "parts": [
-        "406cf4fea2357b8acd4ab000d8746541ba48a27a1fdae1c001b4bb5cb2a4574e"
+        "bee4b924d4859be248f9cc0dc437f53d98bd98269d06b4c4512cc1697839d787"
       ]
     },
     {
       "path": "dists/noble-testing/dshanpi-a1-cm5/binary-all/Packages.gz",
-      "size": 2084,
-      "sha256": "357555a1cc110433bcc9d4018154fe4e30d95c8ba6649c6a498045d361f1150f",
+      "size": 2315,
+      "sha256": "934710415364a5a2277946e81674650b7202083fefd2a908eff3a067036a82bd",
       "parts": [
-        "357555a1cc110433bcc9d4018154fe4e30d95c8ba6649c6a498045d361f1150f"
+        "934710415364a5a2277946e81674650b7202083fefd2a908eff3a067036a82bd"
       ]
     },
     {
       "path": "dists/noble-testing/dshanpi-a1-cm5/binary-all/Packages.xz",
-      "size": 2004,
-      "sha256": "f09318aefa2bdcf92b1b9eb5e4fc72e5f66ebb62ec2720c372aa8ceda40b3e64",
+      "size": 2188,
+      "sha256": "5c85ceeaef9c2cb803fe9e69e454daf336457b94aae70937919c948eac2c9573",
       "parts": [
-        "f09318aefa2bdcf92b1b9eb5e4fc72e5f66ebb62ec2720c372aa8ceda40b3e64"
+        "5c85ceeaef9c2cb803fe9e69e454daf336457b94aae70937919c948eac2c9573"
       ]
     },
     {
@@ -715,26 +763,26 @@
     },
     {
       "path": "dists/noble-testing/dshanpi-r1/binary-all/Packages",
-      "size": 2674,
-      "sha256": "300a61aa133cc6b2ec0f606b0ff27664bc285908a9c160814951e1c3e9343975",
+      "size": 4756,
+      "sha256": "20e9f1ecc42571eb9b0247e54d227189c16ef2bacdf42625abe524b19b750fb4",
       "parts": [
-        "300a61aa133cc6b2ec0f606b0ff27664bc285908a9c160814951e1c3e9343975"
+        "20e9f1ecc42571eb9b0247e54d227189c16ef2bacdf42625abe524b19b750fb4"
       ]
     },
     {
       "path": "dists/noble-testing/dshanpi-r1/binary-all/Packages.gz",
-      "size": 860,
-      "sha256": "37e1426268f61a3e680fed460be67154f2df0846a76fbd1480866a85620faae2",
+      "size": 1086,
+      "sha256": "17ed79ce14454b1b9e60a7995a74903b8ef9c23bc85f4a9be7129ec9e5d6cfcf",
       "parts": [
-        "37e1426268f61a3e680fed460be67154f2df0846a76fbd1480866a85620faae2"
+        "17ed79ce14454b1b9e60a7995a74903b8ef9c23bc85f4a9be7129ec9e5d6cfcf"
       ]
     },
     {
       "path": "dists/noble-testing/dshanpi-r1/binary-all/Packages.xz",
-      "size": 916,
-      "sha256": "1b76bfba0496ba0e26da1166920a035012956e753729187950f55df6b5fc7e91",
+      "size": 1108,
+      "sha256": "02dbefc643ca00c11a994d38f1b81d4a093e2fe33f1b408ae0c9b3980d3c60c6",
       "parts": [
-        "1b76bfba0496ba0e26da1166920a035012956e753729187950f55df6b5fc7e91"
+        "02dbefc643ca00c11a994d38f1b81d4a093e2fe33f1b408ae0c9b3980d3c60c6"
       ]
     },
     {
@@ -786,11 +834,27 @@
       ]
     },
     {
+      "path": "pool/avaota-a1/a/avaota-a1-release-core/avaota-a1-release-core_2026.10.09-1_all.deb",
+      "size": 760,
+      "sha256": "daf44d8c7b46fbf7611515ddea1d85745c40855611a5f2b1a5ef7f2dd852716a",
+      "parts": [
+        "daf44d8c7b46fbf7611515ddea1d85745c40855611a5f2b1a5ef7f2dd852716a"
+      ]
+    },
+    {
       "path": "pool/avaota-a1/a/avaota-a1-release-desktop/avaota-a1-release-desktop_2026.10.08-1_all.deb",
       "size": 770,
       "sha256": "1d592fe409e95e41f743064f40dfa59f810866de1d23799b819b79fdae6a5462",
       "parts": [
         "1d592fe409e95e41f743064f40dfa59f810866de1d23799b819b79fdae6a5462"
+      ]
+    },
+    {
+      "path": "pool/avaota-a1/a/avaota-a1-release-desktop/avaota-a1-release-desktop_2026.10.09-1_all.deb",
+      "size": 772,
+      "sha256": "2b9312a6405974a7765113d95297b8c2fea0e19e464656e94edb92d5a3f9b5bc",
+      "parts": [
+        "2b9312a6405974a7765113d95297b8c2fea0e19e464656e94edb92d5a3f9b5bc"
       ]
     },
     {
@@ -1284,6 +1348,14 @@
       ]
     },
     {
+      "path": "pool/dshanpi-a1-cm5/d/dshanpi-a1-cm5-release-core/dshanpi-a1-cm5-release-core_2026.10.09-1_all.deb",
+      "size": 870,
+      "sha256": "a3325ba619a5529a9060d5adb5fe6d3a62a9899389e3a923da18d17ab7dd2db2",
+      "parts": [
+        "a3325ba619a5529a9060d5adb5fe6d3a62a9899389e3a923da18d17ab7dd2db2"
+      ]
+    },
+    {
       "path": "pool/dshanpi-a1-cm5/d/dshanpi-a1-cm5-release-desktop/dshanpi-a1-cm5-release-desktop_2026.10.08-1_all.deb",
       "size": 886,
       "sha256": "0ec66fff3bd193c6f57130704963ce9755a007abb81ba8764e461875810e35c4",
@@ -1305,6 +1377,14 @@
       "sha256": "76718140e182399eecbde3f62b462568279c5f5a0846c4b5f107518c7828292d",
       "parts": [
         "76718140e182399eecbde3f62b462568279c5f5a0846c4b5f107518c7828292d"
+      ]
+    },
+    {
+      "path": "pool/dshanpi-a1-cm5/d/dshanpi-a1-cm5-release-desktop/dshanpi-a1-cm5-release-desktop_2026.10.09-1_all.deb",
+      "size": 880,
+      "sha256": "0a0a21e1d397494b5071d2077685212aa36457df192a72488213dd94657f71ec",
+      "parts": [
+        "0a0a21e1d397494b5071d2077685212aa36457df192a72488213dd94657f71ec"
       ]
     },
     {
@@ -1466,11 +1546,27 @@
       ]
     },
     {
+      "path": "pool/dshanpi-r1/d/dshanpi-r1-release-core/dshanpi-r1-release-core_2026.10.09-1_all.deb",
+      "size": 738,
+      "sha256": "bb0784ca9d0c913cb9042251cef1f52b234578af9cdf1aac7acb7edca2b1f48d",
+      "parts": [
+        "bb0784ca9d0c913cb9042251cef1f52b234578af9cdf1aac7acb7edca2b1f48d"
+      ]
+    },
+    {
       "path": "pool/dshanpi-r1/d/dshanpi-r1-release-desktop/dshanpi-r1-release-desktop_2026.10.08-1_all.deb",
       "size": 744,
       "sha256": "a1c9e6869dcb8a6dc5425c0601e9a921ebe51bc819ad50f01cbc373102083817",
       "parts": [
         "a1c9e6869dcb8a6dc5425c0601e9a921ebe51bc819ad50f01cbc373102083817"
+      ]
+    },
+    {
+      "path": "pool/dshanpi-r1/d/dshanpi-r1-release-desktop/dshanpi-r1-release-desktop_2026.10.09-1_all.deb",
+      "size": 746,
+      "sha256": "9839cbff51afeb18eba49049bb1f3e6a57fafe3601d7f469f56285dabe3df75c",
+      "parts": [
+        "9839cbff51afeb18eba49049bb1f3e6a57fafe3601d7f469f56285dabe3df75c"
       ]
     },
     {

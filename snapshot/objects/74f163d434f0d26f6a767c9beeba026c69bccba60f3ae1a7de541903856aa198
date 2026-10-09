@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "channel": "testing",
+  "suite": "noble-testing",
+  "product": "avaota-a1",
+  "component": "avaota-a1",
+  "version": "2026.10.09-1",
+  "expected_base_state_sha256": "d19e07ffcc1678451fbfd52e10105b8603b590b13d1ee388cdff4ee42146cf2b",
+  "products": [
+    "dshanpi-a1-cm5",
+    "dshanpi-r1",
+    "avaota-a1"
+  ]
+}
