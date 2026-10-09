@@ -125,6 +125,14 @@ def add_release(args: argparse.Namespace) -> None:
     for key in required:
         if len(found.get(key, [])) != 1:
             fail(f"expected exactly one required package {key[0]}/{key[1]}")
+    # Optional hardware is published as an explicit complete set. It must not
+    # become a dependency of every board's base OS merely to enter APT.
+    for name, packages in config.get("optional_package_sets", {}).items():
+        members = {(item["name"], item["arch"]) for item in packages}
+        if members & set(found):
+            if any(len(found.get(key, [])) != 1 for key in members):
+                fail(f"incomplete or duplicate optional package set: {name}")
+            required |= members
     unexpected = sorted(set(found) - required)
     if unexpected:
         fail("unexpected package in release directory: " + ", ".join(f"{name}/{arch}" for name, arch in unexpected))

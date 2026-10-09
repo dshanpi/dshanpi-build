@@ -1,0 +1,89 @@
+name: Build and publish A1 AXCL packages
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Committed A1 AXCL maintenance release (YYYY.MM.DD-N)
+        required: true
+        default: '2026.10.09-2'
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+concurrency:
+  group: apt-repository-publication
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check delivery policy and release plan
+        env:
+          RELEASE_VERSION: ${{ inputs.version }}
+        run: |
+          python3 tools/check-delivery-policy.py
+          [[ "$RELEASE_VERSION" =~ ^[0-9]{4}\.[0-9]{2}\.[0-9]{2}-[1-9][0-9]*$ ]]
+          test -f "products/dshanpi-a1/releases/$RELEASE_VERSION.lock.json"
+      - name: Install package tools
+        run: sudo apt-get update && sudo apt-get install -y jq patchelf dpkg-dev gnupg xz-utils
+      - name: Test publication tooling
+        run: python3 -m unittest discover -s tests -p 'test_*.py'
+      - name: Configure signing and repository authentication
+        env:
+          APT_GPG_PRIVATE_KEY: ${{ secrets.APT_GPG_PRIVATE_KEY }}
+          APT_GPG_KEY_FINGERPRINT: ${{ secrets.APT_GPG_KEY_FINGERPRINT }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          printf '%s' "$APT_GPG_PRIVATE_KEY" | gpg --batch --import
+          test "$(gpg --batch --with-colons --list-secret-keys "$APT_GPG_KEY_FINGERPRINT" | awk -F: '$1 == "fpr" {print $10; exit}')" = "$(cat keys/dshanpi-archive.fingerprint)"
+          git config --global http.https://github.com/.extraheader "AUTHORIZATION: basic $(printf 'x-access-token:%s' "$GH_TOKEN" | base64 -w0)"
+      - name: Fetch verified repository
+        run: scripts/fetch-pages.sh output/previous keys/dshanpi-archive.asc
+      - name: Build pinned optional packages and exact release markers
+        env:
+          RELEASE_VERSION: ${{ inputs.version }}
+        run: python3 scripts/build-axcl-release.py "$RELEASE_VERSION" output/previous
+      - name: Sign and verify testing candidate
+        env:
+          RELEASE_VERSION: ${{ inputs.version }}
+          APT_GPG_KEY_FINGERPRINT: ${{ secrets.APT_GPG_KEY_FINGERPRINT }}
+        run: |
+          cp -a output/previous output/repository
+          scripts/build-apt-repository.sh testing dshanpi-a1 "$RELEASE_VERSION" "output/dshanpi-a1/$RELEASE_VERSION/packages" output/repository "$APT_GPG_KEY_FINGERPRINT"
+          python3 scripts/verify-repository.py output/repository keys/dshanpi-archive.asc output/previous
+      - name: Retain package evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: a1-axcl-${{ inputs.version }}
+          path: |
+            output/dshanpi-a1/${{ inputs.version }}/packages/SHA256SUMS
+            output/dshanpi-a1/${{ inputs.version }}/packages/axcl-build.json
+            products/dshanpi-a1/releases/${{ inputs.version }}.lock.json
+          if-no-files-found: error
+      - name: Publish immutable APT state and prepare Pages
+        run: |
+          scripts/publish-pages.sh output/repository keys/dshanpi-archive.asc
+          cp keys/dshanpi-archive.asc output/repository/archive-key.asc
+          gpg --batch --yes --dearmor --output output/repository/dshanpi-archive-keyring.gpg keys/dshanpi-archive.asc
+          python3 scripts/pages/catalog.py output/repository
+          cp scripts/pages/index.html output/repository/
+          touch output/repository/.nojekyll
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: output/repository
+  deploy:
+    needs: build
+    runs-on: ubuntu-24.04
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/deploy-pages@v4
+        id: deployment
+      - uses: actions/checkout@v4
+      - name: Verify public signed manifest and package downloads
+        env:
+          RELEASE_VERSION: ${{ inputs.version }}
+        run: python3 scripts/verify-axcl-public.py "$RELEASE_VERSION"
