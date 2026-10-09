@@ -1,0 +1,64 @@
+ac11cc1b8d8ec224cf19f0bc30b6c7ed007d96c88af796fe62f1e99d3ae0f2ac  /var/cache/apt/archives/dshanpi-axcl-runtime_3.16.0+dshanpi1_arm64.deb
+23f1038cafa5d1ee6798403eef84436befbe91a5235a52b74eb1ecae03410bb3  /var/cache/apt/archives/dshanpi-axcl-dkms_3.16.0+dshanpi1_arm64.deb
+e97d16762c61d7c51d6dbe77639c64fbb6a59d68d7263f7cdc4c0a2c5a504cc1  /var/cache/apt/archives/dshanpi-a1-axcl_3.16.0+dshanpi1_arm64.deb
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following packages will be REMOVED:
+  dshanpi-a1-axcl dshanpi-axcl-dkms dshanpi-axcl-runtime
+The following packages will be DOWNGRADED:
+  dshanpi-a1-release-core
+0 upgraded, 0 newly installed, 1 downgraded, 3 to remove and 3 not upgraded.
+Need to get 0 B/824 B of archives.
+After this operation, 103 MB disk space will be freed.
+Removing dshanpi-a1-axcl (3.16.0+dshanpi1) ...
+Removing dshanpi-axcl-dkms (3.16.0+dshanpi1) ...
+Module axcl-3.16.0+dshanpi1 for kernel 6.1.115-vendor-rk35xx (aarch64).
+Before uninstall, this module version was ACTIVE on this kernel.
+
+ax_pcie_host_dev.ko:
+ - Uninstallation
+   - Deleting from: /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+ - Original module
+   - No original module was found for this module on this kernel.
+   - Use the dkms install command to reinstall any previous module version.
+
+ax_pcie_msg.ko:
+ - Uninstallation
+   - Deleting from: /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+ - Original module
+   - No original module was found for this module on this kernel.
+   - Use the dkms install command to reinstall any previous module version.
+
+ax_pcie_mmb.ko:
+ - Uninstallation
+   - Deleting from: /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+ - Original module
+   - No original module was found for this module on this kernel.
+   - Use the dkms install command to reinstall any previous module version.
+
+axcl_host.ko:
+ - Uninstallation
+   - Deleting from: /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+ - Original module
+   - No original module was found for this module on this kernel.
+   - Use the dkms install command to reinstall any previous module version.
+
+ax_pcie_p2p_rc.ko:
+ - Uninstallation
+   - Deleting from: /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+ - Original module
+   - No original module was found for this module on this kernel.
+   - Use the dkms install command to reinstall any previous module version.
+depmod...
+Deleting module axcl-3.16.0+dshanpi1 completely from the DKMS tree.
+Removing dshanpi-axcl-runtime (3.16.0+dshanpi1) ...
+dpkg: warning: downgrading dshanpi-a1-release-core from 2026.10.09-2 to 2026.10.09-1
+Preparing to unpack .../dshanpi-a1-release-core_2026.10.09-1_all.deb ...
+Unpacking dshanpi-a1-release-core (2026.10.09-1) over (2026.10.09-2) ...
+Setting up dshanpi-a1-release-core (2026.10.09-1) ...
+Processing triggers for libc-bin (2.39-0ubuntu8.9) ...
+dshanpi-a1-release-core	2026.10.09-1
+dspi-config	1.0.2-3
+linux-image-vendor-rk35xx	25.11.0-trunk.20261008.4
+PASS_PUBLIC_PACKAGE_ROLLBACK

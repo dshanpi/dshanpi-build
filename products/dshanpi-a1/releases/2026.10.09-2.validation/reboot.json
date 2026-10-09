@@ -1,0 +1,6 @@
+{
+  "before": "18bc6b23-006a-402c-8358-bded37e43fda",
+  "after": "161da857-1dcf-463c-85e0-98f56fd40d8d",
+  "ssh_recovery_seconds": 63,
+  "normal_reboot": true
+}
