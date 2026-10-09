@@ -1,61 +1,73 @@
 {
-  "product": "dshanpi-a1",
+  "product": "dshanpi-a1-cm5",
   "channel": "testing",
   "version": "2026.10.09-1",
-  "revision": "25.11.0-trunk.20261008.4",
-  "note": "APT-only maintenance cohort: dspi-config 1.0.2-3 moves source locks to /run/dspi-config and handles legacy locks. All 16 other package identities and bytes reused from 2026.10.08-4; kernel, DTB, BSP and bootloader unchanged. Existing GitHub images retain their published checksums.",
+  "revision": "25.11.0-trunk.20261008.2",
+  "note": "Shared source-lock fix in dspi-config 1.0.2-3. Other package identities and bytes are reused unchanged from 2026.10.08-3. Hardware validation pending.",
   "sources": {
     "armbianos": "6fdd5fdf96c25dfe53c5dcdf443eda6173133ace",
     "dspi_config": "8ee1e0132cde8f0d62188f0496019b37890baab7"
   },
   "packages": [
     {
-      "package": "armbian-bsp-cli-dshanpi-a1-vendor",
-      "version": "25.11.0-trunk.20261008.4",
-      "architecture": "arm64",
-      "sha256": "3d3b67210adef668a2ec14543dc34fbc0d50f30f79c176e9daaecd619f330c4e"
+      "package": "aic8800-firmware",
+      "version": "5.0+git20260123.5f7be68d-8",
+      "architecture": "all",
+      "sha256": "5f58bc002f4e43c683e36a40cbd1fb9fb26633bfe998ffee5b1fbd42a0400eb7"
     },
     {
-      "package": "armbian-bsp-desktop-dshanpi-a1-vendor",
-      "version": "25.11.0-trunk.20261008.4",
+      "package": "aic8800-sdio-dkms",
+      "version": "5.0+git20260123.5f7be68d-8",
+      "architecture": "all",
+      "sha256": "ffe5ffd3ece88ec15b61afebeeda19f35b1024e4975fb14f59734bdbc0df72e9"
+    },
+    {
+      "package": "armbian-bsp-cli-dshanpi-a1-cm5-vendor",
+      "version": "25.11.0-trunk.20261008.2",
       "architecture": "arm64",
-      "sha256": "9213f45fadd0c1ee6dcd8d3140e885d1c8800c38442bbc7602002af776fa0899"
+      "sha256": "cb2c5eabf263b2fb483cac6f21734c22a8b5a0188d73168468ca232919e57133"
+    },
+    {
+      "package": "armbian-bsp-desktop-dshanpi-a1-cm5-vendor",
+      "version": "25.11.0-trunk.20261008.2",
+      "architecture": "arm64",
+      "sha256": "61843e86dcf161a05e66eed869a5be1fab40d4d3aa17346336118765cb836454"
     },
     {
       "package": "base-files",
-      "version": "25.11.0-trunk.20261008.4-13ubuntu10-noble",
+      "version": "25.11.0-trunk.20261008.2-13ubuntu10-noble",
       "architecture": "arm64",
-      "sha256": "114c0373deb3623b6777ccd214cc4b07becc8f03e679041c37a51846f69c4ae7"
+      "sha256": "516c7af51694c412a02318d28e7ab821ebbe85f2e3c7d822a7b6d581d3e25355"
     },
     {
       "package": "camera-engine-rkaiq",
-      "version": "6.6.3+dshanpi2",
+      "version": "6.6.3+dshanpi1",
       "architecture": "arm64",
-      "sha256": "2735ad9eb32073544991b5c4a541cd90fa1b57d0180be4b2887ea567c6612e2e"
+      "sha256": "7c27705fe52070c7400b001dea9bb30c1f211c9253949883bf53a1368888aee8"
     },
     {
-      "package": "dshanpi-a1-release-core",
+      "package": "dshanpi-a1-cm5-release-core",
       "version": "2026.10.09-1",
       "architecture": "all",
-      "sha256": "8ee64bdcb8a790c225f339c8463d97fefa34d9cae10575dd2dab94ff17ef31c4"
+      "sha256": "a3325ba619a5529a9060d5adb5fe6d3a62a9899389e3a923da18d17ab7dd2db2"
     },
     {
-      "package": "dshanpi-a1-release-desktop",
+      "package": "dshanpi-a1-cm5-release-desktop",
       "version": "2026.10.09-1",
       "architecture": "all",
-      "sha256": "84609de0d8dc7ebf142871e4feff145dd18a59b92116421a41679479a080ea6b"
+      "sha256": "0a0a21e1d397494b5071d2077685212aa36457df192a72488213dd94657f71ec"
     },
     {
-      "package": "dshanpi-a1-repository",
-      "version": "1:2026.10.08-4",
+      "package": "dshanpi-a1-cm5-repository",
+      "version": "1:2026.10.08-3",
       "architecture": "all",
-      "sha256": "5e6f01e65f26e04b8de33f56568c84dc8ee3d34bda09e3a3bc180c54d7976c45"
+      "sha256": "a68daf595438e7fd24cea8848dbc0ecaaff15538fbbc9011f0891c3c78d0a1bc"
     },
     {
       "package": "dshanpi-archive-keyring",
-      "version": "1:2026.10.08-4",
+      "version": "1:2026.10.08-3",
       "architecture": "all",
-      "sha256": "4dfe74b2a003dc061acdb697a9f1b81ee061e9021850fa6b28e6e8800420125f"
+      "sha256": "75e59bf61acf74d3f24bb9dec7b8937b13941111443348140510f9aff472ee76"
     },
     {
       "package": "dspi-config",
@@ -100,22 +112,22 @@
       "sha256": "43cf9767be03acb243f5cc19115008687dbb85235e995d54f3c7718be0c1c0c5"
     },
     {
-      "package": "linux-dtb-vendor-rk35xx",
-      "version": "25.11.0-trunk.20261008.4",
+      "package": "linux-dtb-vendor-rk3576-dshanpi-a1-cm5",
+      "version": "25.11.0-trunk.20261008.2",
       "architecture": "arm64",
-      "sha256": "daa451ad0fb6f1926a17d77982a34add1ae6e5959f9104d532327394cdd5eec9"
+      "sha256": "45945fc526bbab05002fc09cef0aa15d67e1c689c70c5a50b6ae6cf77ade5331"
     },
     {
-      "package": "linux-headers-vendor-rk35xx",
-      "version": "25.11.0-trunk.20261008.4",
+      "package": "linux-headers-vendor-rk3576-dshanpi-a1-cm5",
+      "version": "25.11.0-trunk.20261008.2",
       "architecture": "arm64",
-      "sha256": "b36cb9dda0c51b503827dd4f825eb357549162299a4659edc232a2a85167a585"
+      "sha256": "b9484a1f5070bc1dafd454f6ce931bfafb98e26346a878c5694bc6e0ee6d0f8d"
     },
     {
-      "package": "linux-image-vendor-rk35xx",
-      "version": "25.11.0-trunk.20261008.4",
+      "package": "linux-image-vendor-rk3576-dshanpi-a1-cm5",
+      "version": "25.11.0-trunk.20261008.2",
       "architecture": "arm64",
-      "sha256": "ba5876c183c680049655935b05610adca77a5ac2761e55a1354f0d219bfcf21e"
+      "sha256": "2fe7171f0a076b09f8b892fcf59ef42bc119928aee45dbf5a53da52966151ac2"
     },
     {
       "package": "rockchip-mpp-demos",
@@ -124,7 +136,6 @@
       "sha256": "26476ac7830e0a26357f9d4bbc7229963a2344ea824917cdc919c18e13bcd7e6"
     }
   ],
-  "apt_state_commit": "be50b160f203d6745fb7011e1adf8a39cf516e8e",
   "validation": {
     "package_audit": "passed",
     "signed_repository": "passed",
@@ -132,7 +143,7 @@
     "source_profile_tests": "stable/testing and Ubuntu mirror changes passed for all four board profiles on amd64 and arm64",
     "client_ci": "https://github.com/dshanpi/dspi-config/actions/runs/37905688082",
     "hardware": "A1 client/meta public APT upgrade -> rollback -> upgrade passed; other physical boards not tested",
-    "a1_installed_versions": "system 2026.10.09-1; dspi-config 1.0.2-3; no failed systemd services; apt-get check and exact cohort dependencies passed",
     "reproducible_client": "merged source builds byte-identical dspi-config_1.0.2-3_all.deb"
-  }
+  },
+  "apt_state_commit": "be50b160f203d6745fb7011e1adf8a39cf516e8e"
 }
