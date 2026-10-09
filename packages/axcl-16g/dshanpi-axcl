@@ -1,0 +1,41 @@
+#!/bin/bash
+set -euo pipefail
+case "${1:-check}" in check|start|test) action=${1:-check} ;; *) echo 'Usage: dshanpi-axcl [check|start|test]' >&2; exit 2 ;; esac
+board=$(sed -n 's/^BOARD=//p' /etc/armbian-release | tr -d '"')
+[[ "$board" == dshanpi-a1 ]] || { echo "Unsupported board: $board" >&2; exit 2; }
+kernel=$(uname -r)
+[[ "$kernel" == 6.1.115-vendor-rk35xx ]] || { echo "Unsupported kernel: $kernel" >&2; exit 2; }
+live_btf=$(zcat /proc/config.gz | grep '^CONFIG_DEBUG_INFO_BTF_MODULES=' || true)
+built_btf=$(grep '^CONFIG_DEBUG_INFO_BTF_MODULES=' "/lib/modules/$kernel/build/.config" || true)
+[[ "$live_btf" == "$built_btf" ]] || { echo 'ABI mismatch: headers changed CONFIG_DEBUG_INFO_BTF_MODULES; reinstall exact headers with pahole then rebuild DKMS.' >&2; exit 2; }
+expected_layout=$(objdump -h "$(modinfo -n pwm_fan)" | awk '$2 == ".gnu.linkonce.this_module" {print $3}')
+[[ -n "$expected_layout" ]] || { echo 'Cannot verify original kernel module layout' >&2; exit 2; }
+for module in ax_pcie_host_dev ax_pcie_msg ax_pcie_mmb axcl_host ax_pcie_p2p_rc; do
+    layout=$(objdump -h "$(modinfo -n "$module")" | awk '$2 == ".gnu.linkonce.this_module" {print $3}')
+    [[ "$layout" == "$expected_layout" ]] || { echo "Module layout mismatch: $module" >&2; exit 2; }
+    vermagic=$(modinfo -F vermagic "$module")
+    [[ "${vermagic%% *}" == "$kernel" ]] || { echo "ABI mismatch: $module" >&2; exit 2; }
+done
+echo "PASS: A1 identity and driver ABI ($kernel)"
+if ! lspci -Dn | grep -qi '1f4b:0650'; then
+    echo 'NOT READY: no AX650 PCIe device (1f4b:0650). Power off before connecting the card.' >&2
+    exit 3
+fi
+pac=/lib/firmware/axcl/ax650_card.pac
+manifest=/usr/share/dshanpi-axcl/firmware.sha256
+[[ -f "$pac" && -f "$manifest" ]] || {
+    echo 'NOT READY: install the reviewed firmware DEB for the exact card capacity; a bundled generic PAC is not selected automatically.' >&2
+    exit 4
+}
+sha256sum --strict --check "$manifest"
+if [[ "$action" == check ]]; then
+    echo 'PASS: PCIe device and managed firmware; run sudo dshanpi-axcl test for hardware acceptance.'
+    exit 0
+fi
+[[ $EUID == 0 ]] || { echo 'Use sudo for start/test.' >&2; exit 2; }
+for module in ax_pcie_host_dev ax_pcie_msg ax_pcie_mmb axcl_host ax_pcie_p2p_rc; do modprobe "$module"; done
+/usr/bin/axcl/axcl-smi
+if [[ "$action" == test ]]; then
+    cd /usr/bin/axcl
+    timeout 180 ./ut/axcl_ut_npu
+fi

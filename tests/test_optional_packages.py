@@ -25,6 +25,7 @@ class OptionalPackagesTests(unittest.TestCase):
             if enabled:
                 config['optional_package_sets'] = {'axcl': [dict(name=p, arch='arm64') for p in ('runtime', 'driver', 'axcl')]}
                 config['optional_package_sets']['aic8800d80'] = [dict(name=p, arch='arm64') for p in ('aic-dkms', 'aic-firmware', 'aic-meta')]
+                config['optional_package_sets']['axcl-16g'] = [dict(name=p, arch='arm64') for p in ('runtime-16g', 'driver-16g', 'firmware-16g', 'axcl-16g')]
             config_path.write_text(json.dumps(config))
             packages = root / 'packages'
             packages.mkdir()
@@ -64,3 +65,10 @@ class OptionalPackagesTests(unittest.TestCase):
     def test_unlisted_package_is_rejected(self):
         with self.assertRaisesRegex(SystemExit, 'unexpected'):
             self.exercise(['unreviewed'])
+
+    def test_16gb_requires_paired_firmware_and_runtime(self):
+        with self.assertRaisesRegex(SystemExit, 'incomplete.*axcl-16g'):
+            self.exercise(['runtime-16g', 'driver-16g', 'axcl-16g'])
+
+    def test_both_capacity_variants_remain_available(self):
+        self.assertEqual(len(self.exercise(['runtime', 'driver', 'axcl', 'runtime-16g', 'driver-16g', 'firmware-16g', 'axcl-16g'])), 10)
