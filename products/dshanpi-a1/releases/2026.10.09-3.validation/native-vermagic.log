@@ -1,0 +1,8 @@
+aic_load_fw
+6.1.115-vendor-rk35xx SMP mod_unload modversions aarch64
+
+aic8800_fdrv
+6.1.115-vendor-rk35xx SMP mod_unload modversions aarch64
+aic_load_fw
+aic_btusb
+6.1.115-vendor-rk35xx SMP mod_unload modversions aarch64

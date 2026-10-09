@@ -1,0 +1,73 @@
+{
+  "product": "dshanpi-a1",
+  "release": "2026.10.09-3",
+  "version": "6.4.3.0+dshanpi1",
+  "source_commit": "f70d737002955a24cc58c07ab34dc519015f1353",
+  "workflow": "https://github.com/dshanpi/dshanpi-build/actions/runs/37918974238",
+  "archive_sha256": "336a5538039336d5291f8f43389de978411d1e0917fa2774bb03b6a95939c3b7",
+  "checks": {
+    "native_module_build": "passed: three modules",
+    "vermagic": "6.1.115-vendor-rk35xx SMP mod_unload modversions aarch64",
+    "apt_simulation": "passed",
+    "python_tests": 27,
+    "shell_tests": "passed",
+    "reproducibility": "all three DEBs identical under umask 0077",
+    "public_workflow": "passed",
+    "public_manifest_signature": "verified",
+    "new_public_deb_hashes": "3/3 match local builds",
+    "historical_package_hashes": "20/20 unchanged",
+    "public_apt_installation": "passed",
+    "dkms_installation": "all three modules installed",
+    "installed_files": "dpkg -V clean",
+    "abi": "all three modules match running kernel"
+  },
+  "functional_tests": "reserved for user; not performed",
+  "module_loading": "not requested or performed by this task",
+  "stable_promoted": false,
+  "pending": [
+    "user Wi-Fi/Bluetooth functional tests"
+  ],
+  "package_delivery": "complete",
+  "recorded_at": "2026-10-09T10:46:11.503919+00:00",
+  "scope": "Optional package maintenance delivery; functional testing explicitly reserved for user",
+  "ci": "https://github.com/dshanpi/dshanpi-build/actions/runs/37918778709",
+  "publication": {
+    "channel": "testing",
+    "manifest": "2026.10.09-3.packages.json",
+    "signature": "2026.10.09-3.packages.json.asc",
+    "signing_fingerprint": "476BF598CA47F12146EF18620F6EDF1B5C41F3EC"
+  },
+  "source_location": "packages/aic8800d80/vendor/aic8800d80.tar.gz in dshanpi/dshanpi-build; upstream.lock.json pins SHA-256",
+  "observed_hardware": {
+    "aic_usb_device_enumerated": false,
+    "wifi_connection_test": "not performed",
+    "bluetooth_pairing_test": "not performed",
+    "reboot_test": "not performed"
+  },
+  "evidence": [
+    {
+      "path": "2026.10.09-3.validation/install.log",
+      "sha256": "a3bdb1c76bfa2921bbecf58e6f4c01b4b12d43336d035a2783e2dfcbff20962b"
+    },
+    {
+      "path": "2026.10.09-3.validation/installed.log",
+      "sha256": "1edde57ba19245d82a28860ee9057428a122f18919ebe8e3b839640ac4be4aca"
+    },
+    {
+      "path": "2026.10.09-3.validation/native-vermagic.log",
+      "sha256": "b25f4e81e12cad279a17f8850b9407a3f2a1d4df092670f067765b1429c08a20"
+    },
+    {
+      "path": "2026.10.09-3.validation/public-comparison.json",
+      "sha256": "106a18e9397bdbffc09bbf36230b7006e289e020f576f6bd2b9c7afc444a97eb"
+    },
+    {
+      "path": "2026.10.09-3.validation/reproducibility.json",
+      "sha256": "ccd6e21f828ec4a1144724b730cbb30421238b2d2e48c2dc500467689c0a3884"
+    },
+    {
+      "path": "2026.10.09-3.validation/verify-install.sh",
+      "sha256": "477b539201abde8bcfea2b11d2737d31785733dcc4eca876730a15cc4153609f"
+    }
+  ]
+}

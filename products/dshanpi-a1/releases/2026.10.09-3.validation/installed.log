@@ -1,0 +1,16 @@
+BOARD=dshanpi-a1
+dshanpi-aic8800d80/6.4.3.0+dshanpi1, 6.1.115-vendor-rk35xx, aarch64: installed
+PASS aic_load_fw: 6.1.115-vendor-rk35xx SMP mod_unload modversions aarch64; /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/aic_load_fw.ko
+PASS aic8800_fdrv: 6.1.115-vendor-rk35xx SMP mod_unload modversions aarch64; /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/aic8800_fdrv.ko
+PASS aic_btusb: 6.1.115-vendor-rk35xx SMP mod_unload modversions aarch64; /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/aic_btusb.ko
+bluez	5.72-0ubuntu5.7
+dshanpi-a1-axcl	3.16.0+dshanpi1
+dshanpi-a1-release-core	2026.10.09-3
+dspi-config	1.0.2-3
+linux-headers-vendor-rk35xx	25.11.0-trunk.20261008.4
+linux-image-vendor-rk35xx	25.11.0-trunk.20261008.4
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 001 Device 002: ID 1a86:80a0 QinHeng Electronics USB2.0 HUB
+Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 002 Device 002: ID 1a86:80a1 QinHeng Electronics USB3.0 HUB
+Software installation verified; Wi-Fi/Bluetooth functional testing is reserved for the user.
