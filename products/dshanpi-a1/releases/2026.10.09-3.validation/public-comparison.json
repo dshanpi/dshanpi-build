@@ -1,0 +1,29 @@
+{
+  "new_debs_match_local_build": [
+    {
+      "architecture": "arm64",
+      "component": "dshanpi-a1",
+      "filename": "pool/dshanpi-a1/d/dshanpi-a1-aic8800d80/dshanpi-a1-aic8800d80_6.4.3.0+dshanpi1_arm64.deb",
+      "package": "dshanpi-a1-aic8800d80",
+      "sha256": "b3a1ab764e3f82de5e4ce35bb730e3c9396b864ce3a8ea163372717ad2829f3f",
+      "version": "6.4.3.0+dshanpi1"
+    },
+    {
+      "architecture": "arm64",
+      "component": "dshanpi-a1",
+      "filename": "pool/dshanpi-a1/d/dshanpi-aic8800d80-dkms/dshanpi-aic8800d80-dkms_6.4.3.0+dshanpi1_arm64.deb",
+      "package": "dshanpi-aic8800d80-dkms",
+      "sha256": "669cfa6d4effe88ca823daa5c7759f8df63098293bb690147ee1bfc48f0bd881",
+      "version": "6.4.3.0+dshanpi1"
+    },
+    {
+      "architecture": "arm64",
+      "component": "dshanpi-a1",
+      "filename": "pool/dshanpi-a1/d/dshanpi-aic8800d80-firmware/dshanpi-aic8800d80-firmware_6.4.3.0+dshanpi1_arm64.deb",
+      "package": "dshanpi-aic8800d80-firmware",
+      "sha256": "baaed23bc12beb4687edf8f0f170bf27e2e8132d168b0b6bfc35053419525b68",
+      "version": "6.4.3.0+dshanpi1"
+    }
+  ],
+  "historical_non_meta_packages_unchanged": 20
+}

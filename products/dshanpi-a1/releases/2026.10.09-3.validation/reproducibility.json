@@ -1,0 +1,17 @@
+[
+  {
+    "filename": "dshanpi-a1-aic8800d80_6.4.3.0+dshanpi1_arm64.deb",
+    "sha256": "b3a1ab764e3f82de5e4ce35bb730e3c9396b864ce3a8ea163372717ad2829f3f",
+    "umask_0077_identical": true
+  },
+  {
+    "filename": "dshanpi-aic8800d80-dkms_6.4.3.0+dshanpi1_arm64.deb",
+    "sha256": "669cfa6d4effe88ca823daa5c7759f8df63098293bb690147ee1bfc48f0bd881",
+    "umask_0077_identical": true
+  },
+  {
+    "filename": "dshanpi-aic8800d80-firmware_6.4.3.0+dshanpi1_arm64.deb",
+    "sha256": "baaed23bc12beb4687edf8f0f170bf27e2e8132d168b0b6bfc35053419525b68",
+    "umask_0077_identical": true
+  }
+]
