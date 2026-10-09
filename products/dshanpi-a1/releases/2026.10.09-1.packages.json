@@ -1,0 +1,135 @@
+{
+  "product": "dshanpi-a1",
+  "channel": "testing",
+  "version": "2026.10.09-1",
+  "revision": "25.11.0-trunk.20261008.4",
+  "note": "APT-only maintenance cohort: dspi-config 1.0.2-3 moves source locks to /run/dspi-config and handles legacy locks. All 16 other package identities and bytes reused from 2026.10.08-4; kernel, DTB, BSP and bootloader unchanged. Existing GitHub images retain their published checksums.",
+  "sources": {
+    "armbianos": "6fdd5fdf96c25dfe53c5dcdf443eda6173133ace",
+    "dspi_config": "b0848b6facc074735482621cf8a90d2e5094b4e4"
+  },
+  "packages": [
+    {
+      "package": "armbian-bsp-cli-dshanpi-a1-vendor",
+      "version": "25.11.0-trunk.20261008.4",
+      "architecture": "arm64",
+      "sha256": "3d3b67210adef668a2ec14543dc34fbc0d50f30f79c176e9daaecd619f330c4e"
+    },
+    {
+      "package": "armbian-bsp-desktop-dshanpi-a1-vendor",
+      "version": "25.11.0-trunk.20261008.4",
+      "architecture": "arm64",
+      "sha256": "9213f45fadd0c1ee6dcd8d3140e885d1c8800c38442bbc7602002af776fa0899"
+    },
+    {
+      "package": "base-files",
+      "version": "25.11.0-trunk.20261008.4-13ubuntu10-noble",
+      "architecture": "arm64",
+      "sha256": "114c0373deb3623b6777ccd214cc4b07becc8f03e679041c37a51846f69c4ae7"
+    },
+    {
+      "package": "camera-engine-rkaiq",
+      "version": "6.6.3+dshanpi2",
+      "architecture": "arm64",
+      "sha256": "2735ad9eb32073544991b5c4a541cd90fa1b57d0180be4b2887ea567c6612e2e"
+    },
+    {
+      "package": "dshanpi-a1-release-core",
+      "version": "2026.10.09-1",
+      "architecture": "all",
+      "sha256": "8ee64bdcb8a790c225f339c8463d97fefa34d9cae10575dd2dab94ff17ef31c4"
+    },
+    {
+      "package": "dshanpi-a1-release-desktop",
+      "version": "2026.10.09-1",
+      "architecture": "all",
+      "sha256": "84609de0d8dc7ebf142871e4feff145dd18a59b92116421a41679479a080ea6b"
+    },
+    {
+      "package": "dshanpi-a1-repository",
+      "version": "1:2026.10.08-4",
+      "architecture": "all",
+      "sha256": "5e6f01e65f26e04b8de33f56568c84dc8ee3d34bda09e3a3bc180c54d7976c45"
+    },
+    {
+      "package": "dshanpi-archive-keyring",
+      "version": "1:2026.10.08-4",
+      "architecture": "all",
+      "sha256": "4dfe74b2a003dc061acdb697a9f1b81ee061e9021850fa6b28e6e8800420125f"
+    },
+    {
+      "package": "dspi-config",
+      "version": "1.0.2-3",
+      "architecture": "all",
+      "sha256": "2ba5add81e925b66bd666b65a620f131fd41464d5c71cdba0541787e824a1d22"
+    },
+    {
+      "package": "gstreamer1.0-rockchip1",
+      "version": "1.14-4",
+      "architecture": "arm64",
+      "sha256": "975854ff09d5143353a6931612202b500e27f02223ba0bd43fe54cb5a644730f"
+    },
+    {
+      "package": "librga-dev",
+      "version": "2.2.0-1",
+      "architecture": "arm64",
+      "sha256": "f3f32028a15b7af3f9f55dbadf3d362904c7e15159544288852c96f9b5029dfd"
+    },
+    {
+      "package": "librga2",
+      "version": "2.2.0-1",
+      "architecture": "arm64",
+      "sha256": "a4d0476061cfb7e84687eefd93a4974186e00d764bdf06f4ea8ef3d47f4427a8"
+    },
+    {
+      "package": "librockchip-mpp-dev",
+      "version": "1.5.0-1",
+      "architecture": "arm64",
+      "sha256": "125930e8db00e4cd5a52579f5dcfdc3d56eda565635ba65e8c96944ca547990d"
+    },
+    {
+      "package": "librockchip-mpp1",
+      "version": "1.5.0-1",
+      "architecture": "arm64",
+      "sha256": "82f7b6a452453d6bdbc527d936e664ea61b396a64fa157d2dec2df827c9f70cc"
+    },
+    {
+      "package": "librockchip-vpu0",
+      "version": "1.5.0-1",
+      "architecture": "arm64",
+      "sha256": "43cf9767be03acb243f5cc19115008687dbb85235e995d54f3c7718be0c1c0c5"
+    },
+    {
+      "package": "linux-dtb-vendor-rk35xx",
+      "version": "25.11.0-trunk.20261008.4",
+      "architecture": "arm64",
+      "sha256": "daa451ad0fb6f1926a17d77982a34add1ae6e5959f9104d532327394cdd5eec9"
+    },
+    {
+      "package": "linux-headers-vendor-rk35xx",
+      "version": "25.11.0-trunk.20261008.4",
+      "architecture": "arm64",
+      "sha256": "b36cb9dda0c51b503827dd4f825eb357549162299a4659edc232a2a85167a585"
+    },
+    {
+      "package": "linux-image-vendor-rk35xx",
+      "version": "25.11.0-trunk.20261008.4",
+      "architecture": "arm64",
+      "sha256": "ba5876c183c680049655935b05610adca77a5ac2761e55a1354f0d219bfcf21e"
+    },
+    {
+      "package": "rockchip-mpp-demos",
+      "version": "1.5.0-1",
+      "architecture": "arm64",
+      "sha256": "26476ac7830e0a26357f9d4bbc7229963a2344ea824917cdc919c18e13bcd7e6"
+    }
+  ],
+  "apt_state_commit": "34e7cfda651b2f51f07f19b2d3fb1284bc5dd48d",
+  "validation": {
+    "package_audit": "19 packages passed",
+    "signed_repository": "passed",
+    "exact_dependency_matrix": "16 active release/variant combinations passed",
+    "client_ci": "https://github.com/dshanpi/dspi-config/actions/runs/37904744656",
+    "a1_client_regressions": "full shell/package and real APT source-lock regression suite passed on 192.168.1.54"
+  }
+}
