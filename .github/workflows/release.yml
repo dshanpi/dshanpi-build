@@ -40,6 +40,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # DELIVERY_POLICY.md: artifact retention is not public image delivery.
+      - name: Check delivery policy
+        run: |
+          python3 tools/check-delivery-policy.py
+          echo 'Delivery policy: complete image delivery also requires automatic ArmBianOS GitHub Release publication and public verification. This workflow currently retains image artifacts and publishes APT; the Release integration remains to be implemented.' >> "$GITHUB_STEP_SUMMARY"
+
       - name: Validate release request
         env:
           PRODUCT: ${{ inputs.product }}

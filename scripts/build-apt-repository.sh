@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/lib.sh"
+python3 "$repo_root/tools/check-delivery-policy.py" >/dev/null
 
 [[ $# -eq 6 ]] || die "usage: $0 testing PRODUCT VERSION PACKAGE_DIR REPOSITORY_DIR GPG_FINGERPRINT"
 [[ "$1" == testing ]] || die "new packages may only be published to testing"

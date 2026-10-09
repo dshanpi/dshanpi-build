@@ -1,3 +1,5 @@
+> DShanPI 开发、构建与发布必须遵守 [三仓统一交付门禁](DELIVERY_POLICY.md)，工作入口见 [AGENTS.md](AGENTS.md)。
+
 # dshanpi-build
 
 `dshanpi-build` 是 DShanPI 产品构建与发行编排仓库。它调用各源码仓库的构建系统，
@@ -94,6 +96,14 @@ testing 设置 `NotAutomatic`，不会被普通升级命令误装；stable 保�
 `<product>-release-desktop`。
 
 ## 发布门禁
+
+所有产品同时受 [三仓统一交付门禁](DELIVERY_POLICY.md) 约束。完整系统发行必须自动发布
+到 `dshanpi/ArmBianOS` GitHub Releases，并关联相同 DEB 的 APT 发布与公开下载验证。
+后续维护发行可只构建 DEB 和精确元包。每次构建/发布入口与 CI 均先执行政策一致性检查。
+
+当前自动化缺口：`release.yml` 会保留镜像 artifact 并发布 APT，但尚未实现自动 GitHub
+镜像 Release 上传及发布后验证。这是 G06/G11 的待实现项；本次门禁接入不代表该环节已完成。
+后续实现必须把它接入同一版本计划，不能把手工上传作为常规完成步骤。
 
 ### GitHub Pages 发布
 
