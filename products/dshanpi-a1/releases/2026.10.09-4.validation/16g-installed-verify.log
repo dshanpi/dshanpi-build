@@ -1,0 +1,19 @@
+Reading package lists...
+Building dependency tree...
+Reading state information...
+CHECK build/install/bin/six_app
+CHECK build/install/lib/libax_video_sdk.so
+CHECK build/install/lib/plugins/libax_plugin_pcd.so
+CHECK build/install/lib/plugins/libax_plugin_yolo26.so
+CHECK build/install/lib/plugins/libax_plugin_yolov8_split.so
+PASS: native demo shared libraries resolved against 16GB runtime
+run/config-check-16g.json
+4096
+00:00.0 PCI bridge [0604]: Rockchip Electronics Co., Ltd Device [1d87:3576] (rev 01)
+	Kernel driver in use: pcieport
+01:00.0 Multimedia video controller [0400]: Axera Semiconductor Co., Ltd Device [1f4b:0650] (rev 01)
+	Subsystem: Axera Semiconductor Co., Ltd Device [1f4b:0650]
+	Kernel driver in use: ax_pcie_dev_host
+	Kernel modules: ax_pcie_host_dev
+inactive
+inactive

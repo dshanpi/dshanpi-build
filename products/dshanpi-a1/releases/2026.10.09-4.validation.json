@@ -1,0 +1,112 @@
+{
+  "product": "dshanpi-a1",
+  "release": "2026.10.09-4",
+  "version": "3.16.0+dshanpi2",
+  "source_commit": "b92177176d87a532dec689368aebdbb3f662dc8c",
+  "workflow": "https://github.com/dshanpi/dshanpi-build/actions/runs/37926144410",
+  "ci": "https://github.com/dshanpi/dshanpi-build/actions/runs/37926053424",
+  "recorded_at": "2026-10-09T12:02:31.312279+00:00",
+  "publication": {
+    "channel": "testing",
+    "manifest": "2026.10.09-4.packages.json",
+    "signature": "2026.10.09-4.packages.json.asc",
+    "signing_fingerprint": "476BF598CA47F12146EF18620F6EDF1B5C41F3EC"
+  },
+  "capacity_gb": 16,
+  "capacity_evidence": "confirmed by user",
+  "checks": {
+    "python_tests": 32,
+    "shell_tests": "passed",
+    "package_audit": "4/4 passed",
+    "local_cloud_public_hashes": "identical for all 4 packages",
+    "historical_packages": "23/23 unchanged",
+    "public_manifest_signature": "verified",
+    "public_apt_installation": "passed; board fetched public package ranges into verified APT cache to work around slow single-connection download; APT performed package transaction",
+    "dkms": "5 AXCL modules compiled and installed; AIC cohort retained",
+    "abi_guard": "passed: BTF flags, original kernel module structure size and all AXCL module vermagic",
+    "firmware_sha256": "d0ba0d7690e8a1dd59e8971e9b3311ea48657666d28e6dfe774b7df3254e7ddc",
+    "installed_files": "dpkg -V clean",
+    "apt_dependency_check": "passed",
+    "demo_ldd": "native application and all plugins resolve against 16GB runtime",
+    "config_preparation": "passed",
+    "pcie_binding": "1f4b:0650 bound to ax_pcie_dev_host",
+    "current_boot_kernel_oops": "none; taint 4096 (out-of-tree only)",
+    "rollback_dependency_simulation": "passed; not executed; historical 8GB runtime is not a hardware rollback target for this 16GB card"
+  },
+  "demo": {
+    "commit": "2aa772bbf16b8a904ee6ca57877c0e602208bf49",
+    "native_build": "passed",
+    "assets": "11/11 size and SHA256 verified",
+    "services": "inactive",
+    "inference": "not run",
+    "rtsp_http": "not run",
+    "recording_restart": "not run"
+  },
+  "packages": [
+    {
+      "package": "dshanpi-axcl-firmware-16g",
+      "version": "3.16.0+dshanpi2",
+      "architecture": "arm64",
+      "filename": "dshanpi-axcl-firmware-16g_3.16.0+dshanpi2_arm64.deb",
+      "sha256": "bba3afd357658396204c54e039301655ac8a901fc998242ea15aa3725922e200"
+    },
+    {
+      "package": "dshanpi-axcl-runtime-16g",
+      "version": "3.16.0+dshanpi2",
+      "architecture": "arm64",
+      "filename": "dshanpi-axcl-runtime-16g_3.16.0+dshanpi2_arm64.deb",
+      "sha256": "a83c2b571d0e8159da835a3dfed6e82a5b447a7a5b364c2738bba312918d26f9"
+    },
+    {
+      "package": "dshanpi-axcl-dkms-16g",
+      "version": "3.16.0+dshanpi2",
+      "architecture": "arm64",
+      "filename": "dshanpi-axcl-dkms-16g_3.16.0+dshanpi2_arm64.deb",
+      "sha256": "d3a05586a57a69b7c10462e9c53d4a952ba4328d6dd1d023aa92be665162c18a"
+    },
+    {
+      "package": "dshanpi-a1-axcl-16g",
+      "version": "3.16.0+dshanpi2",
+      "architecture": "arm64",
+      "filename": "dshanpi-a1-axcl-16g_3.16.0+dshanpi2_arm64.deb",
+      "sha256": "c87818ef301d7caee7b6196d227cada3cb43db4ae0a49f214d4684eaa505e234"
+    }
+  ],
+  "stable_promoted": false,
+  "new_image": false,
+  "pending": [
+    "Physical confirmation that AX8850 cooling fan is continuously running before load tests",
+    "NPU test and complete six-stream decode/inference/RTSP/HTTP/record/restart validation",
+    "Corrected versioned kernel/headers publication: source fix is merged in ArmBianOS PR #4; this release retains historical headers bytes"
+  ],
+  "evidence": [
+    {
+      "path": "2026.10.09-4.validation/16g-public-apt-simulation.log",
+      "sha256": "465efe456bc2c514b7afcf80e5519d372c3a0e46e80f65defc6c374a2dae1caa"
+    },
+    {
+      "path": "2026.10.09-4.validation/16g-public-parallel-download.log",
+      "sha256": "d6280f201fbe4b787da07aeca5149f680366cc4a51968f1315ad22ac397d8c4c"
+    },
+    {
+      "path": "2026.10.09-4.validation/16g-public-install-cached.log",
+      "sha256": "9f5d208e44946d3f84ea356cf491bf0013893c7b48fb213de2563dcd92c923f6"
+    },
+    {
+      "path": "2026.10.09-4.validation/16g-installed-verify.log",
+      "sha256": "b70f73db435e58713a757ec0ffeadb8f84abe25f5240ac97d312a5705b6176a1"
+    },
+    {
+      "path": "2026.10.09-4.validation/16g-rollback-simulation.log",
+      "sha256": "7b6fa3d5d19aff991856dd19bd277d2b2a24d028aa0f7e35b7b25ce103000833"
+    },
+    {
+      "path": "2026.10.09-4.validation/16g-retained-packages.json",
+      "sha256": "9f065bab1a97d591a5180af1983f967e9985e51294138485551ddd8eb79b95dd"
+    },
+    {
+      "path": "2026.10.09-4.validation/driver-source-capacity-comparison.json",
+      "sha256": "d53d44f2f380dd232d33570d4daf49e9a97bffe09c1edf423d1c55fe0d116901"
+    }
+  ]
+}

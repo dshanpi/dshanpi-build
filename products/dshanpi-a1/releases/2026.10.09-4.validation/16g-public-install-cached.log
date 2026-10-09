@@ -1,0 +1,133 @@
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  dshanpi-axcl-dkms-16g dshanpi-axcl-firmware-16g dshanpi-axcl-runtime-16g
+The following packages will be REMOVED:
+  dshanpi-a1-axcl dshanpi-axcl-dkms dshanpi-axcl-runtime
+The following NEW packages will be installed:
+  dshanpi-a1-axcl-16g dshanpi-axcl-dkms-16g dshanpi-axcl-firmware-16g
+  dshanpi-axcl-runtime-16g
+The following packages will be upgraded:
+  dshanpi-a1-release-core
+1 upgraded, 4 newly installed, 3 to remove and 2 not upgraded.
+Need to get 59.0 kB/50.0 MB of archives.
+After this operation, 156 MB of additional disk space will be used.
+Get:1 https://apt.100ask.net noble-testing/dshanpi-a1 arm64 dshanpi-axcl-dkms-16g arm64 3.16.0+dshanpi2 [55.0 kB]
+Get:2 https://apt.100ask.net noble-testing/dshanpi-a1 arm64 dshanpi-a1-axcl-16g arm64 3.16.0+dshanpi2 [3,108 B]
+Get:3 https://apt.100ask.net noble-testing/dshanpi-a1 all dshanpi-a1-release-core all 2026.10.09-4 [824 B]
+Fetched 59.0 kB in 5s (11.7 kB/s)
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 78319 files and directories currently installed.)
+Removing dshanpi-a1-axcl (3.16.0+dshanpi1) ...
+Removing dshanpi-axcl-dkms (3.16.0+dshanpi1) ...
+Module axcl-3.16.0+dshanpi1 for kernel 6.1.115-vendor-rk35xx (aarch64).
+Before uninstall, this module version was ACTIVE on this kernel.
+
+ax_pcie_host_dev.ko:
+ - Uninstallation
+   - Deleting from: /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+ - Original module
+   - No original module was found for this module on this kernel.
+   - Use the dkms install command to reinstall any previous module version.
+
+ax_pcie_msg.ko:
+ - Uninstallation
+   - Deleting from: /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+ - Original module
+   - No original module was found for this module on this kernel.
+   - Use the dkms install command to reinstall any previous module version.
+
+ax_pcie_mmb.ko:
+ - Uninstallation
+   - Deleting from: /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+ - Original module
+   - No original module was found for this module on this kernel.
+   - Use the dkms install command to reinstall any previous module version.
+
+axcl_host.ko:
+ - Uninstallation
+   - Deleting from: /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+ - Original module
+   - No original module was found for this module on this kernel.
+   - Use the dkms install command to reinstall any previous module version.
+
+ax_pcie_p2p_rc.ko:
+ - Uninstallation
+   - Deleting from: /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+ - Original module
+   - No original module was found for this module on this kernel.
+   - Use the dkms install command to reinstall any previous module version.
+depmod...
+Deleting module axcl-3.16.0+dshanpi1 completely from the DKMS tree.
+Removing dshanpi-axcl-runtime (3.16.0+dshanpi1) ...
+Selecting previously unselected package dshanpi-axcl-runtime-16g.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 78035 files and directories currently installed.)
+Preparing to unpack .../dshanpi-axcl-runtime-16g_3.16.0+dshanpi2_arm64.deb ...
+Unpacking dshanpi-axcl-runtime-16g (3.16.0+dshanpi2) ...
+Selecting previously unselected package dshanpi-axcl-firmware-16g.
+Preparing to unpack .../dshanpi-axcl-firmware-16g_3.16.0+dshanpi2_arm64.deb ...
+Unpacking dshanpi-axcl-firmware-16g (3.16.0+dshanpi2) ...
+Selecting previously unselected package dshanpi-axcl-dkms-16g.
+Preparing to unpack .../dshanpi-axcl-dkms-16g_3.16.0+dshanpi2_arm64.deb ...
+Unpacking dshanpi-axcl-dkms-16g (3.16.0+dshanpi2) ...
+Selecting previously unselected package dshanpi-a1-axcl-16g.
+Preparing to unpack .../dshanpi-a1-axcl-16g_3.16.0+dshanpi2_arm64.deb ...
+Unpacking dshanpi-a1-axcl-16g (3.16.0+dshanpi2) ...
+Preparing to unpack .../dshanpi-a1-release-core_2026.10.09-4_all.deb ...
+Unpacking dshanpi-a1-release-core (2026.10.09-4) over (2026.10.09-3) ...
+Setting up dshanpi-axcl-runtime-16g (3.16.0+dshanpi2) ...
+Setting up dshanpi-axcl-firmware-16g (3.16.0+dshanpi2) ...
+Setting up dshanpi-axcl-dkms-16g (3.16.0+dshanpi2) ...
+Loading new axcl-3.16.0+dshanpi2 DKMS files...
+Building for 6.1.115-vendor-rk35xx
+Building initial module for 6.1.115-vendor-rk35xx
+Done.
+
+ax_pcie_host_dev.ko:
+Running module version sanity check.
+ - Original module
+   - No original module exists within this kernel
+ - Installation
+   - Installing to /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+
+ax_pcie_msg.ko:
+Running module version sanity check.
+ - Original module
+   - No original module exists within this kernel
+ - Installation
+   - Installing to /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+
+ax_pcie_mmb.ko:
+Running module version sanity check.
+ - Original module
+   - No original module exists within this kernel
+ - Installation
+   - Installing to /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+
+axcl_host.ko:
+Running module version sanity check.
+ - Original module
+   - No original module exists within this kernel
+ - Installation
+   - Installing to /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+
+ax_pcie_p2p_rc.ko:
+Running module version sanity check.
+ - Original module
+   - No original module exists within this kernel
+ - Installation
+   - Installing to /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+depmod...
+Setting up dshanpi-a1-axcl-16g (3.16.0+dshanpi2) ...
+Setting up dshanpi-a1-release-core (2026.10.09-4) ...
+Processing triggers for libc-bin (2.39-0ubuntu8.9) ...
+PASS: A1 identity and driver ABI (6.1.115-vendor-rk35xx)
+/lib/firmware/axcl/ax650_card.pac: OK
+PASS: PCIe device and managed firmware; run sudo dshanpi-axcl test for hardware acceptance.
+axcl/3.16.0+dshanpi2, 6.1.115-vendor-rk35xx, aarch64: installed
+dshanpi-aic8800d80/6.4.3.0+dshanpi1, 6.1.115-vendor-rk35xx, aarch64: installed
+dshanpi-a1-axcl-16g	3.16.0+dshanpi2
+dshanpi-a1-release-core	2026.10.09-4
+dshanpi-axcl-dkms-16g	3.16.0+dshanpi2
+dshanpi-axcl-firmware-16g	3.16.0+dshanpi2
+dshanpi-axcl-runtime-16g	3.16.0+dshanpi2
