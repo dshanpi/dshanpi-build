@@ -9,7 +9,9 @@ remote=${DSHANPI_PAGES_GIT_REMOTE:-origin}
 branch=feature/apt-pages-state
 temporary=$(mktemp -d)
 trap 'rm -rf -- "$temporary"' EXIT
-if [[ -z $(git -C "$repo_root" ls-remote --heads "$remote" "$branch") ]]; then
+remote_ref=$(git -C "$repo_root" ls-remote --heads "$remote" "$branch") ||
+	die "cannot read Pages state; refusing to treat a transport/authentication failure as an empty repository"
+if [[ -z "$remote_ref" ]]; then
 	mkdir -p "$destination"
 	exit 0
 fi

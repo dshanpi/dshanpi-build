@@ -18,6 +18,8 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - name: Check delivery policy and release plan
         env:
           RELEASE_VERSION: ${{ inputs.version }}

@@ -11,7 +11,9 @@ temporary=$(mktemp -d)
 trap 'rm -rf -- "$temporary"' EXIT
 git init -q "$temporary/checkout"
 git -C "$temporary/checkout" remote add origin "$(git -C "$repo_root" remote get-url "$remote")"
-if [[ -n $(git -C "$repo_root" ls-remote --heads "$remote" "$branch") ]]; then
+remote_ref=$(git -C "$repo_root" ls-remote --heads "$remote" "$branch") ||
+	die "cannot read Pages state; refusing publication after a transport/authentication failure"
+if [[ -n "$remote_ref" ]]; then
 	git -C "$temporary/checkout" fetch -q --depth=1 origin "$branch"
 	git -C "$temporary/checkout" checkout -q -b "$branch" FETCH_HEAD
 	python3 "$script_dir/pages/snapshot.py" decode "$temporary/checkout/snapshot" "$temporary/previous"

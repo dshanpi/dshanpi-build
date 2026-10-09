@@ -39,6 +39,8 @@ jobs:
     timeout-minutes: 720
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       # DELIVERY_POLICY.md: artifact retention is not public image delivery.
       - name: Check delivery policy
