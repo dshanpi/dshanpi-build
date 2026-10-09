@@ -1,0 +1,158 @@
+Package: dshanpi-a1-release-core
+Version: 2026.10.08-1
+Architecture: all
+Maintainer: DShanPI <support@dshanpi.com>
+Depends: base-files (= 25.11.0-trunk.20260929.1-13ubuntu10-noble), armbian-bsp-cli-dshanpi-a1-vendor (= 25.11.0-trunk.20261008.3), linux-image-vendor-rk35xx (= 25.11.0-trunk.20261008.3), linux-dtb-vendor-rk35xx (= 25.11.0-trunk.20261008.3), linux-headers-vendor-rk35xx (= 25.11.0-trunk.20261008.3), camera-engine-rkaiq (= 6.6.3+dshanpi1), gstreamer1.0-rockchip1 (= 1.14-4), librockchip-mpp1 (= 1.5.0-1), librockchip-mpp-dev (= 1.5.0-1), librockchip-vpu0 (= 1.5.0-1), rockchip-mpp-demos (= 1.5.0-1), librga2 (= 2.2.0-1), librga-dev (= 2.2.0-1), dshanpi-archive-keyring (= 1:2026.10.08-1), dshanpi-a1-repository (= 1:2026.10.08-1), dspi-config (= 1.0.2-1)
+Section: metapackages
+Priority: optional
+Description: DShanPI dshanpi-a1 tested core system release
+ Locks one tested DShanPI platform package cohort for controlled upgrade
+ and rollback through dspi-config.
+Filename: pool/dshanpi-a1/d/dshanpi-a1-release-core/dshanpi-a1-release-core_2026.10.08-1_all.deb
+Size: 824
+MD5sum: 5466d553c2e3746e16f157292e3d7fd3
+SHA1: 21061fa1b4803d2022088d6ca16c5a011ce94ed8
+SHA256: b230a3ca416682683ceea7ea6781070d75516ddcba642ff3ff132b77fd133202
+
+Package: dshanpi-a1-release-core
+Version: 2026.10.08-4
+Architecture: all
+Maintainer: DShanPI <support@dshanpi.com>
+Depends: base-files (= 25.11.0-trunk.20261008.4-13ubuntu10-noble), armbian-bsp-cli-dshanpi-a1-vendor (= 25.11.0-trunk.20261008.4), linux-image-vendor-rk35xx (= 25.11.0-trunk.20261008.4), linux-dtb-vendor-rk35xx (= 25.11.0-trunk.20261008.4), linux-headers-vendor-rk35xx (= 25.11.0-trunk.20261008.4), camera-engine-rkaiq (= 6.6.3+dshanpi2), gstreamer1.0-rockchip1 (= 1.14-4), librockchip-mpp1 (= 1.5.0-1), librockchip-mpp-dev (= 1.5.0-1), librockchip-vpu0 (= 1.5.0-1), rockchip-mpp-demos (= 1.5.0-1), librga2 (= 2.2.0-1), librga-dev (= 2.2.0-1), dshanpi-archive-keyring (= 1:2026.10.08-4), dshanpi-a1-repository (= 1:2026.10.08-4), dspi-config (= 1.0.2-2)
+Section: metapackages
+Priority: optional
+Description: DShanPI dshanpi-a1 tested core system release
+ Locks one tested DShanPI platform package cohort for controlled upgrade
+ and rollback through dspi-config.
+Filename: pool/dshanpi-a1/d/dshanpi-a1-release-core/dshanpi-a1-release-core_2026.10.08-4_all.deb
+Size: 822
+MD5sum: 1f23e3b63497650c9e072124ee992630
+SHA1: 6da512839a3ac61d14ade0c20967cca0f6735b75
+SHA256: a778773d569c2180e8abb48396f4ccffb8f5004671b69b2eedef48b6ce60ff86
+
+Package: dshanpi-a1-release-core
+Version: 2026.10.09-1
+Architecture: all
+Maintainer: DShanPI <support@dshanpi.com>
+Depends: base-files (= 25.11.0-trunk.20261008.4-13ubuntu10-noble), armbian-bsp-cli-dshanpi-a1-vendor (= 25.11.0-trunk.20261008.4), linux-image-vendor-rk35xx (= 25.11.0-trunk.20261008.4), linux-dtb-vendor-rk35xx (= 25.11.0-trunk.20261008.4), linux-headers-vendor-rk35xx (= 25.11.0-trunk.20261008.4), camera-engine-rkaiq (= 6.6.3+dshanpi2), gstreamer1.0-rockchip1 (= 1.14-4), librockchip-mpp1 (= 1.5.0-1), librockchip-mpp-dev (= 1.5.0-1), librockchip-vpu0 (= 1.5.0-1), rockchip-mpp-demos (= 1.5.0-1), librga2 (= 2.2.0-1), librga-dev (= 2.2.0-1), dshanpi-archive-keyring (= 1:2026.10.08-4), dshanpi-a1-repository (= 1:2026.10.08-4), dspi-config (= 1.0.2-3)
+Section: metapackages
+Priority: optional
+Description: DShanPI dshanpi-a1 tested core system release
+ Locks one tested DShanPI platform package cohort for controlled upgrade
+ and rollback through dspi-config.
+Filename: pool/dshanpi-a1/d/dshanpi-a1-release-core/dshanpi-a1-release-core_2026.10.09-1_all.deb
+Size: 824
+MD5sum: 2a9970537c983c25ecec4e44c935a18c
+SHA1: 5a62f3a50fe1b3f3abb041d64f451dc7e7b32a06
+SHA256: 8ee64bdcb8a790c225f339c8463d97fefa34d9cae10575dd2dab94ff17ef31c4
+
+Package: dshanpi-a1-release-core
+Version: 2026.10.09-2
+Architecture: all
+Maintainer: DShanPI <support@dshanpi.com>
+Depends: base-files (= 25.11.0-trunk.20261008.4-13ubuntu10-noble), armbian-bsp-cli-dshanpi-a1-vendor (= 25.11.0-trunk.20261008.4), linux-image-vendor-rk35xx (= 25.11.0-trunk.20261008.4), linux-dtb-vendor-rk35xx (= 25.11.0-trunk.20261008.4), linux-headers-vendor-rk35xx (= 25.11.0-trunk.20261008.4), camera-engine-rkaiq (= 6.6.3+dshanpi2), gstreamer1.0-rockchip1 (= 1.14-4), librockchip-mpp1 (= 1.5.0-1), librockchip-mpp-dev (= 1.5.0-1), librockchip-vpu0 (= 1.5.0-1), rockchip-mpp-demos (= 1.5.0-1), librga2 (= 2.2.0-1), librga-dev (= 2.2.0-1), dshanpi-archive-keyring (= 1:2026.10.08-4), dshanpi-a1-repository (= 1:2026.10.08-4), dspi-config (= 1.0.2-3)
+Section: metapackages
+Priority: optional
+Description: DShanPI dshanpi-a1 tested core system release
+ Locks one tested DShanPI platform package cohort for controlled upgrade
+ and rollback through dspi-config.
+Filename: pool/dshanpi-a1/d/dshanpi-a1-release-core/dshanpi-a1-release-core_2026.10.09-2_all.deb
+Size: 824
+MD5sum: 886aad00fcc530f22be09f040083f4cb
+SHA1: 9a6859d9ec0e9ccac485699f096394740d45f315
+SHA256: fd03f2febd6d806fcfa008c9e8bcdc67ef724dc77632ddb24e37ace48dc88cbd
+
+Package: dshanpi-a1-release-desktop
+Version: 2026.10.08-1
+Architecture: all
+Maintainer: DShanPI <support@dshanpi.com>
+Depends: base-files (= 25.11.0-trunk.20260929.1-13ubuntu10-noble), armbian-bsp-cli-dshanpi-a1-vendor (= 25.11.0-trunk.20261008.3), linux-image-vendor-rk35xx (= 25.11.0-trunk.20261008.3), linux-dtb-vendor-rk35xx (= 25.11.0-trunk.20261008.3), linux-headers-vendor-rk35xx (= 25.11.0-trunk.20261008.3), camera-engine-rkaiq (= 6.6.3+dshanpi1), gstreamer1.0-rockchip1 (= 1.14-4), librockchip-mpp1 (= 1.5.0-1), librockchip-mpp-dev (= 1.5.0-1), librockchip-vpu0 (= 1.5.0-1), rockchip-mpp-demos (= 1.5.0-1), librga2 (= 2.2.0-1), librga-dev (= 2.2.0-1), dshanpi-archive-keyring (= 1:2026.10.08-1), dshanpi-a1-repository (= 1:2026.10.08-1), dspi-config (= 1.0.2-1), armbian-bsp-desktop-dshanpi-a1-vendor (= 25.11.0-trunk.20261008.3)
+Section: metapackages
+Priority: optional
+Description: DShanPI dshanpi-a1 tested desktop system release
+ Locks one tested DShanPI platform package cohort for controlled upgrade
+ and rollback through dspi-config.
+Filename: pool/dshanpi-a1/d/dshanpi-a1-release-desktop/dshanpi-a1-release-desktop_2026.10.08-1_all.deb
+Size: 834
+MD5sum: 4b1bc6108c2a46642776c97fbee97f03
+SHA1: 040844292a823703309f9be05ebc2fb864c61f16
+SHA256: 82ee5cfbb3d79d823a29966ff152b4ad45cbfa26b5277a812c39f5d5553bd782
+
+Package: dshanpi-a1-release-desktop
+Version: 2026.10.08-4
+Architecture: all
+Maintainer: DShanPI <support@dshanpi.com>
+Depends: base-files (= 25.11.0-trunk.20261008.4-13ubuntu10-noble), armbian-bsp-cli-dshanpi-a1-vendor (= 25.11.0-trunk.20261008.4), linux-image-vendor-rk35xx (= 25.11.0-trunk.20261008.4), linux-dtb-vendor-rk35xx (= 25.11.0-trunk.20261008.4), linux-headers-vendor-rk35xx (= 25.11.0-trunk.20261008.4), camera-engine-rkaiq (= 6.6.3+dshanpi2), gstreamer1.0-rockchip1 (= 1.14-4), librockchip-mpp1 (= 1.5.0-1), librockchip-mpp-dev (= 1.5.0-1), librockchip-vpu0 (= 1.5.0-1), rockchip-mpp-demos (= 1.5.0-1), librga2 (= 2.2.0-1), librga-dev (= 2.2.0-1), dshanpi-archive-keyring (= 1:2026.10.08-4), dshanpi-a1-repository (= 1:2026.10.08-4), dspi-config (= 1.0.2-2), armbian-bsp-desktop-dshanpi-a1-vendor (= 25.11.0-trunk.20261008.4)
+Section: metapackages
+Priority: optional
+Description: DShanPI dshanpi-a1 tested desktop system release
+ Locks one tested DShanPI platform package cohort for controlled upgrade
+ and rollback through dspi-config.
+Filename: pool/dshanpi-a1/d/dshanpi-a1-release-desktop/dshanpi-a1-release-desktop_2026.10.08-4_all.deb
+Size: 828
+MD5sum: e57a4baa4b2fccc771504b98e2236b7b
+SHA1: 66e2fc7d61f3aef540eabc8499fab50ab12107b6
+SHA256: 3d3aa7fcf3bee7fdbdda9f61dbb1a2ee218afb093bd7ad39094d5de49125dd99
+
+Package: dshanpi-a1-release-desktop
+Version: 2026.10.09-1
+Architecture: all
+Maintainer: DShanPI <support@dshanpi.com>
+Depends: base-files (= 25.11.0-trunk.20261008.4-13ubuntu10-noble), armbian-bsp-cli-dshanpi-a1-vendor (= 25.11.0-trunk.20261008.4), linux-image-vendor-rk35xx (= 25.11.0-trunk.20261008.4), linux-dtb-vendor-rk35xx (= 25.11.0-trunk.20261008.4), linux-headers-vendor-rk35xx (= 25.11.0-trunk.20261008.4), camera-engine-rkaiq (= 6.6.3+dshanpi2), gstreamer1.0-rockchip1 (= 1.14-4), librockchip-mpp1 (= 1.5.0-1), librockchip-mpp-dev (= 1.5.0-1), librockchip-vpu0 (= 1.5.0-1), rockchip-mpp-demos (= 1.5.0-1), librga2 (= 2.2.0-1), librga-dev (= 2.2.0-1), dshanpi-archive-keyring (= 1:2026.10.08-4), dshanpi-a1-repository (= 1:2026.10.08-4), dspi-config (= 1.0.2-3), armbian-bsp-desktop-dshanpi-a1-vendor (= 25.11.0-trunk.20261008.4)
+Section: metapackages
+Priority: optional
+Description: DShanPI dshanpi-a1 tested desktop system release
+ Locks one tested DShanPI platform package cohort for controlled upgrade
+ and rollback through dspi-config.
+Filename: pool/dshanpi-a1/d/dshanpi-a1-release-desktop/dshanpi-a1-release-desktop_2026.10.09-1_all.deb
+Size: 830
+MD5sum: 479b55804060622739cb35709be30f57
+SHA1: 57c85da752ee9d45a1e8f6fa5bfea712dfb0eca8
+SHA256: 84609de0d8dc7ebf142871e4feff145dd18a59b92116421a41679479a080ea6b
+
+Package: dshanpi-a1-release-desktop
+Version: 2026.10.09-2
+Architecture: all
+Maintainer: DShanPI <support@dshanpi.com>
+Depends: base-files (= 25.11.0-trunk.20261008.4-13ubuntu10-noble), armbian-bsp-cli-dshanpi-a1-vendor (= 25.11.0-trunk.20261008.4), linux-image-vendor-rk35xx (= 25.11.0-trunk.20261008.4), linux-dtb-vendor-rk35xx (= 25.11.0-trunk.20261008.4), linux-headers-vendor-rk35xx (= 25.11.0-trunk.20261008.4), camera-engine-rkaiq (= 6.6.3+dshanpi2), gstreamer1.0-rockchip1 (= 1.14-4), librockchip-mpp1 (= 1.5.0-1), librockchip-mpp-dev (= 1.5.0-1), librockchip-vpu0 (= 1.5.0-1), rockchip-mpp-demos (= 1.5.0-1), librga2 (= 2.2.0-1), librga-dev (= 2.2.0-1), dshanpi-archive-keyring (= 1:2026.10.08-4), dshanpi-a1-repository (= 1:2026.10.08-4), dspi-config (= 1.0.2-3), armbian-bsp-desktop-dshanpi-a1-vendor (= 25.11.0-trunk.20261008.4)
+Section: metapackages
+Priority: optional
+Description: DShanPI dshanpi-a1 tested desktop system release
+ Locks one tested DShanPI platform package cohort for controlled upgrade
+ and rollback through dspi-config.
+Filename: pool/dshanpi-a1/d/dshanpi-a1-release-desktop/dshanpi-a1-release-desktop_2026.10.09-2_all.deb
+Size: 830
+MD5sum: 16a142c31a6bb7fab858bb6f88f89383
+SHA1: 4a7a7fc4826db43d3d8fd428554dee4d724a9044
+SHA256: 9bd5af0e91f121e471e943b2df4ea7d35ef69ff7c2fd02f1727daabe4ef60a57
+
+Package: dshanpi-a1-repository
+Version: 1:2026.10.08-1
+Architecture: all
+Maintainer: DShanPI <support@dshanpi.com>
+Depends: dshanpi-archive-keyring (= 1:2026.10.08-1)
+Section: misc
+Priority: optional
+Description: DShanPI dshanpi-a1 signed APT source
+ Installs the signed stable source for the DShanPI product platform stack.
+Filename: pool/dshanpi-a1/d/dshanpi-a1-repository/dshanpi-a1-repository_1:2026.10.08-1_all.deb
+Size: 822
+MD5sum: 0c46d61e9dfc38b503bbe2795481f423
+SHA1: 0d0e3c41205b96c88d666ec1c371bff41aae76c4
+SHA256: 3ca260b1d911e73b0b8d91e6461c75041160a065630fc4631909ef3e03665b55
+
+Package: dshanpi-a1-repository
+Version: 1:2026.10.08-4
+Architecture: all
+Maintainer: DShanPI <support@dshanpi.com>
+Depends: dshanpi-archive-keyring (= 1:2026.10.08-4)
+Section: misc
+Priority: optional
+Description: DShanPI dshanpi-a1 signed APT source
+ Installs the signed stable source for the DShanPI product platform stack.
+Filename: pool/dshanpi-a1/d/dshanpi-a1-repository/dshanpi-a1-repository_1:2026.10.08-4_all.deb
+Size: 822
+MD5sum: e898087a7bb44a2290f854050fdf0f5e
+SHA1: cbabed8382f2931c65dabe6a4c29bee00e74c497
+SHA256: 5e6f01e65f26e04b8de33f56568c84dc8ee3d34bda09e3a3bc180c54d7976c45
+
