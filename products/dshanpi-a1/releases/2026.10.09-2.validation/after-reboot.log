@@ -1,0 +1,17 @@
+BOARD=dshanpi-a1
+axcl/3.16.0+dshanpi1, 6.1.115-vendor-rk35xx, aarch64: installed
+PASS ax_pcie_host_dev: 6.1.115-vendor-rk35xx SMP mod_unload modversions aarch64
+PASS ax_pcie_msg: 6.1.115-vendor-rk35xx SMP mod_unload modversions aarch64
+PASS ax_pcie_mmb: 6.1.115-vendor-rk35xx SMP mod_unload modversions aarch64
+PASS axcl_host: 6.1.115-vendor-rk35xx SMP mod_unload modversions aarch64
+PASS ax_pcie_p2p_rc: 6.1.115-vendor-rk35xx SMP mod_unload modversions aarch64
+AXCL-SMI V3.16.0_20260731020156 BUILD: Jul 31 2026 02:29:32
+PASS dynamic libraries: /usr/bin/axcl/axcl-smi
+PASS dynamic libraries: /usr/bin/axcl/ut/axcl_ut_npu
+PASS_APT_SANDBOX_PRESERVED
+PASS: A1 identity and driver ABI (6.1.115-vendor-rk35xx)
+HARDWARE_PENDING_CODE=3
+dshanpi-a1-release-core	2026.10.09-2
+dspi-config	1.0.2-3
+linux-image-vendor-rk35xx	25.11.0-trunk.20261008.4
+NOT READY: no AX650 PCIe device (1f4b:0650). Power off before connecting the card.

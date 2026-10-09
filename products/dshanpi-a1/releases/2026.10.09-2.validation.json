@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-10-09T10:10:35.685160+00:00",
+  "product": "dshanpi-a1",
+  "release": "2026.10.09-2",
+  "scope": "Package maintenance release on existing A1 Armbian; no new image delivery",
+  "source_commits": {
+    "dshanpi_build": "ce934bcba500cd5a33cb84f9db8599ca01feac7a",
+    "armbianos": "f966bb2469de96ef58d183f388be19a0c9f4bc1d",
+    "dspi_config": "39ee3b0d2b4428aacaf91e11a14a2d2e697b813e"
+  },
+  "upstream": {
+    "schema_version": 1,
+    "version": "3.16.0+dshanpi1",
+    "upstream_version": "3.16.0",
+    "upstream_commit": "133bc60f1280a5f200921e28bb5777296c0f76df",
+    "url": "https://huggingface.co/AXERA-TECH/AXCL/resolve/133bc60f1280a5f200921e28bb5777296c0f76df/V3.16.0_8G/axcl_host_aarch64_V3.16.0_20260731020156_NO5288.deb",
+    "sha256": "332d6a4043d39f31446e80b73e113dafbc2e30448e50a99e41e96ddf584aa33c",
+    "product": "dshanpi-a1",
+    "kernel_release": "6.1.115-vendor-rk35xx",
+    "kernel_package_version": "25.11.0-trunk.20261008.4",
+    "source_date_epoch": 1791504000,
+    "firmware_policy": "PAC is deliberately excluded: the card-specific 8GB/16GB PAC must be independently identified, hashed and packaged before hardware acceptance."
+  },
+  "publication": {
+    "channel": "testing",
+    "stable_promoted": false,
+    "workflow": "https://github.com/dshanpi/dshanpi-build/actions/runs/37913469042",
+    "workflow_conclusion": "success",
+    "public_deployment_and_five_new_package_downloads": "passed",
+    "apt_state_commit": "a0338ac54c4905f0529616b25a297db1950fb793",
+    "manifest_url": "https://apt.100ask.net/catalog/releases/dshanpi-a1/2026.10.09-2.json",
+    "signed_manifest_file": "2026.10.09-2.packages.json",
+    "signature_file": "2026.10.09-2.packages.json.asc",
+    "signing_fingerprint": "476BF598CA47F12146EF18620F6EDF1B5C41F3EC"
+  },
+  "checks": {
+    "unit_tests": 24,
+    "shell_tests": "passed",
+    "four_board_exact_dependency_closures": 24,
+    "axcl_apt_dependency_resolution": "passed",
+    "a1_candidate_install": "passed",
+    "a1_dkms_modules_built": 5,
+    "a1_driver_vermagic": "6.1.115-vendor-rk35xx SMP mod_unload modversions aarch64",
+    "a1_smi_help": "passed",
+    "a1_npu_binary_library_resolution": "passed",
+    "a1_remove_restores_baseline": "passed",
+    "apt_sandbox": "unchanged",
+    "public_apt_publication": "passed",
+    "public_manifest_signature": "passed",
+    "public_deb_hashes": "passed in publishing workflow for all five new DEBs",
+    "reproducible_public_debs": "3/3 match with umask 0002 and 0077",
+    "a1_public_apt_install": "passed",
+    "a1_public_deb_hashes": "3/3 match signed public manifest",
+    "a1_public_package_rollback": "passed: remove all AXCL packages and modules; core 2026.10.09-2 -> 2026.10.09-1",
+    "a1_public_package_reinstall": "passed",
+    "a1_reboot": "passed: new boot ID and SSH recovery in 63 seconds",
+    "a1_post_reboot_modules_and_runtime": "passed"
+  },
+  "installed": {
+    "kernel": "6.1.115-vendor-rk35xx",
+    "kernel_package": "25.11.0-trunk.20261008.4",
+    "core": "2026.10.09-2",
+    "dspi_config": "1.0.2-3",
+    "axcl": "3.16.0+dshanpi1"
+  },
+  "reproducibility": "Normalize archive root permissions; local umask 0002 and 0077 builds both match all three published AXCL DEBs byte for byte. Published files were not replaced.",
+  "validation_boundary": {
+    "host_board": "physical original DShanPI A1",
+    "four_board_dependency_closures": "24 local APT solver simulations, not four-board hardware tests",
+    "ax650_pcie_present": false,
+    "firmware_installed": false,
+    "input_capacity_distribution": "8GB only; 16GB runtime differs and requires separate packages and validation",
+    "npu_unit_tests": "not run: no card/PAC",
+    "real_model_inference": "not run: no card/PAC",
+    "full_hardware_closure": "pending"
+  },
+  "pending": [
+    "card capacity and matching PAC identification",
+    "AX650 PCIe device 1f4b:0650 is not present",
+    "card-specific firmware DEB, initialization and reboot recovery with card",
+    "NPU unit tests and real model inference on card"
+  ],
+  "evidence": [
+    {
+      "path": "2026.10.09-2.validation/after-reboot.log",
+      "sha256": "6a8d85f671c231619cc79e47aa71e37da6cdeab0d2431efcdb2a163d2340c0a8"
+    },
+    {
+      "path": "2026.10.09-2.validation/install.log",
+      "sha256": "7d232d13afbf90ed33b693003fe491263b5b5a38f9bef41f48ebc71e5a363711"
+    },
+    {
+      "path": "2026.10.09-2.validation/reboot.json",
+      "sha256": "e4bd039aba23fbe10c725e39d0befe11cc1d04dc40dd532918f4ca81fdb06378"
+    },
+    {
+      "path": "2026.10.09-2.validation/reinstall.log",
+      "sha256": "72810d82ba5305ab0d417c939a139c21203d19077145441d4bdb5c5efb68945b"
+    },
+    {
+      "path": "2026.10.09-2.validation/reproducibility-0077.json",
+      "sha256": "531193686b6ea042f0112468a0aa7979e58bcffeae2ebf8158d85bba285f16e0"
+    },
+    {
+      "path": "2026.10.09-2.validation/reproducibility.json",
+      "sha256": "531193686b6ea042f0112468a0aa7979e58bcffeae2ebf8158d85bba285f16e0"
+    },
+    {
+      "path": "2026.10.09-2.validation/rollback.log",
+      "sha256": "93cec312f69efc96b8432c35b2a53b73e899b92dffecdd2e7c55a38028d6dc79"
+    },
+    {
+      "path": "2026.10.09-2.validation/verify-host.sh",
+      "sha256": "af93b09ff317fc928650f4be610cc5c471704c153362bfd6e8d477c83120f295"
+    }
+  ]
+}

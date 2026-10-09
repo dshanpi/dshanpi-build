@@ -136,7 +136,8 @@ Description: {description}
                 if p.is_file() and not p.is_symlink() and p.relative_to(root).parts[0] != 'DEBIAN':
                     checksums.append(hashlib.md5(p.read_bytes()).hexdigest() + '  ' + p.relative_to(root).as_posix())
             write(root, 'DEBIAN/md5sums', '\n'.join(checksums) + '\n')
-            for p in root.rglob('*'):
+            # Include the archive root: mkdir inherits the builder's umask.
+            for p in [root, *root.rglob('*')]:
                 if not p.is_symlink():
                     p.chmod(0o755 if p.is_dir() or p.stat().st_mode & 0o111 else 0o644)
             for p in [root, *root.rglob('*')]:

@@ -1,0 +1,85 @@
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  dshanpi-axcl-dkms dshanpi-axcl-runtime
+The following NEW packages will be installed:
+  dshanpi-a1-axcl dshanpi-axcl-dkms dshanpi-axcl-runtime
+The following packages will be upgraded:
+  dshanpi-a1-release-core
+1 upgraded, 3 newly installed, 0 to remove and 3 not upgraded.
+Need to get 0 B/33.8 MB of archives.
+After this operation, 103 MB of additional disk space will be used.
+Selecting previously unselected package dshanpi-axcl-runtime.
+Preparing to unpack .../dshanpi-axcl-runtime_3.16.0+dshanpi1_arm64.deb ...
+Unpacking dshanpi-axcl-runtime (3.16.0+dshanpi1) ...
+Selecting previously unselected package dshanpi-axcl-dkms.
+Preparing to unpack .../dshanpi-axcl-dkms_3.16.0+dshanpi1_arm64.deb ...
+Unpacking dshanpi-axcl-dkms (3.16.0+dshanpi1) ...
+Selecting previously unselected package dshanpi-a1-axcl.
+Preparing to unpack .../dshanpi-a1-axcl_3.16.0+dshanpi1_arm64.deb ...
+Unpacking dshanpi-a1-axcl (3.16.0+dshanpi1) ...
+Preparing to unpack .../dshanpi-a1-release-core_2026.10.09-2_all.deb ...
+Unpacking dshanpi-a1-release-core (2026.10.09-2) over (2026.10.09-1) ...
+Setting up dshanpi-axcl-dkms (3.16.0+dshanpi1) ...
+Loading new axcl-3.16.0+dshanpi1 DKMS files...
+Building for 6.1.115-vendor-rk35xx
+Building initial module for 6.1.115-vendor-rk35xx
+Done.
+
+ax_pcie_host_dev.ko:
+Running module version sanity check.
+ - Original module
+   - No original module exists within this kernel
+ - Installation
+   - Installing to /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+
+ax_pcie_msg.ko:
+Running module version sanity check.
+ - Original module
+   - No original module exists within this kernel
+ - Installation
+   - Installing to /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+
+ax_pcie_mmb.ko:
+Running module version sanity check.
+ - Original module
+   - No original module exists within this kernel
+ - Installation
+   - Installing to /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+
+axcl_host.ko:
+Running module version sanity check.
+ - Original module
+   - No original module exists within this kernel
+ - Installation
+   - Installing to /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+
+ax_pcie_p2p_rc.ko:
+Running module version sanity check.
+ - Original module
+   - No original module exists within this kernel
+ - Installation
+   - Installing to /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+depmod...
+Setting up dshanpi-axcl-runtime (3.16.0+dshanpi1) ...
+Setting up dshanpi-a1-release-core (2026.10.09-2) ...
+Setting up dshanpi-a1-axcl (3.16.0+dshanpi1) ...
+Processing triggers for libc-bin (2.39-0ubuntu8.9) ...
+BOARD=dshanpi-a1
+axcl/3.16.0+dshanpi1, 6.1.115-vendor-rk35xx, aarch64: installed
+PASS ax_pcie_host_dev: 6.1.115-vendor-rk35xx SMP mod_unload modversions aarch64
+PASS ax_pcie_msg: 6.1.115-vendor-rk35xx SMP mod_unload modversions aarch64
+PASS ax_pcie_mmb: 6.1.115-vendor-rk35xx SMP mod_unload modversions aarch64
+PASS axcl_host: 6.1.115-vendor-rk35xx SMP mod_unload modversions aarch64
+PASS ax_pcie_p2p_rc: 6.1.115-vendor-rk35xx SMP mod_unload modversions aarch64
+AXCL-SMI V3.16.0_20260731020156 BUILD: Jul 31 2026 02:29:32
+PASS dynamic libraries: /usr/bin/axcl/axcl-smi
+PASS dynamic libraries: /usr/bin/axcl/ut/axcl_ut_npu
+PASS_APT_SANDBOX_PRESERVED
+PASS: A1 identity and driver ABI (6.1.115-vendor-rk35xx)
+HARDWARE_PENDING_CODE=3
+dshanpi-a1-release-core	2026.10.09-2
+dspi-config	1.0.2-3
+linux-image-vendor-rk35xx	25.11.0-trunk.20261008.4
+NOT READY: no AX650 PCIe device (1f4b:0650). Power off before connecting the card.

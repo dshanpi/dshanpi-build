@@ -5,6 +5,10 @@
 `6.1.115-vendor-rk35xx`，内核与 headers 包精确固定为 `25.11.0-trunk.20261008.4`。
 不修改原 A1/CM5 的 DTS、Overlay 或 U-Boot。
 
+**当前 `3.16.0+dshanpi1` 固定上游 8GB 发行输入。** 对照上游 16GB 发行发现运行库
+也有差异，不能只更换 PAC 就宣称支持 16GB。16GB 必须另行固定对应运行库、固件与
+版本包并完成实卡验收；容量未知时，当前包仅可用于主机安装和 DKMS 验证。
+
 | 包 | 内容 |
 | --- | --- |
 | dshanpi-axcl-runtime | ARM64 库、头文件、SMI、示例和 NPU 单元测试 |
@@ -21,6 +25,11 @@
 版本元包，审计、签名并部署 testing。它与其他 APT 发布共享并发队列。
 这是软件包维护发行，不生成新镜像；使用已发布的 A1 `2026.10.08-4` 镜像即可更新。
 
+`2026.10.09-2` 已自动发布 testing，并在原版 A1 完成公网 APT 安装、五模块 DKMS
+编译、卸载回退、重装和重启检查。见[签名包清单](../../products/dshanpi-a1/releases/2026.10.09-2.packages.json)
+与[验收记录及日志索引](../../products/dshanpi-a1/releases/2026.10.09-2.validation.json)。
+验收时未连接 AX650，实卡固件、NPU 测试和模型推理尚未完成，未晋级 stable。
+
 本地可复现入口：
 
 ```sh
@@ -33,8 +42,9 @@ python3 scripts/build-axcl-release.py 2026.10.09-2 /path/to/verified-repository
 先明确选择 testing，并使用现有 Signed-By 源（common 加 dshanpi-a1）。
 
 ```sh
+sudo dspi-config source channel testing
 sudo apt update
-sudo apt install dshanpi-a1-axcl=3.16.0+dshanpi1
+sudo apt install -t noble-testing dshanpi-a1-release-core=2026.10.09-2 dshanpi-a1-axcl=3.16.0+dshanpi1
 dkms status -m axcl
 axcl-smi --help
 sudo dshanpi-axcl check
