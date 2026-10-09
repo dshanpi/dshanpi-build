@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "product": "avaota-a1",
+  "version": "2026.10.09-1",
+  "revision": "25.11.0-trunk.20261008.3",
+  "sources": {
+    "armbianos": {
+      "commit": "1bb69ccdcefab0956805acdd8b46846892374ac0"
+    },
+    "dspi_config": {
+      "commit": "8ee1e0132cde8f0d62188f0496019b37890baab7"
+    }
+  }
+}

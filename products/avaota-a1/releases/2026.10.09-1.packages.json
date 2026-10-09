@@ -1,0 +1,95 @@
+{
+  "product": "avaota-a1",
+  "channel": "testing",
+  "version": "2026.10.09-1",
+  "revision": "25.11.0-trunk.20261008.3",
+  "note": "Shared source-lock fix in dspi-config 1.0.2-3. Other package identities and bytes are reused unchanged from 2026.10.08-1. Hardware validation pending.",
+  "sources": {
+    "armbianos": "1bb69ccdcefab0956805acdd8b46846892374ac0",
+    "dspi_config": "8ee1e0132cde8f0d62188f0496019b37890baab7"
+  },
+  "packages": [
+    {
+      "package": "armbian-bsp-cli-avaota-a1-legacy",
+      "version": "25.11.0-trunk.20261008.3",
+      "architecture": "arm64",
+      "sha256": "f0840706c3aef8d296311a11bf8a7d69c3ecc79ef857af841bdb5498e58d4cad"
+    },
+    {
+      "package": "armbian-bsp-desktop-avaota-a1-legacy",
+      "version": "25.11.0-trunk.20261008.3",
+      "architecture": "arm64",
+      "sha256": "7f12a34f3623dd002b456baa5fcd8b180572d33fee94802bb05f071231e25dc9"
+    },
+    {
+      "package": "armbian-firmware",
+      "version": "25.11.0-trunk.20260929.1",
+      "architecture": "all",
+      "sha256": "63fdf5fdfd0f2b65ec112f2d42c21e93d9c91b66b1d522429a031f54729f6532"
+    },
+    {
+      "package": "avaota-a1-release-core",
+      "version": "2026.10.09-1",
+      "architecture": "all",
+      "sha256": "daf44d8c7b46fbf7611515ddea1d85745c40855611a5f2b1a5ef7f2dd852716a"
+    },
+    {
+      "package": "avaota-a1-release-desktop",
+      "version": "2026.10.09-1",
+      "architecture": "all",
+      "sha256": "2b9312a6405974a7765113d95297b8c2fea0e19e464656e94edb92d5a3f9b5bc"
+    },
+    {
+      "package": "avaota-a1-repository",
+      "version": "1:2026.10.08-1",
+      "architecture": "all",
+      "sha256": "239ae9c75210a5447096c1a203eb9596a2fc36981ac83b7a5091e265dcccad70"
+    },
+    {
+      "package": "base-files",
+      "version": "25.11.0-trunk.20260929.1-13ubuntu10-noble",
+      "architecture": "arm64",
+      "sha256": "828810aa47019d453e48146d447e78e5c34aabd140dd5ab6dd15e73e6e88d8e9"
+    },
+    {
+      "package": "dshanpi-archive-keyring",
+      "version": "1:2026.10.08-1",
+      "architecture": "all",
+      "sha256": "629e0a1c034daf862d937de3f349ec36533af6f0a6d059bf9fd0dd533d375133"
+    },
+    {
+      "package": "dspi-config",
+      "version": "1.0.2-3",
+      "architecture": "all",
+      "sha256": "2ba5add81e925b66bd666b65a620f131fd41464d5c71cdba0541787e824a1d22"
+    },
+    {
+      "package": "linux-dtb-legacy-sun55iw3-syterkit",
+      "version": "25.11.0-trunk.20261008.3",
+      "architecture": "arm64",
+      "sha256": "ad9556296962721c73618305e13db7d3c44839a4f375418d038fa094ceb0ab70"
+    },
+    {
+      "package": "linux-headers-legacy-sun55iw3-syterkit",
+      "version": "25.11.0-trunk.20261008.3",
+      "architecture": "arm64",
+      "sha256": "918a9a20012d49f13725ffe85e3b0c0b3a70f741387a7aea8c9a63a27c116e44"
+    },
+    {
+      "package": "linux-image-legacy-sun55iw3-syterkit",
+      "version": "25.11.0-trunk.20261008.3",
+      "architecture": "arm64",
+      "sha256": "78db670ceabff88567dc74d5c8bdc57060a135befea71566d462f8fbabd1f9c6"
+    }
+  ],
+  "validation": {
+    "package_audit": "passed",
+    "signed_repository": "passed",
+    "exact_dependency_matrix": "22 active release/variant combinations passed",
+    "source_profile_tests": "stable/testing and Ubuntu mirror changes passed for all four board profiles on amd64 and arm64",
+    "client_ci": "https://github.com/dshanpi/dspi-config/actions/runs/37905688082",
+    "hardware": "A1 client/meta public APT upgrade -> rollback -> upgrade passed; other physical boards not tested",
+    "reproducible_client": "merged source builds byte-identical dspi-config_1.0.2-3_all.deb"
+  },
+  "apt_state_commit": "be50b160f203d6745fb7011e1adf8a39cf516e8e"
+}

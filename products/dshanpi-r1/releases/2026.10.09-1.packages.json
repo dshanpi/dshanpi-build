@@ -1,0 +1,89 @@
+{
+  "product": "dshanpi-r1",
+  "channel": "testing",
+  "version": "2026.10.09-1",
+  "revision": "25.11.0-trunk.20261008.3",
+  "note": "Shared source-lock fix in dspi-config 1.0.2-3. Other package identities and bytes are reused unchanged from 2026.10.08-1. Hardware validation pending.",
+  "sources": {
+    "armbianos": "1bb69ccdcefab0956805acdd8b46846892374ac0",
+    "dspi_config": "8ee1e0132cde8f0d62188f0496019b37890baab7"
+  },
+  "packages": [
+    {
+      "package": "armbian-bsp-cli-dshanpi-r1-vendor",
+      "version": "25.11.0-trunk.20261008.3",
+      "architecture": "arm64",
+      "sha256": "d4141cdc03ce0abcf6836e7a114a0c02a2b4ccb80fd24064e0494c3cc68580a8"
+    },
+    {
+      "package": "armbian-bsp-desktop-dshanpi-r1-vendor",
+      "version": "25.11.0-trunk.20261008.3",
+      "architecture": "arm64",
+      "sha256": "7ba5c81407a105f8167516f43f3ab2004ab8f9c12eabfe5223f30fee0d4a87a6"
+    },
+    {
+      "package": "base-files",
+      "version": "25.11.0-trunk.20260929.1-13ubuntu10-noble",
+      "architecture": "arm64",
+      "sha256": "828810aa47019d453e48146d447e78e5c34aabd140dd5ab6dd15e73e6e88d8e9"
+    },
+    {
+      "package": "dshanpi-archive-keyring",
+      "version": "1:2026.10.08-1",
+      "architecture": "all",
+      "sha256": "629e0a1c034daf862d937de3f349ec36533af6f0a6d059bf9fd0dd533d375133"
+    },
+    {
+      "package": "dshanpi-r1-release-core",
+      "version": "2026.10.09-1",
+      "architecture": "all",
+      "sha256": "bb0784ca9d0c913cb9042251cef1f52b234578af9cdf1aac7acb7edca2b1f48d"
+    },
+    {
+      "package": "dshanpi-r1-release-desktop",
+      "version": "2026.10.09-1",
+      "architecture": "all",
+      "sha256": "9839cbff51afeb18eba49049bb1f3e6a57fafe3601d7f469f56285dabe3df75c"
+    },
+    {
+      "package": "dshanpi-r1-repository",
+      "version": "1:2026.10.08-1",
+      "architecture": "all",
+      "sha256": "8f1f2d3f3289cbb013b8630970f93f57661b2bd0a2f9467b9987b052727a3aa0"
+    },
+    {
+      "package": "dspi-config",
+      "version": "1.0.2-3",
+      "architecture": "all",
+      "sha256": "2ba5add81e925b66bd666b65a620f131fd41464d5c71cdba0541787e824a1d22"
+    },
+    {
+      "package": "linux-dtb-vendor-rk35xx",
+      "version": "25.11.0-trunk.20261008.3",
+      "architecture": "arm64",
+      "sha256": "586a40831514ef972e3d4429d258f288efbe620d10e89f588fce822ca3efed94"
+    },
+    {
+      "package": "linux-headers-vendor-rk35xx",
+      "version": "25.11.0-trunk.20261008.3",
+      "architecture": "arm64",
+      "sha256": "cb3f6cf03f4e3e4145bccdb05429d61b074327e9e9f7c383221bbb19cb4949e8"
+    },
+    {
+      "package": "linux-image-vendor-rk35xx",
+      "version": "25.11.0-trunk.20261008.3",
+      "architecture": "arm64",
+      "sha256": "0a5c9ff1a481b82b653610efa738b3d0b9df90f2ab61173432b7eaedf87ea0c4"
+    }
+  ],
+  "validation": {
+    "package_audit": "passed",
+    "signed_repository": "passed",
+    "exact_dependency_matrix": "22 active release/variant combinations passed",
+    "source_profile_tests": "stable/testing and Ubuntu mirror changes passed for all four board profiles on amd64 and arm64",
+    "client_ci": "https://github.com/dshanpi/dspi-config/actions/runs/37905688082",
+    "hardware": "A1 client/meta public APT upgrade -> rollback -> upgrade passed; other physical boards not tested",
+    "reproducible_client": "merged source builds byte-identical dspi-config_1.0.2-3_all.deb"
+  },
+  "apt_state_commit": "be50b160f203d6745fb7011e1adf8a39cf516e8e"
+}
