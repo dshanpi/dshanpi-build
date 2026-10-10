@@ -1,0 +1,104 @@
+{
+  "recorded_at_utc": "2026-10-10T03:38:13.828588+00:00",
+  "mode": "native Ubuntu 24.04 x86_64; no Docker required",
+  "source_commits": {
+    "ArmBianOS": {
+      "url": "https://github.com/dshanpi/ArmBianOS.git",
+      "commit": "47b72f4adfce6a43035a831b0b47c6504633f367"
+    },
+    "dshanpi-build": {
+      "url": "https://github.com/dshanpi/dshanpi-build.git",
+      "commit": "ff7abc69f5b7d68ddfe06bbb43eaa1636b59d9bc"
+    },
+    "dspi-config": {
+      "url": "https://github.com/dshanpi/dspi-config.git",
+      "commit": "69f441a1e7d01feaaf9c936cc5db6ac793805668"
+    }
+  },
+  "tests": {
+    "python": 41,
+    "shell": "passed",
+    "client_four_profiles_and_source_locks": "passed",
+    "armbian_source_and_btf": "passed on public checkout",
+    "workspace_download": "passed from GitHub via checkout-workspace.py; main history and pinned commits only",
+    "hygiene": "passed",
+    "cross_repository_policy": "passed"
+  },
+  "packages": [
+    {
+      "filename": "dspi-config_1.0.2-3_all.deb",
+      "sha256": "2ba5add81e925b66bd666b65a620f131fd41464d5c71cdba0541787e824a1d22",
+      "bytes": 7976,
+      "matches_published_manifest": true
+    },
+    {
+      "filename": "dshanpi-a1-aic8800d80_6.4.3.0+dshanpi1_arm64.deb",
+      "sha256": "b3a1ab764e3f82de5e4ce35bb730e3c9396b864ce3a8ea163372717ad2829f3f",
+      "bytes": 3192,
+      "matches_published_manifest": true
+    },
+    {
+      "filename": "dshanpi-aic8800d80-dkms_6.4.3.0+dshanpi1_arm64.deb",
+      "sha256": "669cfa6d4effe88ca823daa5c7759f8df63098293bb690147ee1bfc48f0bd881",
+      "bytes": 384444,
+      "matches_published_manifest": true
+    },
+    {
+      "filename": "dshanpi-aic8800d80-firmware_6.4.3.0+dshanpi1_arm64.deb",
+      "sha256": "baaed23bc12beb4687edf8f0f170bf27e2e8132d168b0b6bfc35053419525b68",
+      "bytes": 574500,
+      "matches_published_manifest": true
+    },
+    {
+      "filename": "dshanpi-a1-axcl-16g_3.16.0+dshanpi2_arm64.deb",
+      "sha256": "c87818ef301d7caee7b6196d227cada3cb43db4ae0a49f214d4684eaa505e234",
+      "bytes": 3108,
+      "matches_published_manifest": true
+    },
+    {
+      "filename": "dshanpi-axcl-dkms-16g_3.16.0+dshanpi2_arm64.deb",
+      "sha256": "d3a05586a57a69b7c10462e9c53d4a952ba4328d6dd1d023aa92be665162c18a",
+      "bytes": 55048,
+      "matches_published_manifest": true
+    },
+    {
+      "filename": "dshanpi-axcl-firmware-16g_3.16.0+dshanpi2_arm64.deb",
+      "sha256": "bba3afd357658396204c54e039301655ac8a901fc998242ea15aa3725922e200",
+      "bytes": 16190556,
+      "matches_published_manifest": true
+    },
+    {
+      "filename": "dshanpi-axcl-runtime-16g_3.16.0+dshanpi2_arm64.deb",
+      "sha256": "a83c2b571d0e8159da835a3dfed6e82a5b447a7a5b364c2738bba312918d26f9",
+      "bytes": 33747620,
+      "matches_published_manifest": true
+    }
+  ],
+  "client_reproduction": {
+    "umask": "0002",
+    "default_0022_hash_from_auxiliary_clean_environment": "ab9a0797ddac42323862ba8d58ec2120c7f4e55bbc9761672e0a9900b11fdd1a",
+    "payload_unchanged": true,
+    "note": "Historical directory modes depend on umask; never overwrite the published version. Earlier temporary container used only for diagnosis, stopped and removed; final acceptance uses native host."
+  },
+  "axcl_input": {
+    "sha256": "b3033bddc7c67904b87220354ea195261e60baa2688cd374d19df265b7fe9ac8",
+    "method": "--upstream verified original vendor input; native output built into an empty directory, no prior built package reused"
+  },
+  "publication": {
+    "packages_published": false,
+    "image_built": false,
+    "hardware_tested_this_task": false
+  },
+  "logs": [
+    {
+      "path": "native-build.log",
+      "sha256": "231367d459a40b8585d19089673605cc556c1d759fc04506b5d7c4a7ff7652ab"
+    }
+  ],
+  "remaining": [
+    "New version of corrected headers DEB not yet published",
+    "Automatic complete image GitHub Release integration pending",
+    "Bluetooth pairing and six-stream sustained stability pending",
+    "Full image rebuild and hardware acceptance to be performed on the new server/board"
+  ]
+}

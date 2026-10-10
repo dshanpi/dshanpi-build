@@ -1,0 +1,70 @@
+PRETTY_NAME="Ubuntu 24.04 LTS"
+NAME="Ubuntu"
+VERSION_ID="24.04"
+VERSION="24.04 LTS (Noble Numbat)"
+VERSION_CODENAME=noble
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+UBUNTU_CODENAME=noble
+LOGO=ubuntu-logo
+x86_64
+{
+  "mode": "packages",
+  "checks": {
+    "ubuntu_24_04": true,
+    "x86_64": true,
+    "tool:git": true,
+    "tool:curl": true,
+    "tool:python3": true,
+    "tool:jq": true,
+    "tool:dpkg-deb": true,
+    "tool:gpg": true,
+    "tool:patchelf": true,
+    "tool:xz": true,
+    "tool:make": true,
+    "tool:gcc": true,
+    "free_disk": true
+  },
+  "free_gib": 92.5,
+  "minimum_free_gib": 5,
+  "note": "Image disk threshold is a starting minimum, not a peak-usage guarantee. Run sudo -v before image checks."
+}
+Delivery policy wiring passed: dshanpi-build (dshanpi-delivery-v1); not a release/hardware verdict
+Repository hygiene passed: Git index; not a complete credential or ownership audit
+.........................................
+----------------------------------------------------------------------
+Ran 41 tests in 4.062s
+
+OK
+gpg: checking the trustdb
+gpg: marginals needed: 3  completes needed: 1  trust model: pgp
+gpg: depth: 0  valid:   1  signed:   0  trust: 0-, 0q, 0n, 0m, 0f, 1u
+dshanpi-build tests passed
+Delivery policy wiring passed: dspi-config (dshanpi-delivery-v1); not a release/hardware verdict
+Source lock, concurrent writer and real APT scanner tests passed
+dspi-config tests passed
+2ba5add81e925b66bd666b65a620f131fd41464d5c71cdba0541787e824a1d22  /tmp/dshanpi-handoff-native/dshanpi-build/output/handoff-native/client/dspi-config_1.0.2-3_all.deb
+Delivery policy wiring passed: dshanpi-build (dshanpi-delivery-v1); not a release/hardware verdict
+dpkg-deb: building package 'dshanpi-aic8800d80-dkms' in '/tmp/aic8800d80-build-q46_s92g/dshanpi-aic8800d80-dkms_6.4.3.0+dshanpi1_arm64.deb'.
+dpkg-deb: building package 'dshanpi-aic8800d80-firmware' in '/tmp/aic8800d80-build-q46_s92g/dshanpi-aic8800d80-firmware_6.4.3.0+dshanpi1_arm64.deb'.
+dpkg-deb: building package 'dshanpi-a1-aic8800d80' in '/tmp/aic8800d80-build-q46_s92g/dshanpi-a1-aic8800d80_6.4.3.0+dshanpi1_arm64.deb'.
+audited 3 packages
+Delivery policy wiring passed: dshanpi-build (dshanpi-delivery-v1); not a release/hardware verdict
+dpkg-deb: building package 'dshanpi-axcl-firmware-16g' in '/tmp/axcl-build-rs5oca4c/dshanpi-axcl-firmware-16g_3.16.0+dshanpi2_arm64.deb'.
+dpkg-deb: building package 'dshanpi-axcl-runtime-16g' in '/tmp/axcl-build-rs5oca4c/dshanpi-axcl-runtime-16g_3.16.0+dshanpi2_arm64.deb'.
+dpkg-deb: building package 'dshanpi-axcl-dkms-16g' in '/tmp/axcl-build-rs5oca4c/dshanpi-axcl-dkms-16g_3.16.0+dshanpi2_arm64.deb'.
+dpkg-deb: building package 'dshanpi-a1-axcl-16g' in '/tmp/axcl-build-rs5oca4c/dshanpi-a1-axcl-16g_3.16.0+dshanpi2_arm64.deb'.
+audited 4 packages
+2ba5add81e925b66bd666b65a620f131fd41464d5c71cdba0541787e824a1d22  output/handoff-native/client/dspi-config_1.0.2-3_all.deb
+b3a1ab764e3f82de5e4ce35bb730e3c9396b864ce3a8ea163372717ad2829f3f  output/handoff-native/aic8800d80/dshanpi-a1-aic8800d80_6.4.3.0+dshanpi1_arm64.deb
+669cfa6d4effe88ca823daa5c7759f8df63098293bb690147ee1bfc48f0bd881  output/handoff-native/aic8800d80/dshanpi-aic8800d80-dkms_6.4.3.0+dshanpi1_arm64.deb
+baaed23bc12beb4687edf8f0f170bf27e2e8132d168b0b6bfc35053419525b68  output/handoff-native/aic8800d80/dshanpi-aic8800d80-firmware_6.4.3.0+dshanpi1_arm64.deb
+c87818ef301d7caee7b6196d227cada3cb43db4ae0a49f214d4684eaa505e234  output/handoff-native/axcl-16g/dshanpi-a1-axcl-16g_3.16.0+dshanpi2_arm64.deb
+d3a05586a57a69b7c10462e9c53d4a952ba4328d6dd1d023aa92be665162c18a  output/handoff-native/axcl-16g/dshanpi-axcl-dkms-16g_3.16.0+dshanpi2_arm64.deb
+bba3afd357658396204c54e039301655ac8a901fc998242ea15aa3725922e200  output/handoff-native/axcl-16g/dshanpi-axcl-firmware-16g_3.16.0+dshanpi2_arm64.deb
+a83c2b571d0e8159da835a3dfed6e82a5b447a7a5b364c2738bba312918d26f9  output/handoff-native/axcl-16g/dshanpi-axcl-runtime-16g_3.16.0+dshanpi2_arm64.deb
+NATIVE_UBUNTU_VERIFICATION_PASSED

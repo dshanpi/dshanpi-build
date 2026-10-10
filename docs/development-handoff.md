@@ -38,3 +38,11 @@
 小型验证日志保留发行目录；大录像、镜像和 DEB 走发行资产或签名 APT。
 临时 SSH 密码、签名私钥、个人 shell 历史和原始 Codex 会话不作为开发记录上传。
 根目录 AGENTS 与仓库 skills 为接续入口，不要求从旧服务器复制 ~/.codex。
+
+## 本次原生服务器交接验证
+
+[验证清单与包哈希](validation/2026-10-10-handoff/verification.json) 和同目录 native-build.log
+记录原生 Ubuntu 24.04 x86_64、干净 checkout 的软件测试与重建。客户端 1 包、AIC 3 包、
+AXCL 16GB 4 包全部与已发布清单哈希一致。客户端需固定历史 umask 0002。
+固定版本下载器已实际从 GitHub 下载三仓并通过基线门禁；正式步骤不依赖 Docker。
+本次只推送源码与开发记录，没有重新发布包、镜像或执行板端操作。

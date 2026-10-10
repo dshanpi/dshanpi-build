@@ -2,6 +2,7 @@
 
 适用 Ubuntu 24.04 x86_64，普通 sudo 用户，能访问 GitHub、Ubuntu 源、Hugging Face 与
 apt.100ask.net。执行 [DELIVERY_POLICY.md](../DELIVERY_POLICY.md) 和仓库内 skills。
+本手册采用原生 Ubuntu 构建，不需要安装 Docker；镜像编排入口明确设置 `PREFER_DOCKER=no`。
 本手册不依赖旧机路径、代理、缓存或全局 Codex 配置。
 
 ## 1 获取固定版本的三仓
