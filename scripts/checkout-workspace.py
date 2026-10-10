@@ -29,8 +29,10 @@ def checkout(destination, manifest, build_commit):
     destination.mkdir(parents=True, exist_ok=True)
     resolved = {}
     for name, url, commit, target in plans:
-        # Full history retains the protected A1 baseline and old release commits.
-        subprocess.run(['git', 'clone', '--quiet', '--no-checkout', '--', url, str(target)], check=True)
+        # Full main history retains the A1 baseline, without fetching APT data branches.
+        subprocess.run(['git', 'clone', '--quiet', '--no-checkout', '--single-branch', '--branch', 'main', '--', url, str(target)], check=True)
+        if subprocess.run(['git', '-C', str(target), 'cat-file', '-e', commit + '^{commit}'], capture_output=True).returncode:
+            git('-C', target, 'fetch', '--quiet', 'origin', commit)
         git('-C', target, 'checkout', '--quiet', '--detach', commit)
         if git('-C', target, 'rev-parse', 'HEAD') != commit:
             raise ValueError('checkout does not match pinned commit: ' + name)

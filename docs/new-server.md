@@ -10,7 +10,7 @@ apt.100ask.net。执行 [DELIVERY_POLICY.md](../DELIVERY_POLICY.md) 和仓库内
 先取得 dshanpi-build 的交付 commit，再用其中的下载器取得全部代码：
 
 ```bash
-git clone https://github.com/dshanpi/dshanpi-build.git dshanpi-bootstrap
+git clone --single-branch --branch main https://github.com/dshanpi/dshanpi-build.git dshanpi-bootstrap
 cd dshanpi-bootstrap
 # 将交接回复中的 dshanpi-build 完整 SHA 设置为 BUILD_COMMIT
 git checkout --detach "$BUILD_COMMIT"
@@ -20,7 +20,8 @@ cd "$HOME/dshanpi-workspace/dshanpi-build"
 
 `handoff/sources.json` 固定 ArmBianOS 与 dspi-config；dshanpi-build 的 `self` 解析为运行
 下载器的 checkout commit，避免清单引用自身 SHA 的循环。工作区根的 workspace-lock.json
-记录最终三仓完整 SHA。下载器保留 Git 历史、拒绝覆盖任何已有仓库，不安装依赖或发布。
+记录最终三仓完整 SHA。下载器保留 main 历史，必要时补取指定 commit；不拉取 APT 数据分支。
+它拒绝覆盖任何已有仓库，不安装依赖或发布。
 失败时保留部分 checkout 便于诊断；重试使用另一个空目录，不自动删除用户数据。
 不要只下载 GitHub ZIP：source 门禁需要原 A1 Git 基线。
 
@@ -66,7 +67,7 @@ Git 合并 main 不代表旧镜像或历史 lock 已自动升级到 main。
 ## 4 构建客户端和可选包
 
 ```bash
-bash ../dspi-config/packaging/build-deb.sh output/replay/client
+(umask 0002; bash ../dspi-config/packaging/build-deb.sh output/replay/client)
 python3 scripts/build-aic8800d80-packages.py output/replay/aic8800d80
 python3 scripts/build-axcl-16g-packages.py output/replay/axcl-16g
 sha256sum output/replay/client/*.deb output/replay/aic8800d80/*.deb output/replay/axcl-16g/*.deb
@@ -77,6 +78,7 @@ AIC 原始源码已按 SHA 固定并纳入 vendor 目录；AXCL builder 从上�
 加载 ARM64 DKMS 模块；DKMS 在匹配内核的 A1 上验收。
 
 历史参考：客户端 `1.0.2-3`，AIC `6.4.3.0+dshanpi1`，AXCL 16GB `3.16.0+dshanpi2`。
+历史客户端打包需显式 `umask 0002`（默认 0022 会改变目录权限），详见客户端开发记录。
 本次维护资料不应改变这些包字节；候选包与签名历史清单不一致时停止，不能覆盖原版本。
 对应清单与哈希在 products/dshanpi-a1/releases 的 `2026.10.09-3`、`2026.10.09-4` 记录中。
 
@@ -101,9 +103,11 @@ fetch-pages 使用当前仓库 origin 中的 `feature/apt-pages-state` 数据分
 
 ```bash
 bash scripts/build-product.sh dshanpi-a1 products/dshanpi-a1/releases/2026.10.08-4.lock.json --print-plan
+(umask 0002
 APT_PUBLIC_KEY_FILE="$PWD/keys/dshanpi-archive.asc" \
   DSHANPI_PUBLISHED_REPOSITORY="$PWD/output/previous" \
   bash scripts/build-product.sh dshanpi-a1 products/dshanpi-a1/releases/2026.10.08-4.lock.json
+)
 ```
 
 构建器从 lock 获取历史源码，不能用本次 main checkout 冒充历史 commit。

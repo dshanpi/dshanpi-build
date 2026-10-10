@@ -17,16 +17,19 @@ class WorkspaceTests(unittest.TestCase):
             origin.mkdir()
             def git(*args):
                 return subprocess.check_output(['git', '-C', str(origin), *args], text=True).strip()
-            git('init', '-q')
+            git('init', '-q', '-b', 'main')
             git('-c', 'user.name=Test', '-c', 'user.email=test@example.invalid', 'commit', '-qm', 'baseline', '--allow-empty')
             baseline = git('rev-parse', 'HEAD')
             git('-c', 'user.name=Test', '-c', 'user.email=test@example.invalid', 'commit', '-qm', 'next', '--allow-empty')
             head = git('rev-parse', 'HEAD')
+            git('branch', 'apt-data')
             manifest = {'repositories': {name: {'url': str(origin), 'commit': 'self' if name == 'dshanpi-build' else head}
                                          for name in ['ArmBianOS', 'dshanpi-build', 'dspi-config']}}
             output = root / 'new host'
             resolved = workspace.checkout(output, manifest, head)
             self.assertEqual(resolved['dshanpi-build']['commit'], head)
+            refs = subprocess.check_output(['git', '-C', str(output / 'dshanpi-build'), 'branch', '-r'], text=True)
+            self.assertNotIn('apt-data', refs)
             subprocess.run(['git', '-C', str(output / 'ArmBianOS'), 'cat-file', '-e', baseline + '^{commit}'], check=True)
             with self.assertRaises(ValueError):
                 workspace.checkout(output, manifest, head)
