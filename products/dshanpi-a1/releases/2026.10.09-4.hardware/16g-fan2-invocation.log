@@ -1,0 +1,170 @@
+run/config.json
+json file
+02:09:50.909 INF operator():132 | AXCL engine VNPU kind=0
+02:09:50.929 INF operator():132 | AXCL engine VNPU kind=0
+[2026-10-10T02:09:50.955] [INFO] [T:281473443606208] Added path: /pcd
+[2026-10-10T02:09:50.956] [INFO] [T:281473443606208] RTSP server started on 0.0.0.0:8554
+02:09:51.004 INF operator():132 | AXCL engine VNPU kind=0
+[2026-10-10T02:09:51.225] [INFO] [T:281473443606208] Added path: /vehicle
+{"event":"model","input":[1,640,640,3],"kind":"seg","outputs":[{"bytes":102400,"name":"output0","shape":[1,80,80,4]},{"bytes":2048000,"name":"output1","shape":[1,80,80,80]},{"bytes":819200,"name":"674","shape":[1,80,80,32]},{"bytes":25600,"name":"696","shape":[1,40,40,4]},{"bytes":512000,"name":"736","shape":[1,40,40,80]},{"bytes":204800,"name":"758","shape":[1,40,40,32]},{"bytes":6400,"name":"780","shape":[1,20,20,4]},{"bytes":128000,"name":"820","shape":[1,20,20,80]},{"bytes":51200,"name":"842","shape":[1,20,20,32]},{"bytes":3276800,"name":"935","shape":[1,32,160,160]}]}
+[2026-10-10T02:09:51.401] [INFO] [T:281473443606208] Added path: /seg
+02:09:51.424 INF operator():132 | AXCL engine VNPU kind=0
+[2026-10-10T02:09:51.513] [INFO] [T:281473443606208] Added path: /driving
+{"event":"model","input":[1,768,768,3],"kind":"depth","outputs":[{"bytes":2359296,"name":"depth","shape":[1,1,768,768]}]}
+[2026-10-10T02:09:51.748] [INFO] [T:281473443606208] Added path: /depth
+[2026-10-10T02:09:52.038] [INFO] [T:281473443606208] Added path: /count
+[2026-10-10T02:09:52.077] [INFO] [T:281473443606208] Added path: /overview
+pipeline demux: pkt=0 bytes=435554 pts=0 dur=83333 key=1
+pipeline demux: pkt=0 bytes=195392 pts=120000 dur=40000 key=1
+pipeline demux: pkt=0 bytes=159036 pts=66666 dur=33333 key=1
+pipeline demux: pkt=0 bytes=271399 pts=66733 dur=33366 key=1
+pipeline demux: pkt=0 bytes=268325 pts=0 dur=41708 key=1
+pipeline demux: pkt=0 bytes=282655 pts=0 dur=41666 key=1
+pipeline demux: pkt=1 bytes=31699 pts=200000 dur=33333 key=0
+pipeline demux: pkt=1 bytes=805 pts=200200 dur=33366 key=0
+pipeline demux: pkt=1 bytes=68400 pts=240000 dur=40000 key=0
+[2026-10-10T02:09:52.128] [INFO] [T:281472914947776] Auto-updated H264 parameter sets for path: /pcd
+[2026-10-10T02:09:52.130] [INFO] [T:281470932668096] Auto-updated H264 parameter sets for path: /depth
+pipeline demux: pkt=1 bytes=6279 pts=41708 dur=41708 key=0
+pipeline demux: pkt=1 bytes=32929 pts=41666 dur=41666 key=0
+pipeline demux: pkt=2 bytes=6239 pts=133333 dur=33333 key=0
+[2026-10-10T02:09:52.154] [INFO] [T:281470787186368] Auto-updated H264 parameter sets for path: /count
+pipeline demux: pkt=2 bytes=240 pts=133466 dur=33366 key=0
+pipeline demux: pkt=2 bytes=22014 pts=160000 dur=40000 key=0
+pipeline demux: pkt=1 bytes=39182 pts=83333 dur=83333 key=0
+pipeline demux: pkt=2 bytes=9049 pts=83416 dur=41708 key=0
+pipeline demux: pkt=2 bytes=55694 pts=83333 dur=41666 key=0
+pipeline demux: pkt=2 bytes=64122 pts=166666 dur=83333 key=0
+[2026-10-10T02:09:52.262] [INFO] [T:281471565340352] Auto-updated H264 parameter sets for path: /seg
+[2026-10-10T02:09:52.271] [INFO] [T:281471254982336] Auto-updated H264 parameter sets for path: /driving
+[2026-10-10T02:09:52.314] [INFO] [T:281471697362624] Auto-updated H264 parameter sets for path: /vehicle
+[2026-10-10T02:09:52.351] [INFO] [T:281470597721792] Auto-updated H264 parameter sets for path: /overview
+{"direction":"right_to_left","event":"crossing","id":27,"lr":0,"rl":1}
+[2026-10-10T02:10:01.230] [INFO] [T:281466937929408] RTSP OPTIONS rtsp://192.168.1.12:8554/seg
+[2026-10-10T02:10:01.237] [INFO] [T:281466946383552] RTSP OPTIONS rtsp://192.168.1.12:8554/depth
+[2026-10-10T02:10:01.238] [INFO] [T:281466937929408] RTSP DESCRIBE rtsp://192.168.1.12:8554/seg
+[2026-10-10T02:10:01.241] [INFO] [T:281466946383552] RTSP DESCRIBE rtsp://192.168.1.12:8554/depth
+[2026-10-10T02:10:01.247] [INFO] [T:281466937929408] RTSP SETUP rtsp://192.168.1.12:8554/seg/stream
+[2026-10-10T02:10:01.247] [INFO] [T:281466946383552] RTSP SETUP rtsp://192.168.1.12:8554/depth/stream
+[2026-10-10T02:10:01.248] [INFO] [T:281466929475264] RTSP OPTIONS rtsp://192.168.1.12:8554/overview
+[2026-10-10T02:10:01.249] [INFO] [T:281466921021120] RTSP OPTIONS rtsp://192.168.1.12:8554/pcd
+[2026-10-10T02:10:01.260] [INFO] [T:281466937929408] RTSP PLAY rtsp://192.168.1.12:8554/seg/
+[2026-10-10T02:10:01.260] [INFO] [T:281466946383552] RTSP PLAY rtsp://192.168.1.12:8554/depth/
+[2026-10-10T02:10:01.260] [INFO] [T:281466912566976] RTSP OPTIONS rtsp://192.168.1.12:8554/vehicle
+[2026-10-10T02:10:01.260] [INFO] [T:281466921021120] RTSP DESCRIBE rtsp://192.168.1.12:8554/pcd
+[2026-10-10T02:10:01.260] [INFO] [T:281466929475264] RTSP DESCRIBE rtsp://192.168.1.12:8554/overview
+[2026-10-10T02:10:01.266] [INFO] [T:281466929475264] RTSP SETUP rtsp://192.168.1.12:8554/overview/stream
+[2026-10-10T02:10:01.266] [INFO] [T:281466921021120] RTSP SETUP rtsp://192.168.1.12:8554/pcd/stream
+[2026-10-10T02:10:01.267] [INFO] [T:281466912566976] RTSP DESCRIBE rtsp://192.168.1.12:8554/vehicle
+[2026-10-10T02:10:01.267] [INFO] [T:281466887204544] RTSP OPTIONS rtsp://192.168.1.12:8554/count
+[2026-10-10T02:10:01.270] [INFO] [T:281466929475264] RTSP PLAY rtsp://192.168.1.12:8554/overview/
+[2026-10-10T02:10:01.270] [INFO] [T:281466921021120] RTSP PLAY rtsp://192.168.1.12:8554/pcd/
+[2026-10-10T02:10:01.270] [INFO] [T:281466912566976] RTSP SETUP rtsp://192.168.1.12:8554/vehicle/stream
+[2026-10-10T02:10:01.270] [INFO] [T:281466887204544] RTSP DESCRIBE rtsp://192.168.1.12:8554/count
+[2026-10-10T02:10:01.271] [INFO] [T:281466861842112] RTSP OPTIONS rtsp://192.168.1.12:8554/driving
+[2026-10-10T02:10:01.275] [INFO] [T:281466912566976] RTSP PLAY rtsp://192.168.1.12:8554/vehicle/
+[2026-10-10T02:10:01.275] [INFO] [T:281466887204544] RTSP SETUP rtsp://192.168.1.12:8554/count/stream
+[2026-10-10T02:10:01.275] [INFO] [T:281466861842112] RTSP DESCRIBE rtsp://192.168.1.12:8554/driving
+[2026-10-10T02:10:01.281] [INFO] [T:281466887204544] RTSP PLAY rtsp://192.168.1.12:8554/count/
+[2026-10-10T02:10:01.281] [INFO] [T:281466861842112] RTSP SETUP rtsp://192.168.1.12:8554/driving/stream
+[2026-10-10T02:10:01.286] [INFO] [T:281466861842112] RTSP PLAY rtsp://192.168.1.12:8554/driving/
+{"channels":[{"decoded":121,"dropped":0,"encoded":121,"infer_fps":11.994301019422853,"inferred":120,"lr":0,"mux_errors":0,"name":"pcd","objects":2,"process_ms":22.710664001351688,"render_ms":7.867519001592882,"render_replaced":0,"rendered":121,"result_age":0.08090983700094512,"rl":0,"submit_errors":0},{"decoded":249,"dropped":0,"encoded":246,"infer_fps":9.795345832528664,"inferred":98,"lr":0,"mux_errors":0,"name":"vehicle","objects":6,"process_ms":95.16970500408206,"render_ms":4.582901005051099,"render_replaced":0,"rendered":248,"result_age":0.0058544720013742335,"rl":0,"submit_errors":0},{"decoded":297,"dropped":0,"encoded":296,"infer_fps":5.997150509711426,"inferred":60,"lr":0,"mux_errors":0,"name":"seg","objects":6,"process_ms":158.8926039985381,"render_ms":10.0470929974108,"render_replaced":0,"rendered":297,"result_age":0.01321994300087681,"rl":0,"submit_errors":0},{"decoded":298,"dropped":0,"encoded":296,"infer_fps":9.795345832528664,"inferred":98,"lr":0,"mux_errors":0,"name":"driving","objects":4,"process_ms":91.84589000506094,"render_ms":4.435896000359207,"render_replaced":0,"rendered":298,"result_age":0.09253881499898853,"rl":0,"submit_errors":0},{"decoded":240,"dropped":0,"encoded":240,"infer_fps":11.19468095146133,"inferred":112,"lr":0,"mux_errors":0,"name":"depth","objects":0,"process_ms":90.97075799945742,"render_ms":9.038423995662015,"render_replaced":0,"rendered":240,"result_age":0.0035359440007596277,"rl":0,"submit_errors":0},{"decoded":241,"dropped":0,"encoded":240,"infer_fps":9.995250849519044,"inferred":100,"lr":0,"mux_errors":0,"name":"count","objects":8,"process_ms":110.59649499657098,"render_ms":4.760923999128863,"render_replaced":0,"rendered":241,"result_age":0.05671314999926835,"rl":1,"submit_errors":0}],"elapsed":10.004751406995638,"event":"stats","overview_dropped":0,"overview_encoded":294,"overview_mux_errors":0}
+[2026-10-10T02:10:04.625] [INFO] [T:281466937929408] RTSP TEARDOWN rtsp://192.168.1.12:8554/seg/
+[2026-10-10T02:10:04.626] [WARNING] [T:281466937929408] RTSP response send timeout/failed, closing connection
+{"event":"count_loop_reset","loop":1}
+[2026-10-10T02:10:04.870] [INFO] [T:281466861842112] RTSP TEARDOWN rtsp://192.168.1.12:8554/driving/
+[2026-10-10T02:10:04.870] [WARNING] [T:281466861842112] RTSP response send timeout/failed, closing connection
+[2026-10-10T02:10:05.304] [INFO] [T:281466946383552] RTSP TEARDOWN rtsp://192.168.1.12:8554/depth/
+[2026-10-10T02:10:05.304] [INFO] [T:281466887204544] RTSP TEARDOWN rtsp://192.168.1.12:8554/count/
+[2026-10-10T02:10:05.304] [WARNING] [T:281466946383552] RTSP response send timeout/failed, closing connection
+[2026-10-10T02:10:05.335] [INFO] [T:281466929475264] RTSP TEARDOWN rtsp://192.168.1.12:8554/overview/
+[2026-10-10T02:10:05.336] [WARNING] [T:281466929475264] RTSP response send timeout/failed, closing connection
+[2026-10-10T02:10:05.389] [INFO] [T:281466912566976] RTSP TEARDOWN rtsp://192.168.1.12:8554/vehicle/
+[2026-10-10T02:10:05.390] [WARNING] [T:281466912566976] RTSP response send timeout/failed, closing connection
+{"direction":"right_to_left","event":"crossing","id":67,"lr":0,"rl":2}
+[2026-10-10T02:10:07.884] [INFO] [T:281466921021120] RTSP TEARDOWN rtsp://192.168.1.12:8554/pcd/
+[2026-10-10T02:10:07.884] [WARNING] [T:281466921021120] RTSP response send timeout/failed, closing connection
+[2026-10-10T02:10:08.610] [INFO] [T:281466921021120] RTSP OPTIONS rtsp://192.168.1.12:8554/overview
+[2026-10-10T02:10:08.615] [INFO] [T:281466921021120] RTSP DESCRIBE rtsp://192.168.1.12:8554/overview
+[2026-10-10T02:10:08.621] [INFO] [T:281466921021120] RTSP SETUP rtsp://192.168.1.12:8554/overview/stream
+[2026-10-10T02:10:08.626] [INFO] [T:281466921021120] RTSP PLAY rtsp://192.168.1.12:8554/overview/
+[2026-10-10T02:10:11.602] [INFO] [T:281466921021120] RTSP TEARDOWN rtsp://192.168.1.12:8554/overview/
+[2026-10-10T02:10:11.602] [WARNING] [T:281466921021120] RTSP response send timeout/failed, closing connection
+{"channels":[{"decoded":241,"dropped":0,"encoded":241,"infer_fps":12.06320536108662,"inferred":241,"lr":0,"mux_errors":0,"name":"pcd","objects":1,"process_ms":24.4823129978613,"render_ms":8.068212002399378,"render_replaced":0,"rendered":241,"result_age":0.019317112004500814,"rl":0,"submit_errors":0},{"decoded":499,"dropped":0,"encoded":497,"infer_fps":9.670503471284315,"inferred":195,"lr":0,"mux_errors":0,"name":"vehicle","objects":3,"process_ms":90.91096100019058,"render_ms":5.908488994464278,"render_replaced":0,"rendered":498,"result_age":0.04237853399536107,"rl":0,"submit_errors":0},{"decoded":599,"dropped":0,"encoded":597,"infer_fps":6.081450636580858,"inferred":121,"lr":0,"mux_errors":0,"name":"seg","objects":6,"process_ms":134.21642699540826,"render_ms":9.049242005858105,"render_replaced":0,"rendered":599,"result_age":0.1709264860037365,"rl":0,"submit_errors":0},{"decoded":598,"dropped":0,"encoded":596,"infer_fps":9.969591207509604,"inferred":198,"lr":0,"mux_errors":0,"name":"driving","objects":1,"process_ms":91.22973200283013,"render_ms":6.107592002081219,"render_replaced":0,"rendered":598,"result_age":0.006410353002138436,"rl":0,"submit_errors":0},{"decoded":481,"dropped":0,"encoded":479,"infer_fps":10.966550328260563,"inferred":222,"lr":0,"mux_errors":0,"name":"depth","objects":0,"process_ms":80.99338800093392,"render_ms":8.179961994756013,"render_replaced":0,"rendered":481,"result_age":0.09238936399924569,"rl":0,"submit_errors":0},{"decoded":482,"dropped":0,"encoded":481,"infer_fps":9.770199383359412,"inferred":198,"lr":0,"mux_errors":0,"name":"count","objects":8,"process_ms":91.90093800134491,"render_ms":6.044597997970413,"render_replaced":0,"rendered":482,"result_age":0.009294777002651244,"rl":2,"submit_errors":0}],"elapsed":20.035252950998256,"event":"stats","overview_dropped":0,"overview_encoded":594,"overview_mux_errors":0}
+{"event":"count_loop_reset","loop":2}
+{"direction":"right_to_left","event":"crossing","id":88,"lr":0,"rl":3}
+{"channels":[{"decoded":361,"dropped":0,"encoded":360,"infer_fps":11.899768160386758,"inferred":360,"lr":0,"mux_errors":0,"name":"pcd","objects":2,"process_ms":37.58508600003552,"render_ms":5.1396229973761365,"render_replaced":0,"rendered":361,"result_age":0.09239992900256766,"rl":0,"submit_errors":0},{"decoded":750,"dropped":0,"encoded":746,"infer_fps":9.699811021491728,"inferred":292,"lr":0,"mux_errors":0,"name":"vehicle","objects":2,"process_ms":124.33099400368519,"render_ms":4.641284998797346,"render_replaced":0,"rendered":749,"result_age":0.08198041200375883,"rl":0,"submit_errors":0},{"decoded":899,"dropped":0,"encoded":897,"infer_fps":5.799887002541445,"inferred":179,"lr":0,"mux_errors":0,"name":"seg","objects":3,"process_ms":138.04075700318208,"render_ms":6.959870996070094,"render_replaced":0,"rendered":899,"result_age":0.1357773779964191,"rl":0,"submit_errors":0},{"decoded":898,"dropped":0,"encoded":896,"infer_fps":9.799809073259684,"inferred":296,"lr":0,"mux_errors":0,"name":"driving","objects":1,"process_ms":95.23080800136086,"render_ms":4.185917001450434,"render_replaced":0,"rendered":898,"result_age":0.07870344699767884,"rl":0,"submit_errors":0},{"decoded":720,"dropped":0,"encoded":720,"infer_fps":11.09978374624311,"inferred":333,"lr":0,"mux_errors":0,"name":"depth","objects":0,"process_ms":89.52446100011002,"render_ms":6.9785050000064075,"render_replaced":0,"rendered":720,"result_age":0.05571446799876867,"rl":0,"submit_errors":0},{"decoded":723,"dropped":0,"encoded":722,"infer_fps":9.299818814419904,"inferred":291,"lr":0,"mux_errors":0,"name":"count","objects":7,"process_ms":113.04482899868162,"render_ms":5.268141998385545,"render_replaced":0,"rendered":723,"result_age":0.05741240100178402,"rl":3,"submit_errors":0}],"elapsed":30.035447777998343,"event":"stats","overview_dropped":0,"overview_encoded":895,"overview_mux_errors":0}
+[2026-10-10T02:10:22.861] [INFO] [T:281466921021120] RTSP OPTIONS rtsp://127.0.0.1:8554/pcd
+[2026-10-10T02:10:22.862] [INFO] [T:281466921021120] RTSP DESCRIBE rtsp://127.0.0.1:8554/pcd
+[2026-10-10T02:10:22.863] [INFO] [T:281466921021120] RTSP SETUP rtsp://127.0.0.1:8554/pcd/stream
+[2026-10-10T02:10:22.864] [INFO] [T:281466921021120] RTSP PLAY rtsp://127.0.0.1:8554/pcd/
+[2026-10-10T02:10:29.869] [INFO] [T:281466921021120] RTSP TEARDOWN rtsp://127.0.0.1:8554/pcd/
+[2026-10-10T02:10:29.869] [WARNING] [T:281466921021120] RTSP response send timeout/failed, closing connection
+[2026-10-10T02:10:30.125] [INFO] [T:281466921021120] RTSP OPTIONS rtsp://127.0.0.1:8554/vehicle
+[2026-10-10T02:10:30.125] [INFO] [T:281466921021120] RTSP DESCRIBE rtsp://127.0.0.1:8554/vehicle
+[2026-10-10T02:10:30.126] [INFO] [T:281466921021120] RTSP SETUP rtsp://127.0.0.1:8554/vehicle/stream
+[2026-10-10T02:10:30.127] [INFO] [T:281466921021120] RTSP PLAY rtsp://127.0.0.1:8554/vehicle/
+{"event":"count_loop_reset","loop":3}
+{"channels":[{"decoded":481,"dropped":0,"encoded":481,"infer_fps":12.060277918896947,"inferred":481,"lr":0,"mux_errors":0,"name":"pcd","objects":5,"process_ms":29.364353002165444,"render_ms":5.741637003666256,"render_replaced":0,"rendered":481,"result_age":0.04468475300382124,"rl":0,"submit_errors":0},{"decoded":999,"dropped":0,"encoded":998,"infer_fps":9.468813242109174,"inferred":387,"lr":0,"mux_errors":0,"name":"vehicle","objects":6,"process_ms":109.30937500233995,"render_ms":4.52751100237947,"render_replaced":0,"rendered":998,"result_age":0.06015938800555887,"rl":0,"submit_errors":0},{"decoded":1199,"dropped":0,"encoded":1198,"infer_fps":5.880631381941487,"inferred":238,"lr":0,"mux_errors":0,"name":"seg","objects":3,"process_ms":193.3018159979838,"render_ms":10.261695999361109,"render_replaced":0,"rendered":1199,"result_age":0.053379531993414275,"rl":0,"submit_errors":0},{"decoded":1198,"dropped":0,"encoded":1196,"infer_fps":9.468813242109174,"inferred":391,"lr":0,"mux_errors":0,"name":"driving","objects":1,"process_ms":120.17498000204796,"render_ms":6.4240339997923,"render_replaced":0,"rendered":1197,"result_age":0.03417287299816962,"rl":0,"submit_errors":0},{"decoded":962,"dropped":0,"encoded":961,"infer_fps":10.66487386216507,"inferred":440,"lr":0,"mux_errors":0,"name":"depth","objects":0,"process_ms":95.83003500301857,"render_ms":6.620021005801391,"render_replaced":0,"rendered":962,"result_age":0.06688809500337811,"rl":0,"submit_errors":0},{"decoded":965,"dropped":0,"encoded":964,"infer_fps":9.468813242109174,"inferred":386,"lr":0,"mux_errors":0,"name":"count","objects":6,"process_ms":104.8294159991201,"render_ms":6.592425997951068,"render_replaced":0,"rendered":965,"result_age":0.024860245997842867,"rl":3,"submit_errors":0}],"elapsed":40.06838406799943,"event":"stats","overview_dropped":0,"overview_encoded":1195,"overview_mux_errors":0}
+{"direction":"right_to_left","event":"crossing","id":126,"lr":0,"rl":4}
+[2026-10-10T02:10:33.052] [INFO] [T:281466921021120] RTSP TEARDOWN rtsp://127.0.0.1:8554/vehicle/
+[2026-10-10T02:10:33.053] [WARNING] [T:281466921021120] RTSP response send timeout/failed, closing connection
+[2026-10-10T02:10:33.327] [INFO] [T:281466921021120] RTSP OPTIONS rtsp://127.0.0.1:8554/seg
+[2026-10-10T02:10:33.327] [INFO] [T:281466921021120] RTSP DESCRIBE rtsp://127.0.0.1:8554/seg
+[2026-10-10T02:10:33.328] [INFO] [T:281466921021120] RTSP SETUP rtsp://127.0.0.1:8554/seg/stream
+[2026-10-10T02:10:33.329] [INFO] [T:281466921021120] RTSP PLAY rtsp://127.0.0.1:8554/seg/
+[2026-10-10T02:10:36.556] [INFO] [T:281466921021120] RTSP TEARDOWN rtsp://127.0.0.1:8554/seg/
+[2026-10-10T02:10:36.556] [WARNING] [T:281466921021120] RTSP response send timeout/failed, closing connection
+[2026-10-10T02:10:36.799] [INFO] [T:281466921021120] RTSP OPTIONS rtsp://127.0.0.1:8554/driving
+[2026-10-10T02:10:36.799] [INFO] [T:281466921021120] RTSP DESCRIBE rtsp://127.0.0.1:8554/driving
+[2026-10-10T02:10:36.800] [INFO] [T:281466921021120] RTSP SETUP rtsp://127.0.0.1:8554/driving/stream
+[2026-10-10T02:10:36.801] [INFO] [T:281466921021120] RTSP PLAY rtsp://127.0.0.1:8554/driving/
+[2026-10-10T02:10:40.676] [INFO] [T:281466921021120] RTSP TEARDOWN rtsp://127.0.0.1:8554/driving/
+[2026-10-10T02:10:40.677] [WARNING] [T:281466921021120] RTSP response send timeout/failed, closing connection
+[2026-10-10T02:10:40.938] [INFO] [T:281466921021120] RTSP OPTIONS rtsp://127.0.0.1:8554/depth
+[2026-10-10T02:10:40.939] [INFO] [T:281466921021120] RTSP DESCRIBE rtsp://127.0.0.1:8554/depth
+[2026-10-10T02:10:40.940] [INFO] [T:281466921021120] RTSP SETUP rtsp://127.0.0.1:8554/depth/stream
+[2026-10-10T02:10:40.941] [INFO] [T:281466921021120] RTSP PLAY rtsp://127.0.0.1:8554/depth/
+{"channels":[{"decoded":602,"dropped":0,"encoded":601,"infer_fps":11.999354967474744,"inferred":601,"lr":0,"mux_errors":0,"name":"pcd","objects":7,"process_ms":43.30770300293807,"render_ms":8.021596993785352,"render_replaced":0,"rendered":601,"result_age":0.041337069000292104,"rl":0,"submit_errors":0},{"decoded":1251,"dropped":0,"encoded":1247,"infer_fps":9.399494724521883,"inferred":481,"lr":0,"mux_errors":0,"name":"vehicle","objects":4,"process_ms":100.88155200355686,"render_ms":7.468443000107072,"render_replaced":0,"rendered":1248,"result_age":0.08934736200171756,"rl":0,"submit_errors":0},{"decoded":1500,"dropped":0,"encoded":1499,"infer_fps":6.099672108466328,"inferred":299,"lr":0,"mux_errors":0,"name":"seg","objects":4,"process_ms":164.90772299584933,"render_ms":6.254742002056446,"render_replaced":0,"rendered":1500,"result_age":0.10934059500141302,"rl":0,"submit_errors":0},{"decoded":1500,"dropped":0,"encoded":1497,"infer_fps":9.499489349250839,"inferred":486,"lr":0,"mux_errors":0,"name":"driving","objects":1,"process_ms":98.10293799819192,"render_ms":4.997976997401565,"render_replaced":0,"rendered":1499,"result_age":0.08378992399957497,"rl":0,"submit_errors":0},{"decoded":1202,"dropped":0,"encoded":1201,"infer_fps":10.699424845998314,"inferred":547,"lr":0,"mux_errors":0,"name":"depth","objects":0,"process_ms":100.96882299694698,"render_ms":8.054886995523702,"render_replaced":0,"rendered":1202,"result_age":0.02198920199589338,"rl":0,"submit_errors":0},{"decoded":1205,"dropped":0,"encoded":1205,"infer_fps":9.299500099792926,"inferred":479,"lr":0,"mux_errors":0,"name":"count","objects":7,"process_ms":108.70361100387527,"render_ms":4.300038002838846,"render_replaced":0,"rendered":1205,"result_age":0.07983611300005578,"rl":4,"submit_errors":0}],"elapsed":50.068921623998904,"event":"stats","overview_dropped":0,"overview_encoded":1496,"overview_mux_errors":0}
+{"event":"count_loop_reset","loop":4}
+[2026-10-10T02:10:45.059] [INFO] [T:281466921021120] RTSP TEARDOWN rtsp://127.0.0.1:8554/depth/
+[2026-10-10T02:10:45.059] [WARNING] [T:281466921021120] RTSP response send timeout/failed, closing connection
+[2026-10-10T02:10:45.311] [INFO] [T:281466921021120] RTSP OPTIONS rtsp://127.0.0.1:8554/count
+[2026-10-10T02:10:45.312] [INFO] [T:281466921021120] RTSP DESCRIBE rtsp://127.0.0.1:8554/count
+[2026-10-10T02:10:45.313] [INFO] [T:281466921021120] RTSP SETUP rtsp://127.0.0.1:8554/count/stream
+[2026-10-10T02:10:45.314] [INFO] [T:281466921021120] RTSP PLAY rtsp://127.0.0.1:8554/count/
+{"direction":"right_to_left","event":"crossing","id":170,"lr":0,"rl":5}
+[2026-10-10T02:10:48.854] [INFO] [T:281466921021120] RTSP TEARDOWN rtsp://127.0.0.1:8554/count/
+[2026-10-10T02:10:48.854] [WARNING] [T:281466921021120] RTSP response send timeout/failed, closing connection
+[2026-10-10T02:10:49.123] [INFO] [T:281466921021120] RTSP OPTIONS rtsp://127.0.0.1:8554/overview
+[2026-10-10T02:10:49.123] [INFO] [T:281466921021120] RTSP DESCRIBE rtsp://127.0.0.1:8554/overview
+[2026-10-10T02:10:49.124] [INFO] [T:281466921021120] RTSP SETUP rtsp://127.0.0.1:8554/overview/stream
+[2026-10-10T02:10:49.125] [INFO] [T:281466921021120] RTSP PLAY rtsp://127.0.0.1:8554/overview/
+{"channels":[{"decoded":722,"dropped":0,"encoded":722,"infer_fps":11.960734853490237,"inferred":721,"lr":0,"mux_errors":0,"name":"pcd","objects":8,"process_ms":57.28713500138838,"render_ms":5.009829998016357,"render_replaced":0,"rendered":722,"result_age":0.0568165049990057,"rl":0,"submit_errors":0},{"decoded":1500,"dropped":0,"encoded":1498,"infer_fps":9.369242301900686,"inferred":575,"lr":0,"mux_errors":0,"name":"vehicle","objects":1,"process_ms":99.10863100230927,"render_ms":4.442351004399825,"render_replaced":0,"rendered":1498,"result_age":0.04620739499659976,"rl":0,"submit_errors":0},{"decoded":1801,"dropped":0,"encoded":1801,"infer_fps":5.980367426745119,"inferred":359,"lr":0,"mux_errors":0,"name":"seg","objects":1,"process_ms":143.16134600085206,"render_ms":9.420282003702596,"render_replaced":0,"rendered":1801,"result_age":0.16520563700032653,"rl":0,"submit_errors":0},{"decoded":1798,"dropped":0,"encoded":1797,"infer_fps":9.369242301900686,"inferred":580,"lr":0,"mux_errors":0,"name":"driving","objects":1,"process_ms":97.65827299997909,"render_ms":5.15233600162901,"render_replaced":0,"rendered":1797,"result_age":0.0207009139994625,"rl":0,"submit_errors":0},{"decoded":1443,"dropped":0,"encoded":1442,"infer_fps":10.565315787249709,"inferred":653,"lr":0,"mux_errors":0,"name":"depth","objects":0,"process_ms":106.7329739962588,"render_ms":6.488797000201885,"render_replaced":0,"rendered":1443,"result_age":0.00962695599446306,"rl":0,"submit_errors":0},{"decoded":1447,"dropped":0,"encoded":1446,"infer_fps":9.07022393056343,"inferred":570,"lr":0,"mux_errors":0,"name":"count","objects":7,"process_ms":98.57993100013118,"render_ms":6.414284995116759,"render_replaced":0,"rendered":1447,"result_age":0.03170513799705077,"rl":5,"submit_errors":0}],"elapsed":60.10174999699666,"event":"stats","overview_dropped":0,"overview_encoded":1797,"overview_mux_errors":0}
+[2026-10-10T02:10:52.667] [INFO] [T:281466921021120] RTSP TEARDOWN rtsp://127.0.0.1:8554/overview/
+[2026-10-10T02:10:52.668] [WARNING] [T:281466921021120] RTSP response send timeout/failed, closing connection
+[2026-10-10T02:10:53.127] [INFO] [T:281466921021120] RTSP OPTIONS rtsp://127.0.0.1:8554/overview
+[2026-10-10T02:10:53.127] [INFO] [T:281466921021120] RTSP DESCRIBE rtsp://127.0.0.1:8554/overview
+[2026-10-10T02:10:53.128] [INFO] [T:281466921021120] RTSP SETUP rtsp://127.0.0.1:8554/overview/stream
+[2026-10-10T02:10:53.129] [INFO] [T:281466921021120] RTSP PLAY rtsp://127.0.0.1:8554/overview/
+{"event":"count_loop_reset","loop":5}
+{"direction":"right_to_left","event":"crossing","id":205,"lr":0,"rl":6}
+vdec SubmitPacket reject: stop=1 eos=0 pending=0/16 bytes=57004
+pipeline demux: SubmitPacket failed
+vdec SubmitPacket reject: stop=1 eos=0 pending=0/16 bytes=10181
+pipeline demux: SubmitPacket failed
+vdec SubmitPacket reject: stop=1 eos=0 pending=0/16 bytes=287
+pipeline demux: SubmitPacket failed
+vdec SubmitPacket reject: stop=1 eos=0 pending=0/16 bytes=221
+pipeline demux: SubmitPacket failed
+vdec SubmitPacket reject: stop=1 eos=0 pending=0/16 bytes=36627
+pipeline demux: SubmitPacket failed
+[2026-10-10T02:10:59.166] [INFO] [T:281470941122240] RTSP OPTIONS rtsp://127.0.0.1:8554/overview
+[2026-10-10T02:10:59.167] [INFO] [T:281470941122240] RTSP DESCRIBE rtsp://127.0.0.1:8554/overview
+[2026-10-10T02:10:59.168] [INFO] [T:281470941122240] RTSP SETUP rtsp://127.0.0.1:8554/overview/stream
+[2026-10-10T02:10:59.169] [INFO] [T:281470941122240] RTSP PLAY rtsp://127.0.0.1:8554/overview/
+vdec SubmitPacket reject (early): running=0 bytes=79234
+pipeline demux: SubmitPacket failed
+[2026-10-10T02:10:59.373] [INFO] [T:281473443606208] RtspServer stop start, timeout_ms=5000
+[2026-10-10T02:10:59.468] [INFO] [T:281473443606208] RtspServer stop done, elapsed_ms=94
+{"errors":0,"event":"exit"}

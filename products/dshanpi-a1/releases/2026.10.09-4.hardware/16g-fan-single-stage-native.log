@@ -1,0 +1,66 @@
+Running as unit: ax8850-diagnostic-one.service; invocation ID: 83046488643e4fecb00999105c41453d
+2026-10-10T02:07:22Z Device ID           : 1 (0x1)
+temperature         : 71764
+
+
+2026-10-10T02:07:27Z Device ID           : 1 (0x1)
+temperature         : 72058
+
+
+2026-10-10T02:07:33Z Device ID           : 1 (0x1)
+temperature         : 72058
+
+
+2026-10-10T02:07:38Z Device ID           : 1 (0x1)
+temperature         : 71470
+
+
+2026-10-10T02:07:44Z Device ID           : 1 (0x1)
+temperature         : 71470
+
+
+2026-10-10T02:07:49Z Device ID           : 1 (0x1)
+temperature         : 71764
+
+
+2026-10-10T02:07:55Z Device ID           : 1 (0x1)
+temperature         : 71764
+
+
+2026-10-10T02:08:00Z Device ID           : 1 (0x1)
+temperature         : 71470
+
+
+2026-10-10T02:08:06Z Device ID           : 1 (0x1)
+temperature         : 71470
+
+
+Started ax8850-diagnostic-one.service - /usr/bin/flock -n /home/yuxuan/ax8850-multistream-demo/run/application.lock /usr/bin/env LD_LIBRARY_PATH=/home/yuxuan/ax8850-multistream-demo/build/install/lib:/usr/lib/axcl AXP_AXCL_VNPU_KIND=disable /usr/bin/stdbuf -oL -eL /home/yuxuan/ax8850-multistream-demo/build/install/bin/six_app /home/yuxuan/ax8850-multistream-demo/run/one-diagnostic.json 45.
+json file
+02:07:17.123 INF operator():132 | AXCL engine VNPU kind=0
+02:07:17.138 INF operator():132 | AXCL engine VNPU kind=0
+[2026-10-10T02:07:17.164] [INFO] [T:281473236971200] Added path: /pcd
+[2026-10-10T02:07:17.164] [INFO] [T:281473236971200] RTSP server started on 0.0.0.0:8554
+[2026-10-10T02:07:17.215] [INFO] [T:281473236971200] Added path: /overview
+pipeline demux: pkt=0 bytes=435554 pts=0 dur=83333 key=1
+[2026-10-10T02:07:17.259] [INFO] [T:281472644386496] Auto-updated H264 parameter sets for path: /pcd
+[2026-10-10T02:07:17.266] [INFO] [T:281472409661120] Auto-updated H264 parameter sets for path: /overview
+pipeline demux: pkt=1 bytes=39182 pts=83333 dur=83333 key=0
+pipeline demux: pkt=2 bytes=64122 pts=166666 dur=83333 key=0
+[2026-10-10T02:07:21.681] [INFO] [T:281470320832192] RTSP OPTIONS rtsp://192.168.1.12:8554/pcd
+[2026-10-10T02:07:21.688] [INFO] [T:281470320832192] RTSP DESCRIBE rtsp://192.168.1.12:8554/pcd
+[2026-10-10T02:07:21.693] [INFO] [T:281470320832192] RTSP SETUP rtsp://192.168.1.12:8554/pcd/stream
+[2026-10-10T02:07:21.702] [INFO] [T:281470320832192] RTSP PLAY rtsp://192.168.1.12:8554/pcd/
+{"channels":[{"decoded":120,"dropped":0,"encoded":120,"infer_fps":11.996591757482712,"inferred":120,"lr":0,"mux_errors":0,"name":"pcd","objects":2,"process_ms":18.196048004028853,"render_ms":5.226464003499132,"render_replaced":0,"rendered":120,"result_age":0.06348119799804408,"rl":0,"submit_errors":0}],"elapsed":10.002841009001713,"event":"stats","overview_dropped":0,"overview_encoded":299,"overview_mux_errors":0}
+[2026-10-10T02:07:29.005] [INFO] [T:281470320832192] RTSP TEARDOWN rtsp://192.168.1.12:8554/pcd/
+[2026-10-10T02:07:29.006] [WARNING] [T:281470320832192] RTSP response send timeout/failed, closing connection
+{"channels":[{"decoded":241,"dropped":0,"encoded":241,"infer_fps":12.059659450243178,"inferred":241,"lr":0,"mux_errors":0,"name":"pcd","objects":1,"process_ms":19.053784002608154,"render_ms":5.236066004727036,"render_replaced":0,"rendered":241,"result_age":0.012683107001066674,"rl":0,"submit_errors":0}],"elapsed":20.036291829004767,"event":"stats","overview_dropped":0,"overview_encoded":600,"overview_mux_errors":0}
+{"channels":[{"decoded":361,"dropped":0,"encoded":361,"infer_fps":11.960878665458655,"inferred":361,"lr":0,"mux_errors":0,"name":"pcd","objects":2,"process_ms":18.841452001652215,"render_ms":5.1570690047810785,"render_replaced":0,"rendered":361,"result_age":0.04613105900352821,"rl":0,"submit_errors":0}],"elapsed":30.068999572002213,"event":"stats","overview_dropped":0,"overview_encoded":901,"overview_mux_errors":0}
+{"channels":[{"decoded":482,"dropped":0,"encoded":481,"infer_fps":12.059966249795798,"inferred":482,"lr":0,"mux_errors":0,"name":"pcd","objects":5,"process_ms":17.33428900479339,"render_ms":4.7679709969088435,"render_replaced":0,"rendered":482,"result_age":0.08163054200122133,"rl":0,"submit_errors":0}],"elapsed":40.10219514599885,"event":"stats","overview_dropped":0,"overview_encoded":1202,"overview_mux_errors":0}
+vdec SubmitPacket reject: stop=1 eos=0 pending=0/16 bytes=43022
+pipeline demux: SubmitPacket failed
+[2026-10-10T02:08:02.561] [INFO] [T:281473236971200] RtspServer stop start, timeout_ms=5000
+[2026-10-10T02:08:02.566] [INFO] [T:281473236971200] RtspServer stop done, elapsed_ms=5
+{"errors":0,"event":"exit"}
+ax8850-diagnostic-one.service: Deactivated successfully.
+ax8850-diagnostic-one.service: Consumed 14.180s CPU time.

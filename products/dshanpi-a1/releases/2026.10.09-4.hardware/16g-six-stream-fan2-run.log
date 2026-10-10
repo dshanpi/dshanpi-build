@@ -1,0 +1,45 @@
+Running as unit: ax8850-multistream.service; invocation ID: 14e264788a7842d08ac793ad493bc137
+Running as unit: ax8850-local-preview.service; invocation ID: 9a8bfa45e82144fbbec8bb0dafc2f700
+LAN: rtsp://<HOST_IP>:8554/overview
+Board VLC: http://127.0.0.1:8850/overview.ts
+active
+active
+Measured window: 20.0 seconds (video FPS and AI FPS are different)
+Stream       Decode  New video       AI   Encode   Drops*   Errors
+pcd           11.98      11.98    11.98    11.93        0        0
+vehicle       25.01      25.01     9.69    24.96        0        0
+seg           30.05      30.05     5.94    30.00        0        0
+driving       29.95      29.95     9.88    29.95        0        0
+depth         23.96      23.96    11.03    23.96        0        0
+count         24.06      24.06     9.54    24.06        0        0
+Overview encoder: 30.00 FPS
+*Drops: render queue replacement + encoder queue drops, within this window.
+PASS RTSP pcd: 60 decoded frames
+PASS RTSP vehicle: 60 decoded frames
+PASS RTSP seg: 60 decoded frames
+PASS RTSP driving: 60 decoded frames
+PASS RTSP depth: 60 decoded frames
+PASS RTSP count: 60 decoded frames
+PASS RTSP overview: 60 decoded frames
+PASS HTTP preview: 60 decoded frames
+[rtsp @ 0xaaaaf12209f0] Could not find codec parameters for stream 0 (Video: h264, none, 1920x1080): unspecified pixel format
+Consider increasing the value for the 'analyzeduration' (1000000) and 'probesize' (1000000) options
+Input #0, rtsp, from 'rtsp://127.0.0.1:8554/overview':
+  Metadata:
+    title           : RTSP Stream
+  Duration: N/A, bitrate: N/A
+  Stream #0:0: Video: h264, none, 1920x1080, 90k tbr, 90k tbn
+Output #0, mp4, to 'recordings/overview-20261010-021058.mp4':
+  Metadata:
+    title           : RTSP Stream
+    encoder         : Lavf60.16.100
+  Stream #0:0: Video: h264 (avc1 / 0x31637661), none, 1920x1080, q=2-31, 90k tbr, 90k tbn
+Stream mapping:
+  Stream #0:0 -> #0:0 (copy)
+size=       0kB time=N/A bitrate=N/A speed=N/A
+[mp4 @ 0xaaaaf1225c00] Starting second pass: moving the moov atom to the beginning of the file
+[out#0/mp4 @ 0xaaaaf1228ec0] video:0kB audio:0kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: unknown
+[out#0/mp4 @ 0xaaaaf1228ec0] Output file is empty, nothing was encoded
+size=       0kB time=N/A bitrate=N/A speed=N/A
+Saved: /home/yuxuan/ax8850-multistream-demo/recordings/overview-20261010-021058.mp4
+ax8850-multistream is not running. Run ./start.sh first.

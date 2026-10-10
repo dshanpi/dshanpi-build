@@ -37,10 +37,10 @@
     "commit": "2aa772bbf16b8a904ee6ca57877c0e602208bf49",
     "native_build": "passed",
     "assets": "11/11 size and SHA256 verified",
-    "services": "inactive",
-    "inference": "not run",
-    "rtsp_http": "not run",
-    "recording_restart": "not run"
+    "services": "stopped after bounded tests",
+    "inference": "20 NPU unit tests passed; all six channels inferred in bounded hardware run",
+    "rtsp_http": "7/7 RTSP streams and HTTP preview decoded; LAN and board checks passed",
+    "recording_restart": "18.933-second recording fully decoded; application restart checked; continuous thermal validation incomplete"
   },
   "packages": [
     {
@@ -75,9 +75,9 @@
   "stable_promoted": false,
   "new_image": false,
   "pending": [
-    "Physical confirmation that AX8850 cooling fan is continuously running before load tests",
-    "NPU test and complete six-stream decode/inference/RTSP/HTTP/record/restart validation",
-    "Corrected versioned kernel/headers publication: source fix is merged in ArmBianOS PR #4; this release retains historical headers bytes"
+    "Confirm effective AX8850 heatsink contact and directed airflow; power topology if card loss recurs",
+    "Sustained six-stream thermal stability and longer soak test",
+    "Previously recorded corrected kernel/headers package publication"
   ],
   "evidence": [
     {
@@ -108,5 +108,6 @@
       "path": "2026.10.09-4.validation/driver-source-capacity-comparison.json",
       "sha256": "d53d44f2f380dd232d33570d4daf49e9a97bffe09c1edf423d1c55fe0d116901"
     }
-  ]
+  ],
+  "hardware_trial": "2026.10.09-4.hardware.json"
 }

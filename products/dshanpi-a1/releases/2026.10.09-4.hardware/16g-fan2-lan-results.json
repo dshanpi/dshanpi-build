@@ -1,0 +1,37 @@
+[
+  {
+    "stream": "pcd",
+    "rc": 0,
+    "frames": 60
+  },
+  {
+    "stream": "vehicle",
+    "rc": 0,
+    "frames": 60
+  },
+  {
+    "stream": "seg",
+    "rc": 0,
+    "frames": 60
+  },
+  {
+    "stream": "driving",
+    "rc": 0,
+    "frames": 60
+  },
+  {
+    "stream": "depth",
+    "rc": 0,
+    "frames": 60
+  },
+  {
+    "stream": "count",
+    "rc": 0,
+    "frames": 60
+  },
+  {
+    "stream": "overview",
+    "rc": 0,
+    "frames": 60
+  }
+]

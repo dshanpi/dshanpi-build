@@ -1,0 +1,17 @@
+{
+    "programs": [
+
+    ],
+    "streams": [
+        {
+            "codec_name": "h264",
+            "width": 1920,
+            "height": 1080,
+            "nb_read_packets": "568"
+        }
+    ],
+    "format": {
+        "duration": "18.933333",
+        "size": "19201201"
+    }
+}

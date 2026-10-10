@@ -1,0 +1,115 @@
+Do you want to reboot device 0 ? (y/n): reboot device 1 success
++------------------------------------------------------------------------------------------------+
+| AXCL-SMI  V3.16.0_20260729180218                                Driver  V3.16.0_20260729180218 |
++-----------------------------------------+--------------+---------------------------------------+
+| Card  Name                     Firmware | Bus-Id       |                          Memory-Usage |
+| Fan   Temp                Pwr:Usage/Cap | CPU      NPU |                             CMM-Usage |
+|=========================================+==============+=======================================|
+|    0  AX8850                    V3.16.0 | 0000:01:00.0 |                153 MiB /      945 MiB |
+|   --   73C                      -- / -- | 1%        0% |                 18 MiB /    15232 MiB |
++-----------------------------------------+--------------+---------------------------------------+
+
++------------------------------------------------------------------------------------------------+
+| Processes:                                                                                     |
+| Card      PID  Process Name                                                   NPU Memory Usage |
+|================================================================================================|
+[    0.721800] i2c_designware 2022000.i2c: can't get pinctrl, bus recovery not supported
+[    0.722051] i2c_designware 2023000.i2c: can't get pinctrl, bus recovery not supported
+[    0.722266] i2c_designware 2024000.i2c: can't get pinctrl, bus recovery not supported
+[    0.722482] i2c_designware 202a000.i2c: can't get pinctrl, bus recovery not supported
+[    0.722953] axera_dma 120000.dw_dmac: DesignWare AXI DMA Controller, 8 channels
+[    0.724159] axera_dmaxor 30830000.ax_dmaxor: Axera AXI DMAXOR Controller, 32 channels
+[    0.724550] dmadim:ax_dmadim_probe:1658: done
+[    0.727739] axera-pwm 2010000.pwm0: Driver needs updating to atomic API
+[    0.727913] axera-pwm 2011000.pwm1: Driver needs updating to atomic API
+[    0.728082] axera-pwm 2012000.pwm2: Driver needs updating to atomic API
+[    0.728250] axera-pwm 2013000.pwm3: Driver needs updating to atomic API
+[    0.728540] spi_flash@0 enforce active low on chipselect handle
+[    0.728852] spi_master spi5: set clk_div=0x4, speed_hz=50000000, dws->max_freq=200000000
+[    0.729196] spi-nor spi5.0: s25fl016k (2048 Kbytes)
+[    0.730281] stmmaceth 10140000.ethernet: probe axera emac
+[    0.730306] stmmaceth 10140000.ethernet: IRQ eth_wake_irq not found
+[    0.730313] stmmaceth 10140000.ethernet: IRQ eth_lpi not found
+[    0.730428] stmmaceth 10140000.ethernet: emac bus clock: 400MHz
+[    0.730537] stmmaceth 10140000.ethernet: emac phy clock: 25MHz
+[    0.730553] stmmaceth 10140000.ethernet: PTP rate: 50MHz
+[    0.730583] stmmaceth 10140000.ethernet: reset axera emac and phy...
+[    0.735710] stmmaceth 10140000.ethernet: User ID: 0x10, Synopsys ID: 0x52
+[    0.735719] stmmaceth 10140000.ethernet: 	DWMAC4/5
+[    0.735724] stmmaceth 10140000.ethernet: DMA HW capability register supported
+[    0.735729] stmmaceth 10140000.ethernet: RX Checksum Offload Engine supported
+[    0.735732] stmmaceth 10140000.ethernet: TX Checksum insertion supported
+[    0.735736] stmmaceth 10140000.ethernet: Wake-Up On Lan supported
+[    0.735772] stmmaceth 10140000.ethernet: TSO supported
+[    0.735777] stmmaceth 10140000.ethernet: Enable RX Mitigation via HW Watchdog Timer
+[    0.735796] stmmaceth 10140000.ethernet: device MAC address ee:07:f2:a6:2e:5e
+[    0.735802] stmmaceth 10140000.ethernet: Enabled L3L4 Flow TC (entries=4)
+[    0.735806] stmmaceth 10140000.ethernet: Enabled RFS Flow TC (entries=8)
+[    0.735811] stmmaceth 10140000.ethernet: TSO feature enabled
+[    0.735815] stmmaceth 10140000.ethernet: Using 40 bits DMA width
+[    0.744544] dw_i2s_probe enter, pdata = 0x0000000000000000
+[    0.744556] dev->intr_type = 0
+[    0.744560] dw_i2s_probe, hdmi_i2s: 0
+[    0.744614] config pin_sd_misc to 0x0
+[    0.744623] config pin_g3_misc to 0x0
+[    0.744636] designware-i2s 2033000.i2s_mst: IRQ index 0 not found
+[    0.750773] dw_i2s_probe get irq is -6
+[    0.750788] IIS get i2s_mclk: 12288000
+[    0.750795] IIS get i2s_mclk: 12288000
+[    0.750846] IIS probe OK
+[    0.750957] sgm7220 0-0047: device id is not correct
+[    0.755951] sgm7220 0-0047: check device id fail
+[    0.760993] es7210_modinit enter
+[    0.761034] es8311_init enter
+[    0.761295] [drm] drm init enter
+[    0.761873] ALSA device list:
+[    0.761878]   No soundcards found.
+[    0.762040] ax-apb-uart 2016000.ax_uart: forbid DMA for kernel console
+[    0.762080] md: Waiting for all devices to be available before autodetect
+[    0.762083] md: If you don't use raid, use raid=noautodetect
+[    0.762086] md: Autodetecting RAID arrays.
+[    0.762088] md: autorun ...
+[    0.762090] md: ... autorun DONE.
+[    0.764298] EXT4-fs (axramdisk): mounted filesystem with ordered data mode. Opts: (null). Quota mode: disabled.
+[    0.764345] VFS: Mounted root (ext4 filesystem) readonly on device 253:0.
+[    0.764480] devtmpfs: mounted
+[    0.764568] Freeing unused kernel memory: 448K
+[    0.772698] Run /sbin/init as init process
+[    0.772703]   with arguments:
+[    0.772705]     /sbin/init
+[    0.772707]   with environment:
+[    0.772709]     HOME=/
+[    0.772711]     TERM=linux
+[    0.772713]     board_id=0x0,boot_reason=0x0
+[    0.791524] EXT4-fs (axramdisk): re-mounted. Opts: (null). Quota mode: disabled.
+[    0.848643] ax_cmm: loading out-of-tree module taints kernel.
+[    0.958291] [.KO][AX_VDEC][T][ax_vdec_module_init][462][ax_vdec_module]: ax_vdec module build time: Jul 29 2026 18:20:01
+[    0.958291]
+[    0.959737] [.KO][AX_VDEC][T][ax_decoder_probe][370]: Done! ax_vdec module build time: Jul 29 2026 18:20:01
+[    0.959737]
+[    0.959737]
+[    0.982791] [.KO][AX_JDEC][T][ax_jdec_module_init][387][ax_jdec_drv]: [Axera version]: ax_jdec V3.16.0_20260729180218 Jul 29 2026 18:29:45 JK
+[    0.983100] [.KO][AX_JDEC][T][ax_decoder_probe][204][ax_jdec_drv]: jpeg decoder probe begin.
+[    0.983100]
+[    0.983128] [.KO][AX_JDEC][T][ax_decoder_probe][217][ax_jdec_drv]: get the ax650_rst_jdec
+[    0.983128]
+[    0.987703] [.KO][AX_JDEC][T][ax_decoder_probe][247][ax_jdec_drv]: core id 0 name jdec0 actual base addr: 0x10120000
+[    0.987703]
+[    0.990572] ax pcie msg init
+[    0.993193] misc ax_pcie_dma_transfer: DMA mask not set
+[    0.997951] base_addr: 0xffff800019c00080, size: 0x1ffec0
+[    0.997969] base_addr: 0xffff800019e00080, size: 0x1ffe40
+[    1.119024] vtty: /dev/ttyAXCL0 target 0 port 80 ready, rx_pkts 256 payload 4096
+[    1.139641] random: dd: uninitialized urandom read (32 bytes read)
+[    1.156902] stmmaceth 10140000.ethernet: axera_reset_phy
+[    1.262664] stmmaceth 10140000.ethernet eth0: PHY [stmmac-0:01] driver [JL2xxx Gigabit Ethernet] (irq=POLL)
+[    1.263395] stmmaceth 10140000.ethernet eth0: Register MEM_TYPE_PAGE_POOL RxQ-0
+[    2.265658] stmmaceth 10140000.ethernet: Failed to reset the dma
+[    2.271711] stmmaceth 10140000.ethernet eth0: stmmac_hw_setup: DMA engine initialization failed
+[    2.280453] stmmaceth 10140000.ethernet eth0: stmmac_open: Hw setup failed
+[    2.320876] stmmaceth 10140000.ethernet: axera_reset_phy
+[    2.430685] stmmaceth 10140000.ethernet eth0: PHY [stmmac-0:01] driver [JL2xxx Gigabit Ethernet] (irq=POLL)
+[    2.433009] stmmaceth 10140000.ethernet eth0: Register MEM_TYPE_PAGE_POOL RxQ-0
+[    3.435665] stmmaceth 10140000.ethernet: Failed to reset the dma
+[    3.441738] stmmaceth 10140000.ethernet eth0: stmmac_hw_setup: DMA engine initialization failed
+[    3.450491] stmmaceth 10140000.ethernet eth0: stmmac_open: Hw setup failed

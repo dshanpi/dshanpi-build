@@ -1,0 +1,254 @@
+{
+  "product": "dshanpi-a1",
+  "release": "2026.10.09-4",
+  "package_version": "3.16.0+dshanpi2",
+  "demo_commit": "2aa772bbf16b8a904ee6ca57877c0e602208bf49",
+  "recorded_at": "2026-10-10T02:14:06.637101+00:00",
+  "verdict": "functional-path-demonstrated; continuous thermal/stability acceptance incomplete",
+  "npu_unit_tests": {
+    "passed": 20,
+    "failed": 0
+  },
+  "first_run": {
+    "six_channels_inferred": true,
+    "error_free_stats_seconds": 20,
+    "failure": "AXCL PCIe message timeout around input timestamp 28.5 seconds; host heartbeat reported device 1 dead",
+    "last_observed_temperature_c": 78,
+    "host_kernel_oops": false,
+    "recovery": "vendor axcl-smi reboot -d 0; no host reboot, flashing or DT changes",
+    "root_cause": "undetermined; thermal and supply conditions need investigation"
+  },
+  "after_user_added_fan": {
+    "single_channel_seconds": 45,
+    "single_channel_exit_errors": 0,
+    "single_channel_lan_decoded_frames": 60,
+    "single_channel_temperature_c": [
+      71.47,
+      72.058
+    ],
+    "six_channel_stats_last_elapsed_seconds": 60.10174999699666,
+    "measured": {
+      "window_seconds": 50.09699859000102,
+      "last_elapsed_seconds": 60.10174999699666,
+      "channels": [
+        {
+          "name": "pcd",
+          "decoded_fps": 12.0,
+          "inferred_fps": 12.0,
+          "rendered_fps": 12.0,
+          "encoded_fps": 12.0,
+          "mux_errors_total": 0,
+          "submit_errors_total": 0,
+          "drops_total": 0
+        },
+        {
+          "name": "vehicle",
+          "decoded_fps": 24.97,
+          "inferred_fps": 9.52,
+          "rendered_fps": 24.95,
+          "encoded_fps": 24.99,
+          "mux_errors_total": 0,
+          "submit_errors_total": 0,
+          "drops_total": 0
+        },
+        {
+          "name": "seg",
+          "decoded_fps": 30.02,
+          "inferred_fps": 5.97,
+          "rendered_fps": 30.02,
+          "encoded_fps": 30.04,
+          "mux_errors_total": 0,
+          "submit_errors_total": 0,
+          "drops_total": 0
+        },
+        {
+          "name": "driving",
+          "decoded_fps": 29.94,
+          "inferred_fps": 9.62,
+          "rendered_fps": 29.92,
+          "encoded_fps": 29.96,
+          "mux_errors_total": 0,
+          "submit_errors_total": 0,
+          "drops_total": 0
+        },
+        {
+          "name": "depth",
+          "decoded_fps": 24.01,
+          "inferred_fps": 10.8,
+          "rendered_fps": 24.01,
+          "encoded_fps": 23.99,
+          "mux_errors_total": 0,
+          "submit_errors_total": 0,
+          "drops_total": 0
+        },
+        {
+          "name": "count",
+          "decoded_fps": 24.07,
+          "inferred_fps": 9.38,
+          "rendered_fps": 24.07,
+          "encoded_fps": 24.07,
+          "mux_errors_total": 0,
+          "submit_errors_total": 0,
+          "drops_total": 0
+        }
+      ],
+      "overview_fps": 30.001797359173278,
+      "overview_mux_errors_total": 0,
+      "overview_dropped_total": 0
+    },
+    "lan_rtsp": [
+      {
+        "stream": "pcd",
+        "rc": 0,
+        "frames": 60
+      },
+      {
+        "stream": "vehicle",
+        "rc": 0,
+        "frames": 60
+      },
+      {
+        "stream": "seg",
+        "rc": 0,
+        "frames": 60
+      },
+      {
+        "stream": "driving",
+        "rc": 0,
+        "frames": 60
+      },
+      {
+        "stream": "depth",
+        "rc": 0,
+        "frames": 60
+      },
+      {
+        "stream": "count",
+        "rc": 0,
+        "frames": 60
+      },
+      {
+        "stream": "overview",
+        "rc": 0,
+        "frames": 60
+      }
+    ],
+    "local_rtsp": "7/7 streams decoded 60 frames",
+    "http_preview": "60 frames decoded; repeated after application restart",
+    "thermal_samples": "2026.10.09-4.hardware/16g-six-stream-fan2-thermal.jsonl",
+    "thermal_range_c": [
+      75.588,
+      85.294
+    ],
+    "end_reason": "Agent stopped load on sustained temperature rise above diagnostic 85C condition; no second spontaneous card failure observed",
+    "temperature_guard_note": "Diagnostic bounds are not manufacturer maximum ratings. Earlier 80C stop was a conservative test guard; fixed PAC DTS labels 80C passive. No thermal limits or clocks were changed."
+  },
+  "recording": {
+    "duration_seconds": 18.933333,
+    "video_packets": 568,
+    "resolution": "1920x1080",
+    "codec": "h264",
+    "bytes": 19201201,
+    "sha256": "ac16bd2df31a5b3046eb350e0aaabe2c1e8030ada05aef2e6acebaad22e0da81",
+    "local_path": "/home/ubuntu/dshanpi-build/output/six-streams-validation/16g-overview-20s.mp4",
+    "full_decode": "passed with ffmpeg -xerror",
+    "note": "Requested 20 seconds, captured 18.933333 seconds before the deliberately time-limited service stopped. Actual duration is recorded; not claimed as a full 20-second result.",
+    "board_path": "/home/yuxuan/ax8850-multistream-demo/recordings/validated-overview-20261010.mp4"
+  },
+  "application_restart": {
+    "rtsp": "recorded and decoded overview after restart",
+    "http": "60 frames decoded after restart",
+    "exit_errors": 0,
+    "ports_released": true
+  },
+  "current_state": {
+    "application_services": "stopped",
+    "axcl_card": "responding; NPU idle",
+    "stable_promoted": false,
+    "new_image": false
+  },
+  "pending": [
+    "Confirm effective AX8850 heatsink contact and directed airflow; power topology if card loss recurs",
+    "Sustained six-stream thermal stability and longer soak test",
+    "Previously recorded corrected kernel/headers package publication"
+  ],
+  "evidence": [
+    {
+      "path": "2026.10.09-4.hardware/16g-npu-test.log",
+      "sha256": "1d62f767ba188d692f20718ea1cd1700459ed21f3b8a457cb939e2fe3d914d58"
+    },
+    {
+      "path": "2026.10.09-4.hardware/16g-six-stream-first-run.log",
+      "sha256": "cb8e2a41d91ad67387231959ada81cec94171c94af3d7a9237632eba53a7f674"
+    },
+    {
+      "path": "2026.10.09-4.hardware/16g-six-stream-failure.log",
+      "sha256": "70d2c9fac4a40611a9f168437133c19ba7f09bb2ddce4139bd99f55899dbb059"
+    },
+    {
+      "path": "2026.10.09-4.hardware/16g-card-recovery.log",
+      "sha256": "41d0f119904ae615fe157edc6840ebcd238c07c5b682bd6f672b7106747fbfe5"
+    },
+    {
+      "path": "2026.10.09-4.hardware/16g-post-failure-idle.log",
+      "sha256": "17852b6494e7a9d17dec01583159f51fa5f03350746fc3a608d4f1d56fc9b9c6"
+    },
+    {
+      "path": "2026.10.09-4.hardware/16g-fan-single-stage-native.log",
+      "sha256": "843fa8ecd90e64c6947ad1e409ac53ac83781eb5d94fcf49f8447dd717b9eaae"
+    },
+    {
+      "path": "2026.10.09-4.hardware/16g-single-lan-decode.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "2026.10.09-4.hardware/16g-six-stream-thermal.jsonl",
+      "sha256": "1c080d1d666ca1df430a54b9ed9740b315306d66b091c0c96a16773194a3b8de"
+    },
+    {
+      "path": "2026.10.09-4.hardware/16g-six-stream-fan2-thermal.jsonl",
+      "sha256": "21814421fa724b24d68a41099684e71e8000a8d3066f259fc99acc9c089215c9"
+    },
+    {
+      "path": "2026.10.09-4.hardware/16g-six-stream-fan2-run.log",
+      "sha256": "9e54fda8310c7eae7c54e082aa79b64978861e28cf80d45577f8561e8afc7e20"
+    },
+    {
+      "path": "2026.10.09-4.hardware/16g-fan2-invocation.log",
+      "sha256": "83a6feaa2dff17172ccb4e0e0700abdccd18c5b3637615445b3b696f560dd5bd"
+    },
+    {
+      "path": "2026.10.09-4.hardware/16g-fan2-lan-results.json",
+      "sha256": "85411f14874b582052a75a95db76082db10ce33146af42be2eb7acf1625fa2ef"
+    },
+    {
+      "path": "2026.10.09-4.hardware/16g-measured-fps.json",
+      "sha256": "654a70db1530bdd3298c81b5a0ef7673266c01c8f0e0dd2ce1f443589f103374"
+    },
+    {
+      "path": "2026.10.09-4.hardware/16g-overview-record.json",
+      "sha256": "467344c09920c84d4f967bbbdc017879ed8e2d92bbc9947a5a795d1a6f6b1998"
+    },
+    {
+      "path": "2026.10.09-4.hardware/16g-overview-file-decode.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "2026.10.09-4.hardware/16g-restart-http-decode.log",
+      "sha256": "3695e2764198aebb05bbc1958d4121ec990521682862eb75e9563f65c21c6116"
+    },
+    {
+      "path": "2026.10.09-4.hardware/16g-short-record-start.log",
+      "sha256": "cacad47ee92817fece2c8ac5f3f6d1e23c5cf1a146b77f379730ec9006732032"
+    },
+    {
+      "path": "2026.10.09-4.hardware/16g-short-record-stop.log",
+      "sha256": "32d052897249390a29a5a4c6c98fd3ece5a9b63eba4bc75964ae2add47865ef9"
+    },
+    {
+      "path": "2026.10.09-4.hardware/16g-overview-recorded.png",
+      "sha256": "e68cacb2be4244a44dfaf793b712bbbf4935520e231899f24f205142856ec43c"
+    }
+  ],
+  "log_normalization": "Repository text logs have trailing whitespace removed; raw logs retained in workstation output/six-streams-validation."
+}

@@ -1,0 +1,69 @@
+{
+  "window_seconds": 50.09699859000102,
+  "last_elapsed_seconds": 60.10174999699666,
+  "channels": [
+    {
+      "name": "pcd",
+      "decoded_fps": 12.0,
+      "inferred_fps": 12.0,
+      "rendered_fps": 12.0,
+      "encoded_fps": 12.0,
+      "mux_errors_total": 0,
+      "submit_errors_total": 0,
+      "drops_total": 0
+    },
+    {
+      "name": "vehicle",
+      "decoded_fps": 24.97,
+      "inferred_fps": 9.52,
+      "rendered_fps": 24.95,
+      "encoded_fps": 24.99,
+      "mux_errors_total": 0,
+      "submit_errors_total": 0,
+      "drops_total": 0
+    },
+    {
+      "name": "seg",
+      "decoded_fps": 30.02,
+      "inferred_fps": 5.97,
+      "rendered_fps": 30.02,
+      "encoded_fps": 30.04,
+      "mux_errors_total": 0,
+      "submit_errors_total": 0,
+      "drops_total": 0
+    },
+    {
+      "name": "driving",
+      "decoded_fps": 29.94,
+      "inferred_fps": 9.62,
+      "rendered_fps": 29.92,
+      "encoded_fps": 29.96,
+      "mux_errors_total": 0,
+      "submit_errors_total": 0,
+      "drops_total": 0
+    },
+    {
+      "name": "depth",
+      "decoded_fps": 24.01,
+      "inferred_fps": 10.8,
+      "rendered_fps": 24.01,
+      "encoded_fps": 23.99,
+      "mux_errors_total": 0,
+      "submit_errors_total": 0,
+      "drops_total": 0
+    },
+    {
+      "name": "count",
+      "decoded_fps": 24.07,
+      "inferred_fps": 9.38,
+      "rendered_fps": 24.07,
+      "encoded_fps": 24.07,
+      "mux_errors_total": 0,
+      "submit_errors_total": 0,
+      "drops_total": 0
+    }
+  ],
+  "overview_fps": 30.001797359173278,
+  "overview_mux_errors_total": 0,
+  "overview_dropped_total": 0
+}

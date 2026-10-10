@@ -1,0 +1,8 @@
+{"time": "2026-10-10T02:09:55Z", "temperature_c": 75.588, "command_rc": 0}
+{"time": "2026-10-10T02:10:06Z", "temperature_c": 78.235, "command_rc": 0}
+{"time": "2026-10-10T02:10:16Z", "temperature_c": 80.0, "command_rc": 0}
+{"time": "2026-10-10T02:10:27Z", "temperature_c": 81.47, "command_rc": 0}
+{"time": "2026-10-10T02:10:37Z", "temperature_c": 82.647, "command_rc": 0}
+{"time": "2026-10-10T02:10:48Z", "temperature_c": 84.117, "command_rc": 0}
+{"time": "2026-10-10T02:10:58Z", "temperature_c": 85.294, "command_rc": 0}
+Stopped: device unavailable or diagnostic bound reached or sustained rise above 85C (test guard only, not a manufacturer rating)
