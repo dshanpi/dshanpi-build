@@ -18,3 +18,11 @@ stable 只晋级具有适用实板证据的同一组包，不重新构建。
 提交前运行政策检查、适用 shell/Python 测试及 `git diff --check`。
 跨仓修改同步政策副本并使用 `--peer` 检查，PR 列明关联仓库和未完成环节。
 政策检查通过不代表自动镜像发布已经实现；缺少的自动化必须明确记录，不能宣称完整流程已完成。
+
+按 DELIVERY_POLICY.md G13 执行源码归属：板级/内核/设备树归 ArmBianOS，可选驱动
+锁定/补丁/DEB/发行归 dshanpi-build，用户交互归 dspi-config，板卡差异用 BSP profile。
+组件按目录、短期分支和 PR 管理；实现与验证证据分开提交，历史 lock/包/tag 不覆盖。
+暂存后运行 `python3 tools/check-repository-hygiene.py`；只暂存明确审查的文件，
+缓存、构建输出、私钥和个人凭据不提交。技能与开发交接记录随仓库维护。
+
+维护本仓库时读取 `.agents/skills/maintain-dshanpi-delivery/SKILL.md`；开发交接见 `docs/development-handoff.md`。

@@ -2,12 +2,14 @@
   "schema_version": 1,
   "policy_id": "dshanpi-delivery-v1",
   "role": "dshanpi-build",
-  "sha256": "003320d4adcf6d82038e9d786633f15de5611909df7b093de355d16df777fe89",
+  "sha256": "00d4643efe42847526632406fdc4b54828a4461b95a9531092cff4b7d5537429",
   "references": [
     "AGENTS.md",
     "README.md",
     ".github/PULL_REQUEST_TEMPLATE.md",
-    "products/dshanpi-a1-cm5/releases/README.md"
+    "products/dshanpi-a1-cm5/releases/README.md",
+    ".agents/skills/maintain-dshanpi-delivery/SKILL.md",
+    "docs/development-handoff.md"
   ],
   "hooks": [
     ".github/workflows/ci.yml",
@@ -20,5 +22,8 @@
     "scripts/publish-apt.sh",
     "scripts/validate-config.sh",
     "scripts/verify-image.sh"
+  ],
+  "hygiene_hooks": [
+    ".github/workflows/ci.yml"
   ]
 }

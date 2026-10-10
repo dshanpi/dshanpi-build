@@ -217,3 +217,10 @@ for product in products:
 PYTEST
 
 echo "dshanpi-build tests passed"
+
+# Maintenance plans must never enter the complete image build.
+if "$source_root/scripts/build-product.sh" dshanpi-a1 "$source_root/products/dshanpi-a1/releases/2026.10.09-4.lock.json" --print-plan >"$test_root/maintenance.out" 2>&1; then
+    echo 'image builder accepted a package maintenance plan' >&2
+    exit 1
+fi
+grep -F 'package maintenance lock' "$test_root/maintenance.out" >/dev/null

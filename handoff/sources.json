@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "repositories": {
+    "ArmBianOS": {
+      "url": "https://github.com/dshanpi/ArmBianOS.git",
+      "commit": "47b72f4adfce6a43035a831b0b47c6504633f367"
+    },
+    "dshanpi-build": {
+      "url": "https://github.com/dshanpi/dshanpi-build.git",
+      "commit": "self"
+    },
+    "dspi-config": {
+      "url": "https://github.com/dshanpi/dspi-config.git",
+      "commit": "69f441a1e7d01feaaf9c936cc5db6ac793805668"
+    }
+  }
+}

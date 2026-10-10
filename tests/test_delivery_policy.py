@@ -16,7 +16,7 @@ class PolicyTests(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name) / "repo"
         self.manifest = json.loads((ROOT / ".delivery-policy.json").read_text())
-        paths = {".delivery-policy.json", "DELIVERY_POLICY.md", "tools/check-delivery-policy.py",
+        paths = {".delivery-policy.json", "DELIVERY_POLICY.md", "tools/check-delivery-policy.py", "tools/check-repository-hygiene.py",
                  *self.manifest["references"], *self.manifest["hooks"]}
         for name in paths:
             target = self.root / name
@@ -55,6 +55,22 @@ class PolicyTests(unittest.TestCase):
         result = self.run_gate()
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("G12 kernel headers", result.stderr)
+
+    def test_rejects_removed_ownership_gate_even_with_updated_hash(self):
+        path = self.root / "DELIVERY_POLICY.md"
+        text = path.read_text()
+        start = text.index("## G13 ")
+        end = text.index("## 维护与检查", start)
+        path.write_text(text[:start] + text[end:])
+        manifest = self.manifest.copy()
+        manifest["sha256"] = hashlib.sha256(path.read_bytes()).hexdigest()
+        (self.root / ".delivery-policy.json").write_text(json.dumps(manifest))
+        self.assertNotEqual(self.run_gate().returncode, 0)
+
+    def test_rejects_removed_hygiene_hook(self):
+        path = self.root / ".github/workflows/ci.yml"
+        path.write_text(path.read_text().replace("check-repository-hygiene.py", "skipped.py"))
+        self.assertNotEqual(self.run_gate().returncode, 0)
 
     def test_rejects_removed_ci_hook(self):
         path = self.root / ".github/workflows/ci.yml"
