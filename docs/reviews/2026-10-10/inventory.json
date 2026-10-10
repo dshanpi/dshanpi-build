@@ -1,0 +1,388 @@
+{
+  "generated_at_utc": "2026-10-10T02:23:47.292348+00:00",
+  "method": "git diff --numstat BASE HEAD; net changes, not summed commit churn; binary line counts excluded; this uncommitted report excluded",
+  "repositories": [
+    {
+      "name": "ArmBianOS",
+      "base": "9a3ce1500ea7d149dabd64247afea21cde920ed9",
+      "head": "fb69b29b9257bbd5115ac6b08f7e94c975b7756c",
+      "branch": "feature/dshanpi-a1-cm5",
+      "totals": {
+        "files": 47,
+        "added": 3968,
+        "deleted": 7,
+        "binary_files": 0,
+        "binary_bytes_at_head": 0
+      },
+      "categories": {
+        "文档门禁测试": {
+          "files": 20,
+          "added": 1078,
+          "deleted": 0,
+          "binary_files": 0,
+          "binary_bytes_at_head": 0
+        },
+        "CM5板级实现": {
+          "files": 13,
+          "added": 2699,
+          "deleted": 0,
+          "binary_files": 0,
+          "binary_bytes_at_head": 0
+        },
+        "镜像集成与其他板profile": {
+          "files": 10,
+          "added": 144,
+          "deleted": 0,
+          "binary_files": 0,
+          "binary_bytes_at_head": 0
+        },
+        "共享框架修改": {
+          "files": 4,
+          "added": 47,
+          "deleted": 7,
+          "binary_files": 0,
+          "binary_bytes_at_head": 0
+        }
+      },
+      "nonmerge_commits": [
+        {
+          "commit": "38d6da137121c375151c873722e7828b35d8a127",
+          "subject": "board: add DShanPi A1 CM5 support"
+        },
+        {
+          "commit": "96e43871d1d742571cf538fbbc1228eb580b80ea",
+          "subject": "tools: add signed DShanPi package repository workflow"
+        },
+        {
+          "commit": "897e317bbdf8731827d77e029976856196b7a80c",
+          "subject": "tools: harden DShanPI A1 CM5 repository workflow"
+        },
+        {
+          "commit": "c31db75d439dc628bb44621af8af5c1576420e26",
+          "subject": "docs: add DShanPI A1 CM5 maintenance skill"
+        },
+        {
+          "commit": "c83f0aebe8cb7900e28b2b578760739eab2f4d17",
+          "subject": "docs: explain A1 CM5 device tree layout"
+        },
+        {
+          "commit": "d2ba26c5a5cee23411cab3a7c05d81a8733c231d",
+          "subject": "board: add CM5 overlay and release package hooks"
+        },
+        {
+          "commit": "93fad06e5a8879b751ee9fed4fc3663a49c8c97d",
+          "subject": "build: move APT release orchestration to dshanpi-build"
+        },
+        {
+          "commit": "4a0114be3c666305ad3463caecc95a82b8238d08",
+          "subject": "docs: record final CM5 overlay build validation"
+        },
+        {
+          "commit": "6b1738751c4c31f6d604d3fd7c66d96a253968a5",
+          "subject": "build: defer DShanPI source activation until final image stage"
+        },
+        {
+          "commit": "6515a9a040f1a44da2ace089f950810f1ad5cd84",
+          "subject": "build: order repository and release identity at image finalization"
+        },
+        {
+          "commit": "d267aed7017b3e23b6c161e825bf29f13b7bac95",
+          "subject": "docs: align CM5 image gate with generic APT root"
+        },
+        {
+          "commit": "1bb69ccdcefab0956805acdd8b46846892374ac0",
+          "subject": "feat: add multi-product release integration"
+        },
+        {
+          "commit": "6fdd5fdf96c25dfe53c5dcdf443eda6173133ace",
+          "subject": "Install exact local release cohorts when assembling product images"
+        },
+        {
+          "commit": "e4a85575a8ab12370830558fc5b4a6ea98f3405b",
+          "subject": "Require the shared DShanPI delivery policy in board maintenance gates"
+        },
+        {
+          "commit": "cd79146312409711a02c4ee73fe369f9344bb1ff",
+          "subject": "Install ripgrep before running the board source gate in CI"
+        },
+        {
+          "commit": "cad78f31c168714d55b014d59307c487b4518257",
+          "subject": "Require matching installable kernel headers for every released image"
+        },
+        {
+          "commit": "fb69b29b9257bbd5115ac6b08f7e94c975b7756c",
+          "subject": "fix: preserve BTF module ABI when installing kernel headers (#4)"
+        }
+      ]
+    },
+    {
+      "name": "dshanpi-build",
+      "base": "1d389e896f7f76a18d17724008b6678430ad22a5",
+      "head": "8bb13172569d1026348f01a69007c684f1cdc90d",
+      "branch": "main",
+      "totals": {
+        "files": 157,
+        "added": 10130,
+        "deleted": 1,
+        "binary_files": 2,
+        "binary_bytes_at_head": 4308132
+      },
+      "categories": {
+        "文档门禁仓库配置": {
+          "files": 10,
+          "added": 512,
+          "deleted": 1,
+          "binary_files": 0,
+          "binary_bytes_at_head": 0
+        },
+        "构建发布实现": {
+          "files": 39,
+          "added": 3154,
+          "deleted": 0,
+          "binary_files": 0,
+          "binary_bytes_at_head": 0
+        },
+        "包源码锁定与辅助程序": {
+          "files": 9,
+          "added": 301,
+          "deleted": 0,
+          "binary_files": 1,
+          "binary_bytes_at_head": 1978244
+        },
+        "产品配置": {
+          "files": 4,
+          "added": 235,
+          "deleted": 0,
+          "binary_files": 0,
+          "binary_bytes_at_head": 0
+        },
+        "发行清单与验证证据": {
+          "files": 83,
+          "added": 5126,
+          "deleted": 0,
+          "binary_files": 1,
+          "binary_bytes_at_head": 2329888
+        },
+        "回归测试": {
+          "files": 12,
+          "added": 802,
+          "deleted": 0,
+          "binary_files": 0,
+          "binary_bytes_at_head": 0
+        }
+      },
+      "nonmerge_commits": [
+        {
+          "commit": "22a6fbc084a321b9533561db518f17e9f4d72369",
+          "subject": "feat: add multi-product release and APT orchestrator"
+        },
+        {
+          "commit": "6f1991cdb657385906343ad3ca9c2a69d0741303",
+          "subject": "release: pin final A1 CM5 build inputs"
+        },
+        {
+          "commit": "f6d5bc0627b8dc92dafcab9253137b0aae61dbd5",
+          "subject": "release: pin deferred APT source activation"
+        },
+        {
+          "commit": "3e2064695d134d43d7fbe7474f14609fed82481c",
+          "subject": "build: collect locked Rockchip multimedia packages"
+        },
+        {
+          "commit": "f443492e95a1639b1cdae792f7d872bfbd886d11",
+          "subject": "build: select standard CLI image noninteractively"
+        },
+        {
+          "commit": "2cea3e481103221993157525806b26bd93d9b516",
+          "subject": "release: pin final image package ordering"
+        },
+        {
+          "commit": "d8dd51f79b99cfc5e244db7248d76823138b7ff5",
+          "subject": "release: make desktop version marker independently installable"
+        },
+        {
+          "commit": "8f3f9a2ba08c674c6f85e6a81e3948a2fccdc1f2",
+          "subject": "apt: keep stable suites eligible for upgrades"
+        },
+        {
+          "commit": "280c3b49e3792ec3475ecdbb814da6cf1970944a",
+          "subject": "feat: add A1 R1 and Avaota A1 products"
+        },
+        {
+          "commit": "b0bd7ab4555e7ee1b49743921bf7ecf5b535fb37",
+          "subject": "feat: publish signed APT snapshots through GitHub Pages"
+        },
+        {
+          "commit": "8123f50cde8a38817dad3128c27db0d05dbebb88",
+          "subject": "ci: validate APT publishing and snapshot integrity"
+        },
+        {
+          "commit": "1a2fdcb644389aafdb46c72ee39ddf905ae1a2d1",
+          "subject": "build: pin the next complete CM5 Pages release"
+        },
+        {
+          "commit": "d0ec693d682b84c4b3ff69c78f0d32efb617df95",
+          "subject": "Complete multi-board package delivery and release lifecycle checks"
+        },
+        {
+          "commit": "bb44caa47166c07d17effbcec785723968ecc2bf",
+          "subject": "Provide terminal width for unattended Armbian patching"
+        },
+        {
+          "commit": "9311c11fc9de2b6ef731b8c5164c2b6a1a968d76",
+          "subject": "Verify each product image selects its board device tree"
+        },
+        {
+          "commit": "00ca03043fef1ea6b7f88d93b3cc88960ded660b",
+          "subject": "Generate exact core and desktop installation commands from signed cohorts"
+        },
+        {
+          "commit": "05330fc9f7ffc69e4b10bcc2f2d04bbc8a951478",
+          "subject": "Reuse signed published package bytes for equivalent rebuilt payloads"
+        },
+        {
+          "commit": "6dc861dd55ed2925da1f87730d75af56a785112c",
+          "subject": "Record verified CM5 image delivery and public testing cohorts"
+        },
+        {
+          "commit": "d2cf46a4ba88602e696f037441122cd02ba683dd",
+          "subject": "Repair inherited RKAIQ directory permissions during A1 upgrades"
+        },
+        {
+          "commit": "649819f28c1bb0c62e984c2922e26f4bab17747a",
+          "subject": "Record verified A1 CLI and desktop testing delivery"
+        },
+        {
+          "commit": "f2e7a9083aeab6d6a23a976eb29616df3a89455f",
+          "subject": "Record A1 testing cohort with source lock fix"
+        },
+        {
+          "commit": "fa50e70b71009151d5982f7acd8181b30ec08031",
+          "subject": "Cover all four products with validated source lock maintenance releases"
+        },
+        {
+          "commit": "5d913909c35894cad2f9ad272672a8180f81d74b",
+          "subject": "Make the shared image and APT delivery policy mandatory at build entry points"
+        },
+        {
+          "commit": "decd3125a7cd2ac0f4d1e5b8ab9c1c47d42569d4",
+          "subject": "Add optional A1 AXCL DKMS packages and signed APT delivery"
+        },
+        {
+          "commit": "497f4a97aed5eee571fa0230c6207d075f6663df",
+          "subject": "Fail closed on Pages lookup errors and avoid duplicate authentication"
+        },
+        {
+          "commit": "71a07be3798ecc5cb88a89b5140cb57370634970",
+          "subject": "Make AXCL builds independent of umask and record A1 testing delivery"
+        },
+        {
+          "commit": "e75f562705663a6cf43af8c865e25dac65a573bd",
+          "subject": "Enforce the shared per-image kernel headers delivery requirement"
+        },
+        {
+          "commit": "b68850e702c082f2c4e4f936f3de565c6196cb6a",
+          "subject": "Package A1 AIC8800D80 USB Wi-Fi and Bluetooth with DKMS and signed APT delivery"
+        },
+        {
+          "commit": "a7512c86089f75ef06c188dc4c91cc8e07fb2990",
+          "subject": "Remove the AIC Bluetooth soft dependency when its package is removed"
+        },
+        {
+          "commit": "75a3736e0bfd018a2c4277199985d877f34cadc6",
+          "subject": "Record signed AIC8800D80 packages and A1 installation evidence"
+        },
+        {
+          "commit": "bbb6283a9eaf946fa666f25a80c8c804a987e146",
+          "subject": "Normalize the captured module verification log"
+        },
+        {
+          "commit": "43877bff7b9f4e6d10b1e578372b1bf984f76b9c",
+          "subject": "Add explicit A1 AX8850 16GB runtime and firmware delivery"
+        },
+        {
+          "commit": "bde6d1a3e8ffff12f42d455376dc4d33a5b44cec",
+          "subject": "Exercise AXCL activation against BTF and module layout regressions"
+        },
+        {
+          "commit": "a9eb04e8622e12439a5f958046a70ae2859d4d1a",
+          "subject": "Record signed A1 16GB package installation and pending inference checks"
+        },
+        {
+          "commit": "8af17c3acdf41c535ef5f65b6cbc23e84ab5df7c",
+          "subject": "Record A1 six-stream functional checks and unresolved thermal soak"
+        }
+      ]
+    },
+    {
+      "name": "dspi-config",
+      "base": "3d4f93044a307a36786cda3ca0c68e89a8d0c780",
+      "head": "2412c456ea9001f1d4703b0ecd54bea9bca24d80",
+      "branch": "main",
+      "totals": {
+        "files": 15,
+        "added": 1123,
+        "deleted": 2,
+        "binary_files": 0,
+        "binary_bytes_at_head": 0
+      },
+      "categories": {
+        "文档门禁仓库配置": {
+          "files": 8,
+          "added": 364,
+          "deleted": 2,
+          "binary_files": 0,
+          "binary_bytes_at_head": 0
+        },
+        "客户端与打包": {
+          "files": 5,
+          "added": 488,
+          "deleted": 0,
+          "binary_files": 0,
+          "binary_bytes_at_head": 0
+        },
+        "回归测试": {
+          "files": 2,
+          "added": 271,
+          "deleted": 0,
+          "binary_files": 0,
+          "binary_bytes_at_head": 0
+        }
+      },
+      "nonmerge_commits": [
+        {
+          "commit": "02315f9948179ab5c5149acd5bab4e3138de7b48",
+          "subject": "feat: add DShanPI device and release manager"
+        },
+        {
+          "commit": "2b3afad08bdd794e351366b3785aed61a50c4c5b",
+          "subject": "feat: support product-specific overlay directories"
+        },
+        {
+          "commit": "772836bbf8c4f705cadbe779d2c270085abb472d",
+          "subject": "fix: migrate APT domain and pin full release cohorts during rollback"
+        },
+        {
+          "commit": "e6970bf5f21ecb65aa1c6403d8d166d782d28f84",
+          "subject": "Fix intermittent SIGPIPE while reading release dependencies"
+        },
+        {
+          "commit": "51a4af8aeb8430e3554093f6e9e2655cc87614fe",
+          "subject": "Keep source locks outside APT definitions and handle legacy locks"
+        },
+        {
+          "commit": "acd7b8f2fc09a287f70c5e9a03f2f739066b463e",
+          "subject": "Exercise source locking across all four board profiles"
+        },
+        {
+          "commit": "041c224b3b0d160de199505d046166f1ff20122a",
+          "subject": "Apply the shared delivery policy to client packaging and tests"
+        },
+        {
+          "commit": "94e40b31bcbb42f21e95910a5eccae48aabbaf4b",
+          "subject": "Synchronize mandatory image kernel headers delivery policy"
+        }
+      ]
+    }
+  ]
+}
