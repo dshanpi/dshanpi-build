@@ -1,0 +1,96 @@
+inactive
+inactive
+Started ax8850-multistream.service - /bin/bash /home/yuxuan/ax8850-multistream-demo/run.sh configs/six.json 35.
+run/config.json
+json file
+02:12:13.423 INF operator():132 | AXCL engine VNPU kind=0
+02:12:13.437 INF operator():132 | AXCL engine VNPU kind=0
+[2026-10-10T02:12:13.464] [INFO] [T:281473210429120] Added path: /pcd
+[2026-10-10T02:12:13.465] [INFO] [T:281473210429120] RTSP server started on 0.0.0.0:8554
+02:12:13.512 INF operator():132 | AXCL engine VNPU kind=0
+[2026-10-10T02:12:13.735] [INFO] [T:281473210429120] Added path: /vehicle
+{"event":"model","input":[1,640,640,3],"kind":"seg","outputs":[{"bytes":102400,"name":"output0","shape":[1,80,80,4]},{"bytes":2048000,"name":"output1","shape":[1,80,80,80]},{"bytes":819200,"name":"674","shape":[1,80,80,32]},{"bytes":25600,"name":"696","shape":[1,40,40,4]},{"bytes":512000,"name":"736","shape":[1,40,40,80]},{"bytes":204800,"name":"758","shape":[1,40,40,32]},{"bytes":6400,"name":"780","shape":[1,20,20,4]},{"bytes":128000,"name":"820","shape":[1,20,20,80]},{"bytes":51200,"name":"842","shape":[1,20,20,32]},{"bytes":3276800,"name":"935","shape":[1,32,160,160]}]}
+[2026-10-10T02:12:13.915] [INFO] [T:281473210429120] Added path: /seg
+02:12:13.938 INF operator():132 | AXCL engine VNPU kind=0
+[2026-10-10T02:12:14.028] [INFO] [T:281473210429120] Added path: /driving
+{"event":"model","input":[1,768,768,3],"kind":"depth","outputs":[{"bytes":2359296,"name":"depth","shape":[1,1,768,768]}]}
+[2026-10-10T02:12:14.232] [INFO] [T:281473210429120] Added path: /depth
+[2026-10-10T02:12:14.534] [INFO] [T:281473210429120] Added path: /count
+[2026-10-10T02:12:14.591] [INFO] [T:281473210429120] Added path: /overview
+pipeline demux: pkt=0 bytes=435554 pts=0 dur=83333 key=1
+pipeline demux: pkt=0 bytes=195392 pts=120000 dur=40000 key=1
+pipeline demux: pkt=0 bytes=159036 pts=66666 dur=33333 key=1
+pipeline demux: pkt=0 bytes=271399 pts=66733 dur=33366 key=1
+pipeline demux: pkt=0 bytes=268325 pts=0 dur=41708 key=1
+pipeline demux: pkt=0 bytes=282655 pts=0 dur=41666 key=1
+pipeline demux: pkt=1 bytes=31699 pts=200000 dur=33333 key=0
+pipeline demux: pkt=1 bytes=68400 pts=240000 dur=40000 key=0
+pipeline demux: pkt=1 bytes=805 pts=200200 dur=33366 key=0
+[2026-10-10T02:12:14.647] [INFO] [T:281472543878848] Auto-updated H264 parameter sets for path: /pcd
+pipeline demux: pkt=1 bytes=6279 pts=41708 dur=41708 key=0
+[2026-10-10T02:12:14.655] [INFO] [T:281470777405120] Auto-updated H264 parameter sets for path: /depth
+pipeline demux: pkt=1 bytes=32929 pts=41666 dur=41666 key=0
+[2026-10-10T02:12:14.668] [INFO] [T:281470627958464] Auto-updated H264 parameter sets for path: /count
+pipeline demux: pkt=2 bytes=6239 pts=133333 dur=33333 key=0
+pipeline demux: pkt=2 bytes=240 pts=133466 dur=33366 key=0
+pipeline demux: pkt=1 bytes=39182 pts=83333 dur=83333 key=0
+pipeline demux: pkt=2 bytes=22014 pts=160000 dur=40000 key=0
+pipeline demux: pkt=2 bytes=9049 pts=83416 dur=41708 key=0
+pipeline demux: pkt=2 bytes=55694 pts=83333 dur=41666 key=0
+pipeline demux: pkt=2 bytes=64122 pts=166666 dur=83333 key=0
+[2026-10-10T02:12:14.783] [INFO] [T:281471197343424] Auto-updated H264 parameter sets for path: /seg
+[2026-10-10T02:12:14.784] [INFO] [T:281471092944576] Auto-updated H264 parameter sets for path: /driving
+[2026-10-10T02:12:14.847] [INFO] [T:281471461392064] Auto-updated H264 parameter sets for path: /vehicle
+[2026-10-10T02:12:14.860] [INFO] [T:281470438538944] Auto-updated H264 parameter sets for path: /overview
+{"direction":"right_to_left","event":"crossing","id":27,"lr":0,"rl":1}
+[2026-10-10T02:12:19.722] [INFO] [T:281466719694528] RTSP OPTIONS rtsp://192.168.1.12:8554/overview
+[2026-10-10T02:12:19.727] [INFO] [T:281466719694528] RTSP DESCRIBE rtsp://192.168.1.12:8554/overview
+[2026-10-10T02:12:19.732] [INFO] [T:281466719694528] RTSP SETUP rtsp://192.168.1.12:8554/overview/stream
+[2026-10-10T02:12:19.738] [INFO] [T:281466719694528] RTSP PLAY rtsp://192.168.1.12:8554/overview/
+{"channels":[{"decoded":121,"dropped":0,"encoded":120,"infer_fps":11.995294777250567,"inferred":120,"lr":0,"mux_errors":0,"name":"pcd","objects":2,"process_ms":40.31949099589838,"render_ms":4.612564996932633,"render_replaced":0,"rendered":121,"result_age":0.0737533759966027,"rl":0,"submit_errors":0},{"decoded":249,"dropped":0,"encoded":246,"infer_fps":9.596235821800454,"inferred":96,"lr":0,"mux_errors":0,"name":"vehicle","objects":6,"process_ms":101.09828400163678,"render_ms":5.494381999596953,"render_replaced":0,"rendered":249,"result_age":0.004455360998690594,"rl":0,"submit_errors":0},{"decoded":297,"dropped":0,"encoded":297,"infer_fps":5.597804229383598,"inferred":56,"lr":0,"mux_errors":0,"name":"seg","objects":6,"process_ms":202.34523300314322,"render_ms":6.510237995826174,"render_replaced":0,"rendered":297,"result_age":0.12183065099816304,"rl":0,"submit_errors":0},{"decoded":298,"dropped":0,"encoded":296,"infer_fps":9.896118191231718,"inferred":99,"lr":0,"mux_errors":0,"name":"driving","objects":4,"process_ms":85.65599600115092,"render_ms":4.48059899645159,"render_replaced":0,"rendered":298,"result_age":0.0973342520010192,"rl":0,"submit_errors":0},{"decoded":240,"dropped":0,"encoded":239,"infer_fps":10.995686879146353,"inferred":110,"lr":0,"mux_errors":0,"name":"depth","objects":0,"process_ms":97.01784500066424,"render_ms":6.301863999397028,"render_replaced":0,"rendered":240,"result_age":0.07572726200305624,"rl":0,"submit_errors":0},{"decoded":241,"dropped":0,"encoded":240,"infer_fps":9.99607898104214,"inferred":100,"lr":0,"mux_errors":0,"name":"count","objects":7,"process_ms":79.9997499998426,"render_ms":5.618486997263972,"render_replaced":0,"rendered":240,"result_age":0.08661854200181551,"rl":1,"submit_errors":0}],"elapsed":10.003922556999896,"event":"stats","overview_dropped":0,"overview_encoded":294,"overview_mux_errors":0}
+{"event":"count_loop_reset","loop":1}
+{"direction":"right_to_left","event":"crossing","id":64,"lr":0,"rl":2}
+[2026-10-10T02:12:31.169] [INFO] [T:281466694332096] RTSP OPTIONS rtsp://127.0.0.1:8554/overview
+[2026-10-10T02:12:31.169] [INFO] [T:281466694332096] RTSP DESCRIBE rtsp://127.0.0.1:8554/overview
+[2026-10-10T02:12:31.170] [INFO] [T:281466694332096] RTSP SETUP rtsp://127.0.0.1:8554/overview/stream
+[2026-10-10T02:12:31.171] [INFO] [T:281466694332096] RTSP PLAY rtsp://127.0.0.1:8554/overview/
+{"channels":[{"decoded":241,"dropped":0,"encoded":241,"infer_fps":12.06222239924747,"inferred":241,"lr":0,"mux_errors":0,"name":"pcd","objects":1,"process_ms":40.35715899954084,"render_ms":4.673128001741134,"render_replaced":0,"rendered":241,"result_age":0.008337824998307042,"rl":0,"submit_errors":0},{"decoded":499,"dropped":0,"encoded":499,"infer_fps":9.769403265506217,"inferred":194,"lr":0,"mux_errors":0,"name":"vehicle","objects":5,"process_ms":87.2013420012081,"render_ms":4.232115003105719,"render_replaced":0,"rendered":499,"result_age":0.004236936998495366,"rl":0,"submit_errors":0},{"decoded":599,"dropped":0,"encoded":598,"infer_fps":6.2803306706825675,"inferred":119,"lr":0,"mux_errors":0,"name":"seg","objects":5,"process_ms":164.59465499792714,"render_ms":10.043210000731051,"render_replaced":0,"rendered":599,"result_age":0.062066573002084624,"rl":0,"submit_errors":0},{"decoded":598,"dropped":0,"encoded":597,"infer_fps":10.068466630776815,"inferred":200,"lr":0,"mux_errors":0,"name":"driving","objects":1,"process_ms":113.25001699879067,"render_ms":4.2633199991541915,"render_replaced":0,"rendered":598,"result_age":0.07700345799821662,"rl":0,"submit_errors":0},{"decoded":481,"dropped":0,"encoded":480,"infer_fps":11.165032303435677,"inferred":222,"lr":0,"mux_errors":0,"name":"depth","objects":0,"process_ms":74.01863399718422,"render_ms":7.518857004470192,"render_replaced":0,"rendered":481,"result_age":0.08551378599804593,"rl":0,"submit_errors":0},{"decoded":482,"dropped":0,"encoded":482,"infer_fps":9.769403265506217,"inferred":198,"lr":0,"mux_errors":0,"name":"count","objects":8,"process_ms":102.93770299904281,"render_ms":5.752312004915439,"render_replaced":0,"rendered":482,"result_age":0.09051992999593494,"rl":2,"submit_errors":0}],"elapsed":20.0352414959998,"event":"stats","overview_dropped":0,"overview_encoded":595,"overview_mux_errors":0}
+[2026-10-10T02:12:38.291] [INFO] [T:281466694332096] RTSP TEARDOWN rtsp://127.0.0.1:8554/overview/
+[2026-10-10T02:12:38.292] [WARNING] [T:281466694332096] RTSP response send timeout/failed, closing connection
+[2026-10-10T02:12:39.868] [INFO] [T:281466719694528] RTSP TEARDOWN rtsp://192.168.1.12:8554/overview/
+[2026-10-10T02:12:39.868] [WARNING] [T:281466719694528] RTSP response send timeout/failed, closing connection
+{"event":"count_loop_reset","loop":2}
+{"direction":"right_to_left","event":"crossing","id":86,"lr":0,"rl":3}
+{"channels":[{"decoded":362,"dropped":0,"encoded":361,"infer_fps":11.959545612306108,"inferred":361,"lr":0,"mux_errors":0,"name":"pcd","objects":2,"process_ms":38.4431710044737,"render_ms":5.895565001992509,"render_replaced":0,"rendered":361,"result_age":0.049931351000850555,"rl":0,"submit_errors":0},{"decoded":750,"dropped":0,"encoded":750,"infer_fps":9.567636489844887,"inferred":290,"lr":0,"mux_errors":0,"name":"vehicle","objects":1,"process_ms":102.79382199951215,"render_ms":5.115956002555322,"render_replaced":0,"rendered":750,"result_age":0.01850108899816405,"rl":0,"submit_errors":0},{"decoded":901,"dropped":0,"encoded":899,"infer_fps":5.979772806153054,"inferred":179,"lr":0,"mux_errors":0,"name":"seg","objects":3,"process_ms":166.54428699985147,"render_ms":8.221664000302553,"render_replaced":0,"rendered":901,"result_age":0.14111419200344244,"rl":0,"submit_errors":0},{"decoded":898,"dropped":0,"encoded":898,"infer_fps":10.065950890357641,"inferred":301,"lr":0,"mux_errors":0,"name":"driving","objects":1,"process_ms":96.86457099451218,"render_ms":6.196843001816887,"render_replaced":0,"rendered":898,"result_age":0.03380919100163737,"rl":0,"submit_errors":0},{"decoded":722,"dropped":0,"encoded":721,"infer_fps":10.863253931178049,"inferred":331,"lr":0,"mux_errors":0,"name":"depth","objects":0,"process_ms":92.91872500034515,"render_ms":7.6967150016571395,"render_replaced":0,"rendered":721,"result_age":0.06272334700042848,"rl":0,"submit_errors":0},{"decoded":724,"dropped":0,"encoded":724,"infer_fps":9.667299369947438,"inferred":295,"lr":0,"mux_errors":0,"name":"count","objects":6,"process_ms":108.63464499561815,"render_ms":4.2042209970531985,"render_replaced":0,"rendered":724,"result_age":0.12566874700132757,"rl":3,"submit_errors":0}],"elapsed":30.069067520002136,"event":"stats","overview_dropped":0,"overview_encoded":895,"overview_mux_errors":0}
+vdec SubmitPacket reject: stop=1 eos=0 pending=0/16 bytes=45984
+pipeline demux: SubmitPacket failed
+vdec SubmitPacket reject (early): running=0 bytes=13491
+pipeline demux: SubmitPacket failed
+vdec SubmitPacket reject: stop=1 eos=0 pending=0/16 bytes=951
+pipeline demux: SubmitPacket failed
+vdec SubmitPacket reject: stop=1 eos=0 pending=0/16 bytes=55020
+pipeline demux: SubmitPacket failed
+vdec SubmitPacket reject: stop=1 eos=0 pending=0/16 bytes=30779
+pipeline demux: SubmitPacket failed
+vdec SubmitPacket reject: stop=1 eos=0 pending=0/16 bytes=34305
+pipeline demux: SubmitPacket failed
+[2026-10-10T02:12:50.582] [INFO] [T:281473210429120] RtspServer stop start, timeout_ms=5000
+[2026-10-10T02:12:50.596] [INFO] [T:281473210429120] RtspServer stop done, elapsed_ms=14
+{"errors":0,"event":"exit"}
+ax8850-multistream.service: Deactivated successfully.
+ax8850-multistream.service: Consumed 1min 2.763s CPU time.
++------------------------------------------------------------------------------------------------+
+| AXCL-SMI  V3.16.0_20260729180218                                Driver  V3.16.0_20260729180218 |
++-----------------------------------------+--------------+---------------------------------------+
+| Card  Name                     Firmware | Bus-Id       |                          Memory-Usage |
+| Fan   Temp                Pwr:Usage/Cap | CPU      NPU |                             CMM-Usage |
+|=========================================+==============+=======================================|
+|    0  AX8850                    V3.16.0 | 0000:01:00.0 |                164 MiB /      945 MiB |
+|   --   79C                      -- / -- | 1%        0% |                 18 MiB /    15232 MiB |
++-----------------------------------------+--------------+---------------------------------------+
+
++------------------------------------------------------------------------------------------------+
+| Processes:                                                                                     |
+| Card      PID  Process Name                                                   NPU Memory Usage |
+|================================================================================================|
+4096

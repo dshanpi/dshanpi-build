@@ -1,0 +1,5 @@
+{"time": "2026-10-10T02:08:18Z", "temperature_c": 73.235, "command_rc": 0}
+{"time": "2026-10-10T02:08:28Z", "temperature_c": 76.176, "command_rc": 0}
+{"time": "2026-10-10T02:08:38Z", "temperature_c": 78.529, "command_rc": 0}
+{"time": "2026-10-10T02:08:49Z", "temperature_c": 80.294, "command_rc": 0}
+Stopped: device unavailable or conservative diagnostic temperature bound 80C reached (not a manufacturer rating)

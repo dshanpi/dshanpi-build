@@ -1,0 +1,161 @@
+Started ax8850-multistream.service - /bin/bash /home/yuxuan/ax8850-multistream-demo/run.sh.
+run/config.json
+json file
+02:02:57.019 INF operator():132 | AXCL engine VNPU kind=0
+02:02:57.044 INF operator():132 | AXCL engine VNPU kind=0
+[2026-10-10T02:02:57.071] [INFO] [T:281472936095424] Added path: /pcd
+[2026-10-10T02:02:57.072] [INFO] [T:281472936095424] RTSP server started on 0.0.0.0:8554
+02:02:57.127 INF operator():132 | AXCL engine VNPU kind=0
+[2026-10-10T02:02:57.349] [INFO] [T:281472936095424] Added path: /vehicle
+{"event":"model","input":[1,640,640,3],"kind":"seg","outputs":[{"bytes":102400,"name":"output0","shape":[1,80,80,4]},{"bytes":2048000,"name":"output1","shape":[1,80,80,80]},{"bytes":819200,"name":"674","shape":[1,80,80,32]},{"bytes":25600,"name":"696","shape":[1,40,40,4]},{"bytes":512000,"name":"736","shape":[1,40,40,80]},{"bytes":204800,"name":"758","shape":[1,40,40,32]},{"bytes":6400,"name":"780","shape":[1,20,20,4]},{"bytes":128000,"name":"820","shape":[1,20,20,80]},{"bytes":51200,"name":"842","shape":[1,20,20,32]},{"bytes":3276800,"name":"935","shape":[1,32,160,160]}]}
+[2026-10-10T02:02:57.527] [INFO] [T:281472936095424] Added path: /seg
+02:02:57.561 INF operator():132 | AXCL engine VNPU kind=0
+[2026-10-10T02:02:57.648] [INFO] [T:281472936095424] Added path: /driving
+{"event":"model","input":[1,768,768,3],"kind":"depth","outputs":[{"bytes":2359296,"name":"depth","shape":[1,1,768,768]}]}
+[2026-10-10T02:02:57.908] [INFO] [T:281472936095424] Added path: /depth
+[2026-10-10T02:02:58.164] [INFO] [T:281472936095424] Added path: /count
+[2026-10-10T02:02:58.213] [INFO] [T:281472936095424] Added path: /overview
+pipeline demux: pkt=0 bytes=435554 pts=0 dur=83333 key=1
+pipeline demux: pkt=0 bytes=195392 pts=120000 dur=40000 key=1
+pipeline demux: pkt=0 bytes=159036 pts=66666 dur=33333 key=1
+pipeline demux: pkt=0 bytes=271399 pts=66733 dur=33366 key=1
+pipeline demux: pkt=0 bytes=268325 pts=0 dur=41708 key=1
+pipeline demux: pkt=0 bytes=282655 pts=0 dur=41666 key=1
+pipeline demux: pkt=1 bytes=31699 pts=200000 dur=33333 key=0
+pipeline demux: pkt=1 bytes=805 pts=200200 dur=33366 key=0
+pipeline demux: pkt=1 bytes=68400 pts=240000 dur=40000 key=0
+[2026-10-10T02:02:58.263] [INFO] [T:281472275443392] Auto-updated H264 parameter sets for path: /pcd
+pipeline demux: pkt=1 bytes=6279 pts=41708 dur=41708 key=0
+[2026-10-10T02:02:58.270] [INFO] [T:281470500515520] Auto-updated H264 parameter sets for path: /depth
+pipeline demux: pkt=1 bytes=32929 pts=41666 dur=41666 key=0
+[2026-10-10T02:02:58.278] [INFO] [T:281470357470912] Auto-updated H264 parameter sets for path: /count
+pipeline demux: pkt=2 bytes=6239 pts=133333 dur=33333 key=0
+pipeline demux: pkt=2 bytes=240 pts=133466 dur=33366 key=0
+pipeline demux: pkt=2 bytes=22014 pts=160000 dur=40000 key=0
+pipeline demux: pkt=1 bytes=39182 pts=83333 dur=83333 key=0
+pipeline demux: pkt=2 bytes=9049 pts=83416 dur=41708 key=0
+pipeline demux: pkt=2 bytes=55694 pts=83333 dur=41666 key=0
+[2026-10-10T02:02:58.373] [INFO] [T:281471056723648] Auto-updated H264 parameter sets for path: /seg
+pipeline demux: pkt=2 bytes=64122 pts=166666 dur=83333 key=0
+[2026-10-10T02:02:58.399] [INFO] [T:281470614630080] Auto-updated H264 parameter sets for path: /driving
+[2026-10-10T02:02:58.465] [INFO] [T:281471184502464] Auto-updated H264 parameter sets for path: /vehicle
+[2026-10-10T02:02:58.505] [INFO] [T:281470170103488] Auto-updated H264 parameter sets for path: /overview
+{"direction":"right_to_left","event":"crossing","id":26,"lr":0,"rl":1}
+{"channels":[{"decoded":121,"dropped":0,"encoded":120,"infer_fps":11.997002763611771,"inferred":120,"lr":0,"mux_errors":0,"name":"pcd","objects":2,"process_ms":47.72191899974132,"render_ms":6.322806002572179,"render_replaced":0,"rendered":121,"result_age":0.05515546199603705,"rl":0,"submit_errors":0},{"decoded":249,"dropped":0,"encoded":245,"infer_fps":9.697577233919516,"inferred":97,"lr":0,"mux_errors":0,"name":"vehicle","objects":6,"process_ms":117.93143499380676,"render_ms":5.4585739999311045,"render_replaced":0,"rendered":247,"result_age":0.10232823999831453,"rl":0,"submit_errors":0},{"decoded":297,"dropped":0,"encoded":296,"infer_fps":5.698576312715591,"inferred":57,"lr":0,"mux_errors":0,"name":"seg","objects":6,"process_ms":168.48619200027315,"render_ms":11.465600000519771,"render_replaced":0,"rendered":297,"result_age":0.12375257699750364,"rl":0,"submit_errors":0},{"decoded":298,"dropped":0,"encoded":296,"infer_fps":10.297427372100104,"inferred":103,"lr":0,"mux_errors":0,"name":"driving","objects":3,"process_ms":85.14589499827707,"render_ms":4.31594700057758,"render_replaced":0,"rendered":298,"result_age":0.01439419599773828,"rl":0,"submit_errors":0},{"decoded":240,"dropped":0,"encoded":239,"infer_fps":11.197202579370988,"inferred":112,"lr":0,"mux_errors":0,"name":"depth","objects":0,"process_ms":86.42185999633512,"render_ms":9.431047998077702,"render_replaced":0,"rendered":240,"result_age":0.04308957800094504,"rl":0,"submit_errors":0},{"decoded":240,"dropped":0,"encoded":240,"infer_fps":9.89752727997971,"inferred":99,"lr":0,"mux_errors":0,"name":"count","objects":8,"process_ms":90.06807799596572,"render_ms":4.427063002367504,"render_replaced":0,"rendered":240,"result_age":0.04530976700334577,"rl":1,"submit_errors":0}],"elapsed":10.002498320995073,"event":"stats","overview_dropped":0,"overview_encoded":292,"overview_mux_errors":0}
+{"event":"count_loop_reset","loop":1}
+{"direction":"right_to_left","event":"crossing","id":65,"lr":0,"rl":2}
+{"channels":[{"decoded":241,"dropped":0,"encoded":240,"infer_fps":11.99999594280226,"inferred":240,"lr":0,"mux_errors":0,"name":"pcd","objects":1,"process_ms":57.883369001501705,"render_ms":4.83423299738206,"render_replaced":0,"rendered":241,"result_age":0.03966731499531306,"rl":0,"submit_errors":0},{"decoded":499,"dropped":0,"encoded":495,"infer_fps":9.699996720431827,"inferred":194,"lr":0,"mux_errors":0,"name":"vehicle","objects":3,"process_ms":113.25018999923486,"render_ms":5.107625998789445,"render_replaced":0,"rendered":498,"result_age":0.009395779998158105,"rl":0,"submit_errors":0},{"decoded":597,"dropped":0,"encoded":596,"infer_fps":6.199997903781168,"inferred":119,"lr":0,"mux_errors":0,"name":"seg","objects":6,"process_ms":176.38183399685659,"render_ms":12.416001001838595,"render_replaced":0,"rendered":597,"result_age":0.004120604004128836,"rl":0,"submit_errors":0},{"decoded":598,"dropped":0,"encoded":596,"infer_fps":9.899996652811865,"inferred":202,"lr":0,"mux_errors":0,"name":"driving","objects":1,"process_ms":99.14451200165786,"render_ms":4.264659000909887,"render_replaced":0,"rendered":596,"result_age":0.04319672400015406,"rl":0,"submit_errors":0},{"decoded":480,"dropped":0,"encoded":480,"infer_fps":11.09999624709209,"inferred":223,"lr":0,"mux_errors":0,"name":"depth","objects":0,"process_ms":91.83636400121031,"render_ms":7.959086004120763,"render_replaced":0,"rendered":480,"result_age":0.01135384599911049,"rl":0,"submit_errors":0},{"decoded":482,"dropped":0,"encoded":481,"infer_fps":9.799996686621846,"inferred":197,"lr":0,"mux_errors":0,"name":"count","objects":7,"process_ms":110.20781900151633,"render_ms":8.38163399748737,"render_replaced":0,"rendered":481,"result_age":0.0007385080025414936,"rl":2,"submit_errors":0}],"elapsed":20.002501701994333,"event":"stats","overview_dropped":0,"overview_encoded":593,"overview_mux_errors":0}
+{"event":"count_loop_reset","loop":2}
+axcl SendEncodedPacket: AXCL_VDEC_SendStream grp=4 ret=0x80300405 pts=28445083 len=37026 eof=1
+vdec SendEncodedPacket failed: pts=28445083 bytes=37026
+[2026-10-10 02:03:29.777][7351][E][pcie][recv_msg][700]: [1-21] AX_PCIe_ReadMsg(len 770 timeout 3100) fail, size = -2
+[2026-10-10 02:03:29.777][7351][E][pcie][recv_dma_sglist_mem_msg][998]: [1-21] recv msg DMA_SGLIST_INFO fail, recv size 0 != 2
+[2026-10-10 02:03:29.777][7351][E][channel][send][166]: send 37178 bytes, but 0 bytes sent
+axcl SendEncodedPacket: AXCL_VDEC_SendStream grp=3 ret=0x80300405 pts=28461766 len=893 eof=1
+vdec SendEncodedPacket failed: pts=28461766 bytes=893
+axcl SendEncodedPacket: AXCL_VDEC_SendStream grp=5 ret=0x80300405 pts=28541261 len=88531 eof=1
+vdec SendEncodedPacket failed: pts=28541261 bytes=88531
+axcl SendEncodedPacket: AXCL_VDEC_SendStream grp=2 ret=0x80300405 pts=28566666 len=54110 eof=1
+vdec SendEncodedPacket failed: pts=28566666 bytes=54110
+axcl SendEncodedPacket: AXCL_VDEC_SendStream grp=1 ret=0x80300405 pts=28560000 len=11230 eof=1
+vdec SendEncodedPacket failed: pts=28560000 bytes=11230
+axcl SendEncodedPacket: AXCL_VDEC_SendStream grp=0 ret=0x80300405 pts=28500000 len=47823 eof=1
+vdec SendEncodedPacket failed: pts=28500000 bytes=47823
+[2026-10-10 02:03:32.977][7349][E][pcie][recv_msg][700]: [1-21] AX_PCIe_ReadMsg(len 770 timeout 3100) fail, size = -2
+[2026-10-10 02:03:32.977][7349][E][pcie][recv_dma_sglist_mem_msg][998]: [1-21] recv msg DMA_SGLIST_INFO fail, recv size 0 != 2
+[2026-10-10 02:03:32.977][7349][E][channel][send][166]: send 1040 bytes, but 0 bytes sent
+[2026-10-10 02:03:36.180][7353][E][pcie][recv_msg][700]: [1-21] AX_PCIe_ReadMsg(len 770 timeout 3100) fail, size = -2
+[2026-10-10 02:03:36.181][7353][E][pcie][recv_dma_sglist_mem_msg][998]: [1-21] recv msg DMA_SGLIST_INFO fail, recv size 0 != 2
+[2026-10-10 02:03:36.181][7353][E][channel][send][166]: send 88683 bytes, but 0 bytes sent
+[2026-10-10 02:03:39.384][7341][E][pcie][recv_msg][700]: [1-21] AX_PCIe_ReadMsg(len 770 timeout 3100) fail, size = -2
+[2026-10-10 02:03:39.384][7341][E][pcie][recv_dma_sglist_mem_msg][998]: [1-21] recv msg DMA_SGLIST_INFO fail, recv size 0 != 2
+[2026-10-10 02:03:39.384][7341][E][channel][send][166]: send 54262 bytes, but 0 bytes sent
+[2026-10-10 02:03:42.587][7330][E][pcie][recv_msg][700]: [1-21] AX_PCIe_ReadMsg(len 770 timeout 3100) fail, size = -2
+[2026-10-10 02:03:42.587][7330][E][pcie][recv_dma_sglist_mem_msg][998]: [1-21] recv msg DMA_SGLIST_INFO fail, recv size 0 != 2
+[2026-10-10 02:03:42.587][7330][E][channel][send][166]: send 11377 bytes, but 0 bytes sent
+Stopping ax8850-multistream.service - /bin/bash /home/yuxuan/ax8850-multistream-demo/run.sh...
+Oct 10 02:02:27 dshanpi-a1 kernel: ax pcie msg init
+Oct 10 02:02:27 dshanpi-a1 kernel:
+                                   ############### Dev 1 Firmware loading ##############
+Oct 10 02:02:27 dshanpi-a1 kernel:
+                                   =====================PAC Header=====================
+Oct 10 02:02:27 dshanpi-a1 kernel: nMagic: 0x5C6D8E9F
+Oct 10 02:02:27 dshanpi-a1 kernel: nPacVer: 1
+Oct 10 02:02:27 dshanpi-a1 kernel: u64PacSize: 155799824
+Oct 10 02:02:27 dshanpi-a1 kernel: szProdName: AX650_card
+Oct 10 02:02:27 dshanpi-a1 kernel: szProdVer: V3.16.0_20260729180218
+Oct 10 02:02:27 dshanpi-a1 kernel: nFileOffset: 128
+Oct 10 02:02:27 dshanpi-a1 kernel: nFileCount: 5
+Oct 10 02:02:27 dshanpi-a1 kernel: nAuth: 0
+Oct 10 02:02:27 dshanpi-a1 kernel: crc16: 0x0
+Oct 10 02:02:27 dshanpi-a1 kernel: md5: 0x0
+Oct 10 02:02:27 dshanpi-a1 kernel:
+                                   =====================IMG Header=====================
+Oct 10 02:02:27 dshanpi-a1 kernel: szID: UBOOT
+Oct 10 02:02:27 dshanpi-a1 kernel: szType: CODE
+Oct 10 02:02:27 dshanpi-a1 kernel: szFile: u-boot.bin
+Oct 10 02:02:27 dshanpi-a1 kernel: u64CodeOffset: 0x990
+Oct 10 02:02:27 dshanpi-a1 kernel: u64CodeSize: 1071087
+Oct 10 02:02:27 dshanpi-a1 kernel: tBlock.u64Base: 0x14001000
+Oct 10 02:02:27 dshanpi-a1 kernel: tBlock.u64Size: 0
+Oct 10 02:02:27 dshanpi-a1 kernel: tBlock.szPartID:
+Oct 10 02:02:27 dshanpi-a1 kernel: nFlag: 1
+Oct 10 02:02:27 dshanpi-a1 kernel: nSelect: 1
+Oct 10 02:02:27 dshanpi-a1 kernel: [STATUS]: SUCCESS
+Oct 10 02:02:27 dshanpi-a1 kernel:
+                                   =====================IMG Header=====================
+Oct 10 02:02:27 dshanpi-a1 kernel: szID: DTB
+Oct 10 02:02:27 dshanpi-a1 kernel: szType: CODE
+Oct 10 02:02:27 dshanpi-a1 kernel: szFile: AX650_card.dtb
+Oct 10 02:02:27 dshanpi-a1 kernel: u64CodeOffset: 0x10617F
+Oct 10 02:02:27 dshanpi-a1 kernel: u64CodeSize: 192329
+Oct 10 02:02:27 dshanpi-a1 kernel: tBlock.u64Base: 0x110080000
+Oct 10 02:02:27 dshanpi-a1 kernel: tBlock.u64Size: 0
+Oct 10 02:02:27 dshanpi-a1 kernel: tBlock.szPartID:
+Oct 10 02:02:27 dshanpi-a1 kernel: nFlag: 1
+Oct 10 02:02:27 dshanpi-a1 kernel: nSelect: 1
+Oct 10 02:02:29 dshanpi-a1 kernel: [STATUS]: SUCCESS
+Oct 10 02:02:29 dshanpi-a1 kernel:
+                                   =====================IMG Header=====================
+Oct 10 02:02:29 dshanpi-a1 kernel: szID: ATF
+Oct 10 02:02:29 dshanpi-a1 kernel: szType: CODE
+Oct 10 02:02:29 dshanpi-a1 kernel: szFile: atf_bl31.img
+Oct 10 02:02:29 dshanpi-a1 kernel: u64CodeOffset: 0x1350C8
+Oct 10 02:02:29 dshanpi-a1 kernel: u64CodeSize: 28736
+Oct 10 02:02:29 dshanpi-a1 kernel: tBlock.u64Base: 0x11FF10000
+Oct 10 02:02:29 dshanpi-a1 kernel: tBlock.u64Size: 0
+Oct 10 02:02:29 dshanpi-a1 kernel: tBlock.szPartID:
+Oct 10 02:02:29 dshanpi-a1 kernel: nFlag: 1
+Oct 10 02:02:29 dshanpi-a1 kernel: nSelect: 1
+Oct 10 02:02:29 dshanpi-a1 kernel: [STATUS]: SUCCESS
+Oct 10 02:02:29 dshanpi-a1 kernel:
+                                   =====================IMG Header=====================
+Oct 10 02:02:29 dshanpi-a1 kernel: szID: KERNEL
+Oct 10 02:02:29 dshanpi-a1 kernel: szType: CODE
+Oct 10 02:02:29 dshanpi-a1 kernel: szFile: Image
+Oct 10 02:02:29 dshanpi-a1 kernel: u64CodeOffset: 0x13C108
+Oct 10 02:02:29 dshanpi-a1 kernel: u64CodeSize: 20287496
+Oct 10 02:02:29 dshanpi-a1 kernel: tBlock.u64Base: 0x100200000
+Oct 10 02:02:29 dshanpi-a1 kernel: tBlock.u64Size: 0
+Oct 10 02:02:29 dshanpi-a1 kernel: tBlock.szPartID:
+Oct 10 02:02:29 dshanpi-a1 kernel: nFlag: 1
+Oct 10 02:02:29 dshanpi-a1 kernel: nSelect: 1
+Oct 10 02:02:29 dshanpi-a1 kernel: [STATUS]: SUCCESS
+Oct 10 02:02:29 dshanpi-a1 kernel:
+                                   =====================IMG Header=====================
+Oct 10 02:02:29 dshanpi-a1 kernel: szID: ROOTFS
+Oct 10 02:02:29 dshanpi-a1 kernel: szType: CODE
+Oct 10 02:02:29 dshanpi-a1 kernel: szFile: rootfs.ext4
+Oct 10 02:02:29 dshanpi-a1 kernel: u64CodeOffset: 0x1495110
+Oct 10 02:02:29 dshanpi-a1 kernel: u64CodeSize: 134217728
+Oct 10 02:02:29 dshanpi-a1 kernel: tBlock.u64Base: 0x140000000
+Oct 10 02:02:29 dshanpi-a1 kernel: tBlock.u64Size: 0
+Oct 10 02:02:29 dshanpi-a1 kernel: tBlock.szPartID:
+Oct 10 02:02:29 dshanpi-a1 kernel: nFlag: 1
+Oct 10 02:02:29 dshanpi-a1 kernel: nSelect: 1
+Oct 10 02:02:29 dshanpi-a1 kernel: [STATUS]: SUCCESS
+Oct 10 02:02:29 dshanpi-a1 kernel: [axcl_pcie_host_init, 1576]: axcl wait dev 1 handshake...
+Oct 10 02:02:31 dshanpi-a1 kernel: base_addr: 0xffff0000bf900080, size: 0x1ffec0
+Oct 10 02:02:31 dshanpi-a1 kernel: base_addr: 0xffff0000bfb00080, size: 0x1ffe40
+Oct 10 02:03:36 dshanpi-a1 kernel: [axcl_heartbeat_recv_timeout, 216]: master: 19, slave: 19, runtime: 9120205, timeout: 9000
+Oct 10 02:03:36 dshanpi-a1 kernel: [heartbeat_recv_thread, 592]: device 1: dead!

@@ -1,0 +1,36 @@
+2026-10-10T02:06:18+00:00
++------------------------------------------------------------------------------------------------+
+| AXCL-SMI  V3.16.0_20260729180218                                Driver  V3.16.0_20260729180218 |
++-----------------------------------------+--------------+---------------------------------------+
+| Card  Name                     Firmware | Bus-Id       |                          Memory-Usage |
+| Fan   Temp                Pwr:Usage/Cap | CPU      NPU |                             CMM-Usage |
+|=========================================+==============+=======================================|
+|    0  AX8850                    V3.16.0 | 0000:01:00.0 |                152 MiB /      945 MiB |
+|   --   79C                      -- / -- | 1%        0% |                 18 MiB /    15232 MiB |
++-----------------------------------------+--------------+---------------------------------------+
+
++------------------------------------------------------------------------------------------------+
+| Processes:                                                                                     |
+| Card      PID  Process Name                                                   NPU Memory Usage |
+|================================================================================================|
+inactive
+inactive
+4096
+Oct 10 02:03:36 dshanpi-a1 kernel: [axcl_heartbeat_recv_timeout, 216]: master: 19, slave: 19, runtime: 9120205, timeout: 9000
+Oct 10 02:03:36 dshanpi-a1 kernel: [heartbeat_recv_thread, 592]: device 1: dead!
+Oct 10 02:04:19 dshanpi-a1 kernel: [axcl_pcie_port_create, 863]: Recv port ack timeout.
+Oct 10 02:04:36 dshanpi-a1 kernel: [heartbeat_recv_thread, 585]: device 1: dead!
+Oct 10 02:04:52 dshanpi-a1 kernel: device 1: alive!
+{
+	"log": {
+		"host": {
+			"path": "/tmp/axcl/axcl_logs.txt",
+			"//   ": "0: trace, 1: debug, 2: info, 3: warn, 4: error, 5: critical, 6: off",
+			"level": 2
+		},
+		"device": {
+			"//   ": "0: trace, 1: debug, 2: info, 3: warn, 4: error, 5: critical, 6: off",
+			"level": 2
+		}
+	}
+}
