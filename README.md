@@ -6,6 +6,11 @@
 汇集经过固定版本和校验的产物，生成系统版本元包及签名 APT 仓库；它不保存内核、
 设备树或 dspi-config 的源码副本。
 
+## 新服务器与开发交接
+
+Ubuntu 24.04 x86_64 的固定版本下载、预检与构建见 [新服务器手册](docs/new-server.md)。
+变更记录与未完成事项见 [开发交接](docs/development-handoff.md)；仓库内 skills 随源码维护。
+
 ## 仓库边界
 
 - `ArmBianOS`：板卡、Kernel/U-Boot DTS、DTBO、BSP 和系统镜像构建引擎。

@@ -11,6 +11,9 @@ mode=${3:-execute}
 require_command jq
 require_product "$product"
 validate_release_lock "$product" "$lock"
+if jq -e 'has("maintenance_adapter")' "$lock" >/dev/null; then
+	die "package maintenance lock: use the matching scripts/build-<adapter>-release.py, not the image builder"
+fi
 version=$(jq -r .version "$lock")
 revision=$(jq -r .revision "$lock")
 board=$(jq -r .armbian.board "$product_config")
