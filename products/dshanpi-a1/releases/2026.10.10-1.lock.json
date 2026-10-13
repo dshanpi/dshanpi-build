@@ -5,7 +5,7 @@
   "revision": "25.11.0-trunk.20261010.1",
   "sources": {
     "armbianos": {
-      "commit": "47b72f4adfce6a43035a831b0b47c6504633f367"
+      "commit": "6b9fce806cf48bc3e61187460bc3378b3fae5f2c"
     },
     "dspi_config": {
       "commit": "1c46b5a282e41cce4e650b415203a22ae9e9ff93"
@@ -14,7 +14,7 @@
   "image_release": {
     "repository": "dshanpi/ArmBianOS",
     "tag": "dshanpi-a1-2026.10.10-1",
-    "target_commit": "47b72f4adfce6a43035a831b0b47c6504633f367",
+    "target_commit": "6b9fce806cf48bc3e61187460bc3378b3fae5f2c",
     "title": "DShanPI A1 2026.10.10-1",
     "testing": {"draft": false, "prerelease": true},
     "stable": {"draft": false, "prerelease": false},
