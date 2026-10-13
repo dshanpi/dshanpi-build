@@ -26,19 +26,30 @@ fi
 python3 "$script_dir/verify-repository.py" "$repository" "$public_key" "$temporary/previous"
 python3 - "$temporary/previous" "$repository" <<'PY'
 import hashlib
+import json
 from pathlib import Path
 import sys
 old, new = map(Path, sys.argv[1:])
+publication = json.loads((new / 'PUBLICATION.json').read_text())
+allowed_removed = set(publication.get('removed_pool_files', []))
+if publication.get('operation') != 'purge' and allowed_removed:
+    raise SystemExit('Pool removal is allowed only for an explicit purge publication')
+removed = set()
 for path in (old / 'pool').rglob('*'):
     if path.is_file():
         target = new / path.relative_to(old)
         if not target.is_file():
-            raise SystemExit(f'Historical pool file removed: {target}')
+            removed.add(path.relative_to(old).as_posix())
+            continue
         def digest(p):
             with p.open('rb') as f:
                 return hashlib.file_digest(f, 'sha256').digest()
         if digest(path) != digest(target):
             raise SystemExit(f'Historical pool file changed: {target}')
+if removed != allowed_removed:
+    raise SystemExit(
+        f'Pool removal differs from signed purge record: removed={sorted(removed)}, '
+        f'allowed={sorted(allowed_removed)}')
 PY
 python3 "$script_dir/pages/snapshot.py" encode "$repository" "$temporary/checkout/snapshot"
 mkdir -p "$temporary/checkout/tools" "$temporary/checkout/.github/workflows" "$temporary/checkout/site"

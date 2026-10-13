@@ -111,6 +111,11 @@ image、headers、DTB、BSP 和受影响 DKMS 时，平台基线才发生变化�
 - 已发布 pool 字节和旧清单不可覆盖。旧 testing 可以撤出索引，但仍保留回滚及来源复用所需的
   不可变 DEB。
 
+常规维护只允许 `withdraw`，不删除历史字节。确需清理从未晋级 stable 的废弃 testing 批次时，
+必须提交 `products/<product>/purges/<plan-version>.json`，逐项列出目标版本并指定已经公开可用的
+replacement。`purge` 会拒绝任何曾晋级 stable 的目标，只删除没有被 replacement、其他发行清单
+或任一 suite 索引引用的 pool 文件；不得用目录通配或手工删除代替该流程。
+
 ## 示例
 
 设备最初烧录 Ubuntu 24 noble 系列的 `2026.10.10-1` 工厂镜像。之后依次发布：

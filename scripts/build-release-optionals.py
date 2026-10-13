@@ -5,7 +5,6 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
-import shutil
 import subprocess
 
 
@@ -53,13 +52,16 @@ def build_axcl_16g(release_lock: dict, repository: Path, output: Path) -> None:
     component_lock = json.loads((ROOT / 'packages/axcl-16g/upstream.lock.json').read_text())
     package_version = release_package_version(component_lock['upstream_version'], release_lock['version'])
     previous_driver = find_package(repository, component_lock['source_driver'])
-    for package, identity in component_lock['retained_packages'].items():
-        expected = {'package': package, **identity}
-        source = find_package(repository, expected)
-        shutil.copyfile(source, output / source.name)
+    retained = component_lock['retained_packages']
+    previous_runtime = find_package(repository, {
+        'package': 'dshanpi-axcl-runtime-16g', **retained['dshanpi-axcl-runtime-16g']})
+    previous_firmware = find_package(repository, {
+        'package': 'dshanpi-axcl-firmware-16g', **retained['dshanpi-axcl-firmware-16g']})
     subprocess.run([
         'python3', str(ROOT / 'scripts/build-axcl-16g-packages.py'), str(output),
         '--previous-driver', str(previous_driver),
+        '--previous-runtime', str(previous_runtime),
+        '--previous-firmware', str(previous_firmware),
         '--package-version', package_version,
         '--platform-version', release_lock['revision'],
     ], check=True)

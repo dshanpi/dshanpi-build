@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "product": "dshanpi-a1",
+  "suite": "noble-testing",
+  "replacement_version": "2026.10.10-1",
+  "purge_versions": [
+    "2026.10.08-1",
+    "2026.10.08-2",
+    "2026.10.08-3",
+    "2026.10.08-4",
+    "2026.10.09-1",
+    "2026.10.09-2",
+    "2026.10.09-3",
+    "2026.10.09-4"
+  ],
+  "reason": "Replace all pre-2026.10.10 A1 testing cohorts with the new closed-loop release."
+}

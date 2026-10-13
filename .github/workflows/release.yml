@@ -11,10 +11,10 @@ on:
         description: Release version (YYYY.MM.DD-N)
         required: true
       channel:
-        description: Build testing, promote a tested release, or withdraw testing
+        description: Build, promote, withdraw, or execute a reviewed purge plan
         required: true
         type: choice
-        options: [testing, stable, withdraw]
+        options: [testing, stable, withdraw, purge]
       backend:
         description: Repository hosting
         required: true
@@ -61,6 +61,10 @@ jobs:
           if [[ "$OPERATION" == withdraw ]]; then
             echo 'image_release=false' >> "$GITHUB_OUTPUT"
             echo 'Withdrawal lifecycle: remove the exact legacy testing cohort from indexes while retaining immutable pool bytes.' >> "$GITHUB_STEP_SUMMARY"
+          elif [[ "$OPERATION" == purge ]]; then
+            test -f "products/$PRODUCT/purges/$VERSION.json"
+            echo 'image_release=false' >> "$GITHUB_OUTPUT"
+            echo 'Purge lifecycle: remove the reviewed legacy testing manifests and only pool bytes that have no remaining references.' >> "$GITHUB_STEP_SUMMARY"
           else
             test -f "products/$PRODUCT/releases/$VERSION.lock.json"
             if python3 -c 'import json, sys; raise SystemExit("image_release" not in json.load(open(sys.argv[1])))' \
@@ -180,6 +184,14 @@ jobs:
           APT_GPG_KEY_FINGERPRINT: ${{ secrets.APT_GPG_KEY_FINGERPRINT }}
         run: |
           scripts/withdraw-testing-release.sh "${{ inputs.product }}" "${{ inputs.version }}" \
+            output/repository "$APT_GPG_KEY_FINGERPRINT"
+
+      - name: Purge reviewed legacy testing cohorts
+        if: ${{ inputs.channel == 'purge' }}
+        env:
+          APT_GPG_KEY_FINGERPRINT: ${{ secrets.APT_GPG_KEY_FINGERPRINT }}
+        run: |
+          scripts/purge-testing-releases.sh "${{ inputs.product }}" "${{ inputs.version }}" \
             output/repository "$APT_GPG_KEY_FINGERPRINT"
 
       - name: Retain prepared image Release assets and provenance
