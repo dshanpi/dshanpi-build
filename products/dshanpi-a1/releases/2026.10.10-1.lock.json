@@ -11,6 +11,7 @@
       "commit": "1c46b5a282e41cce4e650b415203a22ae9e9ff93"
     }
   },
+  "testing_purge_plan": "2026.10.10-1",
   "image_release": {
     "repository": "dshanpi/ArmBianOS",
     "tag": "dshanpi-a1-2026.10.10-1",
