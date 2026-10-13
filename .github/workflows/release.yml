@@ -247,12 +247,21 @@ jobs:
           if-no-files-found: error
           retention-days: 30
 
+      - name: Pack signed testing repository candidate
+        if: ${{ inputs.channel == 'testing' }}
+        run: |
+          tar --sort=name --format=posix --numeric-owner --owner=0 --group=0 \
+            -cf output/repository-candidate.tar -C output/repository .
+          sha256sum output/repository-candidate.tar > output/repository-candidate.tar.sha256
+
       - name: Retain signed testing repository candidate
         if: ${{ inputs.channel == 'testing' }}
         uses: actions/upload-artifact@v4
         with:
           name: ${{ inputs.product }}-${{ inputs.version }}-repository
-          path: output/repository/
+          path: |
+            output/repository-candidate.tar
+            output/repository-candidate.tar.sha256
           if-no-files-found: error
           compression-level: 0
           retention-days: 7
