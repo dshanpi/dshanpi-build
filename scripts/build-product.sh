@@ -86,7 +86,7 @@ common_args=(build "BOARD=$board" "BRANCH=$branch" "RELEASE=$release" \
 while IFS= read -r adapter; do
 	case "$adapter" in
 		rkaiq-reviewed)
-			"$script_dir/build-reviewed-camera.sh" "$armbian_dir" "$output_root/adapters" ;;
+			"$script_dir/build-reviewed-camera.sh" "$armbian_dir" "$output_root/adapters" "$version" ;;
 		*) die "unknown product package adapter: $adapter" ;;
 	esac
 done < <(jq -r '.package_adapters // [] | .[]' "$product_config")
