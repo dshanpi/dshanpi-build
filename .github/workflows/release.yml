@@ -37,6 +37,8 @@ jobs:
   release:
     runs-on: ubuntu-24.04
     timeout-minutes: 720
+    outputs:
+      image_release: ${{ steps.validate.outputs.image_release }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -46,9 +48,10 @@ jobs:
       - name: Check delivery policy
         run: |
           python3 tools/check-delivery-policy.py
-          echo 'Delivery policy: complete image delivery also requires automatic ArmBianOS GitHub Release publication and public verification. This workflow currently retains image artifacts and publishes APT; the Release integration remains to be implemented.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'Delivery policy: publish the signed APT cohort first, then the exact planned image assets to ArmBianOS Releases and verify both public endpoints.' >> "$GITHUB_STEP_SUMMARY"
 
       - name: Validate release request
+        id: validate
         env:
           PRODUCT: ${{ inputs.product }}
           VERSION: ${{ inputs.version }}
@@ -59,6 +62,18 @@ jobs:
           [[ "$PRODUCT" =~ ^[a-z0-9][a-z0-9-]*$ ]]
           [[ "$VERSION" =~ ^[0-9]{4}\.[0-9]{2}\.[0-9]{2}-[1-9][0-9]*$ ]]
           test -f "products/$PRODUCT/product.json"
+          test -f "products/$PRODUCT/releases/$VERSION.lock.json"
+          if python3 -c 'import json, sys; raise SystemExit("image_release" not in json.load(open(sys.argv[1])))' \
+            "products/$PRODUCT/releases/$VERSION.lock.json"; then
+            python3 scripts/image-release.py validate "$PRODUCT" "products/$PRODUCT/releases/$VERSION.lock.json"
+            echo 'image_release=true' >> "$GITHUB_OUTPUT"
+          elif [[ "$OPERATION" == testing ]]; then
+            echo 'New complete image builds require a fixed image_release plan' >&2
+            exit 1
+          else
+            echo 'image_release=false' >> "$GITHUB_OUTPUT"
+            echo 'Legacy APT-only lifecycle: no image Release plan is present.' >> "$GITHUB_STEP_SUMMARY"
+          fi
           if [[ "$OPERATION" == stable ]]; then
             test -n "$HARDWARE_EVIDENCE" || { echo 'Stable requires a hardware validation report'; exit 1; }
             printf 'Hardware validation: %s\n' "$HARDWARE_EVIDENCE" >> "$GITHUB_STEP_SUMMARY"
@@ -67,7 +82,7 @@ jobs:
       - name: Install release tools
         run: |
           sudo apt-get update
-          sudo apt-get install -y dpkg-dev jq patchelf rsync sshpass xz-utils
+          sudo apt-get install -y dpkg-dev gh jq patchelf rsync sshpass xz-utils
 
       - name: Configure APT signing key
         env:
@@ -124,6 +139,16 @@ jobs:
             "output/${{ inputs.product }}/${{ inputs.version }}/packages" output/repository \
             "$APT_GPG_KEY_FINGERPRINT"
 
+      - name: Prepare fixed image Release assets
+        if: ${{ inputs.channel == 'testing' }}
+        run: |
+          python3 scripts/image-release.py prepare \
+            "${{ inputs.product }}" \
+            "products/${{ inputs.product }}/releases/${{ inputs.version }}.lock.json" \
+            "output/${{ inputs.product }}/${{ inputs.version }}/images" \
+            "output/${{ inputs.product }}/${{ inputs.version }}/packages" \
+            "output/${{ inputs.product }}/${{ inputs.version }}/image-release"
+
       - name: Promote exact testing cohort
         if: ${{ inputs.channel == 'stable' }}
         env:
@@ -140,16 +165,16 @@ jobs:
           scripts/withdraw-testing-release.sh "${{ inputs.product }}" "${{ inputs.version }}" \
             output/repository "$APT_GPG_KEY_FINGERPRINT"
 
-      - name: Retain built images and package provenance
+      - name: Retain prepared image Release assets and provenance
         if: ${{ inputs.channel == 'testing' }}
         uses: actions/upload-artifact@v4
         with:
           name: ${{ inputs.product }}-${{ inputs.version }}
           path: |
-            output/${{ inputs.product }}/${{ inputs.version }}/images/
-            output/${{ inputs.product }}/${{ inputs.version }}/packages/SHA256SUMS
-            products/${{ inputs.product }}/releases/${{ inputs.version }}.lock.json
+            output/${{ inputs.product }}/${{ inputs.version }}/image-release/
+            output/${{ inputs.product }}/${{ inputs.version }}/release-notes.md
           if-no-files-found: error
+          compression-level: 0
           retention-days: 7
 
       - name: Publish verified repository candidate
@@ -191,3 +216,41 @@ jobs:
     steps:
       - uses: actions/deploy-pages@v4
         id: deployment
+
+  publish-image-release:
+    if: ${{ always() && needs.release.outputs.image_release == 'true' && (inputs.channel == 'testing' || inputs.channel == 'stable') && needs.release.result == 'success' && (inputs.backend == 'ssh' || needs.deploy.result == 'success') }}
+    needs: [release, deploy]
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@v5
+        if: ${{ inputs.channel == 'testing' }}
+        with:
+          name: ${{ inputs.product }}-${{ inputs.version }}
+          path: output/${{ inputs.product }}/${{ inputs.version }}
+      - name: Install public verification tools
+        run: sudo apt-get update && sudo apt-get install -y dpkg-dev gh gnupg jq xz-utils
+      - name: Verify the exact signed APT cohort is public
+        run: python3 scripts/verify-product-public.py "${{ inputs.product }}" "${{ inputs.version }}"
+      - name: Publish and verify planned testing image Release
+        if: ${{ inputs.channel == 'testing' }}
+        env:
+          GH_TOKEN: ${{ secrets.ARMBIANOS_RELEASE_TOKEN }}
+        run: |
+          scripts/publish-image-release.sh \
+            "${{ inputs.product }}" \
+            "products/${{ inputs.product }}/releases/${{ inputs.version }}.lock.json" \
+            "output/${{ inputs.product }}/${{ inputs.version }}/image-release" \
+            testing
+      - name: Promote the verified image Release without rebuilding assets
+        if: ${{ inputs.channel == 'stable' }}
+        env:
+          GH_TOKEN: ${{ secrets.ARMBIANOS_RELEASE_TOKEN }}
+          HARDWARE_EVIDENCE: ${{ inputs.hardware_evidence }}
+        run: |
+          scripts/publish-image-release.sh \
+            "${{ inputs.product }}" \
+            "products/${{ inputs.product }}/releases/${{ inputs.version }}.lock.json" \
+            . stable "$HARDWARE_EVIDENCE"

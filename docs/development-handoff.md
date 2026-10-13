@@ -25,8 +25,11 @@
 
 1. 新版本 headers DEB：ArmBianOS BTF 修复已在源码，旧 `25.11.0-trunk.20261008.4`
    headers 仍为历史字节。当前板的恢复不替代全产品新发行。
-2. 自动完整镜像 Release：release.yml 目前只保留镜像 artifact 和发布 APT，尚未实现
-   自动上传 ArmBianOS Release 及公网资产验收；不能把已有人工作业记录当成流水线实现。
+2. 自动完整镜像 Release：`feature/automated-image-release` 已增加固定计划校验、镜像压缩、
+   来源/包集/headers 证据、APT 公网校验、`dshanpi/ArmBianOS` Release 幂等上传及公网资产
+   SHA-256 核验；testing 为 prerelease，stable 只切换同一资产并附实板证据。合并前仍须完成
+   本地门禁和 workflow 评审；远端首次演练需要配置受保护的 `ARMBIANOS_RELEASE_TOKEN`。
+   在成功运行并核对公开 Release 前，不能把代码实现本身写成已经发布完成。
 3. 六路长期稳定性：20/20 NPU、六路推理、RTSP/HTTP、录像和重启已通过有限时测试。
    加风扇后升至 85.294°C 被主动停止；首次掉卡原因未确定，未晋级 stable。
 4. AIC 蓝牙配对待验收；8GB AXCL 旧发行未提供审定 PAC；16GB 回滚只验证了依赖模拟。
