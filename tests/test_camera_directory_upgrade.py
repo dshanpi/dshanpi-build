@@ -6,6 +6,11 @@ import unittest
 
 
 class CameraDirectoryUpgrade(unittest.TestCase):
+    def test_camera_package_version_is_bound_to_product_release(self):
+        script = (Path(__file__).resolve().parents[1] / 'scripts/build-reviewed-camera.sh').read_text()
+        self.assertIn('version="6.6.3+dshanpi.${release_version//-/.}"', script)
+        self.assertIn('dpkg --validate-version "$version"', script)
+
     def test_upgrade_repairs_owned_trees_without_following_symlinks(self):
         script = (Path(__file__).resolve().parents[1] / 'scripts/build-reviewed-camera.sh').read_text()
         postinst = script.split("<<'EOF'\n", 1)[1].split('\nEOF\n', 1)[0]

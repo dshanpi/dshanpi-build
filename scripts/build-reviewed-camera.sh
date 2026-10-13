@@ -1,12 +1,18 @@
 #!/usr/bin/env bash
 set -euo pipefail
-[[ $# -eq 2 ]] || { echo 'usage: build-reviewed-camera.sh ARMBIAN_SOURCE OUTPUT_DIR' >&2; exit 2; }
+[[ $# -eq 3 ]] || { echo 'usage: build-reviewed-camera.sh ARMBIAN_SOURCE OUTPUT_DIR RELEASE_VERSION' >&2; exit 2; }
 armbian=$(realpath -e "$1")
 mkdir -p "$2"
 output=$(realpath "$2")
+release_version=$3
+[[ "$release_version" =~ ^[0-9]{4}\.[0-9]{2}\.[0-9]{2}-[1-9][0-9]*$ ]] || {
+    echo "invalid release version: $release_version" >&2
+    exit 2
+}
 work=$(mktemp -d)
 trap 'rm -rf -- "$work"' EXIT
-version=6.6.3+dshanpi2
+version="6.6.3+dshanpi.${release_version//-/.}"
+dpkg --validate-version "$version"
 "$armbian/packages/bsp/dshanpi-a1-cm5/repack-camera-engine.sh" \
     "$armbian/debs/camera/camera_engine_rkaiq_rk3576_arm64.deb" "$work" "$version"
 dpkg-deb --raw-extract "$work/camera-engine-rkaiq_${version}_arm64.deb" "$work/package"
