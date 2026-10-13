@@ -10,6 +10,8 @@
 
 Ubuntu 24.04 x86_64 的固定版本下载、预检与构建见 [新服务器手册](docs/new-server.md)。
 变更记录与未完成事项见 [开发交接](docs/development-handoff.md)；仓库内 skills 随源码维护。
+客户一次烧录、后续只走 DEB 的版本与发布规则见
+[固定镜像与持续 APT 更新规范](docs/fixed-image-apt-updates.md)。
 
 ## 仓库边界
 
