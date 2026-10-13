@@ -54,6 +54,26 @@ Ubuntu 24.x 或 Ubuntu 26.x 系列内的小版本、平台 revision 和产品软
 发布到正确 component，但不放进 release 元包，除非它是设备运行或 DKMS 重建的必要依赖。
 例如对外镜像对应的精确 `linux-headers-*` 必须持续可安装，但不一定预装在每台设备上。
 
+## 内核基线与源码要求
+
+不是每个 DEB 都“基于内核”。构建输入按包类型确定：
+
+| 包类型 | 是否需要完整 ArmBianOS 源码 | 强制输入 |
+| --- | --- | --- |
+| 普通用户态应用、服务、配置工具 | 否 | 目标 OS 大版本、arm64 ABI、固定组件源码/上游 SHA |
+| 外置 DKMS 驱动 | 否 | 与目标设备完全一致的 headers DEB、内核配置、`Module.symvers` 和 kernel release |
+| 复用已发布的 BSP/DTB/内核包 | 否 | 已发布 DEB 的精确身份和 SHA-256，不重新打包 |
+| 修改内核、内置驱动、DTB 或 BSP | 是 | release lock 固定的 ArmBianOS commit、配置和新 revision |
+| 重新构建 kernel image/headers | 是 | 同一源码、配置、工具链和 revision；image/headers 必须成对发布 |
+
+本机不要求长期保存 ArmBianOS checkout；流水线根据 release lock 自动取得完整 commit。
+如果远端无法取得该 commit，就拒绝需要源码的构建。不能用相近分支或同名内核替代。
+
+package-only 发行默认继承基础发行的软件包 cohort。以当前 A1 Ubuntu 24 基线为例，外置
+DKMS 必须针对 `linux-headers-vendor-rk35xx=25.11.0-trunk.20261010.1` 构建，生成模块的
+kernel release 必须是 `6.1.115-vendor-rk35xx`。只有新 release lock 明确切换整套 kernel
+image、headers、DTB、BSP 和受影响 DKMS 时，平台基线才发生变化。
+
 ## 一次 package-only 发行
 
 1. 修改组件源码或固定上游输入，递增受影响 DEB 版本并补齐依赖、冲突和维护脚本。
