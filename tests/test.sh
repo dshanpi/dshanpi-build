@@ -178,7 +178,13 @@ for product in dshanpi-a1 dshanpi-r1 avaota-a1; do
 			dshanpi-archive-keyring | "$product-repository" | dspi-config) continue ;;
 		esac
 		build_dummy "$package" "$arch"
-	done < <(jq -r '.required_packages[] | [.name, .arch] | @tsv' "$source_root/products/$product/product.json")
+	done < <(jq -r '
+		. as $config |
+		($config.required_packages[],
+		 (($config.release_package_sets // [])[] as $set |
+		  $config.optional_package_sets[$set][])) |
+		[.name, .arch] | @tsv
+	' "$source_root/products/$product/product.json")
 
 	client="$test_root/client-$product"
 	"$source_root/scripts/build-client-packages.sh" "$product" "$version" \
@@ -190,6 +196,10 @@ for product in dshanpi-a1 dshanpi-r1 avaota-a1; do
 	"$source_root/scripts/collect-packages.sh" "$product" "$packages" "$raw" "$client" >/dev/null
 	"$source_root/scripts/build-release-meta.sh" "$product" "$version" "$packages" >/dev/null
 	[[ $(dpkg-deb -f "$packages/${product}-release-core_${version}_all.deb" Package) == "${product}-release-core" ]]
+	if [[ "$product" == dshanpi-a1 ]]; then
+		dpkg-deb -f "$packages/${product}-release-core_${version}_all.deb" Suggests |
+			grep -Fx 'dshanpi-a1-axcl-16g (= 1.0.0-1)' >/dev/null
+	fi
 	"$source_root/scripts/build-apt-repository.sh" testing "$product" "$version" \
 		"$packages" "$multi_repository" "$fingerprint" >/dev/null
 	xz -dc "$multi_repository/dists/noble-testing/$product/binary-all/Packages.xz" |

@@ -64,21 +64,40 @@ core_depends=$(join_dependencies "${core_dependencies[@]}")
 # introducing that bootstrap dependency.
 desktop_depends=$(join_dependencies "${core_dependencies[@]}" "${desktop_dependencies[@]}")
 
+optional_suggestions=()
+while IFS= read -r selector; do
+	[[ -n "$selector" ]] || continue
+	arch=$(jq -r --arg selector "$selector" '
+		[.optional_package_sets[]?[] | select(.name == $selector) | .arch] | unique |
+		if length == 1 then .[0] else empty end
+	' "$product_config")
+	[[ -n "$arch" ]] || die "release optional selector is not unique: $selector"
+	optional_suggestions+=("$(package_dependency "$selector" "$arch")")
+done < <(jq -r '.release_optional_selectors // [] | .[]' "$product_config")
+optional_suggests=$(join_dependencies "${optional_suggestions[@]}")
+
 build_meta() {
 	local package=$1 depends=$2 description=$3 root="$work_dir/$package"
 	mkdir -p "$root/DEBIAN"
-	cat > "$root/DEBIAN/control" <<- EOF
+	{
+	cat <<- EOF
 	Package: $package
 	Version: $release_version
 	Architecture: all
 	Maintainer: DShanPI <support@dshanpi.com>
 	Depends: $depends
+	EOF
+	if [[ -n "$optional_suggests" ]]; then
+		printf 'Suggests: %s\n' "$optional_suggests"
+	fi
+	cat <<- EOF
 	Section: metapackages
 	Priority: optional
 	Description: $description
 	 Locks one tested DShanPI platform package cohort for controlled upgrade
 	 and rollback through dspi-config.
 	EOF
+	} > "$root/DEBIAN/control"
 	find "$root" -exec touch -h -d "@$source_date_epoch" {} +
 	SOURCE_DATE_EPOCH=$source_date_epoch dpkg-deb --root-owner-group --build \
 		"$root" "$package_dir/${package}_${release_version}_all.deb" >/dev/null

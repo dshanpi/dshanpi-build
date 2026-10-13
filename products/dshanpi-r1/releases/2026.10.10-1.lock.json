@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "product": "dshanpi-r1",
+  "version": "2026.10.10-1",
+  "revision": "25.11.0-trunk.20261010.1",
+  "sources": {
+    "armbianos": {
+      "commit": "47b72f4adfce6a43035a831b0b47c6504633f367"
+    },
+    "dspi_config": {
+      "commit": "69f441a1e7d01feaaf9c936cc5db6ac793805668"
+    }
+  },
+  "image_release": {
+    "repository": "dshanpi/ArmBianOS",
+    "tag": "dshanpi-r1-2026.10.10-1",
+    "target_commit": "47b72f4adfce6a43035a831b0b47c6504633f367",
+    "title": "DShanPI R1 2026.10.10-1",
+    "testing": {"draft": false, "prerelease": true},
+    "stable": {"draft": false, "prerelease": false},
+    "variants": [
+      {
+        "name": "cli",
+        "image": "Armbian-unofficial_25.11.0-trunk.20261010.1_Dshanpi-r1_noble_vendor_6.1.115.img",
+        "asset": "Armbian-unofficial_25.11.0-trunk.20261010.1_Dshanpi-r1_noble_vendor_6.1.115.img.xz"
+      },
+      {
+        "name": "desktop",
+        "image": "Armbian-unofficial_25.11.0-trunk.20261010.1_Dshanpi-r1_noble_vendor_6.1.115_gnome_desktop.img",
+        "asset": "Armbian-unofficial_25.11.0-trunk.20261010.1_Dshanpi-r1_noble_vendor_6.1.115_gnome_desktop.img.xz"
+      }
+    ],
+    "assets": [
+      "Armbian-unofficial_25.11.0-trunk.20261010.1_Dshanpi-r1_noble_vendor_6.1.115.img.xz",
+      "Armbian-unofficial_25.11.0-trunk.20261010.1_Dshanpi-r1_noble_vendor_6.1.115_gnome_desktop.img.xz",
+      "SHA256SUMS",
+      "package-SHA256SUMS",
+      "release-lock.json",
+      "release-provenance.json"
+    ]
+  }
+}
