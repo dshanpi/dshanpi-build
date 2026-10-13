@@ -33,21 +33,20 @@ def deb_field(path, field):
     return subprocess.check_output(['dpkg-deb', '-f', str(path), field], text=True).strip()
 
 
-def verify_previous_driver(path, lock):
-    expected = lock['source_driver']
+def verify_previous_package(path, expected):
     if sha(path) != expected['sha256']:
-        raise SystemExit('previous AXCL driver SHA-256 mismatch')
+        raise SystemExit(f"previous {expected['package']} SHA-256 mismatch")
     for field, key in (('Package', 'package'), ('Version', 'version'), ('Architecture', 'architecture')):
         if deb_field(path, field) != expected[key]:
-            raise SystemExit(f'previous AXCL driver {field} mismatch')
+            raise SystemExit(f"previous {expected['package']} {field} mismatch")
 
 
-def package_dependencies(lock, version=None, revision=None):
+def package_dependencies(lock, version=None, revision=None, complete_cohort=False):
     version = version or lock['version']
     revision = revision or lock['kernel_package_version']
     retained = lock['retained_packages']
-    runtime_version = retained['dshanpi-axcl-runtime-16g']['version']
-    firmware_version = retained['dshanpi-axcl-firmware-16g']['version']
+    runtime_version = version if complete_cohort else retained['dshanpi-axcl-runtime-16g']['version']
+    firmware_version = version if complete_cohort else retained['dshanpi-axcl-firmware-16g']['version']
     return {
         'dshanpi-axcl-dkms-16g': (
             f'dkms (>= 3), build-essential, kmod, pahole, binutils, '
@@ -69,6 +68,8 @@ def main():
     source = parser.add_mutually_exclusive_group()
     source.add_argument('--upstream', type=Path)
     source.add_argument('--previous-driver', type=Path)
+    parser.add_argument('--previous-runtime', type=Path)
+    parser.add_argument('--previous-firmware', type=Path)
     parser.add_argument('--package-version')
     parser.add_argument('--platform-version')
     args = parser.parse_args()
@@ -81,6 +82,9 @@ def main():
     if not revision or any(character.isspace() for character in revision):
         raise SystemExit('invalid platform package version')
     kernel = lock['kernel_release']
+    previous_payloads = (args.previous_runtime, args.previous_firmware)
+    if any(previous_payloads) and not (args.previous_driver and all(previous_payloads)):
+        raise SystemExit('previous driver, runtime, and firmware must be supplied together')
     output = args.output.resolve()
     output.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix='axcl-build-') as tmp:
@@ -88,7 +92,7 @@ def main():
         extracted = work / 'source'
         if args.previous_driver:
             previous_driver = args.previous_driver.resolve()
-            verify_previous_driver(previous_driver, lock)
+            verify_previous_package(previous_driver, lock['source_driver'])
             run('dpkg-deb', '--raw-extract', previous_driver, extracted)
             prior = lock['source_driver']['version']
             source_tree = extracted / ('usr/src/axcl-' + prior)
@@ -105,6 +109,49 @@ def main():
             run('dpkg-deb', '--raw-extract', upstream, extracted)
             source_tree = extracted / 'usr/src/axcl'
         driver, meta = work / 'driver', work / 'meta'
+        runtime = work / 'runtime'
+        firmware = work / 'firmware'
+        complete_cohort = not args.previous_driver or all(previous_payloads)
+        if complete_cohort and args.previous_runtime:
+            retained = lock['retained_packages']
+            runtime_expected = {
+                'package': 'dshanpi-axcl-runtime-16g',
+                **retained['dshanpi-axcl-runtime-16g'],
+            }
+            firmware_expected = {
+                'package': 'dshanpi-axcl-firmware-16g',
+                **retained['dshanpi-axcl-firmware-16g'],
+            }
+            verify_previous_package(args.previous_runtime.resolve(), runtime_expected)
+            verify_previous_package(args.previous_firmware.resolve(), firmware_expected)
+            run('dpkg-deb', '--raw-extract', args.previous_runtime.resolve(), runtime)
+            run('dpkg-deb', '--raw-extract', args.previous_firmware.resolve(), firmware)
+            pac = firmware / 'lib/firmware/axcl/ax650_card.pac'
+            if sha(pac) != lock['firmware_sha256']:
+                raise SystemExit('retained 16GB firmware SHA-256 mismatch')
+        elif complete_cohort:
+            pac = extracted / 'lib/firmware/axcl/ax650_card.pac'
+            if lock['capacity_gb'] != 16 or sha(pac) != lock['firmware_sha256']:
+                raise SystemExit('16GB firmware SHA-256 mismatch')
+            (firmware / 'lib/firmware/axcl').mkdir(parents=True)
+            shutil.copyfile(pac, firmware / 'lib/firmware/axcl/ax650_card.pac')
+            write(
+                firmware,
+                'usr/share/dshanpi-axcl/firmware.sha256',
+                lock['firmware_sha256'] + '  /lib/firmware/axcl/ax650_card.pac\n',
+            )
+            for relative in ('usr/bin/axcl', 'usr/lib/axcl', 'usr/include/axcl'):
+                shutil.copytree(extracted / relative, runtime / relative, symlinks=True)
+            write(runtime, 'etc/ld.so.conf.d/dshanpi-axcl.conf', '/usr/lib/axcl\n/usr/lib/axcl/ffmpeg\n')
+            for binary in ('axcl-smi', 'axcl_run_model'):
+                (runtime / 'usr/bin' / binary).symlink_to('axcl/' + binary)
+            write(
+                runtime,
+                'usr/bin/axcl_ut_npu',
+                '#!/bin/sh\ncd /usr/bin/axcl\nexec ./ut/axcl_ut_npu "$@"\n',
+                0o755,
+            )
+            write(runtime, 'DEBIAN/triggers', 'activate-noawait ldconfig\n')
         source = driver / ('usr/src/axcl-' + version)
         shutil.copytree(source_tree, source, symlinks=True)
         # Only the five documented host modules are installed. Network/vtty
@@ -153,16 +200,22 @@ WantedBy=multi-user.target
         # Firmware installation will explicitly enable the service only when
         # a reviewed card-specific package is available.
         retained = lock['retained_packages']
-        dependencies = package_dependencies(lock, version, revision)
+        dependencies = package_dependencies(lock, version, revision, complete_cohort)
         packages = [
             (driver, 'dshanpi-axcl-dkms-16g', dependencies['dshanpi-axcl-dkms-16g'], 'AXCL host driver sources managed by DKMS'),
             (meta, 'dshanpi-a1-axcl-16g', dependencies['dshanpi-a1-axcl-16g'], 'Optional AX650N/AX8850 support for DShanPI A1'),
         ]
+        if complete_cohort:
+            packages[0:0] = [
+                (firmware, 'dshanpi-axcl-firmware-16g', f'dshanpi-axcl-runtime-16g (= {version})', 'AX8850 16GB PAC paired with the exact 16GB runtime'),
+                (runtime, 'dshanpi-axcl-runtime-16g', 'libc6 (>= 2.35), libstdc++6, libgcc-s1', 'AXCL ARM64 runtime, SDK headers and inference tools'),
+            ]
         evidence = {
             'upstream': lock,
             'package_version': version,
             'platform_version': revision,
-            'retained_packages': retained,
+            'retained_packages': {} if complete_cohort else retained,
+            'complete_cohort': complete_cohort,
             'packages': [],
         }
         for root, name, depends, description in packages:

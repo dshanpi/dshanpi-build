@@ -243,6 +243,103 @@ def withdraw_release(args: argparse.Namespace) -> None:
     manifest_path.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n")
 
 
+def purge_releases(args: argparse.Namespace) -> None:
+    repo = args.repository.resolve()
+    config = load_product(args.config.resolve())
+    plan = json.loads(args.plan.resolve().read_text())
+    product = config["product"]
+    suite = config["testing_suite"]
+    if plan.get("schema_version") != 1 or plan.get("product") != product:
+        fail(f"invalid purge plan: {args.plan}")
+    if plan.get("suite") != suite:
+        fail("purge plan may only target the product testing suite")
+    versions = plan.get("purge_versions")
+    if not isinstance(versions, list) or not versions or len(versions) != len(set(versions)):
+        fail("purge plan must contain a non-empty unique purge_versions list")
+    replacement = plan.get("replacement_version")
+    if not isinstance(replacement, str) or replacement in versions:
+        fail("purge plan must name a distinct replacement_version")
+
+    manifests_root = repo / "catalog" / "releases"
+    product_root = manifests_root / product
+    replacement_path = product_root / f"{replacement}.json"
+    if not replacement_path.is_file():
+        fail(f"replacement release manifest is missing: {replacement_path}")
+    replacement_manifest = json.loads(replacement_path.read_text())
+    if (replacement_manifest.get("product") != product
+            or replacement_manifest.get("version") != replacement
+            or replacement_manifest.get("suite") != suite
+            or replacement_manifest.get("withdrawn_from") == suite):
+        fail("replacement release is not active in the testing suite")
+
+    target_paths = [product_root / f"{version}.json" for version in versions]
+    targets = []
+    for version, path in zip(versions, target_paths):
+        if not path.is_file():
+            fail(f"purge target manifest is missing: {path}")
+        manifest = json.loads(path.read_text())
+        if (manifest.get("product") != product or manifest.get("version") != version
+                or manifest.get("suite") != suite):
+            fail(f"purge target identity mismatch: {path}")
+        if manifest.get("promoted_to"):
+            fail(f"stable-promoted release cannot be purged: {version}")
+        targets.append(manifest)
+
+    target_set = {path.resolve() for path in target_paths}
+    remaining_manifests = []
+    for path in manifests_root.glob("*/*.json"):
+        if path.resolve() not in target_set:
+            remaining_manifests.append(json.loads(path.read_text()))
+
+    # Remove only identities that no other active testing release needs. This
+    # includes shared/common packages referenced by a different product.
+    active_by_component: dict[str, set[tuple[str, str, str]]] = {}
+    for manifest in remaining_manifests:
+        manifest_suite = manifest.get("suite")
+        if manifest.get("withdrawn_from") == manifest_suite:
+            continue
+        for package in manifest.get("packages", []):
+            active_by_component.setdefault(package["component"], set()).add(identity(package))
+    affected: dict[str, set[tuple[str, str, str]]] = {}
+    target_filenames = set()
+    for manifest in targets:
+        for package in manifest.get("packages", []):
+            affected.setdefault(package["component"], set()).add(identity(package))
+            target_filenames.add(package["filename"])
+    for component, identities in affected.items():
+        removable = identities - active_by_component.get(component, set())
+        catalog_path = repo / "catalog" / "suites" / suite / f"{component}.tsv"
+        remaining = [entry for entry in read_catalog(catalog_path) if identity(entry) not in removable]
+        write_catalog(catalog_path, remaining)
+
+    for path in target_paths:
+        path.unlink()
+        signature = Path(str(path) + ".asc")
+        if signature.exists():
+            signature.unlink()
+
+    # A pool payload can be removed only when neither a remaining manifest nor
+    # any suite catalog references it. This protects the replacement release,
+    # stable suites, other products, and byte-identical shared packages.
+    referenced = {
+        package["filename"]
+        for manifest in remaining_manifests
+        for package in manifest.get("packages", [])
+    }
+    for catalog_path in (repo / "catalog" / "suites").glob("*/*.tsv"):
+        referenced.update(entry["filename"] for entry in read_catalog(catalog_path))
+    removed_pool_files = []
+    for filename in sorted(target_filenames - referenced):
+        payload = repo / filename
+        if payload.is_file():
+            payload.unlink()
+            removed_pool_files.append(filename)
+    if args.result:
+        args.result.resolve().write_text(json.dumps({
+            "removed_pool_files": removed_pool_files,
+        }, indent=2, sort_keys=True) + "\n")
+
+
 def control_paragraph(path: Path, relative: str) -> str:
     fields = deb_fields(path)
     excluded = {"Filename", "Size", "MD5sum", "SHA1", "SHA256"}
@@ -350,6 +447,12 @@ def main() -> None:
     withdraw.add_argument("version")
     withdraw.add_argument("repository", type=Path)
     withdraw.set_defaults(func=withdraw_release)
+    purge = commands.add_parser("purge")
+    purge.add_argument("config", type=Path)
+    purge.add_argument("plan", type=Path)
+    purge.add_argument("repository", type=Path)
+    purge.add_argument("--result", type=Path)
+    purge.set_defaults(func=purge_releases)
     render_command = commands.add_parser("render")
     render_command.add_argument("repository", type=Path)
     render_command.add_argument("--ensure-suite", action="append", default=[])

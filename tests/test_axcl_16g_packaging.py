@@ -43,7 +43,7 @@ class Axcl16gPackagingTests(unittest.TestCase):
         self.assertIn(f'linux-headers-vendor-rk35xx (= {revision})',
                       self.dependencies['dshanpi-axcl-dkms-16g'])
 
-    def test_meta_targets_new_image_and_bsp_but_retains_runtime_bytes(self):
+    def test_maintenance_meta_targets_new_image_and_bsp_but_retains_runtime_bytes(self):
         depends = self.dependencies['dshanpi-a1-axcl-16g']
         revision = self.lock['kernel_package_version']
         self.assertIn('dshanpi-axcl-runtime-16g (= 3.16.0+dshanpi2)', depends)
@@ -55,10 +55,15 @@ class Axcl16gPackagingTests(unittest.TestCase):
     def test_full_release_overrides_component_platform_version(self):
         release_version = '25.11.0-trunk.20261101.2'
         package_version = OPTIONAL.release_package_version('3.16.0', '2026.11.01-2')
-        dependencies = MODULE.package_dependencies(self.lock, package_version, release_version)
+        dependencies = MODULE.package_dependencies(
+            self.lock, package_version, release_version, complete_cohort=True)
         self.assertEqual(package_version, '3.16.0+dshanpi.2026.11.01.2')
         self.assertIn(f'linux-headers-vendor-rk35xx (= {release_version})',
                       dependencies['dshanpi-axcl-dkms-16g'])
+        self.assertIn(f'dshanpi-axcl-runtime-16g (= {package_version})',
+                      dependencies['dshanpi-a1-axcl-16g'])
+        self.assertIn(f'dshanpi-axcl-firmware-16g (= {package_version})',
+                      dependencies['dshanpi-a1-axcl-16g'])
         self.assertIn(f'dshanpi-axcl-dkms-16g (= {package_version})',
                       dependencies['dshanpi-a1-axcl-16g'])
         self.assertIn(f'linux-image-vendor-rk35xx (= {release_version})',
