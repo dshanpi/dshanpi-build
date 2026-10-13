@@ -58,27 +58,32 @@ jobs:
           [[ "$PRODUCT" =~ ^[a-z0-9][a-z0-9-]*$ ]]
           [[ "$VERSION" =~ ^[0-9]{4}\.[0-9]{2}\.[0-9]{2}-[1-9][0-9]*$ ]]
           test -f "products/$PRODUCT/product.json"
-          test -f "products/$PRODUCT/releases/$VERSION.lock.json"
-          if python3 -c 'import json, sys; raise SystemExit("image_release" not in json.load(open(sys.argv[1])))' \
-            "products/$PRODUCT/releases/$VERSION.lock.json"; then
-            python3 scripts/image-release.py validate "$PRODUCT" "products/$PRODUCT/releases/$VERSION.lock.json"
-            echo 'image_release=true' >> "$GITHUB_OUTPUT"
-          elif python3 -c 'import json, sys; raise SystemExit("maintenance_adapter" not in json.load(open(sys.argv[1])))' \
-            "products/$PRODUCT/releases/$VERSION.lock.json"; then
+          if [[ "$OPERATION" == withdraw ]]; then
             echo 'image_release=false' >> "$GITHUB_OUTPUT"
-            echo 'Package-maintenance lifecycle: publish APT and release markers without rebuilding images.' >> "$GITHUB_STEP_SUMMARY"
-          elif [[ "$OPERATION" == testing ]]; then
-            echo 'New complete image builds require a fixed image_release plan' >&2
-            exit 1
+            echo 'Withdrawal lifecycle: remove the exact legacy testing cohort from indexes while retaining immutable pool bytes.' >> "$GITHUB_STEP_SUMMARY"
           else
-            echo 'image_release=false' >> "$GITHUB_OUTPUT"
-            echo 'Legacy APT-only lifecycle: no image Release plan is present.' >> "$GITHUB_STEP_SUMMARY"
-          fi
-          if [[ "$OPERATION" == stable ]]; then
-            test -f "products/$PRODUCT/releases/$VERSION.hardware-acceptance.json" || {
-              echo 'Stable requires the committed release hardware-acceptance JSON' >&2
+            test -f "products/$PRODUCT/releases/$VERSION.lock.json"
+            if python3 -c 'import json, sys; raise SystemExit("image_release" not in json.load(open(sys.argv[1])))' \
+              "products/$PRODUCT/releases/$VERSION.lock.json"; then
+              python3 scripts/image-release.py validate "$PRODUCT" "products/$PRODUCT/releases/$VERSION.lock.json"
+              echo 'image_release=true' >> "$GITHUB_OUTPUT"
+            elif python3 -c 'import json, sys; raise SystemExit("maintenance_adapter" not in json.load(open(sys.argv[1])))' \
+              "products/$PRODUCT/releases/$VERSION.lock.json"; then
+              echo 'image_release=false' >> "$GITHUB_OUTPUT"
+              echo 'Package-maintenance lifecycle: publish APT and release markers without rebuilding images.' >> "$GITHUB_STEP_SUMMARY"
+            elif [[ "$OPERATION" == testing ]]; then
+              echo 'New complete image builds require a fixed image_release plan' >&2
               exit 1
-            }
+            else
+              echo 'image_release=false' >> "$GITHUB_OUTPUT"
+              echo 'Legacy APT-only lifecycle: no image Release plan is present.' >> "$GITHUB_STEP_SUMMARY"
+            fi
+            if [[ "$OPERATION" == stable ]]; then
+              test -f "products/$PRODUCT/releases/$VERSION.hardware-acceptance.json" || {
+                echo 'Stable requires the committed release hardware-acceptance JSON' >&2
+                exit 1
+              }
+            fi
           fi
 
       - name: Install release tools
