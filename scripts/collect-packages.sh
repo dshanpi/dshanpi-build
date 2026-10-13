@@ -31,7 +31,13 @@ while IFS=$'\t' read -r package arch; do
 	filename=$(basename "${matches[0]}")
 	[[ ! -e "$output_dir/$filename" ]] || die "duplicate output filename: $filename"
 	cp -- "${matches[0]}" "$output_dir/$filename"
-done < <(jq -r '.required_packages[] | [.name, .arch] | @tsv' "$product_config")
+done < <(jq -r '
+  . as $config |
+  ($config.required_packages[],
+   (($config.release_package_sets // [])[] as $set |
+    $config.optional_package_sets[$set][])) |
+  [.name, .arch] | @tsv
+' "$product_config")
 
 for deb in "$output_dir"/*.deb; do
 	package=$(package_field "$deb" Package)

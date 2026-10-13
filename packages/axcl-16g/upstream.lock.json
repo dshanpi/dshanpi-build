@@ -1,14 +1,32 @@
 {
   "schema_version": 1,
-  "version": "3.16.0+dshanpi2",
+  "version": "3.16.0+dshanpi3",
   "upstream_version": "3.16.0",
   "upstream_commit": "133bc60f1280a5f200921e28bb5777296c0f76df",
   "url": "https://huggingface.co/AXERA-TECH/AXCL/resolve/133bc60f1280a5f200921e28bb5777296c0f76df/V3.16.0_16G/axcl_host_aarch64_V3.16.0_20260729180218_NO26582.deb",
   "sha256": "b3033bddc7c67904b87220354ea195261e60baa2688cd374d19df265b7fe9ac8",
   "product": "dshanpi-a1",
   "kernel_release": "6.1.115-vendor-rk35xx",
-  "kernel_package_version": "25.11.0-trunk.20261008.4",
-  "source_date_epoch": 1791504000,
+  "kernel_package_version": "25.11.0-trunk.20261010.1",
+  "source_date_epoch": 1791849600,
+  "source_driver": {
+    "package": "dshanpi-axcl-dkms-16g",
+    "version": "3.16.0+dshanpi2",
+    "architecture": "arm64",
+    "sha256": "d3a05586a57a69b7c10462e9c53d4a952ba4328d6dd1d023aa92be665162c18a"
+  },
+  "retained_packages": {
+    "dshanpi-axcl-runtime-16g": {
+      "version": "3.16.0+dshanpi2",
+      "architecture": "arm64",
+      "sha256": "a83c2b571d0e8159da835a3dfed6e82a5b447a7a5b364c2738bba312918d26f9"
+    },
+    "dshanpi-axcl-firmware-16g": {
+      "version": "3.16.0+dshanpi2",
+      "architecture": "arm64",
+      "sha256": "bba3afd357658396204c54e039301655ac8a901fc998242ea15aa3725922e200"
+    }
+  },
   "firmware_policy": "Paired 16GB runtime and PAC from the same fixed vendor artifact; explicitly selected hardware option. Never upgrade the generic 8GB runtime implicitly.",
   "capacity_gb": 16,
   "firmware_sha256": "d0ba0d7690e8a1dd59e8971e9b3311ea48657666d28e6dfe774b7df3254e7ddc"

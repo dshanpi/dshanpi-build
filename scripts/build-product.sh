@@ -92,6 +92,16 @@ while IFS= read -r adapter; do
 done < <(jq -r '.package_adapters // [] | .[]' "$product_config")
 
 package_search_roots=()
+release_optionals="$output_root/release-optionals"
+if jq -e '.release_package_sets // [] | length > 0' "$product_config" >/dev/null; then
+	[[ -n "${DSHANPI_PUBLISHED_REPOSITORY:-}" ]] ||
+		die "release-bound optional packages require DSHANPI_PUBLISHED_REPOSITORY"
+	python3 "$script_dir/verify-repository.py" --snapshot \
+		"$DSHANPI_PUBLISHED_REPOSITORY" "$APT_PUBLIC_KEY_FILE" "$DSHANPI_PUBLISHED_REPOSITORY"
+	python3 "$script_dir/build-release-optionals.py" "$product" "$lock" \
+		"$DSHANPI_PUBLISHED_REPOSITORY" "$release_optionals"
+	package_search_roots+=("$release_optionals")
+fi
 generated_packages="$output_root/generated-packages"
 mkdir -p "$generated_packages"
 while IFS= read -r relative_path; do

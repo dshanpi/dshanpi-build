@@ -15,9 +15,6 @@ on:
         required: true
         type: choice
         options: [testing, stable, withdraw]
-      hardware_evidence:
-        description: Required for stable; URL or reference to the board validation report
-        required: false
       backend:
         description: Repository hosting
         required: true
@@ -56,7 +53,6 @@ jobs:
           PRODUCT: ${{ inputs.product }}
           VERSION: ${{ inputs.version }}
           OPERATION: ${{ inputs.channel }}
-          HARDWARE_EVIDENCE: ${{ inputs.hardware_evidence }}
         run: |
           set -euo pipefail
           [[ "$PRODUCT" =~ ^[a-z0-9][a-z0-9-]*$ ]]
@@ -75,8 +71,10 @@ jobs:
             echo 'Legacy APT-only lifecycle: no image Release plan is present.' >> "$GITHUB_STEP_SUMMARY"
           fi
           if [[ "$OPERATION" == stable ]]; then
-            test -n "$HARDWARE_EVIDENCE" || { echo 'Stable requires a hardware validation report'; exit 1; }
-            printf 'Hardware validation: %s\n' "$HARDWARE_EVIDENCE" >> "$GITHUB_STEP_SUMMARY"
+            test -f "products/$PRODUCT/releases/$VERSION.hardware-acceptance.json" || {
+              echo 'Stable requires the committed release hardware-acceptance JSON' >&2
+              exit 1
+            }
           fi
 
       - name: Install release tools
@@ -154,6 +152,10 @@ jobs:
         env:
           APT_GPG_KEY_FINGERPRINT: ${{ secrets.APT_GPG_KEY_FINGERPRINT }}
         run: |
+          python3 scripts/validate-hardware-evidence.py \
+            "${{ inputs.product }}" "${{ inputs.version }}" \
+            "products/${{ inputs.product }}/releases/${{ inputs.version }}.hardware-acceptance.json" \
+            output/repository
           scripts/promote-apt-release.sh "${{ inputs.product }}" "${{ inputs.version }}" \
             output/repository "$APT_GPG_KEY_FINGERPRINT"
 
@@ -248,7 +250,7 @@ jobs:
         if: ${{ inputs.channel == 'stable' }}
         env:
           GH_TOKEN: ${{ secrets.ARMBIANOS_RELEASE_TOKEN }}
-          HARDWARE_EVIDENCE: ${{ inputs.hardware_evidence }}
+          HARDWARE_EVIDENCE: products/${{ inputs.product }}/releases/${{ inputs.version }}.hardware-acceptance.json
         run: |
           scripts/publish-image-release.sh \
             "${{ inputs.product }}" \

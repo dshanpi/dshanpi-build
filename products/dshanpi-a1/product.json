@@ -26,6 +26,8 @@
     "debs/gsteamer"
   ],
   "package_adapters": ["rkaiq-reviewed"],
+  "release_package_sets": ["axcl-16g"],
+  "release_optional_selectors": ["dshanpi-a1-axcl-16g"],
   "common_packages": [
     "dshanpi-archive-keyring",
     "dspi-config"

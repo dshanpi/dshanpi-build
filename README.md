@@ -39,6 +39,12 @@ release 元包均按产品隔离。`avaotaa1` 不是内部标识；配置、包�
 必须逐项出现在 `required_packages`，同一个“包名 + 版本 + 架构”出现零份或多份都会失败，
 因此不会把整个 `output/debs` 中的历史包或其他板卡包误发布。
 
+A1 的 `release_package_sets` 把 AXCL 16GB 纳入完整发行构建，
+`release_optional_selectors` 则只把精确版本写入发行元包的 `Suggests`。因此每次完整发行只以
+release lock 的 `version` 和 `revision` 为版本事实源：AXCL 修订号由发行版本自动派生，
+DKMS、内核、头文件和 BSP 依赖都取同一个 `revision`。未安装算力卡软件的系统不会被强制
+安装 AXCL；已经安装 selector 的系统通过 dspi-config 升级或回滚时会同步整套精确依赖。
+
 ```json
 {
   "schema_version": 1,
@@ -56,9 +62,10 @@ release 元包均按产品隔离。`avaotaa1` 不是内部标识；配置、包�
 
 ## 常用命令
 
-原版 A1 的 AX650N/AX8850 可选软件包由独立的包维护工作流构建、签名和发布，
-不要求重新制作镜像。安装、DKMS 内核约束和配套 PAC 的验收边界见
-[A1 AXCL 软件包说明](packages/axcl/README.md)。
+原版 A1 的完整系统发行会自动构建并发布与该 release lock 配套的 AXCL 16GB 包，
+不再人工同步另一份内核/BSP 版本。独立 AXCL 工作流仅保留给不制作新镜像的紧急维护修订。
+安装、DKMS 内核约束和配套 PAC 的验收边界见
+[A1 AXCL 16GB 软件包说明](packages/axcl-16g/README.md)。
 
 AX8850 转接板的 USB Wi-Fi/蓝牙可选包见
 [A1 AIC8800D80 安装与用户测试说明](packages/aic8800d80/README.md)。
@@ -113,9 +120,9 @@ testing 设置 `NotAutomatic`，不会被普通升级命令误装；stable 保�
 到 `dshanpi/ArmBianOS` GitHub Releases，并关联相同 DEB 的 APT 发布与公开下载验证。
 后续维护发行可只构建 DEB 和精确元包。每次构建/发布入口与 CI 均先执行政策一致性检查。
 
-当前自动化缺口：`release.yml` 会保留镜像 artifact 并发布 APT，但尚未实现自动 GitHub
-镜像 Release 上传及发布后验证。这是 G06/G11 的待实现项；本次门禁接入不代表该环节已完成。
-后续实现必须把它接入同一版本计划，不能把手工上传作为常规完成步骤。
+`release.yml` 的 testing 路径按同一 release lock 构建 ArmBianOS、dspi-config、AXCL、
+精确发行元包和 CLI/Desktop 镜像，先发布签名 APT 候选，再发布并验证固定的 GitHub
+镜像 Release 资产。stable 路径不重新构建，只允许晋级相同 SHA-256 的候选。
 
 ### GitHub Pages 发布
 
@@ -162,8 +169,11 @@ Release；实际硬件启动、外设和升级／重启／回滚测试仍待完�
 不要复用已发布版本号写入不同内容。Pages 预算检查会保留历史并停止超限发布。
 
 testing 发布必须先通过包集、身份冲突、权限、RPATH、签名和本地 APT 客户端测试。
-stable 只能读取 testing 的候选清单并复用相同 SHA-256。硬件启动、显示、相机、无线、
-USB/PCIe、DKMS、重启和回滚未验证前不得晋级 stable。
+stable 只能读取 testing 的候选清单并复用相同 SHA-256。验收记录固定为
+`products/<product>/releases/<version>.hardware-acceptance.json`，并绑定该候选的软件包清单
+SHA-256；引用的日志也必须存在且哈希吻合。硬件启动、显示、相机、无线、USB/PCIe、
+DKMS、AXCL SMI/NPU、重启恢复和回滚未验证前不得晋级 stable。格式和操作步骤见
+[真机发行验收](docs/hardware-acceptance.md)。
 
 生产私钥只放在本仓库 GitHub Actions Secrets 中；下载站只安装公钥。首版 Debian
 源码包为可选项，DShanPI 自研源码包门禁将在后续版本启用。
@@ -174,7 +184,7 @@ USB/PCIe、DKMS、重启和回滚未验证前不得晋级 stable。
 仓库管理员从 Actions 的 **Build and publish DShanPI product** 选择产品和版本：
 
 - `testing`：按 release lock 构建包和 CLI/Desktop 镜像，再发布候选。
-- `stable`：填写真机验证记录，仅晋级已经发布的相同包；不重新编译。
+- `stable`：提交固定格式的真机验收记录，仅晋级已经发布的相同包；不重新编译。
 - `withdraw`：撤回指定 testing 候选，保留其他版本仍需要的依赖和所有历史 pool 文件。
 
 完整构建只收集当前 `REVISION` 的生成包，继续拒绝同一版本的多个候选，

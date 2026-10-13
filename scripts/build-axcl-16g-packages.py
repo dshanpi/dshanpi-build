@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build pinned, optional A1 AXCL packages. No board access or publication."""
+"""Build pinned A1 AXCL driver/meta compatibility packages."""
 import argparse
 import hashlib
 import json
@@ -29,43 +29,84 @@ def write(root, relative, content, mode=0o644):
     p.chmod(mode)
 
 
+def deb_field(path, field):
+    return subprocess.check_output(['dpkg-deb', '-f', str(path), field], text=True).strip()
+
+
+def verify_previous_driver(path, lock):
+    expected = lock['source_driver']
+    if sha(path) != expected['sha256']:
+        raise SystemExit('previous AXCL driver SHA-256 mismatch')
+    for field, key in (('Package', 'package'), ('Version', 'version'), ('Architecture', 'architecture')):
+        if deb_field(path, field) != expected[key]:
+            raise SystemExit(f'previous AXCL driver {field} mismatch')
+
+
+def package_dependencies(lock, version=None, revision=None):
+    version = version or lock['version']
+    revision = revision or lock['kernel_package_version']
+    retained = lock['retained_packages']
+    runtime_version = retained['dshanpi-axcl-runtime-16g']['version']
+    firmware_version = retained['dshanpi-axcl-firmware-16g']['version']
+    return {
+        'dshanpi-axcl-dkms-16g': (
+            f'dkms (>= 3), build-essential, kmod, pahole, binutils, '
+            f'linux-headers-vendor-rk35xx (= {revision})'
+        ),
+        'dshanpi-a1-axcl-16g': (
+            f'dshanpi-axcl-firmware-16g (= {firmware_version}), '
+            f'dshanpi-axcl-runtime-16g (= {runtime_version}), '
+            f'dshanpi-axcl-dkms-16g (= {version}), '
+            f'linux-image-vendor-rk35xx (= {revision}), '
+            f'armbian-bsp-cli-dshanpi-a1-vendor (= {revision}), pciutils, coreutils'
+        ),
+    }
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path)
-    parser.add_argument('--upstream', type=Path)
+    source = parser.add_mutually_exclusive_group()
+    source.add_argument('--upstream', type=Path)
+    source.add_argument('--previous-driver', type=Path)
+    parser.add_argument('--package-version')
+    parser.add_argument('--platform-version')
     args = parser.parse_args()
     run('python3', ROOT / 'tools/check-delivery-policy.py')
     lock = json.loads((ROOT / 'packages/axcl-16g/upstream.lock.json').read_text())
-    version, kernel = lock['version'], lock['kernel_release']
+    version = args.package_version or lock['version']
+    revision = args.platform_version or lock['kernel_package_version']
+    if subprocess.run(['dpkg', '--validate-version', version], capture_output=True).returncode:
+        raise SystemExit('invalid AXCL package version')
+    if not revision or any(character.isspace() for character in revision):
+        raise SystemExit('invalid platform package version')
+    kernel = lock['kernel_release']
     output = args.output.resolve()
     output.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix='axcl-build-') as tmp:
         work = Path(tmp)
-        upstream = args.upstream or work / 'upstream.deb'
-        if not args.upstream:
-            urllib.request.urlretrieve(lock['url'], upstream)
-        if sha(upstream) != lock['sha256']:
-            raise SystemExit('upstream SHA-256 mismatch')
-        vendor = work / 'vendor'
-        run('dpkg-deb', '--raw-extract', upstream, vendor)
-        runtime, driver, meta, firmware = (work / name for name in ('runtime', 'driver', 'meta', 'firmware'))
-        pac = vendor / 'lib/firmware/axcl/ax650_card.pac'
-        if lock['capacity_gb'] != 16 or sha(pac) != lock['firmware_sha256']:
-            raise SystemExit('16GB firmware SHA-256 mismatch')
-        (firmware / 'lib/firmware/axcl').mkdir(parents=True)
-        shutil.copyfile(pac, firmware / 'lib/firmware/axcl/ax650_card.pac')
-        write(firmware, 'usr/share/dshanpi-axcl/firmware.sha256', lock['firmware_sha256'] + '  /lib/firmware/axcl/ax650_card.pac\n')
-        for relative in ('usr/bin/axcl', 'usr/lib/axcl', 'usr/include/axcl'):
-            shutil.copytree(vendor / relative, runtime / relative, symlinks=True)
-        write(runtime, 'etc/ld.so.conf.d/dshanpi-axcl.conf', '/usr/lib/axcl\n/usr/lib/axcl/ffmpeg\n')
-        # Stable PATH entry points also work under sudo and non-login shells.
-        for binary in ('axcl-smi', 'axcl_run_model'):
-            (runtime / 'usr/bin' / binary).symlink_to('axcl/' + binary)
-        write(runtime, 'usr/bin/axcl_ut_npu', '#!/bin/sh\ncd /usr/bin/axcl\nexec ./ut/axcl_ut_npu "$@"\n', 0o755)
-        write(runtime, 'DEBIAN/triggers', 'activate-noawait ldconfig\n')
-
+        extracted = work / 'source'
+        if args.previous_driver:
+            previous_driver = args.previous_driver.resolve()
+            verify_previous_driver(previous_driver, lock)
+            run('dpkg-deb', '--raw-extract', previous_driver, extracted)
+            prior = lock['source_driver']['version']
+            source_tree = extracted / ('usr/src/axcl-' + prior)
+            embedded = json.loads((extracted / 'usr/share/doc/dshanpi-axcl-dkms-16g/upstream.json').read_text())
+            for field in ('url', 'sha256', 'upstream_commit', 'upstream_version'):
+                if embedded.get(field) != lock[field]:
+                    raise SystemExit(f'previous AXCL driver provenance mismatch: {field}')
+        else:
+            upstream = args.upstream.resolve() if args.upstream else work / 'upstream.deb'
+            if not args.upstream:
+                urllib.request.urlretrieve(lock['url'], upstream)
+            if sha(upstream) != lock['sha256']:
+                raise SystemExit('upstream SHA-256 mismatch')
+            run('dpkg-deb', '--raw-extract', upstream, extracted)
+            source_tree = extracted / 'usr/src/axcl'
+        driver, meta = work / 'driver', work / 'meta'
         source = driver / ('usr/src/axcl-' + version)
-        shutil.copytree(vendor / 'usr/src/axcl', source, symlinks=True)
+        shutil.copytree(source_tree, source, symlinks=True)
         # Only the five documented host modules are installed. Network/vtty
         # drivers are not needed for the documented inference workflow.
         makefile = source / 'drv/pcie/driver/Makefile'
@@ -111,14 +152,19 @@ WantedBy=multi-user.target
 ''')
         # Firmware installation will explicitly enable the service only when
         # a reviewed card-specific package is available.
-        revision = lock['kernel_package_version']
+        retained = lock['retained_packages']
+        dependencies = package_dependencies(lock, version, revision)
         packages = [
-            (firmware, 'dshanpi-axcl-firmware-16g', f'dshanpi-axcl-runtime-16g (= {version})', 'AX8850 16GB PAC paired with the exact 16GB runtime'),
-            (runtime, 'dshanpi-axcl-runtime-16g', 'libc6 (>= 2.35), libstdc++6, libgcc-s1', 'AXCL ARM64 runtime, SDK headers and inference tools'),
-            (driver, 'dshanpi-axcl-dkms-16g', f'dkms (>= 3), build-essential, kmod, pahole, binutils, linux-headers-vendor-rk35xx (= {revision})', 'AXCL host driver sources managed by DKMS'),
-            (meta, 'dshanpi-a1-axcl-16g', f'dshanpi-axcl-firmware-16g (= {version}), dshanpi-axcl-runtime-16g (= {version}), dshanpi-axcl-dkms-16g (= {version}), linux-image-vendor-rk35xx (= {revision}), armbian-bsp-cli-dshanpi-a1-vendor (= {revision}), pciutils, coreutils', 'Optional AX650N/AX8850 support for DShanPI A1'),
+            (driver, 'dshanpi-axcl-dkms-16g', dependencies['dshanpi-axcl-dkms-16g'], 'AXCL host driver sources managed by DKMS'),
+            (meta, 'dshanpi-a1-axcl-16g', dependencies['dshanpi-a1-axcl-16g'], 'Optional AX650N/AX8850 support for DShanPI A1'),
         ]
-        evidence = {'upstream': lock, 'packages': []}
+        evidence = {
+            'upstream': lock,
+            'package_version': version,
+            'platform_version': revision,
+            'retained_packages': retained,
+            'packages': [],
+        }
         for root, name, depends, description in packages:
             installed_size = sum(p.stat().st_size for p in root.rglob('*') if p.is_file() and not p.is_symlink()) // 1024 + 1
             write(root, 'DEBIAN/control', f'''Package: {name}
