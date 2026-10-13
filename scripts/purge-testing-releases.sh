@@ -14,8 +14,12 @@ plan="$repo_root/products/$product/purges/$plan_version.json"
 suite=$(jq -r .testing_suite "$product_config")
 stable_suite=$(jq -r .codename "$product_config")
 component=$(jq -r .component "$product_config")
-base_state=none
-[[ ! -f "$repository_dir/SHA256SUMS" ]] || base_state=$(sha256sum "$repository_dir/SHA256SUMS" | awk '{print $1}')
+base_state=${DSHANPI_EXPECTED_BASE_STATE_SHA256:-none}
+if [[ "$base_state" == none ]]; then
+	[[ ! -f "$repository_dir/SHA256SUMS" ]] || base_state=$(sha256sum "$repository_dir/SHA256SUMS" | awk '{print $1}')
+else
+	[[ "$base_state" =~ ^[0-9a-f]{64}$ ]] || die "invalid expected public base state"
+fi
 result=$(mktemp)
 trap 'rm -f -- "$result"' EXIT
 

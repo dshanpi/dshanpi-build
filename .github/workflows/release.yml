@@ -179,7 +179,9 @@ jobs:
           plan=$(jq -r '.testing_purge_plan // empty' \
             "products/${{ inputs.product }}/releases/${{ inputs.version }}.lock.json")
           if [[ -n "$plan" ]]; then
-            scripts/purge-testing-releases.sh "${{ inputs.product }}" "$plan" \
+            expected_base=$(jq -r .expected_base_state_sha256 output/repository/PUBLICATION.json)
+            DSHANPI_EXPECTED_BASE_STATE_SHA256="$expected_base" \
+              scripts/purge-testing-releases.sh "${{ inputs.product }}" "$plan" \
               output/repository "$APT_GPG_KEY_FINGERPRINT"
           fi
 
@@ -244,6 +246,16 @@ jobs:
             products/${{ inputs.product }}/releases/${{ inputs.version }}.lock.json
           if-no-files-found: error
           retention-days: 30
+
+      - name: Retain signed testing repository candidate
+        if: ${{ inputs.channel == 'testing' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ inputs.product }}-${{ inputs.version }}-repository
+          path: output/repository/
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 7
 
       - name: Publish verified repository candidate
         if: ${{ inputs.backend == 'ssh' }}
