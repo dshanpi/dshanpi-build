@@ -63,6 +63,10 @@ jobs:
             "products/$PRODUCT/releases/$VERSION.lock.json"; then
             python3 scripts/image-release.py validate "$PRODUCT" "products/$PRODUCT/releases/$VERSION.lock.json"
             echo 'image_release=true' >> "$GITHUB_OUTPUT"
+          elif python3 -c 'import json, sys; raise SystemExit("maintenance_adapter" not in json.load(open(sys.argv[1])))' \
+            "products/$PRODUCT/releases/$VERSION.lock.json"; then
+            echo 'image_release=false' >> "$GITHUB_OUTPUT"
+            echo 'Package-maintenance lifecycle: publish APT and release markers without rebuilding images.' >> "$GITHUB_STEP_SUMMARY"
           elif [[ "$OPERATION" == testing ]]; then
             echo 'New complete image builds require a fixed image_release plan' >&2
             exit 1
@@ -125,8 +129,14 @@ jobs:
           APT_PUBLIC_KEY_FILE: ${{ github.workspace }}/output/dshanpi-archive.asc
           DSHANPI_PUBLISHED_REPOSITORY: ${{ github.workspace }}/output/repository
         run: |
-          scripts/build-product.sh "${{ inputs.product }}" \
-            "products/${{ inputs.product }}/releases/${{ inputs.version }}.lock.json"
+          if jq -e 'has("maintenance_adapter")' \
+            "products/${{ inputs.product }}/releases/${{ inputs.version }}.lock.json" >/dev/null; then
+            python3 scripts/build-maintenance-release.py \
+              "${{ inputs.product }}" "${{ inputs.version }}" output/repository
+          else
+            scripts/build-product.sh "${{ inputs.product }}" \
+              "products/${{ inputs.product }}/releases/${{ inputs.version }}.lock.json"
+          fi
 
       - name: Build signed testing repository
         if: ${{ inputs.channel == 'testing' }}
@@ -138,7 +148,7 @@ jobs:
             "$APT_GPG_KEY_FINGERPRINT"
 
       - name: Prepare fixed image Release assets
-        if: ${{ inputs.channel == 'testing' }}
+        if: ${{ inputs.channel == 'testing' && steps.validate.outputs.image_release == 'true' }}
         run: |
           python3 scripts/image-release.py prepare \
             "${{ inputs.product }}" \
@@ -168,7 +178,7 @@ jobs:
             output/repository "$APT_GPG_KEY_FINGERPRINT"
 
       - name: Retain prepared image Release assets and provenance
-        if: ${{ inputs.channel == 'testing' }}
+        if: ${{ inputs.channel == 'testing' && steps.validate.outputs.image_release == 'true' }}
         uses: actions/upload-artifact@v4
         with:
           name: ${{ inputs.product }}-${{ inputs.version }}
@@ -178,6 +188,18 @@ jobs:
           if-no-files-found: error
           compression-level: 0
           retention-days: 7
+
+      - name: Retain package-maintenance evidence
+        if: ${{ inputs.channel == 'testing' && steps.validate.outputs.image_release == 'false' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ inputs.product }}-${{ inputs.version }}-packages
+          path: |
+            output/${{ inputs.product }}/${{ inputs.version }}/packages/SHA256SUMS
+            output/${{ inputs.product }}/${{ inputs.version }}/packages/*-build.json
+            products/${{ inputs.product }}/releases/${{ inputs.version }}.lock.json
+          if-no-files-found: error
+          retention-days: 30
 
       - name: Publish verified repository candidate
         if: ${{ inputs.backend == 'ssh' }}

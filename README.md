@@ -120,6 +120,12 @@ testing 设置 `NotAutomatic`，不会被普通升级命令误装；stable 保�
 到 `dshanpi/ArmBianOS` GitHub Releases，并关联相同 DEB 的 APT 发布与公开下载验证。
 后续维护发行可只构建 DEB 和精确元包。每次构建/发布入口与 CI 均先执行政策一致性检查。
 
+新增或更新普通 DEB 不要求用户重刷镜像。提交带 `maintenance_adapter` 的 release lock，
+仍运行同一个 `release.yml`：testing 路径通过受控 adapter 构建变化包、复用基础发行中其余
+固定 SHA-256 的包、生成新发行元包并发布 APT，不构建或上传镜像。新增组件只增加包配方和
+`scripts/build-maintenance-release.py` 的 adapter 映射，不再复制整套发布 workflow。
+用户切换 testing 后执行 `dspi-config update install <version>`；stable 验收后使用相同包晋级。
+
 `release.yml` 的 testing 路径按同一 release lock 构建 ArmBianOS、dspi-config、AXCL、
 精确发行元包和 CLI/Desktop 镜像，先发布签名 APT 候选，再发布并验证固定的 GitHub
 镜像 Release 资产。stable 路径不重新构建，只允许晋级相同 SHA-256 的候选。
