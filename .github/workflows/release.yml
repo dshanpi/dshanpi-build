@@ -82,6 +82,21 @@ jobs:
               echo 'image_release=false' >> "$GITHUB_OUTPUT"
               echo 'Legacy APT-only lifecycle: no image Release plan is present.' >> "$GITHUB_STEP_SUMMARY"
             fi
+            TESTING_PURGE_PLAN=$(jq -r '.testing_purge_plan // empty' \
+              "products/$PRODUCT/releases/$VERSION.lock.json")
+            if [[ -n "$TESTING_PURGE_PLAN" ]]; then
+              [[ "$TESTING_PURGE_PLAN" == "$VERSION" ]] || {
+                echo 'testing_purge_plan must match the replacement release version' >&2
+                exit 1
+              }
+              test -f "products/$PRODUCT/purges/$TESTING_PURGE_PLAN.json"
+              jq -e --arg product "$PRODUCT" --arg version "$VERSION" \
+                '.product == $product and .replacement_version == $version' \
+                "products/$PRODUCT/purges/$TESTING_PURGE_PLAN.json" >/dev/null
+              if [[ "$OPERATION" == testing ]]; then
+                echo 'Testing publication will atomically replace the reviewed legacy cohorts.' >> "$GITHUB_STEP_SUMMARY"
+              fi
+            fi
             if [[ "$OPERATION" == stable ]]; then
               test -f "products/$PRODUCT/releases/$VERSION.hardware-acceptance.json" || {
                 echo 'Stable requires the committed release hardware-acceptance JSON' >&2
@@ -155,6 +170,18 @@ jobs:
           scripts/build-apt-repository.sh testing "${{ inputs.product }}" "${{ inputs.version }}" \
             "output/${{ inputs.product }}/${{ inputs.version }}/packages" output/repository \
             "$APT_GPG_KEY_FINGERPRINT"
+
+      - name: Apply reviewed replacement purge to testing candidate
+        if: ${{ inputs.channel == 'testing' }}
+        env:
+          APT_GPG_KEY_FINGERPRINT: ${{ secrets.APT_GPG_KEY_FINGERPRINT }}
+        run: |
+          plan=$(jq -r '.testing_purge_plan // empty' \
+            "products/${{ inputs.product }}/releases/${{ inputs.version }}.lock.json")
+          if [[ -n "$plan" ]]; then
+            scripts/purge-testing-releases.sh "${{ inputs.product }}" "$plan" \
+              output/repository "$APT_GPG_KEY_FINGERPRINT"
+          fi
 
       - name: Prepare fixed image Release assets
         if: ${{ inputs.channel == 'testing' && steps.validate.outputs.image_release == 'true' }}
