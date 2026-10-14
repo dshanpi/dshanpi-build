@@ -92,6 +92,7 @@ flowchart TD
 | CLI image | Build plus read-only inspection | PASS | 3,200,253,952 bytes; SHA-256 `79a9fae0a562f7c1a9103e54e8c164b353af81d29b458085c537a66b7569c8f4` |
 | GNOME image | Build plus read-only inspection | PASS | 4,831,838,208 bytes; SHA-256 `7a5464660a1d609406c5508b67c4ee3764ea1b13399d4ccbe3336bbd27d3c607` |
 | Image cohort | `verify-image.sh` on both fixed-name images | PASS | Core/desktop meta `2026.10.14-1`, exact dependencies, T527 DTB and signed source present |
+| Public image Release | `gh release view` plus downloaded metadata byte comparison | PASS | Non-draft prerelease, fixed ArmBianOS target, six uploaded assets and login notes at `avaota-a1-2026.10.14-1` |
 | Hardware | Avaota A1 boot and peripherals | NOT-RUN | No board evidence supplied |
 
 ## 未完成项
@@ -107,3 +108,6 @@ acceptance or stable promotion.
 The recurring release path now has a byte-exact boundary between CI-produced APT packages and locally
 assembled images. It avoids both Actions image minutes and whole-repository downloads while retaining
 cryptographic package provenance and the fixed-image/later-APT-update customer model.
+The resulting public testing image release is
+`https://github.com/dshanpi/ArmBianOS/releases/tag/avaota-a1-2026.10.14-1`; it remains a prerelease until
+physical Avaota A1 evidence satisfies the separate stable-promotion gate.
