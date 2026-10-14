@@ -35,7 +35,17 @@ class ReleaseExecutorTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             MODULE.validate(self.lock(root, image=False), "testing", "github-hosted")
+            MODULE.validate(self.lock(root, image=True), "testing-packages", "github-hosted")
             MODULE.validate(self.lock(root, image=True), "stable", "github-hosted")
+
+    def test_package_only_operation_requires_complete_release_lock(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            with self.assertRaisesRegex(ValueError, "complete image release lock"):
+                MODULE.validate(
+                    self.lock(Path(temporary), image=False),
+                    "testing-packages",
+                    "github-hosted",
+                )
 
 
 if __name__ == "__main__":

@@ -7,7 +7,7 @@ import sys
 
 
 def validate(lock_path: Path, operation: str, executor: str) -> None:
-    if operation not in {"testing", "stable", "withdraw", "purge"}:
+    if operation not in {"testing", "testing-packages", "stable", "withdraw", "purge"}:
         raise ValueError(f"unsupported release operation: {operation}")
     if executor not in {"github-hosted", "local"}:
         raise ValueError(f"unsupported release executor: {executor}")
@@ -18,6 +18,8 @@ def validate(lock_path: Path, operation: str, executor: str) -> None:
             "uploaded directly to ArmBianOS Releases; GitHub-hosted Actions are reserved "
             "for DEB, signed APT index, and promotion operations"
         )
+    if operation == "testing-packages" and "image_release" not in lock:
+        raise ValueError("testing-packages requires a complete image release lock")
 
 
 if __name__ == "__main__":
