@@ -12,6 +12,11 @@ packages_only=no
 [[ "$mode" != --packages-only ]] || packages_only=yes
 images_only=no
 [[ "$mode" != --images-only ]] || images_only=yes
+images_only_lib_config=
+cleanup_images_only_config() {
+	[[ -z "$images_only_lib_config" ]] || rm -f -- "$images_only_lib_config"
+}
+trap cleanup_images_only_config EXIT
 require_command jq
 require_product "$product"
 validate_release_lock "$product" "$lock"
@@ -55,10 +60,11 @@ prepare_source() {
 	destination="$work_root/sources/$name"
 	if [[ -n "$override" ]]; then
 		destination=$(safe_realpath "$override")
-	elif [[ ! -d "$destination/.git" ]]; then
+	elif ! git -C "$destination" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
 		"$script_dir/checkout-source.sh" "$url" "$commit" "$destination"
 	fi
-	[[ -d "$destination/.git" ]] || die "$name source is not a Git checkout: $destination"
+	[[ $(git -C "$destination" rev-parse --is-inside-work-tree 2>/dev/null) == true ]] ||
+		die "$name source is not a Git checkout: $destination"
 	[[ $(git -C "$destination" rev-parse HEAD) == "$commit" ]] || die "$name source does not match release lock"
 	if [[ "${DSHANPI_ALLOW_DIRTY_SOURCES:-no}" != yes && -n "$(git -C "$destination" status --porcelain --untracked-files=no)" ]]; then
 		die "$name source has tracked changes"
@@ -69,9 +75,48 @@ prepare_source() {
 armbian_dir=$(prepare_source armbianos "${DSHANPI_ARMBIANOS_DIR:-}")
 dspi_dir=$(prepare_source dspi_config "${DSHANPI_DSPI_CONFIG_DIR:-}")
 if [[ "$images_only" == yes ]]; then
+	# Armbian sources lib.config after board/family configuration.  A private,
+	# short-lived override is therefore the supported way to prevent the normal
+	# artifact pass from rebuilding a kernel that the signed release meta-package
+	# will install below.  Never replace a caller-owned user override.
+	images_only_config_target="$armbian_dir/userpatches/lib.config"
+	[[ ! -e "$images_only_config_target" ]] ||
+		die "images-only build refuses to replace existing user configuration: $images_only_config_target"
+	mkdir -p "$(dirname "$images_only_config_target")"
+	cat > "$images_only_config_target" <<- 'EOF'
+		[[ -n "${DSHANPI_RELEASE_PACKAGES_DIR:-}" ]] || {
+			echo "images-only user configuration requires DSHANPI_RELEASE_PACKAGES_DIR" >&2
+			exit 1
+		}
+		KERNELSOURCE=none
+	EOF
+	images_only_lib_config=$images_only_config_target
 	python3 "$script_dir/fetch-public-release.py" \
 		"${DSHANPI_APT_BASE_URL:-https://apt.100ask.net}" "$product_config" "$lock" \
 		"$output_root/packages" "$APT_PUBLIC_KEY_FILE"
+	# Seed the normal Armbian revisioned cache with the same verified public
+	# bytes.  This prevents firmware/base/BSP artifact resolution from cloning
+	# sources or substituting a separately rebuilt package during image assembly.
+	while IFS= read -r -d '' package_file; do
+		package_name=$(package_field "$package_file" Package)
+		case "$package_name" in
+			armbian-firmware | armbian-bsp-cli-*)
+				cache_dir="$armbian_dir/output/debs" ;;
+			base-files)
+				cache_dir="$armbian_dir/output/debs/extra/$release-utils" ;;
+			armbian-bsp-desktop-*)
+				cache_dir="$armbian_dir/output/debs/extra/$release-desktop" ;;
+			*) continue ;;
+		esac
+		cache_file="$cache_dir/$(basename "$package_file")"
+		mkdir -p "$cache_dir"
+		if [[ -e "$cache_file" ]]; then
+			cmp -s -- "$package_file" "$cache_file" ||
+				die "Armbian cache contains different bytes for signed package: $cache_file"
+		else
+			cp -- "$package_file" "$cache_file"
+		fi
+	done < <(find "$output_root/packages" -maxdepth 1 -type f -name '*.deb' -print0)
 	dspi_deb=$(find "$output_root/packages" -maxdepth 1 -type f -name 'dspi-config_*_all.deb' -print -quit)
 	client_packages_dir="$output_root/packages"
 else
@@ -197,12 +242,40 @@ fi
 	"DSHANPI_RELEASE_PACKAGES_DIR=$output_root/packages" \
 	"DSHANPI_RELEASE_META_DEB=$desktop_meta")
 
+image_dir="$armbian_dir/output/images/$board/dshanpi-$version"
+if jq -e '.image_release' "$lock" >/dev/null; then
+	# An images-only assembly deliberately skips kernel source checkout and lets
+	# the signed release meta-package install the exact kernel cohort. Armbian
+	# therefore labels its temporary output "generic" even though verification
+	# below confirms the installed ABI. Normalize those outputs to the immutable
+	# filenames fixed in the release lock before they leave the builder.
+	cli_image=$(find "$image_dir" -maxdepth 1 -type f -name '*.img' ! -name '*_desktop.img' -print -quit)
+	desktop_image=$(find "$image_dir" -maxdepth 1 -type f -name '*_desktop.img' -print -quit)
+	[[ -n "$cli_image" && -n "$desktop_image" ]] || die "cannot identify one CLI and one desktop image"
+	for variant in cli desktop; do
+		if [[ "$variant" == cli ]]; then source_image=$cli_image; else source_image=$desktop_image; fi
+		expected_name=$(jq -r --arg variant "$variant" \
+			'.image_release.variants[] | select(.name == $variant) | .image' "$lock")
+		[[ "$expected_name" =~ ^[A-Za-z0-9][A-Za-z0-9._+-]*\.img$ ]] ||
+			die "unsafe fixed image filename for $variant: $expected_name"
+		if [[ $(basename "$source_image") != "$expected_name" ]]; then
+			[[ -f "$source_image.sha" ]] || die "image checksum sidecar is missing: $source_image.sha"
+			(cd "$image_dir" && sha256sum -c "$(basename "$source_image").sha")
+			[[ ! -e "$image_dir/$expected_name" && ! -e "$image_dir/$expected_name.sha" ]] ||
+				die "fixed image target already exists: $expected_name"
+			mv -- "$source_image" "$image_dir/$expected_name"
+			rm -- "$source_image.sha"
+			(cd "$image_dir" && sha256sum "$expected_name" > "$expected_name.sha")
+		fi
+	done
+fi
+
 image_count=0
 while IFS= read -r -d '' image; do
     sudo "$script_dir/verify-image.sh" "$product" "$version" "$image"
     image_count=$((image_count + 1))
-done < <(find "$armbian_dir/output/images/$board/dshanpi-$version" -maxdepth 1 -type f -name '*.img' -print0)
+done < <(find "$image_dir" -maxdepth 1 -type f -name '*.img' -print0)
 [[ "$image_count" -eq 2 ]] || die "expected exactly two verified CLI/Desktop images, found $image_count"
-find "$armbian_dir/output/images/$board/dshanpi-$version" -maxdepth 1 -type f \
+find "$image_dir" -maxdepth 1 -type f \
 	\( -name '*.img' -o -name '*.img.sha' -o -name '*.img.gz' \) -exec cp -- {} "$output_root/images/" \;
 echo "built $product $version into $output_root"

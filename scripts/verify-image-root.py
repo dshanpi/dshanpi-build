@@ -49,8 +49,25 @@ require(not any(re.match(r'trusted\s*:', line, re.I) for line in source), 'sourc
 require((root / 'usr/share/keyrings/dshanpi-archive-keyring.gpg').stat().st_size > 0, 'archive key is empty')
 board_release = (root / 'etc/armbian-release').read_text()
 require(re.search(r'^BOARD=[\"\']?' + re.escape(args.product) + r'[\"\']?$', board_release, re.M), 'board identity mismatch')
-env = dict(line.split('=', 1) for line in (root / 'boot/armbianEnv.txt').read_text().splitlines() if '=' in line and not line.startswith('#'))
 config = json.loads((Path(__file__).resolve().parents[1] / 'products' / args.product / 'product.json').read_text())
-require(env.get('fdtfile') == config['armbian']['boot_fdt_file'], 'wrong boot device tree for product')
-require((root / 'boot/dtb' / env['fdtfile']).is_file(), 'boot device tree is missing')
+expected_fdt = config['armbian']['boot_fdt_file']
+armbian_env = root / 'boot/armbianEnv.txt'
+extlinux = root / 'boot/extlinux/extlinux.conf'
+if armbian_env.is_file():
+    env = dict(line.split('=', 1) for line in armbian_env.read_text().splitlines()
+               if '=' in line and not line.startswith('#'))
+    selected_fdt = env.get('fdtfile')
+    selected_path = root / 'boot/dtb' / str(selected_fdt)
+elif extlinux.is_file():
+    selections = re.findall(r'^\s*fdt\s+(\S+)\s*$', extlinux.read_text(), re.M | re.I)
+    require(len(selections) == 1, 'expected exactly one extlinux device tree selection')
+    selected = selections[0]
+    prefix = '/dtb/'
+    require(selected.startswith(prefix), 'extlinux device tree is outside /dtb')
+    selected_fdt = selected[len(prefix):]
+    selected_path = root / 'boot' / selected.lstrip('/')
+else:
+    require(False, 'boot configuration is missing')
+require(selected_fdt == expected_fdt, 'wrong boot device tree for product')
+require(selected_path.is_file(), 'boot device tree is missing')
 print('Verified', args.product, args.version, meta['Package'], 'and all exact platform dependencies')
