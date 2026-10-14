@@ -7,6 +7,11 @@ description: Maintain pinned DShanPI DEB recipes, signed APT releases, product i
 
 Read root AGENTS.md and [DELIVERY_POLICY.md](../../../DELIVERY_POLICY.md) before work. Run policy and indexed-source hygiene checks; with sibling checkouts use --peer. The repository is the sole release orchestrator; board/kernel/DT sources belong in ArmBianOS, client interaction in dspi-config.
 
+Every implementation conversation that changes this repository must create or update a
+G14 record in `docs/change-records/`. Link stable requirement IDs and record business
+logic, a Mermaid flow, invariants and failure branches, reproducible tests, evidence,
+and untested items. Run `python3 tools/check-change-record.py` before handoff.
+
 For a new machine or handoff, read [the server guide](../../../docs/new-server.md). For current limitations and prior findings, read [the development handoff](../../../docs/development-handoff.md).
 
 - Keep optional components under packages/<component>; pin upstream commit or archive SHA and put new source adaptations in reviewable patches. Never replace a vendor archive in place.
