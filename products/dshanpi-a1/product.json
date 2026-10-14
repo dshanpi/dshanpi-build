@@ -6,6 +6,11 @@
   "testing_suite": "noble-testing",
   "component": "dshanpi-a1",
   "architectures": ["arm64", "all"],
+  "initial_login": {
+    "username": "root",
+    "password": "1234",
+    "password_change_required": true
+  },
   "sources": {
     "armbianos": "https://github.com/dshanpi/ArmBianOS.git",
     "dspi_config": "https://github.com/dshanpi/dspi-config.git"

@@ -100,7 +100,16 @@ class ImageReleaseTests(unittest.TestCase):
         self.assertEqual(provenance["release"]["target_commit"], COMMIT)
         self.assertEqual(provenance["headers"]["package"], "linux-headers-vendor-rk35xx")
         self.assertIn("linux-headers-vendor-rk35xx=1.2.3-1", provenance["headers"]["apt_install"])
-        self.assertTrue((self.work / "release-notes.md").is_file())
+        self.assertEqual(provenance["initial_login"], {
+            "username": "root",
+            "password": "1234",
+            "password_change_required": True,
+        })
+        notes = (self.work / "release-notes.md").read_text()
+        self.assertIn("## Initial login", notes)
+        self.assertIn("Username: `root`", notes)
+        self.assertIn("Password: `1234`", notes)
+        self.assertIn("requires setting a new root password", notes)
 
 
 if __name__ == "__main__":

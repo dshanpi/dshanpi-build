@@ -51,11 +51,28 @@ def safe_name(value: object, field: str) -> str:
     return value
 
 
+def initial_login(product: str) -> dict:
+    config = load_json(ROOT / "products" / product / "product.json")
+    login = config.get("initial_login")
+    if not isinstance(login, dict):
+        fail("product initial_login documentation is required")
+    username = safe_name(login.get("username"), "initial login username")
+    password = safe_name(login.get("password"), "initial login password")
+    if login.get("password_change_required") is not True:
+        fail("initial login must require a password change")
+    return {
+        "username": username,
+        "password": password,
+        "password_change_required": True,
+    }
+
+
 def validate_plan(product: str, lock: dict) -> dict:
     if not PRODUCT_RE.fullmatch(product) or lock.get("product") != product:
         fail("release product mismatch")
     if lock.get("schema_version") != 1 or not VERSION_RE.fullmatch(str(lock.get("version", ""))):
         fail("invalid release lock identity")
+    initial_login(product)
     source_commit = lock.get("sources", {}).get("armbianos", {}).get("commit", "")
     if not COMMIT_RE.fullmatch(str(source_commit)):
         fail("invalid ArmBianOS source commit")
@@ -160,6 +177,7 @@ def compress_image(source: Path, target: Path) -> None:
 def prepare(product: str, lock_path: Path, images: Path, packages: Path, output: Path) -> None:
     lock = load_json(lock_path)
     plan = validate_plan(product, lock)
+    login = initial_login(product)
     product_config = load_json(ROOT / "products" / product / "product.json")
     if not images.is_dir() or not packages.is_dir():
         fail("image and package directories must exist")
@@ -246,6 +264,7 @@ def prepare(product: str, lock_path: Path, images: Path, packages: Path, output:
             "tag": plan["tag"],
             "target_commit": plan["target_commit"],
         },
+        "initial_login": login,
         "images": image_records,
         "headers": header,
         "packages": {
@@ -272,6 +291,10 @@ def prepare(product: str, lock_path: Path, images: Path, packages: Path, output:
     notes.write_text(
         f"# {plan['title']}\n\n"
         "This is an automatically assembled testing image release. It remains a prerelease until the exact package cohort passes applicable physical-board validation.\n\n"
+        "## Initial login\n\n"
+        f"- Username: `{login['username']}`\n"
+        f"- Password: `{login['password']}`\n"
+        "- The first interactive login requires setting a new root password.\n\n"
         f"## Images\n\n{variant_lines}\n\n"
         "## Matching kernel headers\n\n"
         f"- Package: `{header['package']}={header['version']}` (`{header['architecture']}`)\n"
