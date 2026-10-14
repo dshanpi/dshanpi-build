@@ -163,6 +163,19 @@ class PublicReleaseFetchTests(unittest.TestCase):
         self.assertEqual(len(list(output.glob("*.deb"))), len(self.package_names))
         self.assertTrue((output / "SHA256SUMS").is_file())
         self.assertTrue((output.parent / "public-release.json").is_file())
+        second = self.run_fetch(output)
+        self.assertEqual(second.returncode, 0, second.stderr)
+        self.assertIn("reused verified package", second.stdout)
+
+    def test_rejects_existing_unsigned_extra_package(self):
+        output = self.root / "extra/packages"
+        first = self.run_fetch(output)
+        self.assertEqual(first.returncode, 0, first.stderr)
+        extra = output / "unlisted_1.0-1_all.deb"
+        self.build_deb(extra, "unlisted", "all")
+        second = self.run_fetch(output)
+        self.assertNotEqual(second.returncode, 0)
+        self.assertIn("outside the signed cohort", second.stderr)
 
     def test_rejects_package_changed_after_signed_manifest(self):
         package = next(self.repository.glob("pool/**/*.deb"))
