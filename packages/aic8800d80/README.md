@@ -1,18 +1,19 @@
 # 原版 A1 / AX8850 转接板 AIC8800D80
 
 遵守 [DELIVERY_POLICY.md](../../DELIVERY_POLICY.md)。固定用户提供的原始 tar.gz 和
-SHA-256；驱动版本 6.4.3.0，包版本 6.4.3.0+dshanpi1。本包对应 USB 无线模块，
+SHA-256；驱动版本 6.4.3.0，包版本 6.4.3.0+dshanpi.2026.10.14.1。本包对应 USB 无线模块，
 不因转接板使用 PCIe 就选择 PCIe 无线驱动；不替代 AX650 推理软件和 PAC。
 
 适用原版 DShanPI A1、Noble arm64、内核 `6.1.115-vendor-rk35xx`，内核和 headers
-Debian 版本精确固定为 `25.11.0-trunk.20261008.4`。CM5 的 SDIO 驱动独立维护。
+Debian 版本精确固定为 `25.11.0-trunk.20261010.1`。CM5 的 SDIO 驱动独立维护。
 
 ## 安装
 
 ```sh
 sudo dspi-config source channel testing
 sudo apt update
-sudo apt install -t noble-testing dshanpi-a1-release-core=2026.10.09-3 dshanpi-a1-aic8800d80=6.4.3.0+dshanpi1
+sudo dspi-config update install 2026.10.14-1
+sudo apt install -t noble-testing dshanpi-a1-aic8800d80=6.4.3.0+dshanpi.2026.10.14.1
 dkms status -m dshanpi-aic8800d80
 ```
 
@@ -58,5 +59,5 @@ sudo apt remove dshanpi-a1-aic8800d80 dshanpi-aic8800d80-dkms dshanpi-aic8800d80
 
 DKMS 只清理自己的版本；不强行卸载正在使用的模块。重启可清除已加载的旧模块。
 若要连同配置彻底删除，使用 `apt purge`。编译失败查看
-`/var/lib/dkms/dshanpi-aic8800d80/6.4.3.0+dshanpi1/build/make.log`，修复后通过
+`/var/lib/dkms/dshanpi-aic8800d80/6.4.3.0+dshanpi.2026.10.14.1/build/make.log`，修复后通过
 `dpkg --configure -a` 恢复；不要手工覆盖内核模块。
