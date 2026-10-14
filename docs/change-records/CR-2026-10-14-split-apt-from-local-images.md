@@ -69,6 +69,8 @@ flowchart TD
 | Workflow CI | `Validate APT tooling` | NOT-RUN | Required before merge |
 | Delivery | Avaota A1 `2026.10.14-1` testing APT publication | NOT-RUN | Runs after merge |
 | Failed delivery attempt | Actions run `38560486191` | EXPECTED-FAIL | Kernel artifact rejected leaked desktop parameters before compilation; no image or package was published |
+| Signed candidate | Actions run `38561145467` | PARTIAL | DEBs and signed testing candidate passed verification; Pages capacity gate rejected publication |
+| SSH fallback | Actions run `38563975060` | EXPECTED-FAIL | Backend credentials are unset; stopped before repository download or mutation |
 
 ## 未完成项
 
@@ -76,6 +78,8 @@ The first Avaota A1 package-only run stopped before compilation because desktop 
 were passed to non-desktop artifact commands. The corrected loop scopes those parameters only to
 `armbian-bsp-desktop`; the package cohort remains unpublished pending the replacement run. Package-only
 CI does not replace local image verification or physical-board acceptance.
+The signed candidate also demonstrated that public-host capacity must be resolved by an explicit reviewed
+testing-cohort purge or by configuring the large-capacity backend; silent deletion is forbidden.
 
 ## 交付影响
 

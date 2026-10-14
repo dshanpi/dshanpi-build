@@ -11,6 +11,7 @@
       "commit": "58baae18e98483d308c10d4f707f252390316000"
     }
   },
+  "testing_purge_plan": "2026.10.14-1",
   "image_release": {
     "repository": "dshanpi/ArmBianOS",
     "tag": "avaota-a1-2026.10.14-1",
