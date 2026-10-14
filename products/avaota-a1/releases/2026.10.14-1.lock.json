@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "product": "avaota-a1",
+  "version": "2026.10.14-1",
+  "revision": "25.11.0-trunk.20261014.1",
+  "sources": {
+    "armbianos": {
+      "commit": "5980f8c110cb818dc9b6c3919c8fa6926f1fc731"
+    },
+    "dspi_config": {
+      "commit": "58baae18e98483d308c10d4f707f252390316000"
+    }
+  },
+  "image_release": {
+    "repository": "dshanpi/ArmBianOS",
+    "tag": "avaota-a1-2026.10.14-1",
+    "target_commit": "5980f8c110cb818dc9b6c3919c8fa6926f1fc731",
+    "title": "Avaota A1 T527 2026.10.14-1",
+    "testing": {"draft": false, "prerelease": true},
+    "stable": {"draft": false, "prerelease": false},
+    "variants": [
+      {
+        "name": "cli",
+        "image": "Armbian-unofficial_25.11.0-trunk.20261014.1_Avaota-a1_noble_legacy_5.15.154.img",
+        "asset": "Armbian-unofficial_25.11.0-trunk.20261014.1_Avaota-a1_noble_legacy_5.15.154.img.xz"
+      },
+      {
+        "name": "desktop",
+        "image": "Armbian-unofficial_25.11.0-trunk.20261014.1_Avaota-a1_noble_legacy_5.15.154_gnome_desktop.img",
+        "asset": "Armbian-unofficial_25.11.0-trunk.20261014.1_Avaota-a1_noble_legacy_5.15.154_gnome_desktop.img.xz"
+      }
+    ],
+    "assets": [
+      "Armbian-unofficial_25.11.0-trunk.20261014.1_Avaota-a1_noble_legacy_5.15.154.img.xz",
+      "Armbian-unofficial_25.11.0-trunk.20261014.1_Avaota-a1_noble_legacy_5.15.154_gnome_desktop.img.xz",
+      "SHA256SUMS",
+      "package-SHA256SUMS",
+      "release-lock.json",
+      "release-provenance.json"
+    ]
+  }
+}

@@ -18,6 +18,11 @@
     "desktop_config": "config_base",
     "boot_fdt_file": "allwinner/sun55i-t527-avaota-a1.dtb"
   },
+  "initial_login": {
+    "username": "root",
+    "password": "1234",
+    "password_change_required": true
+  },
   "package_search_paths": ["output/debs"],
   "common_packages": [
     "armbian-firmware",
