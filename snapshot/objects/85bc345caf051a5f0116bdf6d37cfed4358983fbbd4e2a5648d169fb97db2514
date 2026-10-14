@@ -1,0 +1,105 @@
+{
+  "channel": "testing",
+  "packages": [
+    {
+      "architecture": "arm64",
+      "component": "avaota-a1",
+      "filename": "pool/avaota-a1/a/armbian-bsp-cli-avaota-a1-legacy/armbian-bsp-cli-avaota-a1-legacy_25.11.0-trunk.20261014.1_arm64__1-PC9b3f-V713f-H340e-B1e5d-Rf36a.deb",
+      "package": "armbian-bsp-cli-avaota-a1-legacy",
+      "sha256": "4604774d5daeeee276324b20725c1b1dfbff7d4c36baf048a48388fba74ffa48",
+      "version": "25.11.0-trunk.20261014.1"
+    },
+    {
+      "architecture": "arm64",
+      "component": "avaota-a1",
+      "filename": "pool/avaota-a1/a/armbian-bsp-desktop-avaota-a1-legacy/armbian-bsp-desktop-avaota-a1-legacy_25.11.0-trunk.20261014.1_arm64__1-B8091-R448a.deb",
+      "package": "armbian-bsp-desktop-avaota-a1-legacy",
+      "sha256": "99bb5e4514de8d4d3b9080d2737557462d66ed9454e7b814586d2aced3b698a5",
+      "version": "25.11.0-trunk.20261014.1"
+    },
+    {
+      "architecture": "all",
+      "component": "common",
+      "filename": "pool/common/a/armbian-firmware/armbian-firmware_25.11.0-trunk.20261014.1_all__1-SA4179-B6c7f-R448a.deb",
+      "package": "armbian-firmware",
+      "sha256": "e5e0413876b8f2d6d36fb334897f60c7a910ac135b65c6a5567b5fb57996803d",
+      "version": "25.11.0-trunk.20261014.1"
+    },
+    {
+      "architecture": "all",
+      "component": "avaota-a1",
+      "filename": "pool/avaota-a1/a/avaota-a1-release-core/avaota-a1-release-core_2026.10.14-1_all.deb",
+      "package": "avaota-a1-release-core",
+      "sha256": "f0a870251868e2b5c590a134e635a09b13baa35f9fa405fc06e4ff6aae3a2f82",
+      "version": "2026.10.14-1"
+    },
+    {
+      "architecture": "all",
+      "component": "avaota-a1",
+      "filename": "pool/avaota-a1/a/avaota-a1-release-desktop/avaota-a1-release-desktop_2026.10.14-1_all.deb",
+      "package": "avaota-a1-release-desktop",
+      "sha256": "c23e29ba419c1db8b8378330bcc2147940a00d1cc83dcb8a59b5ca2bfbeb2818",
+      "version": "2026.10.14-1"
+    },
+    {
+      "architecture": "all",
+      "component": "avaota-a1",
+      "filename": "pool/avaota-a1/a/avaota-a1-repository/avaota-a1-repository_1:2026.10.14-1_all.deb",
+      "package": "avaota-a1-repository",
+      "sha256": "77a68f312b58e6f007abde4f963084f9bd160056e75634ee7e86d35b7a0f61b8",
+      "version": "1:2026.10.14-1"
+    },
+    {
+      "architecture": "arm64",
+      "component": "avaota-a1",
+      "filename": "pool/avaota-a1/b/base-files/base-files_25.11.0-trunk.20261014.1-13ubuntu10-noble_arm64__1-noble-1armbian1-Baa17-U13ubuntu10-R55fa.deb",
+      "package": "base-files",
+      "sha256": "1eaa98476268f49a2559cf5797b82945e2cb365353c2f7f294e5b4551d562c4f",
+      "version": "25.11.0-trunk.20261014.1-13ubuntu10-noble"
+    },
+    {
+      "architecture": "all",
+      "component": "common",
+      "filename": "pool/common/d/dshanpi-archive-keyring/dshanpi-archive-keyring_1:2026.10.14-1_all.deb",
+      "package": "dshanpi-archive-keyring",
+      "sha256": "2edc66be73e0114160fda10a40a10f99f763198d4e29cd4c77d38bbcd2ed77e1",
+      "version": "1:2026.10.14-1"
+    },
+    {
+      "architecture": "all",
+      "component": "common",
+      "filename": "pool/common/d/dspi-config/dspi-config_1.0.3-1_all.deb",
+      "package": "dspi-config",
+      "sha256": "dd536919b4c2ec73a7d03a3e9b3ff14577169cd94b8c6d0b60bbfc0b02ee770a",
+      "version": "1.0.3-1"
+    },
+    {
+      "architecture": "arm64",
+      "component": "avaota-a1",
+      "filename": "pool/avaota-a1/l/linux-dtb-legacy-sun55iw3-syterkit/linux-dtb-legacy-sun55iw3-syterkit_25.11.0-trunk.20261014.1_arm64__5.15.154-Sa464-D0b5d-P0000-C4f4aH2313-HK01ba-Vc222-B1fdb-R448a.deb",
+      "package": "linux-dtb-legacy-sun55iw3-syterkit",
+      "sha256": "2298cb4e54fbe860c22961e5a9137c2af3076867884fbbf39772cea95c89b388",
+      "version": "25.11.0-trunk.20261014.1"
+    },
+    {
+      "architecture": "arm64",
+      "component": "avaota-a1",
+      "filename": "pool/avaota-a1/l/linux-headers-legacy-sun55iw3-syterkit/linux-headers-legacy-sun55iw3-syterkit_25.11.0-trunk.20261014.1_arm64__5.15.154-Sa464-D0b5d-P0000-C4f4aH2313-HK01ba-Vc222-B1fdb-R448a.deb",
+      "package": "linux-headers-legacy-sun55iw3-syterkit",
+      "sha256": "da3f27b6d5fe3a757295ee04be160a3728de0ec8b5f7cec6953bd1aec543c272",
+      "version": "25.11.0-trunk.20261014.1"
+    },
+    {
+      "architecture": "arm64",
+      "component": "avaota-a1",
+      "filename": "pool/avaota-a1/l/linux-image-legacy-sun55iw3-syterkit/linux-image-legacy-sun55iw3-syterkit_25.11.0-trunk.20261014.1_arm64__5.15.154-Sa464-D0b5d-P0000-C4f4aH2313-HK01ba-Vc222-B1fdb-R448a.deb",
+      "package": "linux-image-legacy-sun55iw3-syterkit",
+      "sha256": "d55de73a25932a2e1d6218121dcbf8697dbceb5d6534ce4b69e1f0cf72b9b31b",
+      "version": "25.11.0-trunk.20261014.1"
+    }
+  ],
+  "product": "avaota-a1",
+  "schema_version": 1,
+  "suite": "noble-testing",
+  "version": "2026.10.14-1"
+}

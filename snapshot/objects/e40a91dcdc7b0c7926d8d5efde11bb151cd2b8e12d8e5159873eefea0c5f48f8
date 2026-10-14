@@ -1,0 +1,47 @@
+Package: avaota-a1-release-core
+Version: 2026.10.14-1
+Architecture: all
+Maintainer: DShanPI <support@dshanpi.com>
+Depends: base-files (= 25.11.0-trunk.20261014.1-13ubuntu10-noble), armbian-bsp-cli-avaota-a1-legacy (= 25.11.0-trunk.20261014.1), linux-image-legacy-sun55iw3-syterkit (= 25.11.0-trunk.20261014.1), linux-dtb-legacy-sun55iw3-syterkit (= 25.11.0-trunk.20261014.1), linux-headers-legacy-sun55iw3-syterkit (= 25.11.0-trunk.20261014.1), armbian-firmware (= 25.11.0-trunk.20261014.1), dshanpi-archive-keyring (= 1:2026.10.14-1), avaota-a1-repository (= 1:2026.10.14-1), dspi-config (= 1.0.3-1)
+Section: metapackages
+Priority: optional
+Description: DShanPI avaota-a1 tested core system release
+ Locks one tested DShanPI platform package cohort for controlled upgrade
+ and rollback through dspi-config.
+Filename: pool/avaota-a1/a/avaota-a1-release-core/avaota-a1-release-core_2026.10.14-1_all.deb
+Size: 750
+MD5sum: 68e96f09d14f110a97368deb2d88ee58
+SHA1: 3d40e54404885d20404f5463072e747bcfd1cd97
+SHA256: f0a870251868e2b5c590a134e635a09b13baa35f9fa405fc06e4ff6aae3a2f82
+
+Package: avaota-a1-release-desktop
+Version: 2026.10.14-1
+Architecture: all
+Maintainer: DShanPI <support@dshanpi.com>
+Depends: base-files (= 25.11.0-trunk.20261014.1-13ubuntu10-noble), armbian-bsp-cli-avaota-a1-legacy (= 25.11.0-trunk.20261014.1), linux-image-legacy-sun55iw3-syterkit (= 25.11.0-trunk.20261014.1), linux-dtb-legacy-sun55iw3-syterkit (= 25.11.0-trunk.20261014.1), linux-headers-legacy-sun55iw3-syterkit (= 25.11.0-trunk.20261014.1), armbian-firmware (= 25.11.0-trunk.20261014.1), dshanpi-archive-keyring (= 1:2026.10.14-1), avaota-a1-repository (= 1:2026.10.14-1), dspi-config (= 1.0.3-1), armbian-bsp-desktop-avaota-a1-legacy (= 25.11.0-trunk.20261014.1)
+Section: metapackages
+Priority: optional
+Description: DShanPI avaota-a1 tested desktop system release
+ Locks one tested DShanPI platform package cohort for controlled upgrade
+ and rollback through dspi-config.
+Filename: pool/avaota-a1/a/avaota-a1-release-desktop/avaota-a1-release-desktop_2026.10.14-1_all.deb
+Size: 758
+MD5sum: 83c710629557e7c8717929ad4e6ef355
+SHA1: 7e0c0cab33be13bfa91d864182aa585e02ac77a2
+SHA256: c23e29ba419c1db8b8378330bcc2147940a00d1cc83dcb8a59b5ca2bfbeb2818
+
+Package: avaota-a1-repository
+Version: 1:2026.10.14-1
+Architecture: all
+Maintainer: DShanPI <support@dshanpi.com>
+Depends: dshanpi-archive-keyring (= 1:2026.10.14-1)
+Section: misc
+Priority: optional
+Description: DShanPI avaota-a1 signed APT source
+ Installs the signed stable source for the DShanPI product platform stack.
+Filename: pool/avaota-a1/a/avaota-a1-repository/avaota-a1-repository_1:2026.10.14-1_all.deb
+Size: 828
+MD5sum: 18b74f5b91406ef57c771e43db863b2e
+SHA1: 94d9337fc6752a8bd5470da7f7b2d34a9eb5099f
+SHA256: 77a68f312b58e6f007abde4f963084f9bd160056e75634ee7e86d35b7a0f61b8
+

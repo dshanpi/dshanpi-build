@@ -1,0 +1,123 @@
+Package: armbian-bsp-cli-avaota-a1-legacy
+Version: 25.11.0-trunk.20261014.1
+Architecture: arm64
+Maintainer: John Doe <john.doe@somewhere.on.planet>
+Section: kernel
+Priority: optional
+Recommends: bsdutils, parted, util-linux, toilet
+Description: Armbian CLI BSP for board 'avaota-a1' branch 'legacy' 
+Installed-Size: 1401
+Armbian-Original-Hash: 1-PC9b3f-V713f-H340e-B1e5d-Rf36a
+Depends: bash, linux-base, u-boot-tools, initramfs-tools, lsb-release, fping, device-tree-compiler, base-files (>= 25.11.0-trunk.20261014.1)
+Replaces: zram-config, armbian-bsp-cli-avaota-a1 (<< 25.11.0-trunk.20261014.1)
+Breaks: armbian-bsp-cli-avaota-a1 (<< 25.11.0-trunk.20261014.1)
+Provides: armbian-bsp-cli
+Filename: pool/avaota-a1/a/armbian-bsp-cli-avaota-a1-legacy/armbian-bsp-cli-avaota-a1-legacy_25.11.0-trunk.20261014.1_arm64__1-PC9b3f-V713f-H340e-B1e5d-Rf36a.deb
+Size: 432216
+MD5sum: da287a6a5297307fe13033e118ae4e32
+SHA1: f7315d5215e2cd711b5a887c4cbce22d7075a0ef
+SHA256: 4604774d5daeeee276324b20725c1b1dfbff7d4c36baf048a48388fba74ffa48
+
+Package: armbian-bsp-desktop-avaota-a1-legacy
+Version: 25.11.0-trunk.20261014.1
+Architecture: arm64
+Maintainer: Armbian Linux <info@armbian.com>
+Section: xorg
+Priority: optional
+Provides: armbian-bsp-desktop, armbian-bsp-desktop-avaota-a1
+Description: Armbian bsp-desktop for release noble, common for all desktop environments on arm64 avaota-a1 machines on legacy branch
+Installed-Size: 2
+Armbian-Original-Hash: 1-B8091-R448a
+Filename: pool/avaota-a1/a/armbian-bsp-desktop-avaota-a1-legacy/armbian-bsp-desktop-avaota-a1-legacy_25.11.0-trunk.20261014.1_arm64__1-B8091-R448a.deb
+Size: 1576
+MD5sum: bf7ec58d1ec0ab7b05dcd21df1665087
+SHA1: d95174c3f392bd1ef5c45afb41e2ffdb327fa955
+SHA256: 99bb5e4514de8d4d3b9080d2737557462d66ed9454e7b814586d2aced3b698a5
+
+Maintainer: Armbian Linux <info@armbian.com>
+Version: 25.11.0-trunk.20261014.1-13ubuntu10-noble
+Package: base-files
+Architecture: arm64
+Essential: yes
+Pre-Depends: awk
+Depends: libc6 (>= 2.34), libcrypt1 (>= 1:4.4.10-10ubuntu3)
+Breaks: debian-security-support (<< 2019.04.25), initscripts (<< 2.88dsf-13.3), sendfile (<< 2.1b.20080616-5.2~), ubuntu-server (<< 1.453)
+Replaces: base, dpkg (<= 1.15.0), miscutils
+Provides: base, usr-is-merged
+Section: admin
+Priority: required
+Multi-Arch: foreign
+Description: Armbian base system miscellaneous files
+ This package contains the basic filesystem hierarchy of a Armbian system, and
+ several important miscellaneous files, such as /etc/debian_version,
+ /etc/host.conf, /etc/issue, /etc/motd, /etc/profile, and others,
+ and the text of several common licenses in use on Armbian systems.
+Original-Maintainer: Santiago Vila <sanvila@debian.org>
+Installed-Size: 350
+Armbian-Original-Hash: 1-noble-1armbian1-Baa17-U13ubuntu10-R55fa
+Filename: pool/avaota-a1/b/base-files/base-files_25.11.0-trunk.20261014.1-13ubuntu10-noble_arm64__1-noble-1armbian1-Baa17-U13ubuntu10-R55fa.deb
+Size: 69044
+MD5sum: 95c252027edc896d50232c4e547e55df
+SHA1: b3630cb73df63193a328aa78aef097185a0f3049
+SHA256: 1eaa98476268f49a2559cf5797b82945e2cb365353c2f7f294e5b4551d562c4f
+
+Version: 25.11.0-trunk.20261014.1
+Maintainer: John Doe <john.doe@somewhere.on.planet>
+Section: kernel
+Package: linux-dtb-legacy-sun55iw3-syterkit
+Architecture: arm64
+Priority: optional
+Provides: linux-dtb, linux-dtb-armbian, armbian-legacy
+Description: Armbian Linux legacy DTBs in /boot/dtb-5.15.154-legacy-sun55iw3-syterkit
+ This package contains device tree blobs from the Linux kernel, version 5.15.154-legacy-sun55iw3-syterkit
+ version "5.15.154" git revision "a464bc4feaff7b102dac6362b44ac3303ec7cae1" codename "Trick or Treat" drivers hash "0b5d7236_c3161803" patches hash "0000000000000000" .config hash "4f4accf8bcb7b3f7" .config hook hash "231397204c6da625" variables hash "c22207b66dc5dd57157df2cd7b9c20559b2ed8ac44b9c3c3b9704002c06b8921" framework bash hash "1fdb079fec31666f"
+Installed-Size: 1458
+Armbian-Original-Hash: 5.15.154-Sa464-D0b5d-P0000-C4f4aH2313-HK01ba-Vc222-B1fdb-R448a
+Filename: pool/avaota-a1/l/linux-dtb-legacy-sun55iw3-syterkit/linux-dtb-legacy-sun55iw3-syterkit_25.11.0-trunk.20261014.1_arm64__5.15.154-Sa464-D0b5d-P0000-C4f4aH2313-HK01ba-Vc222-B1fdb-R448a.deb
+Size: 76936
+MD5sum: 3108be7c989097e55527ee2d02bd3fd2
+SHA1: d991a967b8e46f715be78ee80c9d39e5ace254b9
+SHA256: 2298cb4e54fbe860c22961e5a9137c2af3076867884fbbf39772cea95c89b388
+
+Version: 25.11.0-trunk.20261014.1
+Maintainer: John Doe <john.doe@somewhere.on.planet>
+Section: devel
+Package: linux-headers-legacy-sun55iw3-syterkit
+Architecture: arm64
+Priority: optional
+Provides: linux-headers, linux-headers-armbian, armbian-legacy
+Depends: make, gcc, libc6-dev, bison, flex, libssl-dev, libelf-dev, pahole
+Description: Armbian Linux legacy headers 5.15.154-legacy-sun55iw3-syterkit
+ This package provides kernel header files for 5.15.154-legacy-sun55iw3-syterkit
+ .
+ This is useful for DKMS and building of external modules.
+ version "5.15.154" git revision "a464bc4feaff7b102dac6362b44ac3303ec7cae1" codename "Trick or Treat" drivers hash "0b5d7236_c3161803" patches hash "0000000000000000" .config hash "4f4accf8bcb7b3f7" .config hook hash "231397204c6da625" variables hash "c22207b66dc5dd57157df2cd7b9c20559b2ed8ac44b9c3c3b9704002c06b8921" framework bash hash "1fdb079fec31666f"
+Installed-Size: 67596
+Armbian-Original-Hash: 5.15.154-Sa464-D0b5d-P0000-C4f4aH2313-HK01ba-Vc222-B1fdb-R448a
+Filename: pool/avaota-a1/l/linux-headers-legacy-sun55iw3-syterkit/linux-headers-legacy-sun55iw3-syterkit_25.11.0-trunk.20261014.1_arm64__5.15.154-Sa464-D0b5d-P0000-C4f4aH2313-HK01ba-Vc222-B1fdb-R448a.deb
+Size: 12851444
+MD5sum: 5db270f07e30fc129d4c431919190449
+SHA1: bac8daaa010bb84666ae34477184a2f3f9b340a3
+SHA256: da3f27b6d5fe3a757295ee04be160a3728de0ec8b5f7cec6953bd1aec543c272
+
+Package: linux-image-legacy-sun55iw3-syterkit
+Version: 25.11.0-trunk.20261014.1
+Source: linux-5.15.154
+Armbian-Kernel-Version: 5.15.154
+Armbian-Kernel-Version-Family: 5.15.154-legacy-sun55iw3-syterkit
+Architecture: arm64
+Maintainer: John Doe <john.doe@somewhere.on.planet>
+Section: kernel
+Priority: optional
+Provides: linux-image, linux-image-armbian, armbian-legacy, wireguard-modules
+Description: Armbian Linux legacy kernel image 5.15.154-legacy-sun55iw3-syterkit
+ This package contains the Linux kernel, modules and corresponding other files.
+ version "5.15.154" git revision "a464bc4feaff7b102dac6362b44ac3303ec7cae1" codename "Trick or Treat" drivers hash "0b5d7236_c3161803" patches hash "0000000000000000" .config hash "4f4accf8bcb7b3f7" .config hook hash "231397204c6da625" variables hash "c22207b66dc5dd57157df2cd7b9c20559b2ed8ac44b9c3c3b9704002c06b8921" framework bash hash "1fdb079fec31666f"
+Installed-Size: 43000
+Armbian-Original-Hash: 5.15.154-Sa464-D0b5d-P0000-C4f4aH2313-HK01ba-Vc222-B1fdb-R448a
+Filename: pool/avaota-a1/l/linux-image-legacy-sun55iw3-syterkit/linux-image-legacy-sun55iw3-syterkit_25.11.0-trunk.20261014.1_arm64__5.15.154-Sa464-D0b5d-P0000-C4f4aH2313-HK01ba-Vc222-B1fdb-R448a.deb
+Size: 11023500
+MD5sum: 9dc25eb002fcca4bc1acfc17e72a66ea
+SHA1: 9aafe0a02ad39258cdffa0b7f8cf3fa52c8ec462
+SHA256: d55de73a25932a2e1d6218121dcbf8697dbceb5d6534ce4b69e1f0cf72b9b31b
+
