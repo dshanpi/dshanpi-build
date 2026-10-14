@@ -52,7 +52,7 @@ release_json() {
 		return
 	fi
 	api "repos/$repository/releases?per_page=100" |
-		jq -ce --arg tag "$tag" '[.[][] | select(.tag_name == $tag)] | if length == 1 then .[0] else empty end'
+		jq -ce --arg tag "$tag" '[.[] | select(.tag_name == $tag)] | if length == 1 then .[0] else empty end'
 }
 
 verify_asset_names() {
