@@ -46,7 +46,13 @@ resolve_tag_commit() {
 }
 
 release_json() {
-	api "repos/$repository/releases/tags/$tag"
+	local release
+	if release=$(api "repos/$repository/releases/tags/$tag" 2>/dev/null); then
+		printf '%s\n' "$release"
+		return
+	fi
+	api "repos/$repository/releases?per_page=100" |
+		jq -ce --arg tag "$tag" '[.[][] | select(.tag_name == $tag)] | if length == 1 then .[0] else empty end'
 }
 
 verify_asset_names() {
