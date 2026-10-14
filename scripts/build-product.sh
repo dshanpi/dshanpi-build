@@ -86,9 +86,13 @@ common_args=("BOARD=$board" "BRANCH=$branch" "RELEASE=$release" \
 # command so the candidate image exercises the same package-producing path.
 if [[ "$packages_only" == yes ]]; then
 	for artifact in kernel firmware armbian-base-files armbian-bsp-cli armbian-bsp-desktop; do
+		artifact_args=()
+		if [[ "$artifact" == armbian-bsp-desktop ]]; then
+			artifact_args+=(BUILD_DESKTOP=yes "DESKTOP_ENVIRONMENT=$desktop_environment" \
+				"DESKTOP_ENVIRONMENT_CONFIG_NAME=$desktop_config")
+		fi
 		(cd "$armbian_dir" && ./compile.sh "$artifact" "${common_args[@]}" \
-			"EXT=$release_extensions" "DESKTOP_ENVIRONMENT=$desktop_environment" \
-			"DESKTOP_ENVIRONMENT_CONFIG_NAME=$desktop_config")
+			"EXT=$release_extensions" "${artifact_args[@]}")
 	done
 else
 	(cd "$armbian_dir" && ./compile.sh build "${common_args[@]}" "EXT=$release_extensions" BUILD_DESKTOP=yes \
