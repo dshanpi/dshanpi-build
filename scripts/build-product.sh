@@ -3,11 +3,13 @@ set -euo pipefail
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/lib.sh"
 python3 "$repo_root/tools/check-delivery-policy.py" >/dev/null
 
-[[ $# -ge 2 && $# -le 3 ]] || die "usage: $0 PRODUCT RELEASE_LOCK [--print-plan]"
+[[ $# -ge 2 && $# -le 3 ]] || die "usage: $0 PRODUCT RELEASE_LOCK [--print-plan|--packages-only]"
 product=$1
 lock=$(safe_realpath "$2")
 mode=${3:-execute}
-[[ "$mode" == execute || "$mode" == --print-plan ]] || die "unknown mode: $mode"
+[[ "$mode" == execute || "$mode" == --print-plan || "$mode" == --packages-only ]] || die "unknown mode: $mode"
+packages_only=no
+[[ "$mode" != --packages-only ]] || packages_only=yes
 require_command jq
 require_product "$product"
 validate_release_lock "$product" "$lock"
@@ -71,7 +73,7 @@ dspi_deb=$(find "$dspi_output" -maxdepth 1 -type f -name 'dspi-config_*_all.deb'
 "$script_dir/build-client-packages.sh" "$product" "1:$version" "$APT_PUBLIC_KEY_FILE" \
 	"${DSHANPI_APT_BASE_URL:-https://apt.100ask.net}" "$output_root/client"
 
-common_args=(build "BOARD=$board" "BRANCH=$branch" "RELEASE=$release" \
+common_args=("BOARD=$board" "BRANCH=$branch" "RELEASE=$release" \
 	"REVISION=$revision" KERNEL_CONFIGURE=no PREFER_DOCKER=no BUILD_MINIMAL=no \
 	DEB_COMPRESS=xz COLUMNS=160 "MAKE_FOLDERS=dshanpi-$version" \
 	"DSHANPI_PRODUCT=$product" \
@@ -79,9 +81,20 @@ common_args=(build "BOARD=$board" "BRANCH=$branch" "RELEASE=$release" \
 	"DSHANPI_REPO_CLIENT_PACKAGES_DIR=$output_root/client")
 
 # Artifact pass: create every board-owned package before the release meta-package.
-(cd "$armbian_dir" && ./compile.sh "${common_args[@]}" "EXT=$release_extensions" BUILD_DESKTOP=yes \
-	DESKTOP_APPGROUPS_SELECTED= "DESKTOP_ENVIRONMENT=$desktop_environment" \
-	"DESKTOP_ENVIRONMENT_CONFIG_NAME=$desktop_config")
+# Package-only CI deliberately invokes artifact commands and never enters Armbian's
+# rootfs/image assembler. The controlled local full build uses the normal image
+# command so the candidate image exercises the same package-producing path.
+if [[ "$packages_only" == yes ]]; then
+	for artifact in kernel firmware armbian-base-files armbian-bsp-cli armbian-bsp-desktop; do
+		(cd "$armbian_dir" && ./compile.sh "$artifact" "${common_args[@]}" \
+			"EXT=$release_extensions" "DESKTOP_ENVIRONMENT=$desktop_environment" \
+			"DESKTOP_ENVIRONMENT_CONFIG_NAME=$desktop_config")
+	done
+else
+	(cd "$armbian_dir" && ./compile.sh build "${common_args[@]}" "EXT=$release_extensions" BUILD_DESKTOP=yes \
+		DESKTOP_APPGROUPS_SELECTED= "DESKTOP_ENVIRONMENT=$desktop_environment" \
+		"DESKTOP_ENVIRONMENT_CONFIG_NAME=$desktop_config")
+fi
 
 while IFS= read -r adapter; do
 	case "$adapter" in
@@ -142,12 +155,18 @@ fi
 core_meta=$(find "$output_root/packages" -maxdepth 1 -name "${product}-release-core_${version}_all.deb" -print -quit)
 desktop_meta=$(find "$output_root/packages" -maxdepth 1 -name "${product}-release-desktop_${version}_all.deb" -print -quit)
 [[ -n "$core_meta" && -n "$desktop_meta" ]] || die "release meta-package build failed"
+find "$output_root/packages" -maxdepth 1 -type f -name '*.deb' -print0 | sort -z | xargs -0 sha256sum > "$output_root/packages/SHA256SUMS"
+
+if [[ "$packages_only" == yes ]]; then
+	echo "built $product $version package cohort into $output_root/packages"
+	exit 0
+fi
 
 # Final images carry a release identity from first boot.
-(cd "$armbian_dir" && ./compile.sh "${common_args[@]}" "EXT=$release_extensions,dshanpi-release-meta" BUILD_DESKTOP=no \
+(cd "$armbian_dir" && ./compile.sh build "${common_args[@]}" "EXT=$release_extensions,dshanpi-release-meta" BUILD_DESKTOP=no \
 	"DSHANPI_RELEASE_PACKAGES_DIR=$output_root/packages" \
 	"DSHANPI_RELEASE_META_DEB=$core_meta")
-(cd "$armbian_dir" && ./compile.sh "${common_args[@]}" "EXT=$release_extensions,dshanpi-release-meta" BUILD_DESKTOP=yes \
+(cd "$armbian_dir" && ./compile.sh build "${common_args[@]}" "EXT=$release_extensions,dshanpi-release-meta" BUILD_DESKTOP=yes \
 	DESKTOP_APPGROUPS_SELECTED= "DESKTOP_ENVIRONMENT=$desktop_environment" \
 	"DESKTOP_ENVIRONMENT_CONFIG_NAME=$desktop_config" \
 	"DSHANPI_RELEASE_PACKAGES_DIR=$output_root/packages" \
@@ -161,5 +180,4 @@ done < <(find "$armbian_dir/output/images/$board/dshanpi-$version" -maxdepth 1 -
 [[ "$image_count" -eq 2 ]] || die "expected exactly two verified CLI/Desktop images, found $image_count"
 find "$armbian_dir/output/images/$board/dshanpi-$version" -maxdepth 1 -type f \
 	\( -name '*.img' -o -name '*.img.sha' -o -name '*.img.gz' \) -exec cp -- {} "$output_root/images/" \;
-find "$output_root/packages" -maxdepth 1 -type f -name '*.deb' -print0 | sort -z | xargs -0 sha256sum > "$output_root/packages/SHA256SUMS"
 echo "built $product $version into $output_root"

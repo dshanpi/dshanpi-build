@@ -67,12 +67,22 @@ jobs:
             echo 'Purge lifecycle: remove the reviewed legacy testing manifests and only pool bytes that have no remaining references.' >> "$GITHUB_STEP_SUMMARY"
           else
             test -f "products/$PRODUCT/releases/$VERSION.lock.json"
+            EXECUTOR_OPERATION=$OPERATION
+            if [[ "$OPERATION" == testing ]] && jq -e 'has("image_release")' \
+              "products/$PRODUCT/releases/$VERSION.lock.json" >/dev/null; then
+              EXECUTOR_OPERATION=testing-packages
+            fi
             python3 scripts/check-release-executor.py \
-              "products/$PRODUCT/releases/$VERSION.lock.json" "$OPERATION" github-hosted
+              "products/$PRODUCT/releases/$VERSION.lock.json" "$EXECUTOR_OPERATION" github-hosted
             if python3 -c 'import json, sys; raise SystemExit("image_release" not in json.load(open(sys.argv[1])))' \
               "products/$PRODUCT/releases/$VERSION.lock.json"; then
               python3 scripts/image-release.py validate "$PRODUCT" "products/$PRODUCT/releases/$VERSION.lock.json"
-              echo 'image_release=true' >> "$GITHUB_OUTPUT"
+              if [[ "$OPERATION" == testing ]]; then
+                echo 'image_release=false' >> "$GITHUB_OUTPUT"
+                echo 'Complete-release APT lifecycle: build and publish only the exact DEB cohort; images remain on the controlled local builder.' >> "$GITHUB_STEP_SUMMARY"
+              else
+                echo 'image_release=true' >> "$GITHUB_OUTPUT"
+              fi
             elif python3 -c 'import json, sys; raise SystemExit("maintenance_adapter" not in json.load(open(sys.argv[1])))' \
               "products/$PRODUCT/releases/$VERSION.lock.json"; then
               echo 'image_release=false' >> "$GITHUB_OUTPUT"
@@ -160,8 +170,14 @@ jobs:
             python3 scripts/build-maintenance-release.py \
               "${{ inputs.product }}" "${{ inputs.version }}" output/repository
           else
+            build_mode=()
+            if jq -e 'has("image_release")' \
+              "products/${{ inputs.product }}/releases/${{ inputs.version }}.lock.json" >/dev/null; then
+              build_mode=(--packages-only)
+            fi
             scripts/build-product.sh "${{ inputs.product }}" \
-              "products/${{ inputs.product }}/releases/${{ inputs.version }}.lock.json"
+              "products/${{ inputs.product }}/releases/${{ inputs.version }}.lock.json" \
+              "${build_mode[@]}"
           fi
 
       - name: Build signed testing repository
@@ -308,9 +324,22 @@ jobs:
       - uses: actions/deploy-pages@v4
         id: deployment
 
-  publish-image-release:
-    if: ${{ always() && needs.release.outputs.image_release == 'true' && (inputs.channel == 'testing' || inputs.channel == 'stable') && needs.release.result == 'success' && (inputs.backend == 'ssh' || needs.deploy.result == 'success') }}
+  verify-public-apt:
+    if: ${{ always() && (inputs.channel == 'testing' || inputs.channel == 'stable') && needs.release.result == 'success' && (inputs.backend == 'ssh' || needs.deploy.result == 'success') }}
     needs: [release, deploy]
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install public verification tools
+        run: sudo apt-get update && sudo apt-get install -y dpkg-dev gnupg jq xz-utils
+      - name: Verify the exact signed APT cohort is public
+        run: python3 scripts/verify-product-public.py "${{ inputs.product }}" "${{ inputs.version }}"
+
+  publish-image-release:
+    if: ${{ always() && needs.release.outputs.image_release == 'true' && (inputs.channel == 'testing' || inputs.channel == 'stable') && needs.verify-public-apt.result == 'success' }}
+    needs: [release, deploy, verify-public-apt]
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
@@ -321,10 +350,8 @@ jobs:
         with:
           name: ${{ inputs.product }}-${{ inputs.version }}
           path: output/${{ inputs.product }}/${{ inputs.version }}
-      - name: Install public verification tools
-        run: sudo apt-get update && sudo apt-get install -y dpkg-dev gh gnupg jq xz-utils
-      - name: Verify the exact signed APT cohort is public
-        run: python3 scripts/verify-product-public.py "${{ inputs.product }}" "${{ inputs.version }}"
+      - name: Install image publication tools
+        run: sudo apt-get update && sudo apt-get install -y gh jq xz-utils
       - name: Publish and verify planned testing image Release
         if: ${{ inputs.channel == 'testing' }}
         env:
