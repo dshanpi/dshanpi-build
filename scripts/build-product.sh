@@ -135,7 +135,7 @@ for deb in "$output_root/packages"/*.deb; do
 done
 if [[ -n "${DSHANPI_PUBLISHED_REPOSITORY:-}" ]]; then
 	python3 "$script_dir/reuse-published-packages.py" "$output_root/packages" \
-		"$DSHANPI_PUBLISHED_REPOSITORY" "$APT_PUBLIC_KEY_FILE"
+		"$DSHANPI_PUBLISHED_REPOSITORY" "$APT_PUBLIC_KEY_FILE" "$product_config"
 fi
 "$script_dir/audit-packages.sh" "$output_root/packages"
 "$script_dir/build-release-meta.sh" "$product" "$version" "$output_root/packages"

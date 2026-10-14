@@ -2,6 +2,7 @@
 """Reuse signed immutable packages when only reproducible-build metadata differs."""
 import hashlib
 import io
+import json
 from pathlib import Path
 import re
 import shutil
@@ -55,20 +56,35 @@ def digest(path):
         return hashlib.file_digest(stream, 'sha256').digest()
 
 
-def reuse(packages, repository, key):
+def release_component(path):
+    config = json.loads(path.read_text())
+    return config['component'], set(config['common_packages'])
+
+
+def reuse(packages, repository, key, config):
     if repository.is_dir() and not any(repository.iterdir()):
         return  # The first publication has no historical package identities.
     subprocess.run([sys.executable, str(Path(__file__).with_name('verify-repository.py')),
                     '--snapshot', str(repository), str(key), str(repository)], check=True)
+    component, common_packages = release_component(config)
     published = {}
-    for path in (repository / 'pool').rglob('*.deb'):
-        package_id = identity(path)
-        if package_id in published and digest(published[package_id]) != digest(path):
-            raise ValueError(f'Published package identity has conflicting bytes: {package_id}')
-        published[package_id] = path
+    for published_component in ('common', component):
+        component_root = repository / 'pool' / published_component
+        if not component_root.is_dir():
+            continue
+        for path in component_root.rglob('*.deb'):
+            package_id = identity(path)
+            lookup_key = (published_component, *package_id)
+            if lookup_key in published and digest(published[lookup_key]) != digest(path):
+                raise ValueError(
+                    f'Published package identity has conflicting bytes in {published_component}: '
+                    f'{package_id}')
+            published[lookup_key] = path
     replacements = []
     for path in packages.glob('*.deb'):
-        canonical = published.get(identity(path))
+        package_id = identity(path)
+        target_component = 'common' if package_id[0] in common_packages else component
+        canonical = published.get((target_component, *package_id))
         if canonical is None or digest(path) == digest(canonical):
             continue
         if not equivalent(path, canonical):
@@ -82,8 +98,9 @@ def reuse(packages, repository, key):
 
 
 if __name__ == '__main__':
-    if len(sys.argv) != 4:
-        raise SystemExit('usage: reuse-published-packages.py PACKAGE_DIR SIGNED_REPOSITORY PUBLIC_KEY')
+    if len(sys.argv) != 5:
+        raise SystemExit(
+            'usage: reuse-published-packages.py PACKAGE_DIR SIGNED_REPOSITORY PUBLIC_KEY PRODUCT_CONFIG')
     try:
         reuse(*(Path(arg).resolve() for arg in sys.argv[1:]))
     except (ValueError, subprocess.CalledProcessError) as error:
