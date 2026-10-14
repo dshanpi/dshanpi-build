@@ -67,6 +67,8 @@ jobs:
             echo 'Purge lifecycle: remove the reviewed legacy testing manifests and only pool bytes that have no remaining references.' >> "$GITHUB_STEP_SUMMARY"
           else
             test -f "products/$PRODUCT/releases/$VERSION.lock.json"
+            python3 scripts/check-release-executor.py \
+              "products/$PRODUCT/releases/$VERSION.lock.json" "$OPERATION" github-hosted
             if python3 -c 'import json, sys; raise SystemExit("image_release" not in json.load(open(sys.argv[1])))' \
               "products/$PRODUCT/releases/$VERSION.lock.json"; then
               python3 scripts/image-release.py validate "$PRODUCT" "products/$PRODUCT/releases/$VERSION.lock.json"
