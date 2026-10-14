@@ -16,8 +16,13 @@ class PolicyTests(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name) / "repo"
         self.manifest = json.loads((ROOT / ".delivery-policy.json").read_text())
-        paths = {".delivery-policy.json", "DELIVERY_POLICY.md", "tools/check-delivery-policy.py", "tools/check-repository-hygiene.py",
-                 *self.manifest["references"], *self.manifest["hooks"]}
+        paths = {
+            ".delivery-policy.json", "DELIVERY_POLICY.md",
+            "tools/check-delivery-policy.py", "tools/check-repository-hygiene.py",
+            *self.manifest["references"], *self.manifest["hooks"],
+            *(self.manifest["change_record"][key]
+              for key in ("policy", "template", "checker", "test")),
+        }
         for name in paths:
             target = self.root / name
             target.parent.mkdir(parents=True, exist_ok=True)
@@ -67,6 +72,19 @@ class PolicyTests(unittest.TestCase):
         (self.root / ".delivery-policy.json").write_text(json.dumps(manifest))
         self.assertNotEqual(self.run_gate().returncode, 0)
 
+    def test_rejects_removed_change_record_gate_even_with_updated_hash(self):
+        path = self.root / "DELIVERY_POLICY.md"
+        text = path.read_text()
+        start = text.index("## G14 ")
+        end = text.index("## 维护与检查", start)
+        path.write_text(text[:start] + text[end:])
+        manifest = self.manifest.copy()
+        manifest["sha256"] = hashlib.sha256(path.read_bytes()).hexdigest()
+        (self.root / ".delivery-policy.json").write_text(json.dumps(manifest))
+        result = self.run_gate()
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("G14 change records", result.stderr)
+
     def test_rejects_removed_hygiene_hook(self):
         path = self.root / ".github/workflows/ci.yml"
         path.write_text(path.read_text().replace("check-repository-hygiene.py", "skipped.py"))
@@ -78,6 +96,13 @@ class PolicyTests(unittest.TestCase):
         result = self.run_gate()
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("not wired", result.stderr)
+
+    def test_rejects_removed_change_record_ci_hook(self):
+        path = self.root / ".github/workflows/ci.yml"
+        path.write_text(path.read_text().replace("check-change-record.py", "skipped-record.py"))
+        result = self.run_gate()
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("change-record CI gate", result.stderr)
 
     def test_rejects_peer_drift_even_with_updated_peer_hash(self):
         peer = Path(self.temp.name) / "peer"

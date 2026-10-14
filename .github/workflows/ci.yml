@@ -13,7 +13,10 @@ jobs:
       - name: Reject generated files and private keys in source
         run: python3 tools/check-repository-hygiene.py
       - name: Check delivery policy
-        run: python3 tools/check-delivery-policy.py
+        run: |
+          python3 tools/check-delivery-policy.py
+          python3 tools/test-change-record-policy.py
+          python3 tools/check-change-record.py --base "${{ github.event.pull_request.base.sha || github.event.before || '' }}"
       - name: Install package tools
         run: sudo apt-get update && sudo apt-get install -y jq patchelf dpkg-dev gnupg xz-utils
       - name: Check scripts and snapshot integrity
