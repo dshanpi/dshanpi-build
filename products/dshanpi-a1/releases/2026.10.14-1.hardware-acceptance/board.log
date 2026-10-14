@@ -1,0 +1,89 @@
+DShanPI A1 2026.10.14-1 hardware acceptance
+Requirement: REQ-REL-A1-20261014-001
+Board: dshanpi-a1
+Kernel: 6.1.115-vendor-rk35xx
+Platform packages: 25.11.0-trunk.20261010.1
+Testing manifest SHA-256: 933e9cc7d1e5116eaa5bc805f69b87b556ead3f5b9d691031d60585b38353eec
+Physical power controller: saved LYNX project 6/device 6, relay channel 7, 1000 ms off interval
+
+Package installation
+--------------------
+The public testing index selected these exact installed packages:
+  dshanpi-a1-release-core       2026.10.14-1                         ii
+  dshanpi-a1-axcl-16g          3.16.0+dshanpi.2026.10.10.1         ii
+  dshanpi-axcl-dkms-16g        3.16.0+dshanpi.2026.10.10.1         ii
+  dshanpi-axcl-firmware-16g    3.16.0+dshanpi.2026.10.10.1         ii
+  dshanpi-axcl-runtime-16g     3.16.0+dshanpi.2026.10.10.1         ii
+  dshanpi-a1-aic8800d80        6.4.3.0+dshanpi.2026.10.14.1        ii
+  dshanpi-aic8800d80-dkms      6.4.3.0+dshanpi.2026.10.14.1        ii
+  dshanpi-aic8800d80-firmware  6.4.3.0+dshanpi.2026.10.14.1        ii
+
+Public AXCL DEB SHA-256 values were verified before installation:
+  b42bd568bffe7b6001e8b2ae0b56c63da1df5e3bffc6d4de74aa6186e22d2c3c  dshanpi-a1-axcl-16g
+  127992172272ee3560c7738909736711a613bc0e3196f263a8439cefa7acacdb  dshanpi-axcl-dkms-16g
+  598dbc455709965d440c93c513fba58adea69b60879a0f52f0ce18ce6680eb70  dshanpi-axcl-firmware-16g
+  615bc802833edb3ad47da684419a67cbfe5929fc90e31b4fb59adbb97df1d79c  dshanpi-axcl-runtime-16g
+
+dpkg installation returned 0. Both DKMS modules are installed for the running kernel:
+  axcl/3.16.0+dshanpi.2026.10.10.1, 6.1.115-vendor-rk35xx, aarch64: installed
+  dshanpi-aic8800d80/6.4.3.0+dshanpi.2026.10.14.1, 6.1.115-vendor-rk35xx, aarch64: installed
+dpkg --audit produced no output.
+
+AXCL functional acceptance
+--------------------------
+dshanpi-axcl check returned 0:
+  PASS: A1 identity and driver ABI (6.1.115-vendor-rk35xx)
+  /lib/firmware/axcl/ax650_card.pac: OK
+  PASS: PCIe device and managed firmware
+
+All five modules have matching vermagic and loaded successfully:
+  ax_pcie_host_dev ax_pcie_msg ax_pcie_mmb axcl_host ax_pcie_p2p_rc
+  vermagic: 6.1.115-vendor-rk35xx SMP mod_unload modversions aarch64
+
+After the operator installed the AX8850 fan, a bounded cold power cycle completed without retry.
+The card temperature was 41 C before the NPU test and 43 C after it; later reboot checks measured
+45-46 C. axcl-smi returned 0 and reported:
+  Card 0: AX8850, firmware V3.16.0, bus 0000:01:00.0
+  CMM: 18 MiB / 15232 MiB
+
+The vendor NPU unit test returned 0:
+  [==========] 20 tests from 1 test suite ran.
+  [  PASSED  ] 20 tests.
+  ============= UT PASS =============
+
+Boot and reboot recovery
+------------------------
+Cold cycle at 2026-10-14T09:25:14Z used the saved relay channel and 1000 ms off interval.
+Serial COM18 showed dshanpi-axcl.service finish successfully and reached the login prompt in 27.2 s.
+After boot, systemctl reported the service enabled and active, axcl-smi returned 0, the NPU suite
+again passed 20/20, and there were no firmware-load or heartbeat-timeout messages.
+
+Following the final reinstall of 2026.10.14-1, systemctl reboot took the board down after 2 s.
+SSH returned after 18 s. The release marker was 2026.10.14-1, the AXCL service was enabled and
+active, axcl-smi returned 0 at 45 C, and the NPU suite again passed 20/20. systemctl --failed and
+dpkg --audit produced no output; the current boot contained no firmware-load or heartbeat timeout.
+
+AIC8800D80 acceptance
+---------------------
+After reboot, aic_load_fw, aic8800_fdrv and aic_btusb loaded automatically. The Wi-Fi interface
+returned, scanned successfully, connected through NetworkManager, obtained 192.168.1.12/24, resolved
+DNS and downloaded the public release manifest over HTTPS. Network names and credentials are omitted.
+
+BlueZ was active. bluetoothctl reported the AIC controller powered with central and peripheral roles.
+A bounded discovery scan returned 0 and found five devices; names and addresses are omitted. Pairable
+and discovery were returned to off after the scan.
+
+Rollback and reinstall
+----------------------
+The first noninteractive rollback attempt stopped at APT confirmation and changed no packages. The
+operator then supplied one explicit confirmation. dspi-config rollback returned 0 and installed
+dshanpi-a1-release-core 2026.10.10-1 while preserving the exact AXCL selector and package cohort.
+A cold reboot completed, dshanpi-axcl.service finished, axcl-smi returned 0 at 46 C, and dpkg --audit
+was empty. dspi-config then installed 2026.10.14-1 again; the final reboot and AXCL/NPU checks above
+passed. This records both the safe failure branch and the completed rollback/reinstall path.
+
+Scope
+-----
+This acceptance covers the release lock, AIC Wi-Fi and Bluetooth discovery, AXCL runtime/PAC/DKMS,
+reboot recovery and the supplied NPU unit suite. Bluetooth pairing/transfer, sustained inference,
+multi-stream throughput and long-duration thermal soak were not part of this stable gate.

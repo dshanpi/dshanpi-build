@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "product": "dshanpi-a1",
+  "release": "2026.10.14-1",
+  "verdict": "passed",
+  "package_manifest_sha256": "933e9cc7d1e5116eaa5bc805f69b87b556ead3f5b9d691031d60585b38353eec",
+  "checks": {
+    "apt_install": "passed",
+    "release_meta": "passed",
+    "boot": "passed",
+    "reboot": "passed",
+    "rollback": "passed",
+    "axcl-16g": {
+      "dkms": "passed",
+      "module_load": "passed",
+      "axcl_smi": "passed",
+      "npu": "passed",
+      "reboot_recovery": "passed"
+    }
+  },
+  "evidence": [
+    {
+      "path": "2026.10.14-1.hardware-acceptance/board.log",
+      "sha256": "888429311c495ca30b20f3b1505f0ecd0ffc47db324e974ed8eb68869ee0c816"
+    }
+  ]
+}
