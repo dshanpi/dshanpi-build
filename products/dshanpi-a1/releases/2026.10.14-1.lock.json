@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "product": "dshanpi-a1",
+  "version": "2026.10.14-1",
+  "revision": "25.11.0-trunk.20261010.1",
+  "sources": {
+    "armbianos": {
+      "commit": "5980f8c110cb818dc9b6c3919c8fa6926f1fc731"
+    },
+    "dspi_config": {
+      "commit": "1c46b5a282e41cce4e650b415203a22ae9e9ff93"
+    }
+  },
+  "maintenance_adapter": "aic8800d80",
+  "base_release": "2026.10.10-1",
+  "base_manifest_sha256": "da0c364d1bfd9d444452e3d9030f865bcd9ede62f84251a63086ee2cc2f6e5f5",
+  "image_policy": "Package maintenance release; use the existing DShanPI A1 Ubuntu 24 golden image and update through signed APT.",
+  "hardware_validation": "Testing only until AIC8800D80 module loading, Wi-Fi scan, Bluetooth, and reboot recovery pass on the physical A1 board.",
+  "aic8800d80_lock": "packages/aic8800d80/upstream.lock.json",
+  "aic8800d80_lock_sha256": "a5f361e7cba774c0bfe2962f6d4e67b818d31bf2fa4d27f04530a018838c8515"
+}
