@@ -22,7 +22,9 @@ signed root, and downloads only the package paths named by that manifest. Every 
 the signed root, match both SHA-256 records and expose the declared package/version/architecture. Required
 product packages and both release metadata packages must be present before audit and image assembly.
 Large immutable files use bounded parallel HTTP ranges and five bounded retries; all final bytes are
-still accepted only after the signed SHA-256 check.
+still accepted only after the signed SHA-256 check. An interrupted download can resume the overall cohort
+operation by reusing already complete files only when their signed hashes match; mismatched or extra DEBs
+remain hard failures.
 
 ## 流程
 
@@ -52,6 +54,8 @@ flowchart TD
 - Unknown, duplicate, missing, withdrawn, cross-product or unsigned manifest/package records stop work.
 - Downloads write temporary files and become visible only after completion; retry count is bounded and
   final acceptance never relies on transport success alone.
+- A repeated invocation reuses already verified package files, rejects changed or extra DEBs and does not
+  silently overwrite local bytes.
 - `--images-only` does not rebuild or rewrite DEBs and cannot silently substitute local same-version bytes.
 - Existing Release tags/assets remain protected by the direct-publisher no-overwrite gate.
 - Image verification remains software-only until separate Avaota A1 physical-board evidence exists.
@@ -62,6 +66,7 @@ flowchart TD
 | --- | --- | --- | --- |
 | Unit success | `python3 -m unittest -v tests.test_fetch_public_release` | PASS | Exact signed cohort fetched from local HTTP fixture |
 | Unit tamper | Same suite with post-signing DEB mutation | PASS | Checksum mismatch rejected |
+| Unit resume | Repeat fetch into populated package directory | PASS | Signed files reused; unsigned extra rejected |
 | Syntax | `bash -n scripts/build-product.sh` and Python compile | PASS | Local output |
 | Regression | `python3 -m unittest discover -s tests -v` | PASS | 68 tests passed locally |
 | Integration | `bash tests/test.sh` | PASS | `dshanpi-build tests passed` |

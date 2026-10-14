@@ -150,8 +150,8 @@ def fetch_release(
         or not SAFE_VERSION.fullmatch(version)
     ):
         fail("product configuration and release lock do not match")
-    if output.exists() and (not output.is_dir() or any(output.iterdir())):
-        fail("package output directory must be absent or empty")
+    if output.exists() and not output.is_dir():
+        fail("package output path is not a directory")
     output.mkdir(parents=True, exist_ok=True)
 
     with tempfile.TemporaryDirectory() as temporary_name:
@@ -220,7 +220,12 @@ def fetch_release(
             seen_identities.add(identity)
             seen_names.add(relative.name)
             destination = output / relative.name
-            fetch(base_url, str(relative), destination)
+            if destination.exists():
+                if not destination.is_file() or digest(destination) != expected:
+                    fail(f"existing package differs from the signed cohort: {relative.name}")
+                print(f"reused verified package: {relative.name}")
+            else:
+                fetch(base_url, str(relative), destination)
             if digest(destination) != expected:
                 fail(f"downloaded package checksum mismatch: {relative}")
             actual = tuple(package_field(destination, field) for field in ("Package", "Version", "Architecture"))
@@ -241,6 +246,9 @@ def fetch_release(
                 missing.append((meta, "all"))
         if missing:
             fail(f"signed release is missing required packages: {missing}")
+        unexpected = sorted(path.name for path in output.glob("*.deb") if path.name not in seen_names)
+        if unexpected:
+            fail(f"package directory contains files outside the signed cohort: {unexpected}")
         shutil.copyfile(manifest_path, output.parent / "public-release.json")
 
     checksum_path = output / "SHA256SUMS"
