@@ -14,6 +14,8 @@ based on the Allwinner T527 platform. This release fixes the current ArmBianOS a
 commits, builds the exact DEB cohort plus CLI and GNOME images on the controlled local builder, publishes
 the signed package cohort to the testing APT channel and uploads the fixed image assets directly to
 `dshanpi/ArmBianOS` Releases. It does not claim stable or physical-board acceptance.
+The two older Avaota A1 testing-only cohorts are replaced atomically because the GitHub Pages repository
+cannot retain both old T527 kernel cohorts and the new fixed cohort within its enforced capacity budget.
 
 ## 业务逻辑
 
@@ -22,6 +24,9 @@ revision `25.11.0-trunk.20261014.1`. The product keeps its own APT component, BS
 device tree and core/desktop release metadata. Both image variants consume the same exact signed package
 cohort and expose the standard initial login contract. Complete image work runs locally; GitHub-hosted
 CI remains available for signed APT publication and later promotion without rebuilding image bytes.
+The reviewed purge removes only Avaota A1 testing manifests `2026.10.08-1` and `2026.10.09-1`, then
+garbage-collects only pool objects with no remaining manifest reference. Stable indexes and every package
+still referenced by another product or release remain unchanged.
 
 ## 流程
 
@@ -34,7 +39,8 @@ flowchart TD
   E --> F[Read-only image and SHA-256 validation]
   F -->|failure| G[Retain evidence and stop without publication]
   F -->|pass| H[Publish signed cohort to noble-testing]
-  H --> I[Verify public index signature package bytes and dependency simulation]
+  H --> H2[Atomically replace old Avaota testing cohorts and keep referenced bytes]
+  H2 --> I[Verify public index signature package bytes and dependency simulation]
   I -->|failure| G
   I -->|pass| J[Prepare fixed Release assets and login notes]
   J --> K[Direct local upload to ArmBianOS prerelease]
@@ -54,6 +60,8 @@ flowchart TD
   failure or image verification failure stops publication.
 - Upload or build failures are visible and are not treated as success; recovery reuses only verified bytes.
 - Stable promotion requires separate Avaota A1 hardware evidence and never rebuilds the testing cohort.
+- The purge rejects a missing target cohort, a non-testing target, a product/version mismatch or any pool
+  object that remains referenced; it never deletes stable metadata.
 
 ## 测试报告
 
@@ -74,6 +82,11 @@ flowchart TD
 All build and publication steps remain pending at record creation time. Avaota A1 physical-board testing
 is not available in this session, so the image must remain a prerelease and the package cohort must remain
 in testing until separate board evidence is committed.
+
+The first signed Pages candidate built successfully in run `38561145467` but publication was stopped by
+the 950 MB capacity gate. The SSH fallback run `38563975060` stopped before repository download because
+that backend has no configured credentials. Neither failed attempt changed the public repository. The
+reviewed replacement purge is required before retrying the Pages publication.
 
 ## 交付影响
 
