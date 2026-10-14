@@ -80,6 +80,22 @@ MD5sum: 7ff75aaec49800a76dce5d620f3cb496
 SHA1: baf0e3d5ded3b186865bd1e6626d10f5ceeb471c
 SHA256: 363afee4669f6b3ae022dcbc289abd08f7ec140b3f5954a74407ac55ee78a765
 
+Package: dshanpi-a1-aic8800d80
+Version: 6.4.3.0+dshanpi.2026.10.14.1
+Architecture: arm64
+Maintainer: DShanPI <support@dshanpi.com>
+Section: kernel
+Priority: optional
+Installed-Size: 4
+Depends: dshanpi-aic8800d80-dkms (= 6.4.3.0+dshanpi.2026.10.14.1), dshanpi-aic8800d80-firmware (= 6.4.3.0+dshanpi.2026.10.14.1), linux-image-vendor-rk35xx (= 25.11.0-trunk.20261010.1), armbian-bsp-cli-dshanpi-a1-vendor (= 25.11.0-trunk.20261010.1), bluez, iw, rfkill, usbutils
+Description: Optional AX8850 adapter Wi-Fi and Bluetooth support for DShanPI A1
+ Hardware functional validation is performed separately by the user.
+Filename: pool/dshanpi-a1/d/dshanpi-a1-aic8800d80/dshanpi-a1-aic8800d80_6.4.3.0+dshanpi.2026.10.14.1_arm64.deb
+Size: 3192
+MD5sum: 8b6bd80d56a638e9cb0c2b634240d3aa
+SHA1: f5f6db2ae92582f70db8e14d575c4ec7b2d64453
+SHA256: b47c0e00cdda9f1bac669f0a8a0da84542e85aafea2cef91c594cc812feb3e81
+
 Package: dshanpi-a1-axcl-16g
 Version: 3.16.0+dshanpi.2026.10.10.1
 Architecture: arm64
@@ -96,6 +112,38 @@ Size: 3312
 MD5sum: 266617184ae9abd77b93857c50f4fdd7
 SHA1: 5979c1b567d283d46f45bc9a4d97dce341d673ca
 SHA256: b42bd568bffe7b6001e8b2ae0b56c63da1df5e3bffc6d4de74aa6186e22d2c3c
+
+Package: dshanpi-aic8800d80-dkms
+Version: 6.4.3.0+dshanpi.2026.10.14.1
+Architecture: arm64
+Maintainer: DShanPI <support@dshanpi.com>
+Section: kernel
+Priority: optional
+Installed-Size: 2747
+Depends: dkms (>= 3), build-essential, kmod, linux-headers-vendor-rk35xx (= 25.11.0-trunk.20261010.1), dshanpi-aic8800d80-firmware (= 6.4.3.0+dshanpi.2026.10.14.1)
+Conflicts: aic8800-sdio-dkms, aic8800-usb-dkms, aic8800-pcie-dkms, aic8800-dkms
+Description: AIC8800D80 USB Wi-Fi and Bluetooth DKMS sources for A1
+ Hardware functional validation is performed separately by the user.
+Filename: pool/dshanpi-a1/d/dshanpi-aic8800d80-dkms/dshanpi-aic8800d80-dkms_6.4.3.0+dshanpi.2026.10.14.1_arm64.deb
+Size: 385112
+MD5sum: 2e37d971bd792b054c7f2772f82f6388
+SHA1: 53aa06867a73fc76c233a533cec937b6f5223a59
+SHA256: 14619620ec142c798bbd7f0961465d2b8e1c3d576435309870d79484a571ad01
+
+Package: dshanpi-aic8800d80-firmware
+Version: 6.4.3.0+dshanpi.2026.10.14.1
+Architecture: arm64
+Maintainer: DShanPI <support@dshanpi.com>
+Section: kernel
+Priority: optional
+Installed-Size: 2107
+Description: AX8850 adapter AIC8800D80 vendor firmware
+ Hardware functional validation is performed separately by the user.
+Filename: pool/dshanpi-a1/d/dshanpi-aic8800d80-firmware/dshanpi-aic8800d80-firmware_6.4.3.0+dshanpi.2026.10.14.1_arm64.deb
+Size: 574444
+MD5sum: 4edf86151193f037adf97218a70f50ce
+SHA1: ae086834c41e6bca88fc20c91e4018164d7bd962
+SHA256: 0214c8665cb67c007c4149d31b90fb97a1918d5d61d881e533e423df361de54d
 
 Package: dshanpi-axcl-dkms-16g
 Version: 3.16.0+dshanpi.2026.10.10.1
