@@ -3,13 +3,15 @@ set -euo pipefail
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/lib.sh"
 python3 "$repo_root/tools/check-delivery-policy.py" >/dev/null
 
-[[ $# -ge 2 && $# -le 3 ]] || die "usage: $0 PRODUCT RELEASE_LOCK [--print-plan|--packages-only]"
+[[ $# -ge 2 && $# -le 3 ]] || die "usage: $0 PRODUCT RELEASE_LOCK [--print-plan|--packages-only|--images-only]"
 product=$1
 lock=$(safe_realpath "$2")
 mode=${3:-execute}
-[[ "$mode" == execute || "$mode" == --print-plan || "$mode" == --packages-only ]] || die "unknown mode: $mode"
+[[ "$mode" == execute || "$mode" == --print-plan || "$mode" == --packages-only || "$mode" == --images-only ]] || die "unknown mode: $mode"
 packages_only=no
 [[ "$mode" != --packages-only ]] || packages_only=yes
+images_only=no
+[[ "$mode" != --images-only ]] || images_only=yes
 require_command jq
 require_product "$product"
 validate_release_lock "$product" "$lock"
@@ -66,25 +68,36 @@ prepare_source() {
 
 armbian_dir=$(prepare_source armbianos "${DSHANPI_ARMBIANOS_DIR:-}")
 dspi_dir=$(prepare_source dspi_config "${DSHANPI_DSPI_CONFIG_DIR:-}")
-dspi_output="$output_root/dspi"
-"$dspi_dir/packaging/build-deb.sh" "$dspi_output"
-dspi_deb=$(find "$dspi_output" -maxdepth 1 -type f -name 'dspi-config_*_all.deb' -print -quit)
-[[ -n "$dspi_deb" ]] || die "dspi-config build did not produce a package"
-"$script_dir/build-client-packages.sh" "$product" "1:$version" "$APT_PUBLIC_KEY_FILE" \
-	"${DSHANPI_APT_BASE_URL:-https://apt.100ask.net}" "$output_root/client"
+if [[ "$images_only" == yes ]]; then
+	python3 "$script_dir/fetch-public-release.py" \
+		"${DSHANPI_APT_BASE_URL:-https://apt.100ask.net}" "$product_config" "$lock" \
+		"$output_root/packages" "$APT_PUBLIC_KEY_FILE"
+	dspi_deb=$(find "$output_root/packages" -maxdepth 1 -type f -name 'dspi-config_*_all.deb' -print -quit)
+	client_packages_dir="$output_root/packages"
+else
+	dspi_output="$output_root/dspi"
+	"$dspi_dir/packaging/build-deb.sh" "$dspi_output"
+	dspi_deb=$(find "$dspi_output" -maxdepth 1 -type f -name 'dspi-config_*_all.deb' -print -quit)
+	"$script_dir/build-client-packages.sh" "$product" "1:$version" "$APT_PUBLIC_KEY_FILE" \
+		"${DSHANPI_APT_BASE_URL:-https://apt.100ask.net}" "$output_root/client"
+	client_packages_dir="$output_root/client"
+fi
+[[ -n "$dspi_deb" ]] || die "fixed package cohort does not contain dspi-config"
 
 common_args=("BOARD=$board" "BRANCH=$branch" "RELEASE=$release" \
 	"REVISION=$revision" KERNEL_CONFIGURE=no PREFER_DOCKER=no BUILD_MINIMAL=no \
 	DEB_COMPRESS=xz COLUMNS=160 "MAKE_FOLDERS=dshanpi-$version" \
 	"DSHANPI_PRODUCT=$product" \
 	"DSHANPI_DSPI_CONFIG_DEB=$dspi_deb" \
-	"DSHANPI_REPO_CLIENT_PACKAGES_DIR=$output_root/client")
+	"DSHANPI_REPO_CLIENT_PACKAGES_DIR=$client_packages_dir")
 
 # Artifact pass: create every board-owned package before the release meta-package.
 # Package-only CI deliberately invokes artifact commands and never enters Armbian's
 # rootfs/image assembler. The controlled local full build uses the normal image
 # command so the candidate image exercises the same package-producing path.
-if [[ "$packages_only" == yes ]]; then
+if [[ "$images_only" == yes ]]; then
+	: # The signed public cohort is the complete image input; do not rebuild DEBs.
+elif [[ "$packages_only" == yes ]]; then
 	for artifact in kernel firmware armbian-base-files armbian-bsp-cli armbian-bsp-desktop; do
 		artifact_args=()
 		if [[ "$artifact" == armbian-bsp-desktop ]]; then
@@ -100,6 +113,7 @@ else
 		"DESKTOP_ENVIRONMENT_CONFIG_NAME=$desktop_config")
 fi
 
+if [[ "$images_only" != yes ]]; then
 while IFS= read -r adapter; do
 	case "$adapter" in
 		rkaiq-reviewed)
@@ -160,6 +174,13 @@ core_meta=$(find "$output_root/packages" -maxdepth 1 -name "${product}-release-c
 desktop_meta=$(find "$output_root/packages" -maxdepth 1 -name "${product}-release-desktop_${version}_all.deb" -print -quit)
 [[ -n "$core_meta" && -n "$desktop_meta" ]] || die "release meta-package build failed"
 find "$output_root/packages" -maxdepth 1 -type f -name '*.deb' -print0 | sort -z | xargs -0 sha256sum > "$output_root/packages/SHA256SUMS"
+else
+	"$script_dir/audit-packages.sh" "$output_root/packages"
+fi
+
+core_meta=$(find "$output_root/packages" -maxdepth 1 -name "${product}-release-core_${version}_all.deb" -print -quit)
+desktop_meta=$(find "$output_root/packages" -maxdepth 1 -name "${product}-release-desktop_${version}_all.deb" -print -quit)
+[[ -n "$core_meta" && -n "$desktop_meta" ]] || die "release meta-package cohort is incomplete"
 
 if [[ "$packages_only" == yes ]]; then
 	echo "built $product $version package cohort into $output_root/packages"
