@@ -3,26 +3,26 @@
   "files": [
     {
       "path": "PUBLICATION.json",
-      "size": 263,
-      "sha256": "7b177881f3dfde5b8a777c2fe3e9d958da30308f9005d0898e02f6321088cb7a",
+      "size": 5722,
+      "sha256": "2600582db3e83b8f197a8bfa1a6eb0030a1e27931d2a38659a4c4f0486358e34",
       "parts": [
-        "7b177881f3dfde5b8a777c2fe3e9d958da30308f9005d0898e02f6321088cb7a"
+        "2600582db3e83b8f197a8bfa1a6eb0030a1e27931d2a38659a4c4f0486358e34"
       ]
     },
     {
       "path": "SHA256SUMS",
-      "size": 32046,
-      "sha256": "0c508bb07d38c98cfbb6e52951da26234883217d327a2ac27cad85a90c3da2db",
+      "size": 25361,
+      "sha256": "6dde2f3d15508b7ae9d1f453264b4d24573fa8566eab3c343e90b1f6f0c1ffe6",
       "parts": [
-        "0c508bb07d38c98cfbb6e52951da26234883217d327a2ac27cad85a90c3da2db"
+        "6dde2f3d15508b7ae9d1f453264b4d24573fa8566eab3c343e90b1f6f0c1ffe6"
       ]
     },
     {
       "path": "SHA256SUMS.asc",
       "size": 833,
-      "sha256": "6d84f17e6a2d6635b9582423d52ea96eee823c250c7926444cb9f6e87d43a19a",
+      "sha256": "6846c3c2fb7948398f8bd465d020a88deb4a6ff63b155e28fadc66a206c3021a",
       "parts": [
-        "6d84f17e6a2d6635b9582423d52ea96eee823c250c7926444cb9f6e87d43a19a"
+        "6846c3c2fb7948398f8bd465d020a88deb4a6ff63b155e28fadc66a206c3021a"
       ]
     },
     {
@@ -36,9 +36,9 @@
     {
       "path": "catalog/releases/avaota-a1/2026.10.08-1.json.asc",
       "size": 833,
-      "sha256": "f16afaa22df2004bde990ea342b24b84872a0772b4b122c262be082dc9bec66b",
+      "sha256": "637bd0cce91b3ba4dff8ef538da3940c2d265d5e296f59550b6f48ca1d215eae",
       "parts": [
-        "f16afaa22df2004bde990ea342b24b84872a0772b4b122c262be082dc9bec66b"
+        "637bd0cce91b3ba4dff8ef538da3940c2d265d5e296f59550b6f48ca1d215eae"
       ]
     },
     {
@@ -52,137 +52,25 @@
     {
       "path": "catalog/releases/avaota-a1/2026.10.09-1.json.asc",
       "size": 833,
-      "sha256": "5be5d8f18eecfd1490480be1d9c663e419cee4e96f42ce0fadcb5e6c2f5fa83b",
+      "sha256": "3dc8336bdcc0a5e5fb4bfc58788b6770a76d1009466642b6c5a9aee1b728b5a0",
       "parts": [
-        "5be5d8f18eecfd1490480be1d9c663e419cee4e96f42ce0fadcb5e6c2f5fa83b"
+        "3dc8336bdcc0a5e5fb4bfc58788b6770a76d1009466642b6c5a9aee1b728b5a0"
       ]
     },
     {
-      "path": "catalog/releases/dshanpi-a1/2026.10.08-1.json",
-      "size": 6919,
-      "sha256": "99f614268ec563affaae599234cdf33c33550bb645ead50ddeb3c7bca6c97c65",
+      "path": "catalog/releases/dshanpi-a1/2026.10.10-1.json",
+      "size": 8485,
+      "sha256": "da0c364d1bfd9d444452e3d9030f865bcd9ede62f84251a63086ee2cc2f6e5f5",
       "parts": [
-        "99f614268ec563affaae599234cdf33c33550bb645ead50ddeb3c7bca6c97c65"
+        "da0c364d1bfd9d444452e3d9030f865bcd9ede62f84251a63086ee2cc2f6e5f5"
       ]
     },
     {
-      "path": "catalog/releases/dshanpi-a1/2026.10.08-1.json.asc",
+      "path": "catalog/releases/dshanpi-a1/2026.10.10-1.json.asc",
       "size": 833,
-      "sha256": "c6cc3f2c81d2c5a298971e7eb62578f5cd356f955210eddcd866f25dc1b42acb",
+      "sha256": "36a56ece55bad4ef9db366529f14c4f5aac00c6933043c2c91607f83b140f1be",
       "parts": [
-        "c6cc3f2c81d2c5a298971e7eb62578f5cd356f955210eddcd866f25dc1b42acb"
-      ]
-    },
-    {
-      "path": "catalog/releases/dshanpi-a1/2026.10.08-2.json",
-      "size": 6999,
-      "sha256": "42472c1373e1ad067893685e55d7a8236e82142043720999191edf2acae03bba",
-      "parts": [
-        "42472c1373e1ad067893685e55d7a8236e82142043720999191edf2acae03bba"
-      ]
-    },
-    {
-      "path": "catalog/releases/dshanpi-a1/2026.10.08-2.json.asc",
-      "size": 833,
-      "sha256": "10cd0e25f0cb840e2e07f3ffad6479941261dea2c85ea1449597f95201b88b0c",
-      "parts": [
-        "10cd0e25f0cb840e2e07f3ffad6479941261dea2c85ea1449597f95201b88b0c"
-      ]
-    },
-    {
-      "path": "catalog/releases/dshanpi-a1/2026.10.08-3.json",
-      "size": 6999,
-      "sha256": "08ecb7e10ed914bc5910336dcf88828fe3011d24bf0db5766538052c58cc6060",
-      "parts": [
-        "08ecb7e10ed914bc5910336dcf88828fe3011d24bf0db5766538052c58cc6060"
-      ]
-    },
-    {
-      "path": "catalog/releases/dshanpi-a1/2026.10.08-3.json.asc",
-      "size": 833,
-      "sha256": "bfd6c390de72248b5be8ecbb7739dcb8d2f8805defe41ca553225177ef5c6bb7",
-      "parts": [
-        "bfd6c390de72248b5be8ecbb7739dcb8d2f8805defe41ca553225177ef5c6bb7"
-      ]
-    },
-    {
-      "path": "catalog/releases/dshanpi-a1/2026.10.08-4.json",
-      "size": 6962,
-      "sha256": "3c652734678b1c0e2a636b84d7694de140cbe0f5d521170f051655bcf68e7e32",
-      "parts": [
-        "3c652734678b1c0e2a636b84d7694de140cbe0f5d521170f051655bcf68e7e32"
-      ]
-    },
-    {
-      "path": "catalog/releases/dshanpi-a1/2026.10.08-4.json.asc",
-      "size": 833,
-      "sha256": "d00483daff34b9641abad63c554000cb99451e4f8a144caeafe788144f3b56b3",
-      "parts": [
-        "d00483daff34b9641abad63c554000cb99451e4f8a144caeafe788144f3b56b3"
-      ]
-    },
-    {
-      "path": "catalog/releases/dshanpi-a1/2026.10.09-1.json",
-      "size": 6962,
-      "sha256": "ddb361073e310b9956322f7f5fdef83c5ce17f8da3bec1a841676f6019f83b50",
-      "parts": [
-        "ddb361073e310b9956322f7f5fdef83c5ce17f8da3bec1a841676f6019f83b50"
-      ]
-    },
-    {
-      "path": "catalog/releases/dshanpi-a1/2026.10.09-1.json.asc",
-      "size": 833,
-      "sha256": "752d6363266c3112ee4e9b5a7e26ecafdd225c9382b1d33f34fc20f33dcf2b16",
-      "parts": [
-        "752d6363266c3112ee4e9b5a7e26ecafdd225c9382b1d33f34fc20f33dcf2b16"
-      ]
-    },
-    {
-      "path": "catalog/releases/dshanpi-a1/2026.10.09-2.json",
-      "size": 7970,
-      "sha256": "52064d0a5f0060190187f066e37bf272f3c441ebe8368f39806f634ce19e1ff5",
-      "parts": [
-        "52064d0a5f0060190187f066e37bf272f3c441ebe8368f39806f634ce19e1ff5"
-      ]
-    },
-    {
-      "path": "catalog/releases/dshanpi-a1/2026.10.09-2.json.asc",
-      "size": 833,
-      "sha256": "a8cd589122fddb033cefa9334d857ad9ba83698e082ee6f63470bb9c486544a2",
-      "parts": [
-        "a8cd589122fddb033cefa9334d857ad9ba83698e082ee6f63470bb9c486544a2"
-      ]
-    },
-    {
-      "path": "catalog/releases/dshanpi-a1/2026.10.09-3.json",
-      "size": 9041,
-      "sha256": "e4aa412b062c96c1765233ab4c3d06015b8d76258e951f38bf89e7301f58f5f9",
-      "parts": [
-        "e4aa412b062c96c1765233ab4c3d06015b8d76258e951f38bf89e7301f58f5f9"
-      ]
-    },
-    {
-      "path": "catalog/releases/dshanpi-a1/2026.10.09-3.json.asc",
-      "size": 833,
-      "sha256": "b683118476cd60f9dd04057091bc2a3662d521603eac17f318074358214ee9b6",
-      "parts": [
-        "b683118476cd60f9dd04057091bc2a3662d521603eac17f318074358214ee9b6"
-      ]
-    },
-    {
-      "path": "catalog/releases/dshanpi-a1/2026.10.09-4.json",
-      "size": 10444,
-      "sha256": "22ef1c4bc4f6294376d5ec05491196da8433e8c87ddbf4e5febae29cd929866d",
-      "parts": [
-        "22ef1c4bc4f6294376d5ec05491196da8433e8c87ddbf4e5febae29cd929866d"
-      ]
-    },
-    {
-      "path": "catalog/releases/dshanpi-a1/2026.10.09-4.json.asc",
-      "size": 833,
-      "sha256": "7629adc90ac4c9d266bc445fff9ddcc4b912fe9fa7b763b4ca37b3232a7b0d05",
-      "parts": [
-        "7629adc90ac4c9d266bc445fff9ddcc4b912fe9fa7b763b4ca37b3232a7b0d05"
+        "36a56ece55bad4ef9db366529f14c4f5aac00c6933043c2c91607f83b140f1be"
       ]
     },
     {
@@ -196,9 +84,9 @@
     {
       "path": "catalog/releases/dshanpi-a1-cm5/2026.10.08-1.json.asc",
       "size": 833,
-      "sha256": "0136ab5cc6e0faae1eb7b45f8c21459ffbe4ab96ce4c0927517bcbf03be95284",
+      "sha256": "0fe55b739e9f7fa28857d16fe367a331865baf758b46121e4a695cd4716d7fb3",
       "parts": [
-        "0136ab5cc6e0faae1eb7b45f8c21459ffbe4ab96ce4c0927517bcbf03be95284"
+        "0fe55b739e9f7fa28857d16fe367a331865baf758b46121e4a695cd4716d7fb3"
       ]
     },
     {
@@ -212,9 +100,9 @@
     {
       "path": "catalog/releases/dshanpi-a1-cm5/2026.10.08-2.json.asc",
       "size": 833,
-      "sha256": "3b58f26933ebc86be3312841ce09cb338705d5bf6451813e79d2754b19c3ece2",
+      "sha256": "fc93529c5f0fa88f4a94c46009dcd3e0b0c20b57b4de0ecf3f4f3379c8964d9d",
       "parts": [
-        "3b58f26933ebc86be3312841ce09cb338705d5bf6451813e79d2754b19c3ece2"
+        "fc93529c5f0fa88f4a94c46009dcd3e0b0c20b57b4de0ecf3f4f3379c8964d9d"
       ]
     },
     {
@@ -228,9 +116,9 @@
     {
       "path": "catalog/releases/dshanpi-a1-cm5/2026.10.08-3.json.asc",
       "size": 833,
-      "sha256": "b7beccd63cc2be0024785877b029824dad5a748bed4f1f05529b028393c887f4",
+      "sha256": "26734326e104bdd612e2671adf15295131968d60a6fa36f0a5bffd8cc95e75a7",
       "parts": [
-        "b7beccd63cc2be0024785877b029824dad5a748bed4f1f05529b028393c887f4"
+        "26734326e104bdd612e2671adf15295131968d60a6fa36f0a5bffd8cc95e75a7"
       ]
     },
     {
@@ -244,9 +132,9 @@
     {
       "path": "catalog/releases/dshanpi-a1-cm5/2026.10.09-1.json.asc",
       "size": 833,
-      "sha256": "db78e8fdcd35a1e5e972154ac9b82a73aa881aa100773b0126f4d20fdcdf5fec",
+      "sha256": "c1e6e6585ac4ee58af95f78d491f7e29403b013f7c0b1f08e6309f498709ff2a",
       "parts": [
-        "db78e8fdcd35a1e5e972154ac9b82a73aa881aa100773b0126f4d20fdcdf5fec"
+        "c1e6e6585ac4ee58af95f78d491f7e29403b013f7c0b1f08e6309f498709ff2a"
       ]
     },
     {
@@ -260,9 +148,9 @@
     {
       "path": "catalog/releases/dshanpi-r1/2026.10.08-1.json.asc",
       "size": 833,
-      "sha256": "f5b8b4cd403a0a0c3b213a472b40a8d34c5ce57cd4b971a80dfbd1663dfb5824",
+      "sha256": "c73df84409a5e3bef6a509a792ac72c084f9ff5f9976105fc8a49fdb6db15059",
       "parts": [
-        "f5b8b4cd403a0a0c3b213a472b40a8d34c5ce57cd4b971a80dfbd1663dfb5824"
+        "c73df84409a5e3bef6a509a792ac72c084f9ff5f9976105fc8a49fdb6db15059"
       ]
     },
     {
@@ -276,9 +164,9 @@
     {
       "path": "catalog/releases/dshanpi-r1/2026.10.09-1.json.asc",
       "size": 833,
-      "sha256": "d23f0f81f283cc0111e9be693c4e9a2d2519d20cf834fdbeba6ae5465dc84646",
+      "sha256": "fd2baf61a5dc46ca36aa568b6448c34e480bfa64b9763cc47bff8c4331d95ae6",
       "parts": [
-        "d23f0f81f283cc0111e9be693c4e9a2d2519d20cf834fdbeba6ae5465dc84646"
+        "fd2baf61a5dc46ca36aa568b6448c34e480bfa64b9763cc47bff8c4331d95ae6"
       ]
     },
     {
@@ -321,10 +209,10 @@
     },
     {
       "path": "catalog/suites/noble-testing/common.tsv",
-      "size": 1558,
-      "sha256": "f651edbfd244a714deb25d3387cf0f907f6b91bd83a3bf64b9d236183e8ed35e",
+      "size": 1365,
+      "sha256": "84e83759ad85591bba14ba43ba084e4569c39818348adf694f4744278a0e5aae",
       "parts": [
-        "f651edbfd244a714deb25d3387cf0f907f6b91bd83a3bf64b9d236183e8ed35e"
+        "84e83759ad85591bba14ba43ba084e4569c39818348adf694f4744278a0e5aae"
       ]
     },
     {
@@ -337,10 +225,10 @@
     },
     {
       "path": "catalog/suites/noble-testing/dshanpi-a1.tsv",
-      "size": 9616,
-      "sha256": "9cea7448a8384b34ac1a4a1fc123c5f11d9ee29d6b76a052fad172e9c500f31f",
+      "size": 4553,
+      "sha256": "a83d971a00a98077e723f9b26ac15b6721f7be496918aad5b80101dfa40b4324",
       "parts": [
-        "9cea7448a8384b34ac1a4a1fc123c5f11d9ee29d6b76a052fad172e9c500f31f"
+        "a83d971a00a98077e723f9b26ac15b6721f7be496918aad5b80101dfa40b4324"
       ]
     },
     {
@@ -354,9 +242,9 @@
     {
       "path": "dists/noble/InRelease",
       "size": 9971,
-      "sha256": "41ae12df2210cfb3d0a32569cfbcc334a4fb558247183e52aa2fe097597c4269",
+      "sha256": "8d63dace34e343cbd8f37b643895cda0a02e8b13330c281ef68407d232e41667",
       "parts": [
-        "41ae12df2210cfb3d0a32569cfbcc334a4fb558247183e52aa2fe097597c4269"
+        "8d63dace34e343cbd8f37b643895cda0a02e8b13330c281ef68407d232e41667"
       ]
     },
     {
@@ -370,9 +258,9 @@
     {
       "path": "dists/noble/Release.gpg",
       "size": 833,
-      "sha256": "47b6e9d87758bca67f87ed77c103eba71398924c879d77838cd9a0df7df391df",
+      "sha256": "5b0edca04b688af0699a2290c07a339fdde47162799545db85824693ab21f00a",
       "parts": [
-        "47b6e9d87758bca67f87ed77c103eba71398924c879d77838cd9a0df7df391df"
+        "5b0edca04b688af0699a2290c07a339fdde47162799545db85824693ab21f00a"
       ]
     },
     {
@@ -598,25 +486,25 @@
     {
       "path": "dists/noble-testing/InRelease",
       "size": 10030,
-      "sha256": "5eb0487ce8e1fa29ea5a0b417ef87615849a72b3260e3cfbb26576b3d803c9c0",
+      "sha256": "c1306cf7206b5a221d3005845c2707d82000fc8b710cfa56f319b2fdf450a29d",
       "parts": [
-        "5eb0487ce8e1fa29ea5a0b417ef87615849a72b3260e3cfbb26576b3d803c9c0"
+        "c1306cf7206b5a221d3005845c2707d82000fc8b710cfa56f319b2fdf450a29d"
       ]
     },
     {
       "path": "dists/noble-testing/Release",
       "size": 9148,
-      "sha256": "46369a1b3eaf25a421ef1607c3bcb6ffdb5bada7627ef29b3666950c3cf8761f",
+      "sha256": "d808a3886ce9af1261d8e1acd23fe85a8a85e98261249eaad51930021450f754",
       "parts": [
-        "46369a1b3eaf25a421ef1607c3bcb6ffdb5bada7627ef29b3666950c3cf8761f"
+        "d808a3886ce9af1261d8e1acd23fe85a8a85e98261249eaad51930021450f754"
       ]
     },
     {
       "path": "dists/noble-testing/Release.gpg",
       "size": 833,
-      "sha256": "afaee1a2376bb1c700dbb8bf1f159012f2fe8a47740f32f9d924cc611afe2c2c",
+      "sha256": "272dd45c723ca329d3ad6908933fee7311979640d951cc85053e6fc14b99e615",
       "parts": [
-        "afaee1a2376bb1c700dbb8bf1f159012f2fe8a47740f32f9d924cc611afe2c2c"
+        "272dd45c723ca329d3ad6908933fee7311979640d951cc85053e6fc14b99e615"
       ]
     },
     {
@@ -669,26 +557,26 @@
     },
     {
       "path": "dists/noble-testing/common/binary-all/Packages",
-      "size": 5448,
-      "sha256": "58c6ddb8ac96be0fbeed7d2e712303c76b3a614ad14518ff3fa7db6fd783eaa4",
+      "size": 4922,
+      "sha256": "19c8e4e296a1dd53ea558bf5a1cfbef835108e0ab4b7adbeb035abe465eef184",
       "parts": [
-        "58c6ddb8ac96be0fbeed7d2e712303c76b3a614ad14518ff3fa7db6fd783eaa4"
+        "19c8e4e296a1dd53ea558bf5a1cfbef835108e0ab4b7adbeb035abe465eef184"
       ]
     },
     {
       "path": "dists/noble-testing/common/binary-all/Packages.gz",
-      "size": 1600,
-      "sha256": "4feb1bbbdd8e55ddc61dce2d238760f5fc1641240f0151f6f3b11b38de375ff4",
+      "size": 1499,
+      "sha256": "a91e733d3d742e674aeca8fb0e1df6426e66cd1d917b8acfb5f9785bc4fb3292",
       "parts": [
-        "4feb1bbbdd8e55ddc61dce2d238760f5fc1641240f0151f6f3b11b38de375ff4"
+        "a91e733d3d742e674aeca8fb0e1df6426e66cd1d917b8acfb5f9785bc4fb3292"
       ]
     },
     {
       "path": "dists/noble-testing/common/binary-all/Packages.xz",
-      "size": 1580,
-      "sha256": "ee52cd69c75bbd4291a35fae40240089b8df473af44ffa5364d478ebec0d2de2",
+      "size": 1496,
+      "sha256": "9f3eb23cda8599b49ee278131c03ab80365223cfe04acaff69e8f11aa07a0f70",
       "parts": [
-        "ee52cd69c75bbd4291a35fae40240089b8df473af44ffa5364d478ebec0d2de2"
+        "9f3eb23cda8599b49ee278131c03ab80365223cfe04acaff69e8f11aa07a0f70"
       ]
     },
     {
@@ -715,50 +603,50 @@
     },
     {
       "path": "dists/noble-testing/dshanpi-a1/binary-all/Packages",
-      "size": 16616,
-      "sha256": "d174e539ca016ef7fec5ce0d6b87db487bc5080aad2d703dc38b7185b8f45359",
+      "size": 3312,
+      "sha256": "b1365961e057020ed07f62f4d54385955613ec4296f178c38a3dd7ea01266276",
       "parts": [
-        "d174e539ca016ef7fec5ce0d6b87db487bc5080aad2d703dc38b7185b8f45359"
+        "b1365961e057020ed07f62f4d54385955613ec4296f178c38a3dd7ea01266276"
       ]
     },
     {
       "path": "dists/noble-testing/dshanpi-a1/binary-all/Packages.gz",
-      "size": 2169,
-      "sha256": "7444142c4cdcdab85586ca36c8166d74d2385bc5ed6053576969b3433b09ee42",
+      "size": 968,
+      "sha256": "3bcbcb33b965119454014df0322d41e3cea937913e4b958225938c8aa59cf9d7",
       "parts": [
-        "7444142c4cdcdab85586ca36c8166d74d2385bc5ed6053576969b3433b09ee42"
+        "3bcbcb33b965119454014df0322d41e3cea937913e4b958225938c8aa59cf9d7"
       ]
     },
     {
       "path": "dists/noble-testing/dshanpi-a1/binary-all/Packages.xz",
-      "size": 2020,
-      "sha256": "ba0869f09f958b5b30499fc2c2d9b52c470d819dd2a5c00d6b2f5ccb3545ed37",
+      "size": 1024,
+      "sha256": "0b94d6be92eb145cb79238425df28834eaefb2d9aecbf2319f9af6ddc4f44d30",
       "parts": [
-        "ba0869f09f958b5b30499fc2c2d9b52c470d819dd2a5c00d6b2f5ccb3545ed37"
+        "0b94d6be92eb145cb79238425df28834eaefb2d9aecbf2319f9af6ddc4f44d30"
       ]
     },
     {
       "path": "dists/noble-testing/dshanpi-a1/binary-arm64/Packages",
-      "size": 27141,
-      "sha256": "df963de76cf2438cb8f022861b5571af31e1931c364130afcf202e51de751e35",
+      "size": 15235,
+      "sha256": "c64ba128f4d0a35992de613464b80faf65dfefab38d5df3be4de08bc3c9dcd16",
       "parts": [
-        "df963de76cf2438cb8f022861b5571af31e1931c364130afcf202e51de751e35"
+        "c64ba128f4d0a35992de613464b80faf65dfefab38d5df3be4de08bc3c9dcd16"
       ]
     },
     {
       "path": "dists/noble-testing/dshanpi-a1/binary-arm64/Packages.gz",
-      "size": 6400,
-      "sha256": "a0cd64fc84cceed511f88fa8e10d85c7f38a39fe29456a64ad053d8f5f40ff2c",
+      "size": 4625,
+      "sha256": "c6f801bf22f89d9e4faf43bb83e040ea1f13d64f16a780b01c6a9f5a5323c130",
       "parts": [
-        "a0cd64fc84cceed511f88fa8e10d85c7f38a39fe29456a64ad053d8f5f40ff2c"
+        "c6f801bf22f89d9e4faf43bb83e040ea1f13d64f16a780b01c6a9f5a5323c130"
       ]
     },
     {
       "path": "dists/noble-testing/dshanpi-a1/binary-arm64/Packages.xz",
-      "size": 5988,
-      "sha256": "31b92a952f1916c486b8e586f16ee7ef7b232044f6f70dbdb9a220f83951120d",
+      "size": 4440,
+      "sha256": "26965f8310171fa6debd42fa6c32159f60dc36a6f3d203602f91ee1ef3f9780f",
       "parts": [
-        "31b92a952f1916c486b8e586f16ee7ef7b232044f6f70dbdb9a220f83951120d"
+        "26965f8310171fa6debd42fa6c32159f60dc36a6f3d203602f91ee1ef3f9780f"
       ]
     },
     {
@@ -964,14 +852,6 @@
       ]
     },
     {
-      "path": "pool/common/d/dshanpi-archive-keyring/dshanpi-archive-keyring_1:2026.10.08-2_all.deb",
-      "size": 1824,
-      "sha256": "523b43cd40905f0278a21f5f8eb93b0b65b74051c9655b8e692ea6e59c567070",
-      "parts": [
-        "523b43cd40905f0278a21f5f8eb93b0b65b74051c9655b8e692ea6e59c567070"
-      ]
-    },
-    {
       "path": "pool/common/d/dshanpi-archive-keyring/dshanpi-archive-keyring_1:2026.10.08-3_all.deb",
       "size": 1824,
       "sha256": "75e59bf61acf74d3f24bb9dec7b8937b13941111443348140510f9aff472ee76",
@@ -980,11 +860,11 @@
       ]
     },
     {
-      "path": "pool/common/d/dshanpi-archive-keyring/dshanpi-archive-keyring_1:2026.10.08-4_all.deb",
+      "path": "pool/common/d/dshanpi-archive-keyring/dshanpi-archive-keyring_1:2026.10.10-1_all.deb",
       "size": 1824,
-      "sha256": "4dfe74b2a003dc061acdb697a9f1b81ee061e9021850fa6b28e6e8800420125f",
+      "sha256": "3772c6e00985e86c33ada01b1c9c9fcb6e8a411f38ac3ed05cf1562de8eadd03",
       "parts": [
-        "4dfe74b2a003dc061acdb697a9f1b81ee061e9021850fa6b28e6e8800420125f"
+        "3772c6e00985e86c33ada01b1c9c9fcb6e8a411f38ac3ed05cf1562de8eadd03"
       ]
     },
     {
@@ -1004,14 +884,6 @@
       ]
     },
     {
-      "path": "pool/common/d/dspi-config/dspi-config_1.0.2-2_all.deb",
-      "size": 7410,
-      "sha256": "74a02715f1b024deab22921a2d2d114cbfcad06e7d306328bb5c65cb5ea46d6d",
-      "parts": [
-        "74a02715f1b024deab22921a2d2d114cbfcad06e7d306328bb5c65cb5ea46d6d"
-      ]
-    },
-    {
       "path": "pool/common/d/dspi-config/dspi-config_1.0.2-3_all.deb",
       "size": 7976,
       "sha256": "2ba5add81e925b66bd666b65a620f131fd41464d5c71cdba0541787e824a1d22",
@@ -1020,307 +892,99 @@
       ]
     },
     {
-      "path": "pool/dshanpi-a1/a/armbian-bsp-cli-dshanpi-a1-vendor/armbian-bsp-cli-dshanpi-a1-vendor_25.11.0-trunk.20261008.3_arm64__1-PC9b3f-Vb3d8-H3abc-B1e5d-Rf36a.deb",
-      "size": 433772,
-      "sha256": "7a8736a2e6d32f41b4d2d80b30a426c377ec5037346e995b71364e032cf2ca4b",
+      "path": "pool/common/d/dspi-config/dspi-config_1.0.3-1_all.deb",
+      "size": 8332,
+      "sha256": "dd536919b4c2ec73a7d03a3e9b3ff14577169cd94b8c6d0b60bbfc0b02ee770a",
       "parts": [
-        "7a8736a2e6d32f41b4d2d80b30a426c377ec5037346e995b71364e032cf2ca4b"
+        "dd536919b4c2ec73a7d03a3e9b3ff14577169cd94b8c6d0b60bbfc0b02ee770a"
       ]
     },
     {
-      "path": "pool/dshanpi-a1/a/armbian-bsp-cli-dshanpi-a1-vendor/armbian-bsp-cli-dshanpi-a1-vendor_25.11.0-trunk.20261008.4_arm64__1-PC9b3f-Vb3d8-H3abc-B1e5d-Rf36a.deb",
-      "size": 433696,
-      "sha256": "3d3b67210adef668a2ec14543dc34fbc0d50f30f79c176e9daaecd619f330c4e",
+      "path": "pool/dshanpi-a1/a/armbian-bsp-cli-dshanpi-a1-vendor/armbian-bsp-cli-dshanpi-a1-vendor_25.11.0-trunk.20261010.1_arm64__1-PC9b3f-Vb3d8-H3abc-B1e5d-Rf36a.deb",
+      "size": 433528,
+      "sha256": "16cf6071c422bfa4aa865bd12b72dfc60ef2a7725a7bc3f5d5a087cc4de1a44d",
       "parts": [
-        "3d3b67210adef668a2ec14543dc34fbc0d50f30f79c176e9daaecd619f330c4e"
+        "16cf6071c422bfa4aa865bd12b72dfc60ef2a7725a7bc3f5d5a087cc4de1a44d"
       ]
     },
     {
-      "path": "pool/dshanpi-a1/a/armbian-bsp-desktop-dshanpi-a1-vendor/armbian-bsp-desktop-dshanpi-a1-vendor_25.11.0-trunk.20261008.3_arm64__1-B8091-R448a.deb",
-      "size": 1580,
-      "sha256": "3bf02b0b7d76057598a21b7ae48fbb73ac9829ae572565ceb52522f50a221b81",
-      "parts": [
-        "3bf02b0b7d76057598a21b7ae48fbb73ac9829ae572565ceb52522f50a221b81"
-      ]
-    },
-    {
-      "path": "pool/dshanpi-a1/a/armbian-bsp-desktop-dshanpi-a1-vendor/armbian-bsp-desktop-dshanpi-a1-vendor_25.11.0-trunk.20261008.4_arm64__1-B8091-R448a.deb",
+      "path": "pool/dshanpi-a1/a/armbian-bsp-desktop-dshanpi-a1-vendor/armbian-bsp-desktop-dshanpi-a1-vendor_25.11.0-trunk.20261010.1_arm64__1-B8091-R448a.deb",
       "size": 1576,
-      "sha256": "9213f45fadd0c1ee6dcd8d3140e885d1c8800c38442bbc7602002af776fa0899",
+      "sha256": "4d1ad2cd623e2bd30cb97441214b14fc7a737cc3bbbd1875ef51367bd5501b26",
       "parts": [
-        "9213f45fadd0c1ee6dcd8d3140e885d1c8800c38442bbc7602002af776fa0899"
+        "4d1ad2cd623e2bd30cb97441214b14fc7a737cc3bbbd1875ef51367bd5501b26"
       ]
     },
     {
-      "path": "pool/dshanpi-a1/b/base-files/base-files_25.11.0-trunk.20260929.1-13ubuntu10-noble_arm64.deb",
-      "size": 69052,
-      "sha256": "828810aa47019d453e48146d447e78e5c34aabd140dd5ab6dd15e73e6e88d8e9",
+      "path": "pool/dshanpi-a1/b/base-files/base-files_25.11.0-trunk.20261010.1-13ubuntu10-noble_arm64__1-noble-1armbian1-Baa17-U13ubuntu10-R55fa.deb",
+      "size": 69060,
+      "sha256": "3ce14f0195b8244e9ef21648131a9b1cbd6a31aef2c14f055780611c73091167",
       "parts": [
-        "828810aa47019d453e48146d447e78e5c34aabd140dd5ab6dd15e73e6e88d8e9"
+        "3ce14f0195b8244e9ef21648131a9b1cbd6a31aef2c14f055780611c73091167"
       ]
     },
     {
-      "path": "pool/dshanpi-a1/b/base-files/base-files_25.11.0-trunk.20261008.4-13ubuntu10-noble_arm64__1-noble-1armbian1-Baa17-U13ubuntu10-R55fa.deb",
-      "size": 69056,
-      "sha256": "114c0373deb3623b6777ccd214cc4b07becc8f03e679041c37a51846f69c4ae7",
+      "path": "pool/dshanpi-a1/c/camera-engine-rkaiq/camera-engine-rkaiq_6.6.3+dshanpi.2026.10.10.1_arm64.deb",
+      "size": 1561534,
+      "sha256": "363afee4669f6b3ae022dcbc289abd08f7ec140b3f5954a74407ac55ee78a765",
       "parts": [
-        "114c0373deb3623b6777ccd214cc4b07becc8f03e679041c37a51846f69c4ae7"
+        "363afee4669f6b3ae022dcbc289abd08f7ec140b3f5954a74407ac55ee78a765"
       ]
     },
     {
-      "path": "pool/dshanpi-a1/c/camera-engine-rkaiq/camera-engine-rkaiq_6.6.3+dshanpi1_arm64.deb",
-      "size": 1561080,
-      "sha256": "7c27705fe52070c7400b001dea9bb30c1f211c9253949883bf53a1368888aee8",
+      "path": "pool/dshanpi-a1/d/dshanpi-a1-axcl-16g/dshanpi-a1-axcl-16g_3.16.0+dshanpi.2026.10.10.1_arm64.deb",
+      "size": 3312,
+      "sha256": "b42bd568bffe7b6001e8b2ae0b56c63da1df5e3bffc6d4de74aa6186e22d2c3c",
       "parts": [
-        "7c27705fe52070c7400b001dea9bb30c1f211c9253949883bf53a1368888aee8"
+        "b42bd568bffe7b6001e8b2ae0b56c63da1df5e3bffc6d4de74aa6186e22d2c3c"
       ]
     },
     {
-      "path": "pool/dshanpi-a1/c/camera-engine-rkaiq/camera-engine-rkaiq_6.6.3+dshanpi2_arm64.deb",
-      "size": 1561540,
-      "sha256": "2735ad9eb32073544991b5c4a541cd90fa1b57d0180be4b2887ea567c6612e2e",
+      "path": "pool/dshanpi-a1/d/dshanpi-a1-release-core/dshanpi-a1-release-core_2026.10.10-1_all.deb",
+      "size": 846,
+      "sha256": "02f33c135fc558a235d87b0f41a7fb9822cdab92dfefca16cab3d54792fee61b",
       "parts": [
-        "2735ad9eb32073544991b5c4a541cd90fa1b57d0180be4b2887ea567c6612e2e"
+        "02f33c135fc558a235d87b0f41a7fb9822cdab92dfefca16cab3d54792fee61b"
       ]
     },
     {
-      "path": "pool/dshanpi-a1/d/dshanpi-a1-aic8800d80/dshanpi-a1-aic8800d80_6.4.3.0+dshanpi1_arm64.deb",
-      "size": 3192,
-      "sha256": "b3a1ab764e3f82de5e4ce35bb730e3c9396b864ce3a8ea163372717ad2829f3f",
+      "path": "pool/dshanpi-a1/d/dshanpi-a1-release-desktop/dshanpi-a1-release-desktop_2026.10.10-1_all.deb",
+      "size": 854,
+      "sha256": "9215e8f1ee28bb981c2cb81e0c51d2264ebe974f2b224de60a97166169d14f1c",
       "parts": [
-        "b3a1ab764e3f82de5e4ce35bb730e3c9396b864ce3a8ea163372717ad2829f3f"
+        "9215e8f1ee28bb981c2cb81e0c51d2264ebe974f2b224de60a97166169d14f1c"
       ]
     },
     {
-      "path": "pool/dshanpi-a1/d/dshanpi-a1-axcl/dshanpi-a1-axcl_3.16.0+dshanpi1_arm64.deb",
-      "size": 2756,
-      "sha256": "e97d16762c61d7c51d6dbe77639c64fbb6a59d68d7263f7cdc4c0a2c5a504cc1",
-      "parts": [
-        "e97d16762c61d7c51d6dbe77639c64fbb6a59d68d7263f7cdc4c0a2c5a504cc1"
-      ]
-    },
-    {
-      "path": "pool/dshanpi-a1/d/dshanpi-a1-axcl-16g/dshanpi-a1-axcl-16g_3.16.0+dshanpi2_arm64.deb",
-      "size": 3108,
-      "sha256": "c87818ef301d7caee7b6196d227cada3cb43db4ae0a49f214d4684eaa505e234",
-      "parts": [
-        "c87818ef301d7caee7b6196d227cada3cb43db4ae0a49f214d4684eaa505e234"
-      ]
-    },
-    {
-      "path": "pool/dshanpi-a1/d/dshanpi-a1-release-core/dshanpi-a1-release-core_2026.10.08-1_all.deb",
-      "size": 824,
-      "sha256": "b230a3ca416682683ceea7ea6781070d75516ddcba642ff3ff132b77fd133202",
-      "parts": [
-        "b230a3ca416682683ceea7ea6781070d75516ddcba642ff3ff132b77fd133202"
-      ]
-    },
-    {
-      "path": "pool/dshanpi-a1/d/dshanpi-a1-release-core/dshanpi-a1-release-core_2026.10.08-2_all.deb",
-      "size": 822,
-      "sha256": "166bf2aff8415e6ad9f811cdd16600da0fe68f5b1cb88aa9f4b41356185c8719",
-      "parts": [
-        "166bf2aff8415e6ad9f811cdd16600da0fe68f5b1cb88aa9f4b41356185c8719"
-      ]
-    },
-    {
-      "path": "pool/dshanpi-a1/d/dshanpi-a1-release-core/dshanpi-a1-release-core_2026.10.08-3_all.deb",
-      "size": 822,
-      "sha256": "83e9b508b05276981f89f134eee96be186a5cc7501b1b70e7859c3611778113d",
-      "parts": [
-        "83e9b508b05276981f89f134eee96be186a5cc7501b1b70e7859c3611778113d"
-      ]
-    },
-    {
-      "path": "pool/dshanpi-a1/d/dshanpi-a1-release-core/dshanpi-a1-release-core_2026.10.08-4_all.deb",
-      "size": 822,
-      "sha256": "a778773d569c2180e8abb48396f4ccffb8f5004671b69b2eedef48b6ce60ff86",
-      "parts": [
-        "a778773d569c2180e8abb48396f4ccffb8f5004671b69b2eedef48b6ce60ff86"
-      ]
-    },
-    {
-      "path": "pool/dshanpi-a1/d/dshanpi-a1-release-core/dshanpi-a1-release-core_2026.10.09-1_all.deb",
-      "size": 824,
-      "sha256": "8ee64bdcb8a790c225f339c8463d97fefa34d9cae10575dd2dab94ff17ef31c4",
-      "parts": [
-        "8ee64bdcb8a790c225f339c8463d97fefa34d9cae10575dd2dab94ff17ef31c4"
-      ]
-    },
-    {
-      "path": "pool/dshanpi-a1/d/dshanpi-a1-release-core/dshanpi-a1-release-core_2026.10.09-2_all.deb",
-      "size": 824,
-      "sha256": "fd03f2febd6d806fcfa008c9e8bcdc67ef724dc77632ddb24e37ace48dc88cbd",
-      "parts": [
-        "fd03f2febd6d806fcfa008c9e8bcdc67ef724dc77632ddb24e37ace48dc88cbd"
-      ]
-    },
-    {
-      "path": "pool/dshanpi-a1/d/dshanpi-a1-release-core/dshanpi-a1-release-core_2026.10.09-3_all.deb",
-      "size": 824,
-      "sha256": "0aabb328babe20317de08bd71abaa76ea68f0ff59420b7f75ada1cc790b97be8",
-      "parts": [
-        "0aabb328babe20317de08bd71abaa76ea68f0ff59420b7f75ada1cc790b97be8"
-      ]
-    },
-    {
-      "path": "pool/dshanpi-a1/d/dshanpi-a1-release-core/dshanpi-a1-release-core_2026.10.09-4_all.deb",
-      "size": 824,
-      "sha256": "d583c887b922e0c726c31b03dd8b0c637a3f5929a80c107ac270df215159a7a5",
-      "parts": [
-        "d583c887b922e0c726c31b03dd8b0c637a3f5929a80c107ac270df215159a7a5"
-      ]
-    },
-    {
-      "path": "pool/dshanpi-a1/d/dshanpi-a1-release-desktop/dshanpi-a1-release-desktop_2026.10.08-1_all.deb",
-      "size": 834,
-      "sha256": "82ee5cfbb3d79d823a29966ff152b4ad45cbfa26b5277a812c39f5d5553bd782",
-      "parts": [
-        "82ee5cfbb3d79d823a29966ff152b4ad45cbfa26b5277a812c39f5d5553bd782"
-      ]
-    },
-    {
-      "path": "pool/dshanpi-a1/d/dshanpi-a1-release-desktop/dshanpi-a1-release-desktop_2026.10.08-2_all.deb",
-      "size": 828,
-      "sha256": "f572f4b1b230ece94e16ba4af922deed7371125bdd2aef7afc2c3eac5bc1da9a",
-      "parts": [
-        "f572f4b1b230ece94e16ba4af922deed7371125bdd2aef7afc2c3eac5bc1da9a"
-      ]
-    },
-    {
-      "path": "pool/dshanpi-a1/d/dshanpi-a1-release-desktop/dshanpi-a1-release-desktop_2026.10.08-3_all.deb",
-      "size": 828,
-      "sha256": "8ee1b16be1f59e1d0c7ff08c0719c9a9304624696d17809088575519e496c552",
-      "parts": [
-        "8ee1b16be1f59e1d0c7ff08c0719c9a9304624696d17809088575519e496c552"
-      ]
-    },
-    {
-      "path": "pool/dshanpi-a1/d/dshanpi-a1-release-desktop/dshanpi-a1-release-desktop_2026.10.08-4_all.deb",
-      "size": 828,
-      "sha256": "3d3aa7fcf3bee7fdbdda9f61dbb1a2ee218afb093bd7ad39094d5de49125dd99",
-      "parts": [
-        "3d3aa7fcf3bee7fdbdda9f61dbb1a2ee218afb093bd7ad39094d5de49125dd99"
-      ]
-    },
-    {
-      "path": "pool/dshanpi-a1/d/dshanpi-a1-release-desktop/dshanpi-a1-release-desktop_2026.10.09-1_all.deb",
-      "size": 830,
-      "sha256": "84609de0d8dc7ebf142871e4feff145dd18a59b92116421a41679479a080ea6b",
-      "parts": [
-        "84609de0d8dc7ebf142871e4feff145dd18a59b92116421a41679479a080ea6b"
-      ]
-    },
-    {
-      "path": "pool/dshanpi-a1/d/dshanpi-a1-release-desktop/dshanpi-a1-release-desktop_2026.10.09-2_all.deb",
-      "size": 830,
-      "sha256": "9bd5af0e91f121e471e943b2df4ea7d35ef69ff7c2fd02f1727daabe4ef60a57",
-      "parts": [
-        "9bd5af0e91f121e471e943b2df4ea7d35ef69ff7c2fd02f1727daabe4ef60a57"
-      ]
-    },
-    {
-      "path": "pool/dshanpi-a1/d/dshanpi-a1-release-desktop/dshanpi-a1-release-desktop_2026.10.09-3_all.deb",
-      "size": 830,
-      "sha256": "3f67ec31843bd63864832c0ebb2bc32ef8e213394998ed00947bf169022dc5af",
-      "parts": [
-        "3f67ec31843bd63864832c0ebb2bc32ef8e213394998ed00947bf169022dc5af"
-      ]
-    },
-    {
-      "path": "pool/dshanpi-a1/d/dshanpi-a1-release-desktop/dshanpi-a1-release-desktop_2026.10.09-4_all.deb",
-      "size": 830,
-      "sha256": "d61ab68b0d1a9ea5d21eb7864ecf6b737efbd7a3ef06f8bf50b9d4ec2f483d0f",
-      "parts": [
-        "d61ab68b0d1a9ea5d21eb7864ecf6b737efbd7a3ef06f8bf50b9d4ec2f483d0f"
-      ]
-    },
-    {
-      "path": "pool/dshanpi-a1/d/dshanpi-a1-repository/dshanpi-a1-repository_1:2026.10.08-1_all.deb",
-      "size": 822,
-      "sha256": "3ca260b1d911e73b0b8d91e6461c75041160a065630fc4631909ef3e03665b55",
-      "parts": [
-        "3ca260b1d911e73b0b8d91e6461c75041160a065630fc4631909ef3e03665b55"
-      ]
-    },
-    {
-      "path": "pool/dshanpi-a1/d/dshanpi-a1-repository/dshanpi-a1-repository_1:2026.10.08-2_all.deb",
+      "path": "pool/dshanpi-a1/d/dshanpi-a1-repository/dshanpi-a1-repository_1:2026.10.10-1_all.deb",
       "size": 820,
-      "sha256": "be44f0b9e814c5db294a5209f8099bce8f091c54c9c4e1604d7d760f30cef4b7",
+      "sha256": "05ef6338d326bc424f697f8b4c64a4f4763abbaeeb6766d57d19c0500f7ff346",
       "parts": [
-        "be44f0b9e814c5db294a5209f8099bce8f091c54c9c4e1604d7d760f30cef4b7"
+        "05ef6338d326bc424f697f8b4c64a4f4763abbaeeb6766d57d19c0500f7ff346"
       ]
     },
     {
-      "path": "pool/dshanpi-a1/d/dshanpi-a1-repository/dshanpi-a1-repository_1:2026.10.08-3_all.deb",
-      "size": 820,
-      "sha256": "f55be1ed3a878edb25476734557dcd87d855b287be0e200da07cf744e01316e7",
+      "path": "pool/dshanpi-a1/d/dshanpi-axcl-dkms-16g/dshanpi-axcl-dkms-16g_3.16.0+dshanpi.2026.10.10.1_arm64.deb",
+      "size": 55256,
+      "sha256": "127992172272ee3560c7738909736711a613bc0e3196f263a8439cefa7acacdb",
       "parts": [
-        "f55be1ed3a878edb25476734557dcd87d855b287be0e200da07cf744e01316e7"
+        "127992172272ee3560c7738909736711a613bc0e3196f263a8439cefa7acacdb"
       ]
     },
     {
-      "path": "pool/dshanpi-a1/d/dshanpi-a1-repository/dshanpi-a1-repository_1:2026.10.08-4_all.deb",
-      "size": 822,
-      "sha256": "5e6f01e65f26e04b8de33f56568c84dc8ee3d34bda09e3a3bc180c54d7976c45",
+      "path": "pool/dshanpi-a1/d/dshanpi-axcl-firmware-16g/dshanpi-axcl-firmware-16g_3.16.0+dshanpi.2026.10.10.1_arm64.deb",
+      "size": 16190792,
+      "sha256": "598dbc455709965d440c93c513fba58adea69b60879a0f52f0ce18ce6680eb70",
       "parts": [
-        "5e6f01e65f26e04b8de33f56568c84dc8ee3d34bda09e3a3bc180c54d7976c45"
+        "598dbc455709965d440c93c513fba58adea69b60879a0f52f0ce18ce6680eb70"
       ]
     },
     {
-      "path": "pool/dshanpi-a1/d/dshanpi-aic8800d80-dkms/dshanpi-aic8800d80-dkms_6.4.3.0+dshanpi1_arm64.deb",
-      "size": 384444,
-      "sha256": "669cfa6d4effe88ca823daa5c7759f8df63098293bb690147ee1bfc48f0bd881",
+      "path": "pool/dshanpi-a1/d/dshanpi-axcl-runtime-16g/dshanpi-axcl-runtime-16g_3.16.0+dshanpi.2026.10.10.1_arm64.deb",
+      "size": 33753312,
+      "sha256": "615bc802833edb3ad47da684419a67cbfe5929fc90e31b4fb59adbb97df1d79c",
       "parts": [
-        "669cfa6d4effe88ca823daa5c7759f8df63098293bb690147ee1bfc48f0bd881"
-      ]
-    },
-    {
-      "path": "pool/dshanpi-a1/d/dshanpi-aic8800d80-firmware/dshanpi-aic8800d80-firmware_6.4.3.0+dshanpi1_arm64.deb",
-      "size": 574500,
-      "sha256": "baaed23bc12beb4687edf8f0f170bf27e2e8132d168b0b6bfc35053419525b68",
-      "parts": [
-        "baaed23bc12beb4687edf8f0f170bf27e2e8132d168b0b6bfc35053419525b68"
-      ]
-    },
-    {
-      "path": "pool/dshanpi-a1/d/dshanpi-axcl-dkms/dshanpi-axcl-dkms_3.16.0+dshanpi1_arm64.deb",
-      "size": 54972,
-      "sha256": "23f1038cafa5d1ee6798403eef84436befbe91a5235a52b74eb1ecae03410bb3",
-      "parts": [
-        "23f1038cafa5d1ee6798403eef84436befbe91a5235a52b74eb1ecae03410bb3"
-      ]
-    },
-    {
-      "path": "pool/dshanpi-a1/d/dshanpi-axcl-dkms-16g/dshanpi-axcl-dkms-16g_3.16.0+dshanpi2_arm64.deb",
-      "size": 55048,
-      "sha256": "d3a05586a57a69b7c10462e9c53d4a952ba4328d6dd1d023aa92be665162c18a",
-      "parts": [
-        "d3a05586a57a69b7c10462e9c53d4a952ba4328d6dd1d023aa92be665162c18a"
-      ]
-    },
-    {
-      "path": "pool/dshanpi-a1/d/dshanpi-axcl-firmware-16g/dshanpi-axcl-firmware-16g_3.16.0+dshanpi2_arm64.deb",
-      "size": 16190556,
-      "sha256": "bba3afd357658396204c54e039301655ac8a901fc998242ea15aa3725922e200",
-      "parts": [
-        "bba3afd357658396204c54e039301655ac8a901fc998242ea15aa3725922e200"
-      ]
-    },
-    {
-      "path": "pool/dshanpi-a1/d/dshanpi-axcl-runtime/dshanpi-axcl-runtime_3.16.0+dshanpi1_arm64.deb",
-      "size": 33752300,
-      "sha256": "ac11cc1b8d8ec224cf19f0bc30b6c7ed007d96c88af796fe62f1e99d3ae0f2ac",
-      "parts": [
-        "ac11cc1b8d8ec224cf19f0bc30b6c7ed007d96c88af796fe62f1e99d3ae0f2ac"
-      ]
-    },
-    {
-      "path": "pool/dshanpi-a1/d/dshanpi-axcl-runtime-16g/dshanpi-axcl-runtime-16g_3.16.0+dshanpi2_arm64.deb",
-      "size": 33747620,
-      "sha256": "a83c2b571d0e8159da835a3dfed6e82a5b447a7a5b364c2738bba312918d26f9",
-      "parts": [
-        "a83c2b571d0e8159da835a3dfed6e82a5b447a7a5b364c2738bba312918d26f9"
+        "615bc802833edb3ad47da684419a67cbfe5929fc90e31b4fb59adbb97df1d79c"
       ]
     },
     {
@@ -1332,51 +996,27 @@
       ]
     },
     {
-      "path": "pool/dshanpi-a1/l/linux-dtb-vendor-rk35xx/linux-dtb-vendor-rk35xx_25.11.0-trunk.20261008.3_arm64__6.1.115-S710b-D0b5d-P09c0-C2265H2313-HK01ba-Vc222-Bd200-R448a.deb",
-      "size": 2427960,
-      "sha256": "586a40831514ef972e3d4429d258f288efbe620d10e89f588fce822ca3efed94",
+      "path": "pool/dshanpi-a1/l/linux-dtb-vendor-rk35xx/linux-dtb-vendor-rk35xx_25.11.0-trunk.20261010.1_arm64__6.1.115-S710b-D0b5d-P09c0-C2265H2313-HK01ba-Vc222-B1fdb-R448a.deb",
+      "size": 2419704,
+      "sha256": "9967b1da9f7989a520d0624f31812a7a3226acee1179dab8aa9c2d3a93296ec5",
       "parts": [
-        "586a40831514ef972e3d4429d258f288efbe620d10e89f588fce822ca3efed94"
+        "9967b1da9f7989a520d0624f31812a7a3226acee1179dab8aa9c2d3a93296ec5"
       ]
     },
     {
-      "path": "pool/dshanpi-a1/l/linux-dtb-vendor-rk35xx/linux-dtb-vendor-rk35xx_25.11.0-trunk.20261008.4_arm64__6.1.115-S710b-D0b5d-P09c0-C2265H2313-HK01ba-Vc222-Bd200-R448a.deb",
-      "size": 2422116,
-      "sha256": "daa451ad0fb6f1926a17d77982a34add1ae6e5959f9104d532327394cdd5eec9",
+      "path": "pool/dshanpi-a1/l/linux-headers-vendor-rk35xx/linux-headers-vendor-rk35xx_25.11.0-trunk.20261010.1_arm64__6.1.115-S710b-D0b5d-P09c0-C2265H2313-HK01ba-Vc222-B1fdb-R448a.deb",
+      "size": 14006812,
+      "sha256": "f4c949223dc3e96b1bbfe07d82dd9a48f4a959b0b37199ac61e816d7a15b7ba9",
       "parts": [
-        "daa451ad0fb6f1926a17d77982a34add1ae6e5959f9104d532327394cdd5eec9"
+        "f4c949223dc3e96b1bbfe07d82dd9a48f4a959b0b37199ac61e816d7a15b7ba9"
       ]
     },
     {
-      "path": "pool/dshanpi-a1/l/linux-headers-vendor-rk35xx/linux-headers-vendor-rk35xx_25.11.0-trunk.20261008.3_arm64__6.1.115-S710b-D0b5d-P09c0-C2265H2313-HK01ba-Vc222-Bd200-R448a.deb",
-      "size": 14006216,
-      "sha256": "cb3f6cf03f4e3e4145bccdb05429d61b074327e9e9f7c383221bbb19cb4949e8",
+      "path": "pool/dshanpi-a1/l/linux-image-vendor-rk35xx/linux-image-vendor-rk35xx_25.11.0-trunk.20261010.1_arm64__6.1.115-S710b-D0b5d-P09c0-C2265H2313-HK01ba-Vc222-B1fdb-R448a.deb",
+      "size": 36924784,
+      "sha256": "6023a4dc4d4e5ee7eefe0c57bf7e753e506a2effb657aec3cb04018b869957fd",
       "parts": [
-        "cb3f6cf03f4e3e4145bccdb05429d61b074327e9e9f7c383221bbb19cb4949e8"
-      ]
-    },
-    {
-      "path": "pool/dshanpi-a1/l/linux-headers-vendor-rk35xx/linux-headers-vendor-rk35xx_25.11.0-trunk.20261008.4_arm64__6.1.115-S710b-D0b5d-P09c0-C2265H2313-HK01ba-Vc222-Bd200-R448a.deb",
-      "size": 14008176,
-      "sha256": "b36cb9dda0c51b503827dd4f825eb357549162299a4659edc232a2a85167a585",
-      "parts": [
-        "b36cb9dda0c51b503827dd4f825eb357549162299a4659edc232a2a85167a585"
-      ]
-    },
-    {
-      "path": "pool/dshanpi-a1/l/linux-image-vendor-rk35xx/linux-image-vendor-rk35xx_25.11.0-trunk.20261008.3_arm64__6.1.115-S710b-D0b5d-P09c0-C2265H2313-HK01ba-Vc222-Bd200-R448a.deb",
-      "size": 36907800,
-      "sha256": "0a5c9ff1a481b82b653610efa738b3d0b9df90f2ab61173432b7eaedf87ea0c4",
-      "parts": [
-        "0a5c9ff1a481b82b653610efa738b3d0b9df90f2ab61173432b7eaedf87ea0c4"
-      ]
-    },
-    {
-      "path": "pool/dshanpi-a1/l/linux-image-vendor-rk35xx/linux-image-vendor-rk35xx_25.11.0-trunk.20261008.4_arm64__6.1.115-S710b-D0b5d-P09c0-C2265H2313-HK01ba-Vc222-Bd200-R448a.deb",
-      "size": 36932044,
-      "sha256": "ba5876c183c680049655935b05610adca77a5ac2761e55a1354f0d219bfcf21e",
-      "parts": [
-        "ba5876c183c680049655935b05610adca77a5ac2761e55a1354f0d219bfcf21e"
+        "6023a4dc4d4e5ee7eefe0c57bf7e753e506a2effb657aec3cb04018b869957fd"
       ]
     },
     {
