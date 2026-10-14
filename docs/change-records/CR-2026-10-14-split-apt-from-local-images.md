@@ -68,11 +68,14 @@ flowchart TD
 | Workflow | Parse `.github/workflows/release.yml` with PyYAML | PASS | Local command output |
 | Workflow CI | `Validate APT tooling` | NOT-RUN | Required before merge |
 | Delivery | Avaota A1 `2026.10.14-1` testing APT publication | NOT-RUN | Runs after merge |
+| Failed delivery attempt | Actions run `38560486191` | EXPECTED-FAIL | Kernel artifact rejected leaked desktop parameters before compilation; no image or package was published |
 
 ## 未完成项
 
-The Avaota A1 package cohort has not been built or published at record creation time. Package-only CI
-does not replace local image verification or physical-board acceptance.
+The first Avaota A1 package-only run stopped before compilation because desktop selection parameters
+were passed to non-desktop artifact commands. The corrected loop scopes those parameters only to
+`armbian-bsp-desktop`; the package cohort remains unpublished pending the replacement run. Package-only
+CI does not replace local image verification or physical-board acceptance.
 
 ## 交付影响
 
