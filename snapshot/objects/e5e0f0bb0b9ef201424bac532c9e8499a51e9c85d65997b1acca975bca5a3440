@@ -1,0 +1,30 @@
+Package: dshanpi-archive-keyring
+Version: 1:2026.10.10-1
+Architecture: all
+Maintainer: DShanPI <support@dshanpi.com>
+Section: misc
+Priority: optional
+Description: DShanPI APT archive signing key
+ Public key used to authenticate packages from apt.100ask.net.
+Filename: pool/common/d/dshanpi-archive-keyring/dshanpi-archive-keyring_1:2026.10.10-1_all.deb
+Size: 1824
+MD5sum: 8de5631814e58b2939e5c8df5b4854e3
+SHA1: eeaa397b1881f7626b2e521ada21e7200e6e5e42
+SHA256: 3772c6e00985e86c33ada01b1c9c9fcb6e8a411f38ac3ed05cf1562de8eadd03
+
+Package: dspi-config
+Version: 1.0.3-1
+Architecture: all
+Maintainer: DShanPI <support@dshanpi.com>
+Depends: apt, bash, coreutils, dpkg, util-linux, whiptail
+Section: admin
+Priority: optional
+Description: DShanPI device-tree and system configuration utility
+ Manage board-specific device-tree overlays, signed software sources and
+ release meta-package upgrades from a terminal menu or command line.
+Filename: pool/common/d/dspi-config/dspi-config_1.0.3-1_all.deb
+Size: 8332
+MD5sum: 5abc93f690bc9568c74d333cbb8dddef
+SHA1: 0aa8efbe58f7e8c693af9127bccdfc99da9c717e
+SHA256: dd536919b4c2ec73a7d03a3e9b3ff14577169cd94b8c6d0b60bbfc0b02ee770a
+
