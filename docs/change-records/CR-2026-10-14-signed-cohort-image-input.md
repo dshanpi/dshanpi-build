@@ -21,7 +21,7 @@ public key against the root `SHA256SUMS.asc`, verifies the selected release mani
 signed root, and downloads only the package paths named by that manifest. Every DEB must also be named in
 the signed root, match both SHA-256 records and expose the declared package/version/architecture. Required
 product packages and both release metadata packages must be present before audit and image assembly.
-Large immutable files use bounded parallel HTTP ranges and five bounded retries; all final bytes are
+Large immutable files use bounded parallel HTTP ranges, per-range offsets and five bounded retries; all final bytes are
 still accepted only after the signed SHA-256 check. An interrupted download can resume the overall cohort
 operation by reusing already complete files only when their signed hashes match; mismatched or extra DEBs
 remain hard failures.
@@ -54,6 +54,8 @@ flowchart TD
 - Unknown, duplicate, missing, withdrawn, cross-product or unsigned manifest/package records stop work.
 - Downloads write temporary files and become visible only after completion; retry count is bounded and
   final acceptance never relies on transport success alone.
+- Incomplete range files remain temporary and resume at their exact byte offsets; they are deleted only
+  after all ranges assemble to the advertised full size.
 - A repeated invocation reuses already verified package files, rejects changed or extra DEBs and does not
   silently overwrite local bytes.
 - `--images-only` does not rebuild or rewrite DEBs and cannot silently substitute local same-version bytes.
