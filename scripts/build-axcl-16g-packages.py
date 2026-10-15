@@ -62,6 +62,14 @@ def package_dependencies(lock, version=None, revision=None, complete_cohort=Fals
     }
 
 
+def installed_size_kib(root):
+    # Source DEB control files are packaging metadata, not installed content.
+    size = sum(p.stat().st_size for p in root.rglob('*')
+               if p.is_file() and not p.is_symlink()
+               and p.relative_to(root).parts[0] != 'DEBIAN')
+    return (size + 1023) // 1024
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path)
@@ -229,7 +237,12 @@ esac
             'packages': [],
         }
         for root, name, depends, description in packages:
-            installed_size = sum(p.stat().st_size for p in root.rglob('*') if p.is_file() and not p.is_symlink()) // 1024 + 1
+            write(root, f'usr/share/doc/{name}/upstream.json', json.dumps(lock, indent=2) + '\n')
+            write(root, f'usr/share/doc/{name}/copyright',
+                  'Upstream: AXERA-TECH AXCL\nSource: ' + lock['url'] + '\n'
+                  'The upstream distribution metadata declares BSD-3-Clause.\n'
+                  'Driver source retains its original copyright notices and MODULE_LICENSE declarations.\n')
+            installed_size = installed_size_kib(root)
             write(root, 'DEBIAN/control', f'''Package: {name}
 Version: {version}
 Architecture: arm64
@@ -242,11 +255,6 @@ Conflicts: axclhost, dshanpi-axcl-runtime, dshanpi-axcl-dkms, dshanpi-a1-axcl
 Description: {description}
  Explicit 16GB card variant. Runtime and PAC must be installed together.
 ''')
-            write(root, f'usr/share/doc/{name}/upstream.json', json.dumps(lock, indent=2) + '\n')
-            write(root, f'usr/share/doc/{name}/copyright',
-                  'Upstream: AXERA-TECH AXCL\nSource: ' + lock['url'] + '\n'
-                  'The upstream distribution metadata declares BSD-3-Clause.\n'
-                  'Driver source retains its original copyright notices and MODULE_LICENSE declarations.\n')
             checksums = []
             for p in sorted(root.rglob('*')):
                 if p.is_file() and not p.is_symlink() and p.relative_to(root).parts[0] != 'DEBIAN':

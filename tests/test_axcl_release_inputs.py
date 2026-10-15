@@ -20,7 +20,7 @@ class MaintenanceInputTests(unittest.TestCase):
             return result
 
     def plan(self):
-        return json.loads((ROOT / 'products/dshanpi-a1/releases/2026.10.15-1.lock.json').read_text())
+        return json.loads((ROOT / 'products/dshanpi-a1/releases/2026.10.15-2.lock.json').read_text())
 
     def test_wrong_product_is_rejected(self):
         plan = self.plan(); plan['product'] = 'dshanpi-a1-cm5'
