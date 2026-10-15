@@ -76,3 +76,27 @@ A1 16GB users in render gain ordinary-user device/log access from the package it
 marker binds the exact optional selector in Suggests without installing hardware software on systems
 that have not selected it. Prior local candidate evidence is in docs/validation/2026-10-15-axcl-access/.
 Formal public and board evidence will be committed separately with run IDs and signed manifest hashes.
+
+## Reproducible metadata correction
+
+Testing run 38692053088 stopped before signing/publication because the mandatory package-byte gate
+failed. Local comparison found only runtime DEBIAN/control Installed-Size differed (100425 vs 100426
+KiB); all installed file contents, permissions, owners and timestamps were identical. Imported control
+metadata and the prior provenance file size had been included in the size calculation. The builder now
+writes current provenance first and measures only installed regular files, excluding DEBIAN metadata.
+A new component version 3.16.0+dshanpi.2026.10.15.2 and new release 2026.10.15-2 preserve the first
+candidate and failed plan. Both historical source cohorts must produce identical four-package hashes.
+The previous assertion of pending identical-byte reproduction is superseded by this recorded failure;
+it was never a public release. The corrected cohort will receive fresh APT hardware acceptance.
+
+The optional local whole-repository download was stopped after GitHub Actions had verified the full
+signed snapshot, to avoid redundant transfers of unrelated board kernels. The local comparison inputs
+came from the preserved board rollback files and matched the release plan's signed-public hashes.
+Formal builds and publication continue to use the full verified Actions snapshot.
+
+Correction validation: PASS, 81 Python tests and the Shell suite. Both source cohorts produced four
+byte-identical 3.16.0+dshanpi.2026.10.15.2 DEBs; each passed package audit. Expected hashes are pinned
+in the new 2026.10.15-2 lock. Historical 2026.10.15-1 lock and evidence remain unchanged. Build logs:
+output/permissions-reproducible-python.log and output/permissions-reproducible-shell.log; package
+manifests: output/reproducible-source-{current,original}/axcl-16g-build.json. Public APT and board
+acceptance remain NOT-RUN for revision 2 at this implementation commit.
