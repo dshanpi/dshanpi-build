@@ -6,18 +6,21 @@
 
 ## 当前交付状态
 
-四包已通过 A1 8GB 实板测试，并由 [testing 发布任务](https://github.com/dshanpi/dshanpi-build/actions/runs/38714648985)
-发布到 `noble-testing`。原容量阻断已通过用户批准的 CM5 旧测试版清理解除；
-8GB 四包共 50,000,632 字节，16GB 四包共 50,003,704 字节，均沿用同一拆分规则。
+8GB 四包已发布到默认 `noble` 源，配套镜像无需另加测试源。
+[stable 发布任务](https://github.com/dshanpi/dshanpi-build/actions/runs/38716589966)
+通过签名、公开索引和下载哈希检查；30 个包全部沿用 testing 的字节，没有重新构建。
 
-公网 APT 安装、重启恢复、上一 stable 包集回滚及重装均已通过，三轮普通用户 NPU 均为 20/20。
-[正式验收记录](../../products/dshanpi-a1/releases/2026.10.15-3.hardware-acceptance.json)
-绑定精确 testing manifest 和日志哈希。stable 晋级待本验收提交合并后触发；默认 `noble`
-源此时尚无 8GB 包，不能把 testing 发布成功等同于默认源交付完成。
+公网 APT 安装、重启恢复、回滚和重装均通过，三轮普通用户 NPU 为 20/20，
+耗时约 10.1 秒，测试后温度 39–41°C。默认源查询与入口包重装也通过。
+[正式硬件验收](../../products/dshanpi-a1/releases/2026.10.15-3.hardware-acceptance.json)
+和 [stable 核对](../../docs/validation/2026-10-15-axcl-8gb-public/stable-verification.json)记录适用范围。
+
+8GB 四包共 50,000,632 字节；既有 16GB 四包和平台包未改。经批准清理两个 CM5
+旧测试版本后，整个 APT 快照约 513.40 MB，仍保留原 950 MB 预算。
 
 ## 安装与自检
 
-确认卡为 8GB，断电安装，开启风扇后启动开发板。包公开到所选 APT 通道后执行：
+确认卡为 8GB，断电安装，开启风扇后启动开发板。在已内置 `apt.100ask.net` 的配套镜像执行：
 
 ```sh
 sudo apt update

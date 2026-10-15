@@ -1,0 +1,67 @@
+set -eu
+export DEBIAN_FRONTEND=noninteractive
+opts=(-o Dir::Etc::sourcelist=/etc/apt/sources.list.d/dshanpi.sources -o Dir::Etc::sourceparts=- -o APT::Get::List-Cleanup=0 -o Acquire::http::No-Cache=true -o Acquire::https::No-Cache=true -o Acquire::https::Timeout=30)
+cat /etc/apt/sources.list.d/dshanpi.sources
+apt-get "${opts[@]}" update
+apt-cache "${opts[@]}" policy dshanpi-a1-axcl-8g dshanpi-a1-axcl-16g
+apt-get "${opts[@]}" --reinstall install -y dshanpi-a1-axcl-8g=3.16.0+dshanpi.2026.10.15.3
+systemctl enable --now dshanpi-axcl.service
+runuser -u baiwen -- axcl-smi
+apt-get check
+sha256sum /etc/apt/sources.list.d/dshanpi.sources
+Types: deb
+URIs: https://apt.100ask.net
+Suites: noble
+Components: common dshanpi-a1
+Architectures: arm64 all
+Signed-By: /usr/share/keyrings/dshanpi-archive-keyring.gpg
+Get:1 https://apt.100ask.net noble InRelease [9,971 B]
+Get:2 https://apt.100ask.net noble/dshanpi-a1 all Packages [1,422 B]
+Get:3 https://apt.100ask.net noble/dshanpi-a1 arm64 Packages [6,225 B]
+Fetched 17.6 kB in 2s (9,019 B/s)
+Reading package lists...
+dshanpi-a1-axcl-8g:
+  Installed: 3.16.0+dshanpi.2026.10.15.3
+  Candidate: 3.16.0+dshanpi.2026.10.15.3
+  Version table:
+ *** 3.16.0+dshanpi.2026.10.15.3 500
+        500 https://apt.100ask.net noble/dshanpi-a1 arm64 Packages
+        100 /var/lib/dpkg/status
+dshanpi-a1-axcl-16g:
+  Installed: (none)
+  Candidate: 3.16.0+dshanpi.2026.10.15.2
+  Version table:
+     3.16.0+dshanpi.2026.10.15.2 500
+        500 https://apt.100ask.net noble/dshanpi-a1 arm64 Packages
+     3.16.0+dshanpi.2026.10.10.1 500
+        500 https://apt.100ask.net noble/dshanpi-a1 arm64 Packages
+Reading package lists...
+Building dependency tree...
+Reading state information...
+0 upgraded, 0 newly installed, 1 reinstalled, 0 to remove and 0 not upgraded.
+Need to get 0 B/4,268 B of archives.
+After this operation, 0 B of additional disk space will be used.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 101134 files and directories currently installed.)
+Preparing to unpack .../dshanpi-a1-axcl-8g_3.16.0+dshanpi.2026.10.15.3_arm64.deb ...
+Unpacking dshanpi-a1-axcl-8g (3.16.0+dshanpi.2026.10.15.3) over (3.16.0+dshanpi.2026.10.15.3) ...
+Setting up dshanpi-a1-axcl-8g (3.16.0+dshanpi.2026.10.15.3) ...
+AXCL: members of render can use axcl-smi. Add other users explicitly and log in again.
+AXCL: confirm card capacity and cooling before enabling dshanpi-axcl.service.
++------------------------------------------------------------------------------------------------+
+| AXCL-SMI  V3.16.0_20260731020156                                Driver  V3.16.0_20260731020156 |
++-----------------------------------------+--------------+---------------------------------------+
+| Card  Name                     Firmware | Bus-Id       |                          Memory-Usage |
+| Fan   Temp                Pwr:Usage/Cap | CPU      NPU |                             CMM-Usage |
+|=========================================+==============+=======================================|
+|    0  AX8850                    V3.16.0 | 0000:01:00.0 |                152 MiB /      945 MiB |
+|   --   41C                      -- / -- | 3%        0% |                 18 MiB /     7040 MiB |
++-----------------------------------------+--------------+---------------------------------------+
+
++------------------------------------------------------------------------------------------------+
+| Processes:                                                                                     |
+| Card      PID  Process Name                                                   NPU Memory Usage |
+|================================================================================================|
+Reading package lists...
+Building dependency tree...
+Reading state information...
+9e00e649bd0c681e5f1836a2b7e2b9559d3f459e2f109d1afe9ee348f06d579a  /etc/apt/sources.list.d/dshanpi.sources
