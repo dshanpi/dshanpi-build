@@ -3,6 +3,7 @@
 import argparse
 import hashlib
 import json
+import lzma
 import os
 from pathlib import Path
 import shutil
@@ -70,7 +71,9 @@ def installed_size_kib(root):
     return (size + 1023) // 1024
 
 
-def main():
+def main(capacity=16):
+    if capacity not in (8, 16):
+        raise SystemExit("unsupported AXCL capacity")
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path)
     source = parser.add_mutually_exclusive_group()
@@ -82,9 +85,16 @@ def main():
                         help='Pinned maintenance plan selecting the historical input cohort')
     parser.add_argument('--package-version')
     parser.add_argument('--platform-version')
+    parser.add_argument('--firmware', type=Path, help='Explicit hash-pinned 8GB PAC')
     args = parser.parse_args()
     run('python3', ROOT / 'tools/check-delivery-policy.py')
-    lock = json.loads((ROOT / 'packages/axcl-16g/upstream.lock.json').read_text())
+    lock = json.loads((ROOT / f'packages/axcl-{capacity}g/upstream.lock.json').read_text())
+    if lock['capacity_gb'] != capacity:
+        raise SystemExit('component capacity mismatch')
+    if capacity == 8 and any((args.previous_driver, args.previous_runtime, args.previous_firmware, args.previous_release_lock)):
+        raise SystemExit('8GB requires its independently pinned vendor inputs')
+    if capacity == 16 and args.firmware:
+        raise SystemExit('16GB retains its paired vendor PAC; --firmware is 8GB only')
     version = args.package_version or lock['version']
     revision = args.platform_version or lock['kernel_package_version']
     if subprocess.run(['dpkg', '--validate-version', version], capture_output=True).returncode:
@@ -154,8 +164,18 @@ def main():
                 raise SystemExit('retained 16GB firmware SHA-256 mismatch')
         elif complete_cohort:
             pac = extracted / 'lib/firmware/axcl/ax650_card.pac'
-            if lock['capacity_gb'] != 16 or sha(pac) != lock['firmware_sha256']:
-                raise SystemExit('16GB firmware SHA-256 mismatch')
+            if capacity == 8:
+                if args.firmware:
+                    pac = args.firmware.resolve()
+                else:
+                    archive = ROOT / lock['firmware_archive']
+                    if sha(archive) != lock['firmware_archive_sha256']:
+                        raise SystemExit('8GB firmware archive SHA-256 mismatch')
+                    pac = work / 'reviewed-8gb.pac'
+                    with lzma.open(archive, 'rb') as src, pac.open('wb') as dst:
+                        shutil.copyfileobj(src, dst)
+            if sha(pac) != lock['firmware_sha256']:
+                raise SystemExit(f'{capacity}GB firmware SHA-256 mismatch')
             (firmware / 'lib/firmware/axcl').mkdir(parents=True)
             shutil.copyfile(pac, firmware / 'lib/firmware/axcl/ax650_card.pac')
             write(
@@ -237,6 +257,12 @@ esac
             'packages': [],
         }
         for root, name, depends, description in packages:
+            conflicts = 'axclhost, dshanpi-axcl-runtime, dshanpi-axcl-dkms, dshanpi-a1-axcl'
+            if capacity == 8:
+                name = name.replace('-16g', '-8g')
+                depends = depends.replace('-16g', '-8g')
+                description = description.replace('16GB', '8GB')
+                conflicts += ', dshanpi-a1-axcl-16g, dshanpi-axcl-runtime-16g, dshanpi-axcl-dkms-16g, dshanpi-axcl-firmware-16g'
             write(root, f'usr/share/doc/{name}/upstream.json', json.dumps(lock, indent=2) + '\n')
             write(root, f'usr/share/doc/{name}/copyright',
                   'Upstream: AXERA-TECH AXCL\nSource: ' + lock['url'] + '\n'
@@ -251,9 +277,9 @@ Section: misc
 Priority: optional
 Installed-Size: {installed_size}
 Depends: {depends}
-Conflicts: axclhost, dshanpi-axcl-runtime, dshanpi-axcl-dkms, dshanpi-a1-axcl
+Conflicts: {conflicts}
 Description: {description}
- Explicit 16GB card variant. Runtime and PAC must be installed together.
+ Explicit {capacity}GB card variant. Runtime and PAC must be installed together.
 ''')
             checksums = []
             for p in sorted(root.rglob('*')):
@@ -274,7 +300,7 @@ Description: {description}
                 raise SystemExit(f'refusing changed package identity: {deb}')
             shutil.copyfile(candidate, deb)
             evidence['packages'].append({'package': name, 'version': version, 'architecture': 'arm64', 'filename': deb.name, 'sha256': sha(deb)})
-        (output / 'axcl-16g-build.json').write_text(json.dumps(evidence, indent=2) + '\n')
+        (output / f'axcl-{capacity}g-build.json').write_text(json.dumps(evidence, indent=2) + '\n')
     run(ROOT / 'scripts/audit-packages.sh', output)
 
 

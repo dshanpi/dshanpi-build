@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "version": "3.16.0+dshanpi.2026.10.15.3",
+  "upstream_version": "3.16.0",
+  "upstream_commit": "133bc60f1280a5f200921e28bb5777296c0f76df",
+  "url": "https://huggingface.co/AXERA-TECH/AXCL/resolve/133bc60f1280a5f200921e28bb5777296c0f76df/V3.16.0_8G/axcl_host_aarch64_V3.16.0_20260731020156_NO5288.deb",
+  "sha256": "332d6a4043d39f31446e80b73e113dafbc2e30448e50a99e41e96ddf584aa33c",
+  "product": "dshanpi-a1",
+  "kernel_release": "6.1.115-vendor-rk35xx",
+  "kernel_package_version": "25.11.0-trunk.20261010.1",
+  "source_date_epoch": 1791849600,
+  "retained_packages": {},
+  "capacity_gb": 8,
+  "firmware_policy": "Explicit user-supplied AX8850 8GB 4266 PAC. The upstream DEB embedded PAC is not used. Both original inputs are immutable and independently hashed.",
+  "firmware_original_name": "AX8850_card_V3.16.0_8GB_4266_RELEASE.pac",
+  "firmware_sha256": "4d3f5b7ff3871b0b16aa894e7ca9e26f842b3a27f5f04ce14acd1a90b0861ade",
+  "firmware_archive": "packages/axcl-8g/vendor/AX8850_card_V3.16.0_8GB_4266_RELEASE.pac.xz",
+  "firmware_archive_sha256": "0085778fe7d5b0e5d6e630a8b013264301ad5b817f3f4d99fda9c8949bf26354"
+}

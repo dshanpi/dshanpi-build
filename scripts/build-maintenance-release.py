@@ -10,6 +10,7 @@ import subprocess
 ROOT = Path(__file__).resolve().parents[1]
 ADAPTERS = {
     ('dshanpi-a1', 'axcl'): 'build-axcl-release.py',
+    ('dshanpi-a1', 'axcl-8g'): 'build-axcl-8g-release.py',
     ('dshanpi-a1', 'axcl-16g'): 'build-axcl-16g-release.py',
     ('dshanpi-a1', 'aic8800d80'): 'build-aic8800d80-release.py',
 }

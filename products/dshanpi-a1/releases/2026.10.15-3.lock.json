@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "product": "dshanpi-a1",
+  "revision": "25.11.0-trunk.20261010.1",
+  "sources": {
+    "armbianos": {
+      "commit": "5980f8c110cb818dc9b6c3919c8fa6926f1fc731"
+    },
+    "dspi_config": {
+      "commit": "1c46b5a282e41cce4e650b415203a22ae9e9ff93"
+    }
+  },
+  "image_policy": "Package maintenance release; use the existing DShanPI A1 Ubuntu 24 golden image and update through signed APT.",
+  "version": "2026.10.15-3",
+  "maintenance_adapter": "axcl-8g",
+  "base_release": "2026.10.15-2",
+  "base_manifest_sha256": "519e1730062cd9f84a9cf2f20a52ead403da34e2badbe9943c3334f1031202bf",
+  "hardware_validation": "Validate the changed 8GB cohort on DShanPI A1. Retain all 16GB and platform package bytes from the signed base; no new image.",
+  "axcl_complete_cohort": true,
+  "axcl_8g_lock": "packages/axcl-8g/upstream.lock.json",
+  "axcl_8g_lock_sha256": "faf6d37554cd33d670fcd36f291e4f44a33f356ab2c60e3ed75f0cb47f2afdec",
+  "axcl_expected_packages": {
+    "dshanpi-axcl-firmware-8g": "ef4b5e712c9cfd215fe7d24da5198480220b033fce26c0731831d7c95f9f520c",
+    "dshanpi-axcl-runtime-8g": "8d4e219ade8596d719a70742e90d2eb62680c1805e47bdb1c5dbbf8bd00fe29f",
+    "dshanpi-axcl-dkms-8g": "85b206151d186f40d53daf1c26d53fa73c993a0f867bc6edf08135253ecd2c41",
+    "dshanpi-a1-axcl-8g": "802ee0908d38e64b55edead595c23ef014b7907f87322906e4b4f25e72ef2dc9"
+  }
+}
