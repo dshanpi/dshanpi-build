@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "channel": "testing",
+  "operation": "purge",
+  "suite": "noble-testing",
+  "product": "dshanpi-a1-cm5",
+  "component": "dshanpi-a1-cm5",
+  "version": "2026.10.15-1",
+  "purge_versions": [
+    "2026.10.08-1",
+    "2026.10.08-2"
+  ],
+  "removed_pool_files": [
+    "pool/common/d/dspi-config/dspi-config_1.0.1-2_all.deb",
+    "pool/dshanpi-a1-cm5/a/armbian-bsp-cli-dshanpi-a1-cm5-vendor/armbian-bsp-cli-dshanpi-a1-cm5-vendor_25.11.0-trunk.20261008.1_arm64.deb",
+    "pool/dshanpi-a1-cm5/a/armbian-bsp-desktop-dshanpi-a1-cm5-vendor/armbian-bsp-desktop-dshanpi-a1-cm5-vendor_25.11.0-trunk.20261008.1_arm64.deb",
+    "pool/dshanpi-a1-cm5/b/base-files/base-files_25.11.0-trunk.20260929.1-13ubuntu10-noble_arm64.deb",
+    "pool/dshanpi-a1-cm5/d/dshanpi-a1-cm5-release-core/dshanpi-a1-cm5-release-core_2026.10.08-1_all.deb",
+    "pool/dshanpi-a1-cm5/d/dshanpi-a1-cm5-release-core/dshanpi-a1-cm5-release-core_2026.10.08-2_all.deb",
+    "pool/dshanpi-a1-cm5/d/dshanpi-a1-cm5-release-desktop/dshanpi-a1-cm5-release-desktop_2026.10.08-1_all.deb",
+    "pool/dshanpi-a1-cm5/d/dshanpi-a1-cm5-release-desktop/dshanpi-a1-cm5-release-desktop_2026.10.08-2_all.deb",
+    "pool/dshanpi-a1-cm5/d/dshanpi-a1-cm5-repository/dshanpi-a1-cm5-repository_1:2026.10.08-1_all.deb",
+    "pool/dshanpi-a1-cm5/l/linux-dtb-vendor-rk3576-dshanpi-a1-cm5/linux-dtb-vendor-rk3576-dshanpi-a1-cm5_25.11.0-trunk.20260930.1_arm64.deb",
+    "pool/dshanpi-a1-cm5/l/linux-headers-vendor-rk3576-dshanpi-a1-cm5/linux-headers-vendor-rk3576-dshanpi-a1-cm5_25.11.0-trunk.20260930.1_arm64.deb",
+    "pool/dshanpi-a1-cm5/l/linux-image-vendor-rk3576-dshanpi-a1-cm5/linux-image-vendor-rk3576-dshanpi-a1-cm5_25.11.0-trunk.20260930.1_arm64.deb"
+  ],
+  "expected_base_state_sha256": "15ef19c00dd62cba3dfabe0f487e11f9de0e540f99b413155199a7371e1090d9"
+}
