@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "product": "dshanpi-a1",
+  "release": "2026.10.15-2",
+  "package_version": "3.16.0+dshanpi.2026.10.15.2",
+  "suite": "noble",
+  "testing_workflow": "https://github.com/dshanpi/dshanpi-build/actions/runs/38692942310",
+  "stable_workflow": "https://github.com/dshanpi/dshanpi-build/actions/runs/38697178592",
+  "testing_manifest_sha256": "aa6bf062b149befb0755cbfbc9fc0ffac2f255a976487ab52cc0ab77c6d8141d",
+  "stable_manifest_sha256": "519e1730062cd9f84a9cf2f20a52ead403da34e2badbe9943c3334f1031202bf",
+  "package_records_unchanged_on_promotion": true,
+  "public_download_validation": "All 26 packages and signatures passed in testing and stable workflows.",
+  "default_source_install": "Passed default noble APT policy/plan and forced four-package reinstall; reused the byte-identical cache downloaded through signed testing APT. No testing source was added under /etc.",
+  "source_file_sha256_unchanged": "9e00e649bd0c681e5f1836a2b7e2b9559d3f459e2f109d1afe9ee348f06d579a",
+  "index_refresh": "Full apt update was interrupted while slowly downloading Ubuntu Contents. Successful final refresh selected only the existing dshanpi.sources with List-Cleanup=0; no signatures bypassed.",
+  "final_user_npu": {
+    "passed": 20,
+    "total": 20,
+    "elapsed_ms": 10215,
+    "temperature_after_c": 47,
+    "cmm_total_mib": 15232
+  },
+  "exact_installed_cohort_count": 22,
+  "manual_permission_overrides": false,
+  "evidence": [
+    {
+      "path": "2026.10.15-2.hardware-acceptance/stable-board.log",
+      "sha256": "bea7acc95ab3fd98a64aa807f45ec51227dddedb04f91d96f779c5a119793aa0"
+    }
+  ],
+  "scope": "AXCL 16GB A1 package maintenance; no new images, 8GB testing or extended model stress testing."
+}
