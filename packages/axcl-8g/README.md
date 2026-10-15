@@ -6,26 +6,14 @@
 
 ## 当前交付状态
 
-四包构建与 A1 8GB 实板安装、普通用户 NPU 20/20、重启恢复、卸载及重装均通过。
-云端构建的四个 DEB 与实测包逐字节一致，但 APT 发布被仓库总容量检查阻止，当前
-`noble` 和 `noble-testing` 尚无 8GB 包，不能直接按包名从公开源安装。
+四包已通过 A1 8GB 实板测试，并由 [testing 发布任务](https://github.com/dshanpi/dshanpi-build/actions/runs/38714648985)
+发布到 `noble-testing`。原容量阻断已通过用户批准的 CM5 旧测试版清理解除；
+8GB 四包共 50,000,632 字节，16GB 四包共 50,003,704 字节，均沿用同一拆分规则。
 
-在保存四个候选 DEB 的开发板目录中，可执行已实测的本地安装路径：
-
-```sh
-sudo apt install -y ./dshanpi-*8g*.deb
-sudo systemctl enable --now dshanpi-axcl.service
-axcl-smi
-axcl_ut_npu
-```
-
-8GB 四包共 50,000,632 字节；16GB 已发布四包共 50,003,704 字节，采用同一拆分规则。
-容量问题发生在整个仓库：当前快照 926,431,337 字节，加上 8GB 四包至少
-976,431,969 字节，超过 `scripts/pages/snapshot.py` 的 950,000,000 字节预算。
-`apt.100ask.net` 的 CNAME 为 `dshanpi.github.io`；公开 DEB 由 GitHub.com 提供。
-没有把完整系统镜像或原厂 DEB 重复塞入 8GB 包。原包、历史回滚路径和公开索引未变。
-
-[实板验证清单](../../docs/validation/2026-10-15-axcl-8gb/verification.json)
+公网 APT 安装、重启恢复、上一 stable 包集回滚及重装均已通过，三轮普通用户 NPU 均为 20/20。
+[正式验收记录](../../products/dshanpi-a1/releases/2026.10.15-3.hardware-acceptance.json)
+绑定精确 testing manifest 和日志哈希。stable 晋级待本验收提交合并后触发；默认 `noble`
+源此时尚无 8GB 包，不能把 testing 发布成功等同于默认源交付完成。
 
 ## 安装与自检
 

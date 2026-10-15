@@ -1,0 +1,8 @@
+{
+  "state_commit": "4ee3d0290251475b888dec4b09067fab28eaf876",
+  "verified_files": 12,
+  "retired_payload_bytes": 463021314,
+  "archive": "cm5-two-retired-testing-backup.tar",
+  "archive_sha256": "6b255c914984190868dd41b6bebfafdd624119cf8cb94c2139bf8c83de69f0d0",
+  "all_payloads_verified": true
+}

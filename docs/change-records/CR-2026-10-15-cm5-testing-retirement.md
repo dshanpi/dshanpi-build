@@ -62,14 +62,14 @@ The pre-existing CM5 2026.10.10-1 missing headers URL is outside this approved o
 | Static | `python3 tools/check-delivery-policy.py --peer ../ArmBianOS --peer ../dspi-config` | PASS | Local execution; no policy changes |
 | Reference simulation | `repository_tool.py purge` on isolated metadata and placeholder pool copy | PASS: exactly 12 reviewed paths; retained manifests and noble catalogs unchanged | `docs/validation/2026-10-15-cm5-retirement/reviewed-files.json` |
 | Dependency analysis | All retained public Packages exact Depends/Pre-Depends checked against removed identities | PASS: zero newly missing exact dependencies | Local `output/apt-cleanup-audit/analysis.json` |
-| Backup | Download old payloads and signed metadata; compare with current snapshot SHA-256 | NOT-RUN: completion required before dispatch | Local `output/cm5-retirement-backup/` |
+| Backup | Download old payloads and signed metadata; compare with current snapshot SHA-256 | PASS: all 12 payload hashes verified; recoverable TAR backed up on build host and operator PC | Local `output/cm5-retirement-backup/` |
 | Regression | Python and Shell suite | PASS: 84 Python tests and Shell suite | Local `output/cm5-retirement-python.log` and `output/cm5-retirement-shell.log` |
-| Public / hardware | Purge publication and public A1 8GB install | NOT-RUN: follows reviewed plan merge | Will be recorded separately after execution |
+| Public / hardware | Purge publication and public A1 8GB install | PASS: purge 38714370425 and public checks; A1 8GB acceptance remains pending | `docs/validation/2026-10-15-cm5-retirement/public-verification.json` |
 
 ## 未完成项
 
-Complete backup and regression checks before dispatch. Public purge, A1 8GB publication,
-APT hardware acceptance and stable promotion remain pending at plan preparation. No CM5,
+Backup, regression checks and public purge are complete. A1 8GB publication,
+APT hardware acceptance and stable promotion remain pending. No CM5,
 R1 or Avaota hardware validation is implied by metadata/reference checks.
 
 ## 交付影响
