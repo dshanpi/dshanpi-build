@@ -1,0 +1,5 @@
+# AXCL misc devices; grant access only to the render group.
+SUBSYSTEM=="misc", KERNEL=="axcl_host", GROUP="render", MODE="0660"
+SUBSYSTEM=="misc", KERNEL=="ax_mmb_dev", GROUP="render", MODE="0660"
+SUBSYSTEM=="misc", KERNEL=="msg_userdev", GROUP="render", MODE="0660"
+SUBSYSTEM=="misc", KERNEL=="p2p", GROUP="render", MODE="0660"

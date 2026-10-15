@@ -1,0 +1,13 @@
+#!/bin/sh
+set -e
+case "$1" in
+    remove|purge)
+        # Keep user logs, group membership and local /etc overrides.
+        if [ -S /run/udev/control ]; then
+            udevadm control --reload-rules
+        fi
+        if [ -d /run/systemd/system ]; then
+            systemctl daemon-reload
+        fi
+        ;;
+esac

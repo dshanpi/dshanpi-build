@@ -1,0 +1,118 @@
+{
+  "requirement": "REQ-AXCL-USER-ACCESS-001",
+  "tested_source_commit": "847653d271e529ec29059d047c5283979e8dbe55",
+  "product": "dshanpi-a1",
+  "capacity_gb": 16,
+  "platform_version": "25.11.0-trunk.20261010.1",
+  "package_version": "3.16.0+dshanpi.2026.10.15.1",
+  "rollback_version": "3.16.0+dshanpi.2026.10.10.1",
+  "packages": [
+    {
+      "package": "dshanpi-axcl-firmware-16g",
+      "version": "3.16.0+dshanpi.2026.10.15.1",
+      "architecture": "arm64",
+      "filename": "dshanpi-axcl-firmware-16g_3.16.0+dshanpi.2026.10.15.1_arm64.deb",
+      "sha256": "924ccd3c940166ba9a3b5bb750d69541750044cb6280bcbc7a229919196fbfb3"
+    },
+    {
+      "package": "dshanpi-axcl-runtime-16g",
+      "version": "3.16.0+dshanpi.2026.10.15.1",
+      "architecture": "arm64",
+      "filename": "dshanpi-axcl-runtime-16g_3.16.0+dshanpi.2026.10.15.1_arm64.deb",
+      "sha256": "1f56452c6824c66e0f2512905d833e4ebdfff23688bd92394a943e69ab2f67af"
+    },
+    {
+      "package": "dshanpi-axcl-dkms-16g",
+      "version": "3.16.0+dshanpi.2026.10.15.1",
+      "architecture": "arm64",
+      "filename": "dshanpi-axcl-dkms-16g_3.16.0+dshanpi.2026.10.15.1_arm64.deb",
+      "sha256": "b0bc6e6f00c5f74910f8aa01b68a48878c6254e5539fb0ee010485c466cf267f"
+    },
+    {
+      "package": "dshanpi-a1-axcl-16g",
+      "version": "3.16.0+dshanpi.2026.10.15.1",
+      "architecture": "arm64",
+      "filename": "dshanpi-a1-axcl-16g_3.16.0+dshanpi.2026.10.15.1_arm64.deb",
+      "sha256": "b10c44e10cea7fd5a375ba76b5e080ce9fc518294ef8e795dc9b78f723447b73"
+    }
+  ],
+  "checks": {
+    "upgrade_install": {
+      "result": "PASS",
+      "evidence": "board/evidence/04-install-retry.json",
+      "evidence_sha256": "c1a0a5c6378941cda349357d895cf4eaa22bb2a43790fb7354d7e832aedeafde"
+    },
+    "nonroot_after_upgrade": {
+      "result": "PASS",
+      "evidence": "board/evidence/06-user-test.json",
+      "evidence_sha256": "583afe53ff9de62d82a1772349c26b1e2dbf90e576af3946b7dcf8fc0c059400",
+      "npu_tests_passed": 20,
+      "npu_duration_ms": 10194,
+      "boot_id": "ff25e0f7-25b2-414b-bb05-1342601f0a88",
+      "temperature_before_test_c": 43.128
+    },
+    "existing_permissions_repair_log_preserved": {
+      "result": "PASS",
+      "evidence": "board/evidence/07-reconfigure-reboot.json",
+      "evidence_sha256": "0b5dd1c0fea540f201cf3f9f24d7fb9ebc1df125848147217fdd469b94784b2f",
+      "boot_id": "ff25e0f7-25b2-414b-bb05-1342601f0a88"
+    },
+    "nonroot_after_upgrade_reboot": {
+      "result": "PASS",
+      "evidence": "board/evidence/08-after-upgrade-reboot.json",
+      "evidence_sha256": "83b87c2d7d2751d6f53542a21e951530e3ea3a874507fb9f14128387ce2137ba",
+      "npu_tests_passed": 20,
+      "npu_duration_ms": 10276,
+      "boot_id": "3465403b-4490-4450-856d-ebd44fdbb10d",
+      "temperature_before_test_c": 45.889
+    },
+    "cohort_rollback_install": {
+      "result": "PASS",
+      "evidence": "board/evidence/10-rollback-offline.json",
+      "evidence_sha256": "38dc226a0e52a581854b068b16158c25b32e584caf0517b757d34f4c01aaac59",
+      "boot_id": "3465403b-4490-4450-856d-ebd44fdbb10d"
+    },
+    "root_npu_after_rollback_reboot": {
+      "result": "PASS",
+      "evidence": "board/evidence/11-rollback-test.json",
+      "evidence_sha256": "6f8ea6ef8dd7586e87afd1a28b5a1eae7a47c04b98e11d375e596945a729cb8f",
+      "npu_tests_passed": 20,
+      "npu_duration_ms": 10190,
+      "boot_id": "be84c033-dbd1-4707-968d-2cbe772db11a",
+      "old_nonroot_failure_reproduced": true,
+      "temperature_before_test_c": 44.662
+    },
+    "purge_four_packages_then_install": {
+      "result": "PASS",
+      "evidence": "board/evidence/13-clean-install.json",
+      "evidence_sha256": "0b18f6cb4703a04504587108451451c25c506e3e963d9945a2b68a43a55dd64e"
+    },
+    "nonroot_after_clean_package_install": {
+      "result": "PASS",
+      "evidence": "board/evidence/14-clean-user-test.json",
+      "evidence_sha256": "6d8fe9dc9fd01acbe77d2533bca47352b252fe7a3dd6f2275e665b2a7f3011ad",
+      "npu_tests_passed": 20,
+      "npu_duration_ms": 10285,
+      "boot_id": "be84c033-dbd1-4707-968d-2cbe772db11a",
+      "temperature_before_test_c": 44.662
+    },
+    "nonroot_after_final_reboot": {
+      "result": "PASS",
+      "evidence": "board/evidence/16-final-user-test.json",
+      "evidence_sha256": "3dc5d752190471dfe51298d961d9e16ced11bc0152826d04a828c01d9c9b432e",
+      "npu_tests_passed": 20,
+      "npu_duration_ms": 10201,
+      "boot_id": "286bfb9f-8365-4c27-834e-07ba86a1f014",
+      "temperature_before_test_c": 44.355
+    }
+  },
+  "manual_permission_overrides": "absent throughout; no board-side patch applied",
+  "installation_scope": "local four-DEB candidate; package-purge reinstall is not a second image reflash",
+  "public_apt_status": "NOT-RUN: candidate not published",
+  "untested": [
+    "8GB/other boards",
+    "long-term model workloads",
+    "log-rotation stress",
+    "public APT installation"
+  ]
+}

@@ -1,0 +1,14 @@
+[Unit]
+Description=DShanPI AXCL card initialization
+After=systemd-udev-settle.service systemd-tmpfiles-setup.service
+ConditionPathExists=/usr/share/dshanpi-axcl/firmware.sha256
+
+[Service]
+Type=oneshot
+UMask=0007
+ExecStartPre=/usr/bin/systemd-tmpfiles --create /usr/lib/tmpfiles.d/dshanpi-axcl-access.conf
+ExecStart=/usr/sbin/dshanpi-axcl start
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

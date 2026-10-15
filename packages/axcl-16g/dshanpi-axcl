@@ -34,6 +34,8 @@ if [[ "$action" == check ]]; then
 fi
 [[ $EUID == 0 ]] || { echo 'Use sudo for start/test.' >&2; exit 2; }
 for module in ax_pcie_host_dev ax_pcie_msg ax_pcie_mmb axcl_host ax_pcie_p2p_rc; do modprobe "$module"; done
+# Wait until udev has applied render permissions to newly created nodes.
+udevadm settle
 /usr/bin/axcl/axcl-smi
 if [[ "$action" == test ]]; then
     cd /usr/bin/axcl

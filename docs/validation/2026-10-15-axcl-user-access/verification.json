@@ -1,0 +1,73 @@
+{
+  "requirement": "REQ-AXCL-USER-ACCESS-001",
+  "tested_source_commit": "847653d271e529ec29059d047c5283979e8dbe55",
+  "product": "dshanpi-a1",
+  "capacity_gb": 16,
+  "package_version": "3.16.0+dshanpi.2026.10.15.1",
+  "platform_version": "25.11.0-trunk.20261010.1",
+  "packages": [
+    {
+      "package": "dshanpi-axcl-firmware-16g",
+      "version": "3.16.0+dshanpi.2026.10.15.1",
+      "architecture": "arm64",
+      "filename": "dshanpi-axcl-firmware-16g_3.16.0+dshanpi.2026.10.15.1_arm64.deb",
+      "sha256": "924ccd3c940166ba9a3b5bb750d69541750044cb6280bcbc7a229919196fbfb3"
+    },
+    {
+      "package": "dshanpi-axcl-runtime-16g",
+      "version": "3.16.0+dshanpi.2026.10.15.1",
+      "architecture": "arm64",
+      "filename": "dshanpi-axcl-runtime-16g_3.16.0+dshanpi.2026.10.15.1_arm64.deb",
+      "sha256": "1f56452c6824c66e0f2512905d833e4ebdfff23688bd92394a943e69ab2f67af"
+    },
+    {
+      "package": "dshanpi-axcl-dkms-16g",
+      "version": "3.16.0+dshanpi.2026.10.15.1",
+      "architecture": "arm64",
+      "filename": "dshanpi-axcl-dkms-16g_3.16.0+dshanpi.2026.10.15.1_arm64.deb",
+      "sha256": "b0bc6e6f00c5f74910f8aa01b68a48878c6254e5539fb0ee010485c466cf267f"
+    },
+    {
+      "package": "dshanpi-a1-axcl-16g",
+      "version": "3.16.0+dshanpi.2026.10.15.1",
+      "architecture": "arm64",
+      "filename": "dshanpi-a1-axcl-16g_3.16.0+dshanpi.2026.10.15.1_arm64.deb",
+      "sha256": "b10c44e10cea7fd5a375ba76b5e080ce9fc518294ef8e795dc9b78f723447b73"
+    }
+  ],
+  "upstream_sha256": "b3033bddc7c67904b87220354ea195261e60baa2688cd374d19df265b7fe9ac8",
+  "firmware_sha256": "d0ba0d7690e8a1dd59e8971e9b3311ea48657666d28e6dfe774b7df3254e7ddc",
+  "checks": {
+    "clean_checkout_policy_change_record_hygiene": "PASS",
+    "python_unittest_clean_checkout": {
+      "result": "PASS",
+      "tests": 77,
+      "command": "python3 -m unittest discover -s tests -p 'test_*.py'"
+    },
+    "shell_regression": {
+      "result": "PASS",
+      "command": "bash tests/test.sh"
+    },
+    "package_audit": "PASS",
+    "clean_commit_rebuild_four_hashes": "PASS",
+    "payload_verification": {
+      "package_version": "3.16.0+dshanpi.2026.10.15.1",
+      "exact_template_payloads": "PASS",
+      "file_modes": "PASS",
+      "no_etc_override_shipped": "PASS",
+      "runtime_firmware_payload_comparison": "PASS",
+      "compared_files": {
+        "dshanpi-axcl-runtime-16g": 182,
+        "dshanpi-axcl-firmware-16g": 1
+      }
+    },
+    "old_version_request": "PASS: rejected before creating output",
+    "hardware_install_reboot_rollback": {
+      "result": "PASS",
+      "evidence": "hardware-verification.json",
+      "scope": "16GB A1: upgrade, existing-node reconfiguration, reboot, old-cohort rollback, package-purge reinstall, final reboot; no /etc manual overrides"
+    },
+    "public_apt_install": "NOT-RUN: no publication requested or performed"
+  },
+  "scope": "16GB A1 candidate only; no 8GB/other-board claim; no kernel or PAC modification"
+}

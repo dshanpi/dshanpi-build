@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "product": "dshanpi-a1",
+  "version": "2026.10.15-1",
+  "revision": "25.11.0-trunk.20261010.1",
+  "sources": {
+    "armbianos": {
+      "commit": "5980f8c110cb818dc9b6c3919c8fa6926f1fc731"
+    },
+    "dspi_config": {
+      "commit": "1c46b5a282e41cce4e650b415203a22ae9e9ff93"
+    }
+  },
+  "maintenance_adapter": "axcl-16g",
+  "base_release": "2026.10.14-1",
+  "base_manifest_sha256": "47b2ca9e147ffabc2daace4e1b14eb43bb3195760203a18737144b37f092775c",
+  "image_policy": "Package maintenance release; use the existing DShanPI A1 Ubuntu 24 golden image and update through signed APT.",
+  "hardware_validation": "AXCL 16GB local upgrade, rollback, reinstall and reboot passed; public APT cohort acceptance is required before stable promotion.",
+  "axcl_source_release": "2026.10.14-1",
+  "axcl_source_manifest_sha256": "47b2ca9e147ffabc2daace4e1b14eb43bb3195760203a18737144b37f092775c",
+  "axcl_complete_cohort": true,
+  "axcl_16g_lock": "packages/axcl-16g/upstream.lock.json",
+  "axcl_16g_lock_sha256": "eaa312884ff641fddb978136cbf4fc7d691a169aef842cb3bbd10ffeb2e39998",
+  "axcl_source_packages": {
+    "source_driver": {
+      "package": "dshanpi-axcl-dkms-16g",
+      "version": "3.16.0+dshanpi.2026.10.10.1",
+      "architecture": "arm64",
+      "sha256": "127992172272ee3560c7738909736711a613bc0e3196f263a8439cefa7acacdb"
+    },
+    "retained_packages": {
+      "dshanpi-axcl-runtime-16g": {
+        "package": "dshanpi-axcl-runtime-16g",
+        "version": "3.16.0+dshanpi.2026.10.10.1",
+        "architecture": "arm64",
+        "sha256": "615bc802833edb3ad47da684419a67cbfe5929fc90e31b4fb59adbb97df1d79c"
+      },
+      "dshanpi-axcl-firmware-16g": {
+        "package": "dshanpi-axcl-firmware-16g",
+        "version": "3.16.0+dshanpi.2026.10.10.1",
+        "architecture": "arm64",
+        "sha256": "598dbc455709965d440c93c513fba58adea69b60879a0f52f0ce18ce6680eb70"
+      }
+    }
+  },
+  "axcl_expected_packages": {
+    "dshanpi-axcl-firmware-16g": "924ccd3c940166ba9a3b5bb750d69541750044cb6280bcbc7a229919196fbfb3",
+    "dshanpi-axcl-runtime-16g": "1f56452c6824c66e0f2512905d833e4ebdfff23688bd92394a943e69ab2f67af",
+    "dshanpi-axcl-dkms-16g": "b0bc6e6f00c5f74910f8aa01b68a48878c6254e5539fb0ee010485c466cf267f",
+    "dshanpi-a1-axcl-16g": "b10c44e10cea7fd5a375ba76b5e080ce9fc518294ef8e795dc9b78f723447b73"
+  }
+}

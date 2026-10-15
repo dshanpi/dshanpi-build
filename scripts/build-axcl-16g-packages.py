@@ -57,7 +57,7 @@ def package_dependencies(lock, version=None, revision=None, complete_cohort=Fals
             f'dshanpi-axcl-runtime-16g (= {runtime_version}), '
             f'dshanpi-axcl-dkms-16g (= {version}), '
             f'linux-image-vendor-rk35xx (= {revision}), '
-            f'armbian-bsp-cli-dshanpi-a1-vendor (= {revision}), pciutils, coreutils'
+            f'armbian-bsp-cli-dshanpi-a1-vendor (= {revision}), pciutils, coreutils, adduser, systemd, udev'
         ),
     }
 
@@ -70,6 +70,8 @@ def main():
     source.add_argument('--previous-driver', type=Path)
     parser.add_argument('--previous-runtime', type=Path)
     parser.add_argument('--previous-firmware', type=Path)
+    parser.add_argument('--previous-release-lock', type=Path,
+                        help='Pinned maintenance plan selecting the historical input cohort')
     parser.add_argument('--package-version')
     parser.add_argument('--platform-version')
     args = parser.parse_args()
@@ -81,7 +83,20 @@ def main():
         raise SystemExit('invalid AXCL package version')
     if not revision or any(character.isspace() for character in revision):
         raise SystemExit('invalid platform package version')
+    # New permission payloads must never reuse a historical package identity.
+    if subprocess.run(['dpkg', '--compare-versions', version, 'ge', lock['version']]).returncode:
+        raise SystemExit('permission-enabled packages require a new version >= ' + lock['version'])
     kernel = lock['kernel_release']
+    source_inputs = lock
+    if args.previous_release_lock:
+        plan = json.loads(args.previous_release_lock.read_text())
+        if (plan.get('product') != lock['product'] or
+                plan.get('axcl_complete_cohort') is not True or
+                plan.get('axcl_16g_lock_sha256') != sha(ROOT / 'packages/axcl-16g/upstream.lock.json')):
+            raise SystemExit('invalid previous AXCL release plan')
+        if not all((args.previous_driver, args.previous_runtime, args.previous_firmware)):
+            raise SystemExit('previous release plan requires all three input packages')
+        source_inputs = plan['axcl_source_packages']
     previous_payloads = (args.previous_runtime, args.previous_firmware)
     if any(previous_payloads) and not (args.previous_driver and all(previous_payloads)):
         raise SystemExit('previous driver, runtime, and firmware must be supplied together')
@@ -92,9 +107,9 @@ def main():
         extracted = work / 'source'
         if args.previous_driver:
             previous_driver = args.previous_driver.resolve()
-            verify_previous_package(previous_driver, lock['source_driver'])
+            verify_previous_package(previous_driver, source_inputs['source_driver'])
             run('dpkg-deb', '--raw-extract', previous_driver, extracted)
-            prior = lock['source_driver']['version']
+            prior = source_inputs['source_driver']['version']
             source_tree = extracted / ('usr/src/axcl-' + prior)
             embedded = json.loads((extracted / 'usr/share/doc/dshanpi-axcl-dkms-16g/upstream.json').read_text())
             for field in ('url', 'sha256', 'upstream_commit', 'upstream_version'):
@@ -113,7 +128,7 @@ def main():
         firmware = work / 'firmware'
         complete_cohort = not args.previous_driver or all(previous_payloads)
         if complete_cohort and args.previous_runtime:
-            retained = lock['retained_packages']
+            retained = source_inputs['retained_packages']
             runtime_expected = {
                 'package': 'dshanpi-axcl-runtime-16g',
                 **retained['dshanpi-axcl-runtime-16g'],
@@ -184,21 +199,16 @@ esac
 ''', 0o755)
         # Do not auto-load before the exact card PAC has been reviewed.
         write(meta, 'usr/sbin/dshanpi-axcl', (ROOT / 'packages/axcl-16g/dshanpi-axcl').read_text(), 0o755)
-        write(meta, 'lib/systemd/system/dshanpi-axcl.service', '''[Unit]
-Description=DShanPI AXCL card initialization
-After=systemd-udev-settle.service
-ConditionPathExists=/usr/share/dshanpi-axcl/firmware.sha256
-
-[Service]
-Type=oneshot
-ExecStart=/usr/sbin/dshanpi-axcl start
-RemainAfterExit=yes
-
-[Install]
-WantedBy=multi-user.target
-''')
-        # Firmware installation will explicitly enable the service only when
-        # a reviewed card-specific package is available.
+        component = ROOT / 'packages/axcl-16g'
+        for filename, destination, mode in (
+            ('70-dshanpi-axcl-access.rules', 'usr/lib/udev/rules.d/70-dshanpi-axcl-access.rules', 0o644),
+            ('dshanpi-axcl-access.conf', 'usr/lib/tmpfiles.d/dshanpi-axcl-access.conf', 0o644),
+            ('dshanpi-axcl.service', 'lib/systemd/system/dshanpi-axcl.service', 0o644),
+            ('postinst', 'DEBIAN/postinst', 0o755),
+            ('postrm', 'DEBIAN/postrm', 0o755),
+        ):
+            write(meta, destination, (component / filename).read_text(), mode)
+        # Installation configures access only. Activation remains explicit.
         retained = lock['retained_packages']
         dependencies = package_dependencies(lock, version, revision, complete_cohort)
         packages = [

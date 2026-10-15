@@ -1,0 +1,26 @@
+#!/bin/sh
+set -e
+case "$1" in
+    configure)
+        # Do not guess a desktop/login user or grant all users device access.
+        if ! getent group render >/dev/null; then
+            addgroup --system render
+        fi
+        systemd-tmpfiles --create /usr/lib/tmpfiles.d/dshanpi-axcl-access.conf
+        # Refresh live nodes on upgrades, without loading modules or starting NPU jobs.
+        if [ -S /run/udev/control ]; then
+            udevadm control --reload-rules
+            for name in axcl_host ax_mmb_dev msg_userdev p2p; do
+                if [ -e "/sys/class/misc/$name" ]; then
+                    udevadm trigger --action=change "/sys/class/misc/$name"
+                fi
+            done
+            udevadm settle
+        fi
+        if [ -d /run/systemd/system ]; then
+            systemctl daemon-reload
+        fi
+        echo 'AXCL: members of render can use axcl-smi. Add other users explicitly and log in again.'
+        echo 'AXCL: confirm card capacity and cooling before enabling dshanpi-axcl.service.'
+        ;;
+esac
