@@ -1,0 +1,919 @@
+Sanitized command outputs; account name replaced with test-user. Original SSH records remain in the local board/evidence directory. No command credentials are included.
+
+=== 26-apt-install-proxy ===
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  camera-engine-rkaiq dshanpi-axcl-dkms-16g dshanpi-axcl-firmware-16g
+  dshanpi-axcl-runtime-16g dspi-config
+The following packages will be upgraded:
+  camera-engine-rkaiq dshanpi-a1-axcl-16g dshanpi-a1-release-desktop
+  dshanpi-axcl-dkms-16g dshanpi-axcl-firmware-16g dshanpi-axcl-runtime-16g
+  dspi-config
+7 upgraded, 0 newly installed, 0 to remove and 2 not upgraded.
+Need to get 50.0 MB/51.6 MB of archives.
+After this operation, 9216 B disk space will be freed.
+Get:1 https://apt.100ask.net noble-testing/dshanpi-a1 arm64 dshanpi-axcl-firmware-16g arm64 3.16.0+dshanpi.2026.10.15.2 [16.2 MB]
+Get:2 https://apt.100ask.net noble-testing/dshanpi-a1 arm64 dshanpi-axcl-runtime-16g arm64 3.16.0+dshanpi.2026.10.15.2 [33.8 MB]
+Get:3 https://apt.100ask.net noble-testing/dshanpi-a1 arm64 dshanpi-axcl-dkms-16g arm64 3.16.0+dshanpi.2026.10.15.2 [55.2 kB]
+Fetched 50.0 MB in 14min 54s (55.9 kB/s)
+Download complete and in download only mode
+dshanpi-axcl-firmware-16g_3.16.0+dshanpi.2026.10.15.2_arm64.deb: OK
+dshanpi-axcl-runtime-16g_3.16.0+dshanpi.2026.10.15.2_arm64.deb: OK
+dshanpi-axcl-dkms-16g_3.16.0+dshanpi.2026.10.15.2_arm64.deb: OK
+dshanpi-a1-axcl-16g_3.16.0+dshanpi.2026.10.15.2_arm64.deb: OK
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  camera-engine-rkaiq dshanpi-axcl-dkms-16g dshanpi-axcl-firmware-16g
+  dshanpi-axcl-runtime-16g dspi-config
+The following packages will be upgraded:
+  camera-engine-rkaiq dshanpi-a1-axcl-16g dshanpi-a1-release-desktop
+  dshanpi-axcl-dkms-16g dshanpi-axcl-firmware-16g dshanpi-axcl-runtime-16g
+  dspi-config
+7 upgraded, 0 newly installed, 0 to remove and 2 not upgraded.
+After this operation, 9216 B disk space will be freed.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 101134 files and directories currently installed.)
+Preparing to unpack .../0-dshanpi-a1-release-desktop_2026.10.15-2_all.deb ...
+Unpacking dshanpi-a1-release-desktop (2026.10.15-2) over (2026.10.10-1) ...
+Preparing to unpack .../1-dspi-config_1.0.3-1_all.deb ...
+Unpacking dspi-config (1.0.3-1) over (1.0.2-3) ...
+Preparing to unpack .../2-camera-engine-rkaiq_6.6.3+dshanpi.2026.10.10.1_arm64.deb ...
+Unpacking camera-engine-rkaiq (6.6.3+dshanpi.2026.10.10.1) over (6.6.3+dshanpi2) ...
+Preparing to unpack .../3-dshanpi-a1-axcl-16g_3.16.0+dshanpi.2026.10.15.2_arm64.deb ...
+Unpacking dshanpi-a1-axcl-16g (3.16.0+dshanpi.2026.10.15.2) over (3.16.0+dshanpi.2026.10.15.1) ...
+Preparing to unpack .../4-dshanpi-axcl-firmware-16g_3.16.0+dshanpi.2026.10.15.2_arm64.deb ...
+Unpacking dshanpi-axcl-firmware-16g (3.16.0+dshanpi.2026.10.15.2) over (3.16.0+dshanpi.2026.10.15.1) ...
+Preparing to unpack .../5-dshanpi-axcl-runtime-16g_3.16.0+dshanpi.2026.10.15.2_arm64.deb ...
+Unpacking dshanpi-axcl-runtime-16g (3.16.0+dshanpi.2026.10.15.2) over (3.16.0+dshanpi.2026.10.15.1) ...
+Preparing to unpack .../6-dshanpi-axcl-dkms-16g_3.16.0+dshanpi.2026.10.15.2_arm64.deb ...
+Module axcl-3.16.0+dshanpi.2026.10.15.1 for kernel 6.1.115-vendor-rk35xx (aarch64).
+Before uninstall, this module version was ACTIVE on this kernel.
+
+ax_pcie_host_dev.ko:
+ - Uninstallation
+   - Deleting from: /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+ - Original module
+   - No original module was found for this module on this kernel.
+   - Use the dkms install command to reinstall any previous module version.
+
+ax_pcie_msg.ko:
+ - Uninstallation
+   - Deleting from: /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+ - Original module
+   - No original module was found for this module on this kernel.
+   - Use the dkms install command to reinstall any previous module version.
+
+ax_pcie_mmb.ko:
+ - Uninstallation
+   - Deleting from: /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+ - Original module
+   - No original module was found for this module on this kernel.
+   - Use the dkms install command to reinstall any previous module version.
+
+axcl_host.ko:
+ - Uninstallation
+   - Deleting from: /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+ - Original module
+   - No original module was found for this module on this kernel.
+   - Use the dkms install command to reinstall any previous module version.
+
+ax_pcie_p2p_rc.ko:
+ - Uninstallation
+   - Deleting from: /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+ - Original module
+   - No original module was found for this module on this kernel.
+   - Use the dkms install command to reinstall any previous module version.
+depmod...
+Deleting module axcl-3.16.0+dshanpi.2026.10.15.1 completely from the DKMS tree.
+Unpacking dshanpi-axcl-dkms-16g (3.16.0+dshanpi.2026.10.15.2) over (3.16.0+dshanpi.2026.10.15.1) ...
+Setting up dspi-config (1.0.3-1) ...
+Setting up dshanpi-axcl-runtime-16g (3.16.0+dshanpi.2026.10.15.2) ...
+Setting up dshanpi-axcl-firmware-16g (3.16.0+dshanpi.2026.10.15.2) ...
+Setting up dshanpi-axcl-dkms-16g (3.16.0+dshanpi.2026.10.15.2) ...
+Loading new axcl-3.16.0+dshanpi.2026.10.15.2 DKMS files...
+Building for 6.1.115-vendor-rk35xx
+Building initial module for 6.1.115-vendor-rk35xx
+Done.
+
+ax_pcie_host_dev.ko:
+Running module version sanity check.
+ - Original module
+   - No original module exists within this kernel
+ - Installation
+   - Installing to /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+
+ax_pcie_msg.ko:
+Running module version sanity check.
+ - Original module
+   - No original module exists within this kernel
+ - Installation
+   - Installing to /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+
+ax_pcie_mmb.ko:
+Running module version sanity check.
+ - Original module
+   - No original module exists within this kernel
+ - Installation
+   - Installing to /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+
+axcl_host.ko:
+Running module version sanity check.
+ - Original module
+   - No original module exists within this kernel
+ - Installation
+   - Installing to /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+
+ax_pcie_p2p_rc.ko:
+Running module version sanity check.
+ - Original module
+   - No original module exists within this kernel
+ - Installation
+   - Installing to /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+depmod...
+Setting up camera-engine-rkaiq (6.6.3+dshanpi.2026.10.10.1) ...
+Setting up dshanpi-a1-axcl-16g (3.16.0+dshanpi.2026.10.15.2) ...
+AXCL: members of render can use axcl-smi. Add other users explicitly and log in again.
+AXCL: confirm card capacity and cooling before enabling dshanpi-axcl.service.
+Setting up dshanpi-a1-release-desktop (2026.10.15-2) ...
+Processing triggers for libc-bin (2.39-0ubuntu8.9) ...
+axcl/3.16.0+dshanpi.2026.10.15.2, 6.1.115-vendor-rk35xx, aarch64: installed
+Result=success
+ActiveState=active
+SubState=exited
+
+W: Download is performed unsandboxed as root as file '/home/test-user/axcl-apt-verification/downloads/partial/dshanpi-axcl-firmware-16g_3.16.0+dshanpi.2026.10.15.2_arm64.deb' couldn't be accessed by user '_apt'. - pkgAcquire::Run (13: Permission denied)
+
+=== 36-new-cohort ===
+armbian-bsp-cli-dshanpi-a1-vendor 25.11.0-trunk.20261010.1 installed
+armbian-bsp-desktop-dshanpi-a1-vendor 25.11.0-trunk.20261010.1 installed
+base-files 25.11.0-trunk.20261010.1-13ubuntu10-noble installed
+camera-engine-rkaiq 6.6.3+dshanpi.2026.10.10.1 installed
+dshanpi-a1-axcl-16g 3.16.0+dshanpi.2026.10.15.2 installed
+dshanpi-a1-release-desktop 2026.10.15-2 installed
+dshanpi-a1-repository 1:2026.10.10-1 installed
+dshanpi-archive-keyring 1:2026.10.10-1 installed
+dshanpi-axcl-dkms-16g 3.16.0+dshanpi.2026.10.15.2 installed
+dshanpi-axcl-firmware-16g 3.16.0+dshanpi.2026.10.15.2 installed
+dshanpi-axcl-runtime-16g 3.16.0+dshanpi.2026.10.15.2 installed
+dspi-config 1.0.3-1 installed
+gstreamer1.0-rockchip1 1.14-4 installed
+librga-dev 2.2.0-1 installed
+librga2 2.2.0-1 installed
+librockchip-mpp-dev 1.5.0-1 installed
+librockchip-mpp1 1.5.0-1 installed
+librockchip-vpu0 1.5.0-1 installed
+linux-dtb-vendor-rk35xx 25.11.0-trunk.20261010.1 installed
+linux-headers-vendor-rk35xx 25.11.0-trunk.20261010.1 installed
+linux-image-vendor-rk35xx 25.11.0-trunk.20261010.1 installed
+rockchip-mpp-demos 1.5.0-1 installed
+PASS: exact installed release and AXCL cohort 22 packages
+
+
+=== 37-testing-user-npu ===
+uid=1001(test-user) gid=1001(test-user) groups=1001(test-user),5(tty),6(disk),20(dialout),27(sudo),29(audio),44(video),46(plugdev),60(games),100(users),108(netdev),110(bluetooth),993(render),996(input),999(systemd-journal),1000(gpio)
+cb61a9df-dda2-4e72-bcf4-8cbf9c39be96
+Result=success
+ActiveState=active
+SubState=exited
+enabled
+dshanpi-a1-axcl-16g 3.16.0+dshanpi.2026.10.15.2
+dshanpi-a1-release-desktop 2026.10.15-2
+dshanpi-axcl-dkms-16g 3.16.0+dshanpi.2026.10.15.2
+dshanpi-axcl-firmware-16g 3.16.0+dshanpi.2026.10.15.2
+dshanpi-axcl-runtime-16g 3.16.0+dshanpi.2026.10.15.2
+linux-headers-vendor-rk35xx 25.11.0-trunk.20261010.1
+linux-image-vendor-rk35xx 25.11.0-trunk.20261010.1
+axcl/3.16.0+dshanpi.2026.10.15.2, 6.1.115-vendor-rk35xx, aarch64: installed
+660 root render /dev/axcl_host
+660 root render /dev/ax_mmb_dev
+660 root render /dev/msg_userdev
+660 root render /dev/p2p
+2770 root render /tmp/axcl
+660 root render /tmp/axcl/axcl_logs.txt
++------------------------------------------------------------------------------------------------+
+| AXCL-SMI  V3.16.0_20260729180218                                Driver  V3.16.0_20260729180218 |
++-----------------------------------------+--------------+---------------------------------------+
+| Card  Name                     Firmware | Bus-Id       |                          Memory-Usage |
+| Fan   Temp                Pwr:Usage/Cap | CPU      NPU |                             CMM-Usage |
+|=========================================+==============+=======================================|
+|    0  AX8850                    V3.16.0 | 0000:01:00.0 |                151 MiB /      945 MiB |
+|   --   48C                      -- / -- | 0%        0% |                 18 MiB /    15232 MiB |
++-----------------------------------------+--------------+---------------------------------------+
+
++------------------------------------------------------------------------------------------------+
+| Processes:                                                                                     |
+| Card      PID  Process Name                                                   NPU Memory Usage |
+|================================================================================================|
+|    0  AX8850                    V3.16.0 | 0000:01:00.0 |                151 MiB /      945 MiB |
+device index: 0, bus number: 1
+[==========] Running 20 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 20 tests from axclrtDeviceTest
+[ RUN      ] axclrtDeviceTest.Case01_AXCL_ENGINE_NPUReset
+[       OK ] axclrtDeviceTest.Case01_AXCL_ENGINE_NPUReset (0 ms)
+[ RUN      ] axclrtDeviceTest.Case02_AXCL_ENGINE_GetVersion
+[       OK ] axclrtDeviceTest.Case02_AXCL_ENGINE_GetVersion (2 ms)
+[ RUN      ] axclrtDeviceTest.Case03_AXCL_EngineInitDeinit
+[       OK ] axclrtDeviceTest.Case03_AXCL_EngineInitDeinit (209 ms)
+[ RUN      ] axclrtDeviceTest.Case04_AXCL_ENGINE_GetVNPUAttr
+[       OK ] axclrtDeviceTest.Case04_AXCL_ENGINE_GetVNPUAttr (846 ms)
+[ RUN      ] axclrtDeviceTest.Case05_AXCL_ENGINE_GetModelType
+[       OK ] axclrtDeviceTest.Case05_AXCL_ENGINE_GetModelType (840 ms)
+[ RUN      ] axclrtDeviceTest.Case06_AXCL_ENGINE_CreateHandle
+[       OK ] axclrtDeviceTest.Case06_AXCL_ENGINE_CreateHandle (863 ms)
+[ RUN      ] axclrtDeviceTest.Case07_AXCL_ENGINE_CreateHandleV2
+[       OK ] axclrtDeviceTest.Case07_AXCL_ENGINE_CreateHandleV2 (863 ms)
+[ RUN      ] axclrtDeviceTest.Case08_AXCL_ENGINE_CreateContext
+[       OK ] axclrtDeviceTest.Case08_AXCL_ENGINE_CreateContext (855 ms)
+[ RUN      ] axclrtDeviceTest.Case09_AXCL_ENGINE_CreateContextV2
+[       OK ] axclrtDeviceTest.Case09_AXCL_ENGINE_CreateContextV2 (863 ms)
+[ RUN      ] axclrtDeviceTest.Case10_AXCL_ENGINE_GetHandleModelType
+[       OK ] axclrtDeviceTest.Case10_AXCL_ENGINE_GetHandleModelType (215 ms)
+[ RUN      ] axclrtDeviceTest.Case11_AXCL_ENGINE_GetModelToolsVersion
+[       OK ] axclrtDeviceTest.Case11_AXCL_ENGINE_GetModelToolsVersion (215 ms)
+[ RUN      ] axclrtDeviceTest.Case12_AXCL_ENGINE_GetCMMUsage
+[       OK ] axclrtDeviceTest.Case12_AXCL_ENGINE_GetCMMUsage (215 ms)
+[ RUN      ] axclrtDeviceTest.Case13_AXCL_ENGINE_GetGroupIOInfoCount
+[       OK ] axclrtDeviceTest.Case13_AXCL_ENGINE_GetGroupIOInfoCount (215 ms)
+[ RUN      ] axclrtDeviceTest.Case14_AXCL_ENGINE_SetAffinity
+[       OK ] axclrtDeviceTest.Case14_AXCL_ENGINE_SetAffinity (215 ms)
+[ RUN      ] axclrtDeviceTest.Case15_AXCL_ENGINE_GetAffinity
+[       OK ] axclrtDeviceTest.Case15_AXCL_ENGINE_GetAffinity (1487 ms)
+[ RUN      ] axclrtDeviceTest.Case16_AX_ENGINE_GetIOInfo
+[       OK ] axclrtDeviceTest.Case16_AX_ENGINE_GetIOInfo (1248 ms)
+[ RUN      ] axclrtDeviceTest.Case17_AXCL_ENGINE_GetGroupIOInfo
+[       OK ] axclrtDeviceTest.Case17_AXCL_ENGINE_GetGroupIOInfo (215 ms)
+[ RUN      ] axclrtDeviceTest.Case18_AX_ENGINE_RunSync
+[       OK ] axclrtDeviceTest.Case18_AX_ENGINE_RunSync (287 ms)
+[ RUN      ] axclrtDeviceTest.Case19_AX_ENGINE_RunSyncV2
+[       OK ] axclrtDeviceTest.Case19_AX_ENGINE_RunSyncV2 (287 ms)
+[ RUN      ] axclrtDeviceTest.Case20_AXCL_ENGINE_RunGroupIOSync
+[       OK ] axclrtDeviceTest.Case20_AXCL_ENGINE_RunGroupIOSync (295 ms)
+[----------] 20 tests from axclrtDeviceTest (10252 ms total)
+
+[----------] Global test environment tear-down
+[==========] 20 tests from 1 test suite ran. (10252 ms total)
+[  PASSED  ] 20 tests.
+============= UT PASS =============
++------------------------------------------------------------------------------------------------+
+| AXCL-SMI  V3.16.0_20260729180218                                Driver  V3.16.0_20260729180218 |
++-----------------------------------------+--------------+---------------------------------------+
+| Card  Name                     Firmware | Bus-Id       |                          Memory-Usage |
+| Fan   Temp                Pwr:Usage/Cap | CPU      NPU |                             CMM-Usage |
+|=========================================+==============+=======================================|
+|    0  AX8850                    V3.16.0 | 0000:01:00.0 |                152 MiB /      945 MiB |
+|   --   49C                      -- / -- | 2%        0% |                 18 MiB /    15232 MiB |
++-----------------------------------------+--------------+---------------------------------------+
+
++------------------------------------------------------------------------------------------------+
+| Processes:                                                                                     |
+| Card      PID  Process Name                                                   NPU Memory Usage |
+|================================================================================================|
+
+
+=== 38-testing-reboot ===
+Reading package lists...
+Building dependency tree...
+Reading state information...
+cb61a9df-dda2-4e72-bcf4-8cbf9c39be96
+
+
+=== 39-testing-recovery ===
+29f89cb2-a35f-41fe-b65c-854b1e83d539
+active
+
+=== 40-testing-after-reboot ===
+uid=1001(test-user) gid=1001(test-user) groups=1001(test-user),5(tty),6(disk),20(dialout),27(sudo),29(audio),44(video),46(plugdev),60(games),100(users),108(netdev),110(bluetooth),993(render),996(input),999(systemd-journal),1000(gpio)
+29f89cb2-a35f-41fe-b65c-854b1e83d539
+Result=success
+ActiveState=active
+SubState=exited
+enabled
+dshanpi-a1-axcl-16g 3.16.0+dshanpi.2026.10.15.2
+dshanpi-a1-release-desktop 2026.10.15-2
+dshanpi-axcl-dkms-16g 3.16.0+dshanpi.2026.10.15.2
+dshanpi-axcl-firmware-16g 3.16.0+dshanpi.2026.10.15.2
+dshanpi-axcl-runtime-16g 3.16.0+dshanpi.2026.10.15.2
+linux-headers-vendor-rk35xx 25.11.0-trunk.20261010.1
+linux-image-vendor-rk35xx 25.11.0-trunk.20261010.1
+axcl/3.16.0+dshanpi.2026.10.15.2, 6.1.115-vendor-rk35xx, aarch64: installed
+660 root render /dev/axcl_host
+660 root render /dev/ax_mmb_dev
+660 root render /dev/msg_userdev
+660 root render /dev/p2p
+2770 root render /tmp/axcl
+660 root render /tmp/axcl/axcl_logs.txt
++------------------------------------------------------------------------------------------------+
+| AXCL-SMI  V3.16.0_20260729180218                                Driver  V3.16.0_20260729180218 |
++-----------------------------------------+--------------+---------------------------------------+
+| Card  Name                     Firmware | Bus-Id       |                          Memory-Usage |
+| Fan   Temp                Pwr:Usage/Cap | CPU      NPU |                             CMM-Usage |
+|=========================================+==============+=======================================|
+|    0  AX8850                    V3.16.0 | 0000:01:00.0 |                151 MiB /      945 MiB |
+|   --   47C                      -- / -- | 2%        0% |                 18 MiB /    15232 MiB |
++-----------------------------------------+--------------+---------------------------------------+
+
++------------------------------------------------------------------------------------------------+
+| Processes:                                                                                     |
+| Card      PID  Process Name                                                   NPU Memory Usage |
+|================================================================================================|
+|    0  AX8850                    V3.16.0 | 0000:01:00.0 |                151 MiB /      945 MiB |
+device index: 0, bus number: 1
+[==========] Running 20 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 20 tests from axclrtDeviceTest
+[ RUN      ] axclrtDeviceTest.Case01_AXCL_ENGINE_NPUReset
+[       OK ] axclrtDeviceTest.Case01_AXCL_ENGINE_NPUReset (0 ms)
+[ RUN      ] axclrtDeviceTest.Case02_AXCL_ENGINE_GetVersion
+[       OK ] axclrtDeviceTest.Case02_AXCL_ENGINE_GetVersion (1 ms)
+[ RUN      ] axclrtDeviceTest.Case03_AXCL_EngineInitDeinit
+[       OK ] axclrtDeviceTest.Case03_AXCL_EngineInitDeinit (211 ms)
+[ RUN      ] axclrtDeviceTest.Case04_AXCL_ENGINE_GetVNPUAttr
+[       OK ] axclrtDeviceTest.Case04_AXCL_ENGINE_GetVNPUAttr (832 ms)
+[ RUN      ] axclrtDeviceTest.Case05_AXCL_ENGINE_GetModelType
+[       OK ] axclrtDeviceTest.Case05_AXCL_ENGINE_GetModelType (840 ms)
+[ RUN      ] axclrtDeviceTest.Case06_AXCL_ENGINE_CreateHandle
+[       OK ] axclrtDeviceTest.Case06_AXCL_ENGINE_CreateHandle (855 ms)
+[ RUN      ] axclrtDeviceTest.Case07_AXCL_ENGINE_CreateHandleV2
+[       OK ] axclrtDeviceTest.Case07_AXCL_ENGINE_CreateHandleV2 (863 ms)
+[ RUN      ] axclrtDeviceTest.Case08_AXCL_ENGINE_CreateContext
+[       OK ] axclrtDeviceTest.Case08_AXCL_ENGINE_CreateContext (864 ms)
+[ RUN      ] axclrtDeviceTest.Case09_AXCL_ENGINE_CreateContextV2
+[       OK ] axclrtDeviceTest.Case09_AXCL_ENGINE_CreateContextV2 (854 ms)
+[ RUN      ] axclrtDeviceTest.Case10_AXCL_ENGINE_GetHandleModelType
+[       OK ] axclrtDeviceTest.Case10_AXCL_ENGINE_GetHandleModelType (215 ms)
+[ RUN      ] axclrtDeviceTest.Case11_AXCL_ENGINE_GetModelToolsVersion
+[       OK ] axclrtDeviceTest.Case11_AXCL_ENGINE_GetModelToolsVersion (215 ms)
+[ RUN      ] axclrtDeviceTest.Case12_AXCL_ENGINE_GetCMMUsage
+[       OK ] axclrtDeviceTest.Case12_AXCL_ENGINE_GetCMMUsage (215 ms)
+[ RUN      ] axclrtDeviceTest.Case13_AXCL_ENGINE_GetGroupIOInfoCount
+[       OK ] axclrtDeviceTest.Case13_AXCL_ENGINE_GetGroupIOInfoCount (215 ms)
+[ RUN      ] axclrtDeviceTest.Case14_AXCL_ENGINE_SetAffinity
+[       OK ] axclrtDeviceTest.Case14_AXCL_ENGINE_SetAffinity (215 ms)
+[ RUN      ] axclrtDeviceTest.Case15_AXCL_ENGINE_GetAffinity
+[       OK ] axclrtDeviceTest.Case15_AXCL_ENGINE_GetAffinity (1479 ms)
+[ RUN      ] axclrtDeviceTest.Case16_AX_ENGINE_GetIOInfo
+[       OK ] axclrtDeviceTest.Case16_AX_ENGINE_GetIOInfo (1248 ms)
+[ RUN      ] axclrtDeviceTest.Case17_AXCL_ENGINE_GetGroupIOInfo
+[       OK ] axclrtDeviceTest.Case17_AXCL_ENGINE_GetGroupIOInfo (215 ms)
+[ RUN      ] axclrtDeviceTest.Case18_AX_ENGINE_RunSync
+[       OK ] axclrtDeviceTest.Case18_AX_ENGINE_RunSync (303 ms)
+[ RUN      ] axclrtDeviceTest.Case19_AX_ENGINE_RunSyncV2
+[       OK ] axclrtDeviceTest.Case19_AX_ENGINE_RunSyncV2 (287 ms)
+[ RUN      ] axclrtDeviceTest.Case20_AXCL_ENGINE_RunGroupIOSync
+[       OK ] axclrtDeviceTest.Case20_AXCL_ENGINE_RunGroupIOSync (295 ms)
+[----------] 20 tests from axclrtDeviceTest (10239 ms total)
+
+[----------] Global test environment tear-down
+[==========] 20 tests from 1 test suite ran. (10239 ms total)
+[  PASSED  ] 20 tests.
+============= UT PASS =============
++------------------------------------------------------------------------------------------------+
+| AXCL-SMI  V3.16.0_20260729180218                                Driver  V3.16.0_20260729180218 |
++-----------------------------------------+--------------+---------------------------------------+
+| Card  Name                     Firmware | Bus-Id       |                          Memory-Usage |
+| Fan   Temp                Pwr:Usage/Cap | CPU      NPU |                             CMM-Usage |
+|=========================================+==============+=======================================|
+|    0  AX8850                    V3.16.0 | 0000:01:00.0 |                152 MiB /      945 MiB |
+|   --   48C                      -- / -- | 1%        0% |                 18 MiB /    15232 MiB |
++-----------------------------------------+--------------+---------------------------------------+
+
++------------------------------------------------------------------------------------------------+
+| Processes:                                                                                     |
+| Card      PID  Process Name                                                   NPU Memory Usage |
+|================================================================================================|
+
+
+=== 41-rollback-plan ===
+Reading package lists...
+Building dependency tree...
+Reading state information...
+Suggested packages:
+  dshanpi-a1-axcl-16g
+The following packages will be DOWNGRADED:
+  dshanpi-a1-axcl-16g dshanpi-a1-release-desktop dshanpi-axcl-dkms-16g
+  dshanpi-axcl-firmware-16g dshanpi-axcl-runtime-16g
+0 upgraded, 0 newly installed, 5 downgraded, 0 to remove and 2 not upgraded.
+Inst dshanpi-a1-axcl-16g [3.16.0+dshanpi.2026.10.15.2] (3.16.0+dshanpi.2026.10.10.1 DShanPI:noble-testing [arm64]) []
+Inst dshanpi-axcl-firmware-16g [3.16.0+dshanpi.2026.10.15.2] (3.16.0+dshanpi.2026.10.10.1 DShanPI:noble-testing [arm64]) []
+Inst dshanpi-axcl-runtime-16g [3.16.0+dshanpi.2026.10.15.2] (3.16.0+dshanpi.2026.10.10.1 DShanPI:noble-testing [arm64]) []
+Inst dshanpi-axcl-dkms-16g [3.16.0+dshanpi.2026.10.15.2] (3.16.0+dshanpi.2026.10.10.1 DShanPI:noble-testing [arm64])
+Inst dshanpi-a1-release-desktop [2026.10.15-2] (2026.10.14-1 DShanPI:noble-testing [all])
+Conf dshanpi-a1-axcl-16g (3.16.0+dshanpi.2026.10.10.1 DShanPI:noble-testing [arm64])
+Conf dshanpi-axcl-firmware-16g (3.16.0+dshanpi.2026.10.10.1 DShanPI:noble-testing [arm64])
+Conf dshanpi-axcl-runtime-16g (3.16.0+dshanpi.2026.10.10.1 DShanPI:noble-testing [arm64])
+Conf dshanpi-axcl-dkms-16g (3.16.0+dshanpi.2026.10.10.1 DShanPI:noble-testing [arm64])
+Conf dshanpi-a1-release-desktop (2026.10.14-1 DShanPI:noble-testing [all])
+
+
+=== 42-rollback-install-reboot ===
+29f89cb2-a35f-41fe-b65c-854b1e83d539
+Reading package lists...
+Building dependency tree...
+Reading state information...
+Suggested packages:
+  dshanpi-a1-axcl-16g
+The following packages will be DOWNGRADED:
+  dshanpi-a1-axcl-16g dshanpi-a1-release-desktop dshanpi-axcl-dkms-16g
+  dshanpi-axcl-firmware-16g dshanpi-axcl-runtime-16g
+0 upgraded, 0 newly installed, 5 downgraded, 0 to remove and 2 not upgraded.
+Need to get 850 B/50.0 MB of archives.
+After this operation, 7168 B of additional disk space will be used.
+Get:1 https://apt.100ask.net noble-testing/dshanpi-a1 all dshanpi-a1-release-desktop all 2026.10.14-1 [850 B]
+Fetched 850 B in 1s (1386 B/s)
+dpkg: warning: downgrading dshanpi-a1-axcl-16g from 3.16.0+dshanpi.2026.10.15.2 to 3.16.0+dshanpi.2026.10.10.1
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 101134 files and directories currently installed.)
+Preparing to unpack .../dshanpi-a1-axcl-16g_3.16.0+dshanpi.2026.10.10.1_arm64.deb ...
+Unpacking dshanpi-a1-axcl-16g (3.16.0+dshanpi.2026.10.10.1) over (3.16.0+dshanpi.2026.10.15.2) ...
+dpkg: warning: downgrading dshanpi-axcl-firmware-16g from 3.16.0+dshanpi.2026.10.15.2 to 3.16.0+dshanpi.2026.10.10.1
+Preparing to unpack .../dshanpi-axcl-firmware-16g_3.16.0+dshanpi.2026.10.10.1_arm64.deb ...
+Unpacking dshanpi-axcl-firmware-16g (3.16.0+dshanpi.2026.10.10.1) over (3.16.0+dshanpi.2026.10.15.2) ...
+dpkg: warning: downgrading dshanpi-axcl-runtime-16g from 3.16.0+dshanpi.2026.10.15.2 to 3.16.0+dshanpi.2026.10.10.1
+Preparing to unpack .../dshanpi-axcl-runtime-16g_3.16.0+dshanpi.2026.10.10.1_arm64.deb ...
+Unpacking dshanpi-axcl-runtime-16g (3.16.0+dshanpi.2026.10.10.1) over (3.16.0+dshanpi.2026.10.15.2) ...
+dpkg: warning: downgrading dshanpi-axcl-dkms-16g from 3.16.0+dshanpi.2026.10.15.2 to 3.16.0+dshanpi.2026.10.10.1
+Preparing to unpack .../dshanpi-axcl-dkms-16g_3.16.0+dshanpi.2026.10.10.1_arm64.deb ...
+Module axcl-3.16.0+dshanpi.2026.10.15.2 for kernel 6.1.115-vendor-rk35xx (aarch64).
+Before uninstall, this module version was ACTIVE on this kernel.
+
+ax_pcie_host_dev.ko:
+ - Uninstallation
+   - Deleting from: /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+ - Original module
+   - No original module was found for this module on this kernel.
+   - Use the dkms install command to reinstall any previous module version.
+
+ax_pcie_msg.ko:
+ - Uninstallation
+   - Deleting from: /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+ - Original module
+   - No original module was found for this module on this kernel.
+   - Use the dkms install command to reinstall any previous module version.
+
+ax_pcie_mmb.ko:
+ - Uninstallation
+   - Deleting from: /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+ - Original module
+   - No original module was found for this module on this kernel.
+   - Use the dkms install command to reinstall any previous module version.
+
+axcl_host.ko:
+ - Uninstallation
+   - Deleting from: /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+ - Original module
+   - No original module was found for this module on this kernel.
+   - Use the dkms install command to reinstall any previous module version.
+
+ax_pcie_p2p_rc.ko:
+ - Uninstallation
+   - Deleting from: /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+ - Original module
+   - No original module was found for this module on this kernel.
+   - Use the dkms install command to reinstall any previous module version.
+depmod...
+Deleting module axcl-3.16.0+dshanpi.2026.10.15.2 completely from the DKMS tree.
+Unpacking dshanpi-axcl-dkms-16g (3.16.0+dshanpi.2026.10.10.1) over (3.16.0+dshanpi.2026.10.15.2) ...
+dpkg: warning: downgrading dshanpi-a1-release-desktop from 2026.10.15-2 to 2026.10.14-1
+Preparing to unpack .../dshanpi-a1-release-desktop_2026.10.14-1_all.deb ...
+Unpacking dshanpi-a1-release-desktop (2026.10.14-1) over (2026.10.15-2) ...
+Setting up dshanpi-axcl-runtime-16g (3.16.0+dshanpi.2026.10.10.1) ...
+Setting up dshanpi-axcl-firmware-16g (3.16.0+dshanpi.2026.10.10.1) ...
+Setting up dshanpi-a1-release-desktop (2026.10.14-1) ...
+Setting up dshanpi-axcl-dkms-16g (3.16.0+dshanpi.2026.10.10.1) ...
+Loading new axcl-3.16.0+dshanpi.2026.10.10.1 DKMS files...
+Building for 6.1.115-vendor-rk35xx
+Building initial module for 6.1.115-vendor-rk35xx
+Done.
+
+ax_pcie_host_dev.ko:
+Running module version sanity check.
+ - Original module
+   - No original module exists within this kernel
+ - Installation
+   - Installing to /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+
+ax_pcie_msg.ko:
+Running module version sanity check.
+ - Original module
+   - No original module exists within this kernel
+ - Installation
+   - Installing to /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+
+ax_pcie_mmb.ko:
+Running module version sanity check.
+ - Original module
+   - No original module exists within this kernel
+ - Installation
+   - Installing to /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+
+axcl_host.ko:
+Running module version sanity check.
+ - Original module
+   - No original module exists within this kernel
+ - Installation
+   - Installing to /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+
+ax_pcie_p2p_rc.ko:
+Running module version sanity check.
+ - Original module
+   - No original module exists within this kernel
+ - Installation
+   - Installing to /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+depmod...
+Setting up dshanpi-a1-axcl-16g (3.16.0+dshanpi.2026.10.10.1) ...
+Processing triggers for libc-bin (2.39-0ubuntu8.9) ...
+
+
+=== 43-rollback-recovery ===
+a7106d47-644f-4c09-9535-429e3893bee3
+active
+
+=== 44-rollback-cohort ===
+armbian-bsp-cli-dshanpi-a1-vendor 25.11.0-trunk.20261010.1 installed
+armbian-bsp-desktop-dshanpi-a1-vendor 25.11.0-trunk.20261010.1 installed
+base-files 25.11.0-trunk.20261010.1-13ubuntu10-noble installed
+camera-engine-rkaiq 6.6.3+dshanpi.2026.10.10.1 installed
+dshanpi-a1-axcl-16g 3.16.0+dshanpi.2026.10.10.1 installed
+dshanpi-a1-release-desktop 2026.10.14-1 installed
+dshanpi-a1-repository 1:2026.10.10-1 installed
+dshanpi-archive-keyring 1:2026.10.10-1 installed
+dshanpi-axcl-dkms-16g 3.16.0+dshanpi.2026.10.10.1 installed
+dshanpi-axcl-firmware-16g 3.16.0+dshanpi.2026.10.10.1 installed
+dshanpi-axcl-runtime-16g 3.16.0+dshanpi.2026.10.10.1 installed
+dspi-config 1.0.3-1 installed
+gstreamer1.0-rockchip1 1.14-4 installed
+librga-dev 2.2.0-1 installed
+librga2 2.2.0-1 installed
+librockchip-mpp-dev 1.5.0-1 installed
+librockchip-mpp1 1.5.0-1 installed
+librockchip-vpu0 1.5.0-1 installed
+linux-dtb-vendor-rk35xx 25.11.0-trunk.20261010.1 installed
+linux-headers-vendor-rk35xx 25.11.0-trunk.20261010.1 installed
+linux-image-vendor-rk35xx 25.11.0-trunk.20261010.1 installed
+rockchip-mpp-demos 1.5.0-1 installed
+PASS: exact installed release and AXCL cohort 22 packages
+
+
+=== 45-rollback-root-npu ===
+a7106d47-644f-4c09-9535-429e3893bee3
+Result=success
+ActiveState=active
+SubState=exited
+axcl/3.16.0+dshanpi.2026.10.10.1, 6.1.115-vendor-rk35xx, aarch64: installed
+ax_pcie_p2p_rc         16384  0
+axcl_host             430080  0
+ax_pcie_mmb            16384  0
+ax_pcie_msg            16384  0
+ax_pcie_host_dev       86016  4 ax_pcie_msg,ax_pcie_p2p_rc,axcl_host,ax_pcie_mmb
++------------------------------------------------------------------------------------------------+
+| AXCL-SMI  V3.16.0_20260729180218                                Driver  V3.16.0_20260729180218 |
++-----------------------------------------+--------------+---------------------------------------+
+| Card  Name                     Firmware | Bus-Id       |                          Memory-Usage |
+| Fan   Temp                Pwr:Usage/Cap | CPU      NPU |                             CMM-Usage |
+|=========================================+==============+=======================================|
+|    0  AX8850                    V3.16.0 | 0000:01:00.0 |                151 MiB /      945 MiB |
+|   --   47C                      -- / -- | 1%        0% |                 18 MiB /    15232 MiB |
++-----------------------------------------+--------------+---------------------------------------+
+
++------------------------------------------------------------------------------------------------+
+| Processes:                                                                                     |
+| Card      PID  Process Name                                                   NPU Memory Usage |
+|================================================================================================|
+device index: 0, bus number: 1
+[==========] Running 20 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 20 tests from axclrtDeviceTest
+[ RUN      ] axclrtDeviceTest.Case01_AXCL_ENGINE_NPUReset
+[       OK ] axclrtDeviceTest.Case01_AXCL_ENGINE_NPUReset (0 ms)
+[ RUN      ] axclrtDeviceTest.Case02_AXCL_ENGINE_GetVersion
+[       OK ] axclrtDeviceTest.Case02_AXCL_ENGINE_GetVersion (1 ms)
+[ RUN      ] axclrtDeviceTest.Case03_AXCL_EngineInitDeinit
+[       OK ] axclrtDeviceTest.Case03_AXCL_EngineInitDeinit (215 ms)
+[ RUN      ] axclrtDeviceTest.Case04_AXCL_ENGINE_GetVNPUAttr
+[       OK ] axclrtDeviceTest.Case04_AXCL_ENGINE_GetVNPUAttr (831 ms)
+[ RUN      ] axclrtDeviceTest.Case05_AXCL_ENGINE_GetModelType
+[       OK ] axclrtDeviceTest.Case05_AXCL_ENGINE_GetModelType (840 ms)
+[ RUN      ] axclrtDeviceTest.Case06_AXCL_ENGINE_CreateHandle
+[       OK ] axclrtDeviceTest.Case06_AXCL_ENGINE_CreateHandle (839 ms)
+[ RUN      ] axclrtDeviceTest.Case07_AXCL_ENGINE_CreateHandleV2
+[       OK ] axclrtDeviceTest.Case07_AXCL_ENGINE_CreateHandleV2 (840 ms)
+[ RUN      ] axclrtDeviceTest.Case08_AXCL_ENGINE_CreateContext
+[       OK ] axclrtDeviceTest.Case08_AXCL_ENGINE_CreateContext (848 ms)
+[ RUN      ] axclrtDeviceTest.Case09_AXCL_ENGINE_CreateContextV2
+[       OK ] axclrtDeviceTest.Case09_AXCL_ENGINE_CreateContextV2 (838 ms)
+[ RUN      ] axclrtDeviceTest.Case10_AXCL_ENGINE_GetHandleModelType
+[       OK ] axclrtDeviceTest.Case10_AXCL_ENGINE_GetHandleModelType (207 ms)
+[ RUN      ] axclrtDeviceTest.Case11_AXCL_ENGINE_GetModelToolsVersion
+[       OK ] axclrtDeviceTest.Case11_AXCL_ENGINE_GetModelToolsVersion (207 ms)
+[ RUN      ] axclrtDeviceTest.Case12_AXCL_ENGINE_GetCMMUsage
+[       OK ] axclrtDeviceTest.Case12_AXCL_ENGINE_GetCMMUsage (207 ms)
+[ RUN      ] axclrtDeviceTest.Case13_AXCL_ENGINE_GetGroupIOInfoCount
+[       OK ] axclrtDeviceTest.Case13_AXCL_ENGINE_GetGroupIOInfoCount (207 ms)
+[ RUN      ] axclrtDeviceTest.Case14_AXCL_ENGINE_SetAffinity
+[       OK ] axclrtDeviceTest.Case14_AXCL_ENGINE_SetAffinity (207 ms)
+[ RUN      ] axclrtDeviceTest.Case15_AXCL_ENGINE_GetAffinity
+[       OK ] axclrtDeviceTest.Case15_AXCL_ENGINE_GetAffinity (1503 ms)
+[ RUN      ] axclrtDeviceTest.Case16_AX_ENGINE_GetIOInfo
+[       OK ] axclrtDeviceTest.Case16_AX_ENGINE_GetIOInfo (1249 ms)
+[ RUN      ] axclrtDeviceTest.Case17_AXCL_ENGINE_GetGroupIOInfo
+[       OK ] axclrtDeviceTest.Case17_AXCL_ENGINE_GetGroupIOInfo (215 ms)
+[ RUN      ] axclrtDeviceTest.Case18_AX_ENGINE_RunSync
+[       OK ] axclrtDeviceTest.Case18_AX_ENGINE_RunSync (302 ms)
+[ RUN      ] axclrtDeviceTest.Case19_AX_ENGINE_RunSyncV2
+[       OK ] axclrtDeviceTest.Case19_AX_ENGINE_RunSyncV2 (279 ms)
+[ RUN      ] axclrtDeviceTest.Case20_AXCL_ENGINE_RunGroupIOSync
+[       OK ] axclrtDeviceTest.Case20_AXCL_ENGINE_RunGroupIOSync (280 ms)
+[----------] 20 tests from axclrtDeviceTest (10129 ms total)
+
+[----------] Global test environment tear-down
+[==========] 20 tests from 1 test suite ran. (10129 ms total)
+[  PASSED  ] 20 tests.
+============= UT PASS =============
++------------------------------------------------------------------------------------------------+
+| AXCL-SMI  V3.16.0_20260729180218                                Driver  V3.16.0_20260729180218 |
++-----------------------------------------+--------------+---------------------------------------+
+| Card  Name                     Firmware | Bus-Id       |                          Memory-Usage |
+| Fan   Temp                Pwr:Usage/Cap | CPU      NPU |                             CMM-Usage |
+|=========================================+==============+=======================================|
+|    0  AX8850                    V3.16.0 | 0000:01:00.0 |                152 MiB /      945 MiB |
+|   --   48C                      -- / -- | 2%        0% |                 18 MiB /    15232 MiB |
++-----------------------------------------+--------------+---------------------------------------+
+
++------------------------------------------------------------------------------------------------+
+| Processes:                                                                                     |
+| Card      PID  Process Name                                                   NPU Memory Usage |
+|================================================================================================|
+Reading package lists...
+Building dependency tree...
+Reading state information...
+Ordinary-user old-version behavior follows (expected historical permission error):
+[10-15 15:02:59:776][E][smi][device_manager][0020]: axcl init fail, ret = 0x8030010b
++------------------------------------------------------------------------------------------------+
+| AXCL-SMI  V3.16.0_20260729180218                                Driver  V3.16.0_20260729180218 |
++-----------------------------------------+--------------+---------------------------------------+
+| Card  Name                     Firmware | Bus-Id       |                          Memory-Usage |
+| Fan   Temp                Pwr:Usage/Cap | CPU      NPU |                             CMM-Usage |
+|=========================================+==============+=======================================|
+
++------------------------------------------------------------------------------------------------+
+| Processes:                                                                                     |
+| Card      PID  Process Name                                                   NPU Memory Usage |
+|================================================================================================|
+[2026-10-15 15:02:59.776][4081][E][device manager][init][60]: open /dev/axcl_host fail, errno: 13 Permission denied
+
+file sink initialization failed: Failed opening file /tmp/axcl/axcl_logs.txt for writing: Permission denied
+
+=== 46-restore-testing-reboot ===
+a7106d47-644f-4c09-9535-429e3893bee3
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  dshanpi-axcl-dkms-16g dshanpi-axcl-firmware-16g dshanpi-axcl-runtime-16g
+The following packages will be upgraded:
+  dshanpi-a1-axcl-16g dshanpi-a1-release-desktop dshanpi-axcl-dkms-16g
+  dshanpi-axcl-firmware-16g dshanpi-axcl-runtime-16g
+5 upgraded, 0 newly installed, 0 to remove and 2 not upgraded.
+After this operation, 7168 B disk space will be freed.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 101132 files and directories currently installed.)
+Preparing to unpack .../dshanpi-a1-axcl-16g_3.16.0+dshanpi.2026.10.15.2_arm64.deb ...
+Unpacking dshanpi-a1-axcl-16g (3.16.0+dshanpi.2026.10.15.2) over (3.16.0+dshanpi.2026.10.10.1) ...
+Preparing to unpack .../dshanpi-axcl-firmware-16g_3.16.0+dshanpi.2026.10.15.2_arm64.deb ...
+Unpacking dshanpi-axcl-firmware-16g (3.16.0+dshanpi.2026.10.15.2) over (3.16.0+dshanpi.2026.10.10.1) ...
+Preparing to unpack .../dshanpi-axcl-runtime-16g_3.16.0+dshanpi.2026.10.15.2_arm64.deb ...
+Unpacking dshanpi-axcl-runtime-16g (3.16.0+dshanpi.2026.10.15.2) over (3.16.0+dshanpi.2026.10.10.1) ...
+Preparing to unpack .../dshanpi-axcl-dkms-16g_3.16.0+dshanpi.2026.10.15.2_arm64.deb ...
+Module axcl-3.16.0+dshanpi.2026.10.10.1 for kernel 6.1.115-vendor-rk35xx (aarch64).
+Before uninstall, this module version was ACTIVE on this kernel.
+
+ax_pcie_host_dev.ko:
+ - Uninstallation
+   - Deleting from: /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+ - Original module
+   - No original module was found for this module on this kernel.
+   - Use the dkms install command to reinstall any previous module version.
+
+ax_pcie_msg.ko:
+ - Uninstallation
+   - Deleting from: /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+ - Original module
+   - No original module was found for this module on this kernel.
+   - Use the dkms install command to reinstall any previous module version.
+
+ax_pcie_mmb.ko:
+ - Uninstallation
+   - Deleting from: /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+ - Original module
+   - No original module was found for this module on this kernel.
+   - Use the dkms install command to reinstall any previous module version.
+
+axcl_host.ko:
+ - Uninstallation
+   - Deleting from: /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+ - Original module
+   - No original module was found for this module on this kernel.
+   - Use the dkms install command to reinstall any previous module version.
+
+ax_pcie_p2p_rc.ko:
+ - Uninstallation
+   - Deleting from: /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+ - Original module
+   - No original module was found for this module on this kernel.
+   - Use the dkms install command to reinstall any previous module version.
+depmod...
+Deleting module axcl-3.16.0+dshanpi.2026.10.10.1 completely from the DKMS tree.
+Unpacking dshanpi-axcl-dkms-16g (3.16.0+dshanpi.2026.10.15.2) over (3.16.0+dshanpi.2026.10.10.1) ...
+Preparing to unpack .../dshanpi-a1-release-desktop_2026.10.15-2_all.deb ...
+Unpacking dshanpi-a1-release-desktop (2026.10.15-2) over (2026.10.14-1) ...
+Setting up dshanpi-axcl-runtime-16g (3.16.0+dshanpi.2026.10.15.2) ...
+Setting up dshanpi-axcl-firmware-16g (3.16.0+dshanpi.2026.10.15.2) ...
+Setting up dshanpi-a1-release-desktop (2026.10.15-2) ...
+Setting up dshanpi-axcl-dkms-16g (3.16.0+dshanpi.2026.10.15.2) ...
+Loading new axcl-3.16.0+dshanpi.2026.10.15.2 DKMS files...
+Building for 6.1.115-vendor-rk35xx
+Building initial module for 6.1.115-vendor-rk35xx
+Done.
+
+ax_pcie_host_dev.ko:
+Running module version sanity check.
+ - Original module
+   - No original module exists within this kernel
+ - Installation
+   - Installing to /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+
+ax_pcie_msg.ko:
+Running module version sanity check.
+ - Original module
+   - No original module exists within this kernel
+ - Installation
+   - Installing to /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+
+ax_pcie_mmb.ko:
+Running module version sanity check.
+ - Original module
+   - No original module exists within this kernel
+ - Installation
+   - Installing to /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+
+axcl_host.ko:
+Running module version sanity check.
+ - Original module
+   - No original module exists within this kernel
+ - Installation
+   - Installing to /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+
+ax_pcie_p2p_rc.ko:
+Running module version sanity check.
+ - Original module
+   - No original module exists within this kernel
+ - Installation
+   - Installing to /lib/modules/6.1.115-vendor-rk35xx/updates/dkms/
+depmod...
+Setting up dshanpi-a1-axcl-16g (3.16.0+dshanpi.2026.10.15.2) ...
+AXCL: members of render can use axcl-smi. Add other users explicitly and log in again.
+AXCL: confirm card capacity and cooling before enabling dshanpi-axcl.service.
+Processing triggers for libc-bin (2.39-0ubuntu8.9) ...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+
+
+=== 47-restored-recovery ===
+7c4b93c6-3706-405c-866b-893422dfc3f9
+active
+
+=== 48-restored-user-npu ===
+uid=1001(test-user) gid=1001(test-user) groups=1001(test-user),5(tty),6(disk),20(dialout),27(sudo),29(audio),44(video),46(plugdev),60(games),100(users),108(netdev),110(bluetooth),993(render),996(input),999(systemd-journal),1000(gpio)
+7c4b93c6-3706-405c-866b-893422dfc3f9
+Result=success
+ActiveState=active
+SubState=exited
+enabled
+dshanpi-a1-axcl-16g 3.16.0+dshanpi.2026.10.15.2
+dshanpi-a1-release-desktop 2026.10.15-2
+dshanpi-axcl-dkms-16g 3.16.0+dshanpi.2026.10.15.2
+dshanpi-axcl-firmware-16g 3.16.0+dshanpi.2026.10.15.2
+dshanpi-axcl-runtime-16g 3.16.0+dshanpi.2026.10.15.2
+linux-headers-vendor-rk35xx 25.11.0-trunk.20261010.1
+linux-image-vendor-rk35xx 25.11.0-trunk.20261010.1
+axcl/3.16.0+dshanpi.2026.10.15.2, 6.1.115-vendor-rk35xx, aarch64: installed
+ax_pcie_p2p_rc         16384  0
+axcl_host             430080  0
+ax_pcie_mmb            16384  0
+ax_pcie_msg            16384  0
+ax_pcie_host_dev       86016  4 ax_pcie_msg,ax_pcie_p2p_rc,axcl_host,ax_pcie_mmb
+6.1.115-vendor-rk35xx SMP mod_unload modversions aarch64
+660 root render /dev/axcl_host
+660 root render /dev/ax_mmb_dev
+660 root render /dev/msg_userdev
+660 root render /dev/p2p
+2770 root render /tmp/axcl
+660 root render /tmp/axcl/axcl_logs.txt
++------------------------------------------------------------------------------------------------+
+| AXCL-SMI  V3.16.0_20260729180218                                Driver  V3.16.0_20260729180218 |
++-----------------------------------------+--------------+---------------------------------------+
+| Card  Name                     Firmware | Bus-Id       |                          Memory-Usage |
+| Fan   Temp                Pwr:Usage/Cap | CPU      NPU |                             CMM-Usage |
+|=========================================+==============+=======================================|
+|    0  AX8850                    V3.16.0 | 0000:01:00.0 |                151 MiB /      945 MiB |
+|   --   47C                      -- / -- | 2%        0% |                 18 MiB /    15232 MiB |
++-----------------------------------------+--------------+---------------------------------------+
+
++------------------------------------------------------------------------------------------------+
+| Processes:                                                                                     |
+| Card      PID  Process Name                                                   NPU Memory Usage |
+|================================================================================================|
+|    0  AX8850                    V3.16.0 | 0000:01:00.0 |                151 MiB /      945 MiB |
+device index: 0, bus number: 1
+[==========] Running 20 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 20 tests from axclrtDeviceTest
+[ RUN      ] axclrtDeviceTest.Case01_AXCL_ENGINE_NPUReset
+[       OK ] axclrtDeviceTest.Case01_AXCL_ENGINE_NPUReset (0 ms)
+[ RUN      ] axclrtDeviceTest.Case02_AXCL_ENGINE_GetVersion
+[       OK ] axclrtDeviceTest.Case02_AXCL_ENGINE_GetVersion (1 ms)
+[ RUN      ] axclrtDeviceTest.Case03_AXCL_EngineInitDeinit
+[       OK ] axclrtDeviceTest.Case03_AXCL_EngineInitDeinit (214 ms)
+[ RUN      ] axclrtDeviceTest.Case04_AXCL_ENGINE_GetVNPUAttr
+[       OK ] axclrtDeviceTest.Case04_AXCL_ENGINE_GetVNPUAttr (855 ms)
+[ RUN      ] axclrtDeviceTest.Case05_AXCL_ENGINE_GetModelType
+[       OK ] axclrtDeviceTest.Case05_AXCL_ENGINE_GetModelType (855 ms)
+[ RUN      ] axclrtDeviceTest.Case06_AXCL_ENGINE_CreateHandle
+[       OK ] axclrtDeviceTest.Case06_AXCL_ENGINE_CreateHandle (847 ms)
+[ RUN      ] axclrtDeviceTest.Case07_AXCL_ENGINE_CreateHandleV2
+[       OK ] axclrtDeviceTest.Case07_AXCL_ENGINE_CreateHandleV2 (855 ms)
+[ RUN      ] axclrtDeviceTest.Case08_AXCL_ENGINE_CreateContext
+[       OK ] axclrtDeviceTest.Case08_AXCL_ENGINE_CreateContext (855 ms)
+[ RUN      ] axclrtDeviceTest.Case09_AXCL_ENGINE_CreateContextV2
+[       OK ] axclrtDeviceTest.Case09_AXCL_ENGINE_CreateContextV2 (855 ms)
+[ RUN      ] axclrtDeviceTest.Case10_AXCL_ENGINE_GetHandleModelType
+[       OK ] axclrtDeviceTest.Case10_AXCL_ENGINE_GetHandleModelType (215 ms)
+[ RUN      ] axclrtDeviceTest.Case11_AXCL_ENGINE_GetModelToolsVersion
+[       OK ] axclrtDeviceTest.Case11_AXCL_ENGINE_GetModelToolsVersion (207 ms)
+[ RUN      ] axclrtDeviceTest.Case12_AXCL_ENGINE_GetCMMUsage
+[       OK ] axclrtDeviceTest.Case12_AXCL_ENGINE_GetCMMUsage (208 ms)
+[ RUN      ] axclrtDeviceTest.Case13_AXCL_ENGINE_GetGroupIOInfoCount
+[       OK ] axclrtDeviceTest.Case13_AXCL_ENGINE_GetGroupIOInfoCount (207 ms)
+[ RUN      ] axclrtDeviceTest.Case14_AXCL_ENGINE_SetAffinity
+[       OK ] axclrtDeviceTest.Case14_AXCL_ENGINE_SetAffinity (208 ms)
+[ RUN      ] axclrtDeviceTest.Case15_AXCL_ENGINE_GetAffinity
+[       OK ] axclrtDeviceTest.Case15_AXCL_ENGINE_GetAffinity (1487 ms)
+[ RUN      ] axclrtDeviceTest.Case16_AX_ENGINE_GetIOInfo
+[       OK ] axclrtDeviceTest.Case16_AX_ENGINE_GetIOInfo (1247 ms)
+[ RUN      ] axclrtDeviceTest.Case17_AXCL_ENGINE_GetGroupIOInfo
+[       OK ] axclrtDeviceTest.Case17_AXCL_ENGINE_GetGroupIOInfo (208 ms)
+[ RUN      ] axclrtDeviceTest.Case18_AX_ENGINE_RunSync
+[       OK ] axclrtDeviceTest.Case18_AX_ENGINE_RunSync (294 ms)
+[ RUN      ] axclrtDeviceTest.Case19_AX_ENGINE_RunSyncV2
+[       OK ] axclrtDeviceTest.Case19_AX_ENGINE_RunSyncV2 (279 ms)
+[ RUN      ] axclrtDeviceTest.Case20_AXCL_ENGINE_RunGroupIOSync
+[       OK ] axclrtDeviceTest.Case20_AXCL_ENGINE_RunGroupIOSync (280 ms)
+[----------] 20 tests from axclrtDeviceTest (10193 ms total)
+
+[----------] Global test environment tear-down
+[==========] 20 tests from 1 test suite ran. (10193 ms total)
+[  PASSED  ] 20 tests.
+============= UT PASS =============
++------------------------------------------------------------------------------------------------+
+| AXCL-SMI  V3.16.0_20260729180218                                Driver  V3.16.0_20260729180218 |
++-----------------------------------------+--------------+---------------------------------------+
+| Card  Name                     Firmware | Bus-Id       |                          Memory-Usage |
+| Fan   Temp                Pwr:Usage/Cap | CPU      NPU |                             CMM-Usage |
+|=========================================+==============+=======================================|
+|    0  AX8850                    V3.16.0 | 0000:01:00.0 |                152 MiB /      945 MiB |
+|   --   48C                      -- / -- | 1%        0% |                 18 MiB /    15232 MiB |
++-----------------------------------------+--------------+---------------------------------------+
+
++------------------------------------------------------------------------------------------------+
+| Processes:                                                                                     |
+| Card      PID  Process Name                                                   NPU Memory Usage |
+|================================================================================================|
+
+
+=== 49-restored-cohort ===
+armbian-bsp-cli-dshanpi-a1-vendor 25.11.0-trunk.20261010.1 installed
+armbian-bsp-desktop-dshanpi-a1-vendor 25.11.0-trunk.20261010.1 installed
+base-files 25.11.0-trunk.20261010.1-13ubuntu10-noble installed
+camera-engine-rkaiq 6.6.3+dshanpi.2026.10.10.1 installed
+dshanpi-a1-axcl-16g 3.16.0+dshanpi.2026.10.15.2 installed
+dshanpi-a1-release-desktop 2026.10.15-2 installed
+dshanpi-a1-repository 1:2026.10.10-1 installed
+dshanpi-archive-keyring 1:2026.10.10-1 installed
+dshanpi-axcl-dkms-16g 3.16.0+dshanpi.2026.10.15.2 installed
+dshanpi-axcl-firmware-16g 3.16.0+dshanpi.2026.10.15.2 installed
+dshanpi-axcl-runtime-16g 3.16.0+dshanpi.2026.10.15.2 installed
+dspi-config 1.0.3-1 installed
+gstreamer1.0-rockchip1 1.14-4 installed
+librga-dev 2.2.0-1 installed
+librga2 2.2.0-1 installed
+librockchip-mpp-dev 1.5.0-1 installed
+librockchip-mpp1 1.5.0-1 installed
+librockchip-vpu0 1.5.0-1 installed
+linux-dtb-vendor-rk35xx 25.11.0-trunk.20261010.1 installed
+linux-headers-vendor-rk35xx 25.11.0-trunk.20261010.1 installed
+linux-image-vendor-rk35xx 25.11.0-trunk.20261010.1 installed
+rockchip-mpp-demos 1.5.0-1 installed
+PASS: exact installed release and AXCL cohort 22 packages

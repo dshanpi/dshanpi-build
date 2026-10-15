@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "product": "dshanpi-a1",
+  "release": "2026.10.15-2",
+  "verdict": "passed",
+  "package_manifest_sha256": "aa6bf062b149befb0755cbfbc9fc0ffac2f255a976487ab52cc0ab77c6d8141d",
+  "checks": {
+    "apt_install": "passed",
+    "release_meta": "passed",
+    "boot": "passed",
+    "reboot": "passed",
+    "rollback": "passed",
+    "axcl-16g": {
+      "dkms": "passed",
+      "module_load": "passed",
+      "axcl_smi": "passed",
+      "npu": "passed",
+      "reboot_recovery": "passed"
+    }
+  },
+  "evidence": [
+    {
+      "path": "2026.10.15-2.hardware-acceptance/board.log",
+      "sha256": "635f8e7021e0cb444e40f2b55dbce3cdc31ec114959cea71006e61eaffb30f5f"
+    }
+  ],
+  "testing_workflow": "https://github.com/dshanpi/dshanpi-build/actions/runs/38692942310",
+  "build_commit": "62d967a0f62af3aaa209337bd0f73209283b2b5d",
+  "package_version": "3.16.0+dshanpi.2026.10.15.2",
+  "package_hashes": {
+    "dshanpi-axcl-firmware-16g": "57c8b18d76c13b42def12e3b4c856355da422115ec3af0c8c1379a4352231195",
+    "dshanpi-axcl-runtime-16g": "58399e65337517e22a782c4f8b043c38ba40e69a561fbe5db80e91eed2d96105",
+    "dshanpi-axcl-dkms-16g": "826a772383378aca67b1fdd61ef009f983aa79646353373048c2b5c28d7073e6",
+    "dshanpi-a1-axcl-16g": "c8b45cc4d50c7aacad53e50ef2ac5ae10400c16dab6ed00c1cabe2112c98f446"
+  },
+  "npu_runs": [
+    {
+      "stage": "37-testing-user-npu",
+      "user": "ordinary render member",
+      "passed": 20,
+      "total": 20,
+      "elapsed_ms": 10252,
+      "temperature_after_c": 49
+    },
+    {
+      "stage": "40-testing-after-reboot",
+      "user": "ordinary render member",
+      "passed": 20,
+      "total": 20,
+      "elapsed_ms": 10239,
+      "temperature_after_c": 48
+    },
+    {
+      "stage": "45-rollback-root-npu",
+      "user": "root",
+      "passed": 20,
+      "total": 20,
+      "elapsed_ms": 10129,
+      "temperature_after_c": 48
+    },
+    {
+      "stage": "48-restored-user-npu",
+      "user": "ordinary render member",
+      "passed": 20,
+      "total": 20,
+      "elapsed_ms": 10193,
+      "temperature_after_c": 48
+    }
+  ],
+  "scope": "DShanPI A1 RK3576 with 16GB AX8850; kernel 6.1.115-vendor-rk35xx, platform revision 25.11.0-trunk.20261010.1. Twenty unchanged platform/optional package bytes retained from prior stable. AIC and other board hardware not revalidated. No new images.",
+  "rollback": "Exact 22-package installed cohort checked at previous stable 2026.10.14-1 and restored 2026.10.15-2. Old AXCL 2026.10.10.1 root NPU passed; known ordinary-user permission error reproduced. New version restored without manual /etc overrides.",
+  "not_tested": [
+    "8GB cards",
+    "other boards",
+    "all models or extended stress tests"
+  ]
+}
