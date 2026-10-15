@@ -30,3 +30,5 @@ stable 只晋级具有适用实板证据的同一组包，不重新构建。
 缓存、构建输出、私钥和个人凭据不提交。技能与开发交接记录随仓库维护。
 
 维护本仓库时读取 `.agents/skills/maintain-dshanpi-delivery/SKILL.md`；开发交接见 `docs/development-handoff.md`。
+
+用户 README 保留功能与操作说明；开发门禁、原 README 规则与历史资料保留在 [开发维护指南](docs/development-guide.md)，开发者与 AI 工具须一并读取。新增用户文档不得删减开发约束。

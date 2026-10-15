@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+<title id="title">从源码到用户：一次发行的业务流程</title><desc id="desc">先完成候选包公开验证，再分为设备维护与首次烧录两条交付路径。</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" fill="#64748b"/></marker></defs>
+<rect width="1200" height="900" rx="20" fill="#f4f7fb"/>
+<text x="44" y="52" font-family="Noto Sans CJK SC, sans-serif" font-size="30" font-weight="700" fill="#10243a">从源码到用户：一次发行的业务流程</text>
+<text x="44" y="85" font-family="Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#52677b">先完成候选包公开验证，再分为设备维护与首次烧录两条交付路径。</text>
+<rect x="44" y="122" width="314" height="145" rx="14" fill="#fff5df" stroke="#e6c881" stroke-width="1.5"/>
+<text x="64" y="156" font-family="Noto Sans CJK SC, sans-serif" font-size="21" font-weight="700" fill="#805b14">01 固定输入</text>
+<text x="64" y="188" font-family="Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#334155">提交新 lock 与完整源码 SHA</text>
+<text x="64" y="215" font-family="Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#334155">选择产品、revision 和版本</text>
+<text x="64" y="242" font-family="Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#334155">校验计划与主机环境</text>
+<rect x="442" y="122" width="314" height="145" rx="14" fill="#eaf2ff" stroke="#9ab9ee" stroke-width="1.5"/>
+<text x="462" y="156" font-family="Noto Sans CJK SC, sans-serif" font-size="21" font-weight="700" fill="#154a91">02 构建与审计</text>
+<text x="462" y="188" font-family="Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#334155">Actions：packages-only</text>
+<text x="462" y="215" font-family="Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#334155">或已登记的 maintenance adapter</text>
+<text x="462" y="242" font-family="Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#334155">生成精确 core / desktop 元包</text>
+<rect x="842" y="122" width="314" height="145" rx="14" fill="#e7f6f0" stroke="#98cebb" stroke-width="1.5"/>
+<text x="862" y="156" font-family="Noto Sans CJK SC, sans-serif" font-size="21" font-weight="700" fill="#14654e">03 testing APT</text>
+<text x="862" y="188" font-family="Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#334155">签名并发布候选索引</text>
+<text x="862" y="215" font-family="Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#334155">公开下载校验 DEB 与哈希</text>
+<text x="862" y="242" font-family="Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#334155">失败时停止后续交付</text>
+<polyline points="358,194 442,194" fill="none" stroke="#64748b" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<polyline points="756,194 842,194" fill="none" stroke="#64748b" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<rect x="44" y="352" width="512" height="162" rx="14" fill="#eaf2ff" stroke="#9ab9ee" stroke-width="1.5"/>
+<text x="64" y="386" font-family="Noto Sans CJK SC, sans-serif" font-size="21" font-weight="700" fill="#154a91">04A 已有设备：维护与实板验收</text>
+<text x="64" y="418" font-family="Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#334155">source channel testing → update list</text>
+<text x="64" y="445" font-family="Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#334155">选择精确版本 → APT 模拟 → 确认安装</text>
+<text x="64" y="472" font-family="Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#334155">重启后验证启动、外设与整组回滚</text>
+<rect x="644" y="352" width="512" height="162" rx="14" fill="#eaf2ff" stroke="#9ab9ee" stroke-width="1.5"/>
+<text x="664" y="386" font-family="Noto Sans CJK SC, sans-serif" font-size="21" font-weight="700" fill="#154a91">04B 首次烧录：组装与镜像发布</text>
+<text x="664" y="418" font-family="Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#334155">受控本机 images-only 消费同一套 DEB</text>
+<text x="664" y="445" font-family="Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#334155">只读检查 → prepare 压缩、校验与来源记录</text>
+<text x="664" y="472" font-family="Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#334155">发布 prerelease，并验证公开资产</text>
+<polyline points="998,267 998,310 300,310 300,352" fill="none" stroke="#64748b" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<polyline points="1050,267 1050,352" fill="none" stroke="#64748b" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<rect x="44" y="610" width="512" height="160" rx="14" fill="#e7f6f0" stroke="#98cebb" stroke-width="1.5"/>
+<text x="64" y="644" font-family="Noto Sans CJK SC, sans-serif" font-size="21" font-weight="700" fill="#14654e">05A 通过验收后晋级 stable</text>
+<text x="64" y="676" font-family="Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#334155">提交适用板型的实板证据</text>
+<text x="64" y="703" font-family="Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#334155">stable 复用同一组 DEB 与 SHA-256</text>
+<text x="64" y="730" font-family="Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#334155">不重新构建，不覆盖历史包</text>
+<rect x="644" y="610" width="512" height="160" rx="14" fill="#e7f6f0" stroke="#98cebb" stroke-width="1.5"/>
+<text x="664" y="644" font-family="Noto Sans CJK SC, sans-serif" font-size="21" font-weight="700" fill="#14654e">05B 镜像计划的 stable 交付</text>
+<text x="664" y="676" font-family="Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#334155">APT 已晋级且公共验证成功</text>
+<text x="664" y="703" font-family="Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#334155">已有 Release 的资产须与计划一致</text>
+<text x="664" y="730" font-family="Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#334155">校验后晋级同一 Release</text>
+<polyline points="300,514 300,610" fill="none" stroke="#64748b" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<polyline points="900,514 900,610" fill="none" stroke="#64748b" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<polyline points="556,690 644,690" fill="none" stroke="#64748b" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<text x="44" y="837" font-family="Noto Sans CJK SC, sans-serif" font-size="17" font-weight="400" fill="#334155">失败分支：输入 / 构建 / 签名 / 公网 / 实板任一门禁失败，保留证据并修复；不得跳过后续检查。</text>
+</svg>

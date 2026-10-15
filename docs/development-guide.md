@@ -1,0 +1,284 @@
+# dshanpi-build 开发维护指南
+
+本文面向源码开发者、发行维护者和 AI 编码工具。面向使用者的功能、架构、业务流程和操作说明见 [README](../README.md)。
+原有开发要求和门禁继续保留，新增图文说明不替代这些要求。
+
+## 开发入口与规则来源
+
+开始工作前读取 [AGENTS.md](../AGENTS.md)、[三仓统一交付门禁](../DELIVERY_POLICY.md) 和 [仓库维护 skill](../.agents/skills/maintain-dshanpi-delivery/SKILL.md)。
+统一政策 G01～G14 是完整要求；本指南是开发入口，不能缩减政策或将软件测试等同于实板验收。
+AI 工具从 AGENTS.md 进入本指南；当前限制与接续事项见 [开发交接](development-handoff.md)。
+
+## 必须保留的开发与交付门禁
+
+| 规则 | 开发与发行要求 | 政策条款 |
+| --- | --- | --- |
+| 源码归属 | 板级/内核/DT/BSP 归 ArmBianOS，可选组件配方与发行归 dshanpi-build，设备交互归 dspi-config；不复制一套更新器或发布流程 | G01、G13 |
+| 四板隔离 | 共享修改评估 A1、CM5、R1、Avaota A1；仅 common 加本板 component，CM5 保留独立内核命名空间 | G02 |
+| 固定输入与历史 | 固定完整源码 SHA、版本、架构和哈希；历史 lock、tag、包字节不覆盖；安装内容、依赖、维护脚本及包内 README 变化使用新 DEB 版本 | G03、G13 |
+| Overlay | 数据和 DTBO 来自本板 BSP；按适用规则校验、备份并说明重启，不能用手工拷贝替代正式交付 | G04 |
+| 完整镜像 | 安装同一套精确 DEB、工具、profile、公钥、软件源和元包；验证全部变体、镜像来源、公开下载及 Release 资产 | G05、G06 |
+| APT 与密钥 | 签名、包集、身份、权限、RPATH、本地客户端及历史不变性检查；使用并发保护与原子发布；私钥/凭据留在受保护环境，保留 Signed-By | G07 |
+| 持续维护 | 新版精确元包绑定所有受影响产品；升级及回滚操作完整依赖集合，保留旧包和恢复路径 | G08 |
+| stable 晋级 | 先 testing；核对候选清单及日志哈希，具备适用板型实板证据后只晋级相同包和 SHA-256，不重新构建 | G09 |
+| 验证与完成标准 | 静态、软件模拟、包/镜像、公共端点及实板分别记录；未完成自动化或未做硬件验证不得宣称交付完成 | G10、G11 |
+| 内核头文件 | 每个镜像提供精确匹配的 headers DEB，关联源码、配置、版本、ABI、Module.symvers、大小和 SHA-256，以及 APT 安装命令和外部模块编译验证 | G12 |
+| 会话记录与源码卫生 | 每次修改有 REQ、业务流程、失败分支、测试和未完成项；运行记录门禁，只暂存审查文件，检查索引，不提交缓存/输出/密钥/个人配置 | G13、G14 |
+
+上述是规则要求，具体实现边界及缺失环节应按源码、测试与交接记录如实记录。当前 testing Actions 负责 DEB/APT；完整镜像由受控本机组装，不能据此把完整自动 Release 的交付要求删除。
+
+## 新增产品或组件
+
+新增板卡先在 ArmBianOS 完成 board、DTB/DTBO、BSP profile，再在本仓库新增产品配置，声明包集、component、core/desktop 差异和源码地址，提交新 release lock。沿用已有收集、元包、APT 和验收脚本，不复制整套工作流。
+
+新增必装应用加入 `required_packages`；可选硬件用完整 selector 包组表达驱动/运行库/固件精确依赖及冲突。组件上游 commit 或归档 SHA-256 固定在 `packages/<component>/`，原始归档不可原地替换。维护发行补充 dispatcher 映射，并评估四产品共享逻辑的影响。
+
+配置工具 README 也属于其 DEB 内容；更新 dspi-config 后，须在后续正式发行中固定新客户端 commit，为所有受影响产品生成新的精确元包，不能只单独替换工具破坏旧元包约束。
+
+
+## 开发检查命令
+
+提交前从仓库根运行：
+
+```bash
+python3 tools/check-delivery-policy.py --peer ../ArmBianOS --peer ../dspi-config
+python3 tools/check-change-record.py
+python3 tools/check-repository-hygiene.py
+python3 -m unittest discover -s tests -p 'test_*.py'
+bash tests/test.sh
+bash -n scripts/*.sh
+git diff --check
+```
+
+新会话修改需附 `docs/change-records/` 记录，包含需求、流程、失败分支和测试报告。临时日志、构建目录和私钥不提交；暂存后再运行索引卫生检查。
+
+
+## 改写前 README 原文保留
+
+以下内容来自本仓库提交 `841a135809bb1437c6c3e01e8ab3d592e1790095` 的 `README.md`，完整保留原有说明、要求、门禁与历史记录，仅将相对链接调整为从本目录访问。
+这些历史记录中的候选状态、工作流实现和产物位置对应当时上下文；操作现版本时参照用户 README 与当前源码。历史记录不能作为本次发布或实板验收证据；其中的开发规则继续受统一政策约束。
+
+<details>
+<summary>展开改写前 README 全文</summary>
+
+> DShanPI 开发、构建与发布必须遵守 [三仓统一交付门禁](../DELIVERY_POLICY.md)，工作入口见 [AGENTS.md](../AGENTS.md)。
+
+# dshanpi-build
+
+`dshanpi-build` 是 DShanPI 产品构建与发行编排仓库。它调用各源码仓库的构建系统，
+汇集经过固定版本和校验的产物，生成系统版本元包及签名 APT 仓库；它不保存内核、
+设备树或 dspi-config 的源码副本。
+
+## 新服务器与开发交接
+
+Ubuntu 24.04 x86_64 的固定版本下载、预检与构建见 [新服务器手册](../docs/new-server.md)。
+变更记录与未完成事项见 [开发交接](../docs/development-handoff.md)；仓库内 skills 随源码维护。
+客户一次烧录、后续只走 DEB 的版本与发布规则见
+[固定镜像与持续 APT 更新规范](../docs/fixed-image-apt-updates.md)。
+
+## 仓库边界
+
+- `ArmBianOS`：板卡、Kernel/U-Boot DTS、DTBO、BSP 和系统镜像构建引擎。
+- `dspi-config`：设备端 overlay、软件源和系统版本管理工具及其 deb。
+- `dshanpi-build`：固定源码 commit、调用构建、选择包、制作元包、生成并签名 APT。
+- GitHub Pages：当前托管 `https://apt.100ask.net` 的签名仓库。
+- `dlfilewebsite`：可选的自建服务器接收端；保留验签与原子导入接口。
+
+## 产品配置
+
+每个产品使用 `products/<product>/product.json`。新增板卡只新增产品配置和必要的构建
+适配器，不复制 APT 发布脚本。一次正式构建还需要 release lock：
+
+| 产品 | Armbian board/branch | 内核包命名空间 | 产品 component |
+| --- | --- | --- | --- |
+| DShanPI A1 CM5 | `dshanpi-a1-cm5` / `vendor` | `rk3576-dshanpi-a1-cm5` | `dshanpi-a1-cm5` |
+| DShanPI A1 | `dshanpi-a1` / `vendor` | `rk35xx` | `dshanpi-a1` |
+| DShanPI R1 | `dshanpi-r1` / `vendor` | `rk35xx` | `dshanpi-r1` |
+| Avaota A1 | `avaota-a1` / `legacy` | `sun55iw3-syterkit` | `avaota-a1` |
+
+其中 A1 与 R1 使用同一个经过固定 commit/revision 的 RK35xx 内核包，但 BSP、仓库入口和
+release 元包均按产品隔离。`avaotaa1` 不是内部标识；配置、包名和发布命令统一使用
+`avaota-a1`。
+
+`package_search_paths` 声明该产品允许收集的 ArmBianOS 产物目录。最终进入发布目录的包仍
+必须逐项出现在 `required_packages`，同一个“包名 + 版本 + 架构”出现零份或多份都会失败，
+因此不会把整个 `output/debs` 中的历史包或其他板卡包误发布。
+
+A1 的 `release_package_sets` 把 AXCL 16GB 纳入完整发行构建，
+`release_optional_selectors` 则只把精确版本写入发行元包的 `Suggests`。因此每次完整发行只以
+release lock 的 `version` 和 `revision` 为版本事实源：AXCL 修订号由发行版本自动派生，
+DKMS、内核、头文件和 BSP 依赖都取同一个 `revision`。未安装算力卡软件的系统不会被强制
+安装 AXCL；已经安装 selector 的系统通过 dspi-config 升级或回滚时会同步整套精确依赖。
+
+```json
+{
+  "schema_version": 1,
+  "product": "dshanpi-a1-cm5",
+  "version": "2026.09.30-1",
+  "revision": "25.11.0-trunk.20260930.1",
+  "sources": {
+    "armbianos": {"commit": "完整 40 位 SHA"},
+    "dspi_config": {"commit": "完整 40 位 SHA"}
+  }
+}
+```
+
+源码必须固定完整 commit，不能使用漂移分支。版本号使用 `YYYY.MM.DD-N`。
+
+## 常用命令
+
+原版 A1 的完整系统发行会自动构建并发布与该 release lock 配套的 AXCL 16GB 包，
+不再人工同步另一份内核/BSP 版本。独立 AXCL 工作流仅保留给不制作新镜像的紧急维护修订。
+安装、DKMS 内核约束和配套 PAC 的验收边界见
+[A1 AXCL 16GB 软件包说明](../packages/axcl-16g/README.md)。
+
+AX8850 转接板的 USB Wi-Fi/蓝牙可选包见
+[A1 AIC8800D80 安装与用户测试说明](../packages/aic8800d80/README.md)。
+
+```bash
+# 构建 dspi-config、APT 客户端、ArmBian 包和 CLI/Desktop 镜像
+scripts/build-product.sh dshanpi-a1-cm5 path/to/release.lock.json
+
+# 其他产品使用完全相同的入口
+scripts/build-product.sh dshanpi-a1 products/dshanpi-a1/releases/2026.10.02-1.lock.json
+scripts/build-product.sh dshanpi-r1 products/dshanpi-r1/releases/2026.10.02-1.lock.json
+scripts/build-product.sh avaota-a1 products/avaota-a1/releases/2026.10.02-1.lock.json
+
+# 从完整包目录生成精确依赖且可独立安装的 core/desktop 元包
+scripts/build-release-meta.sh dshanpi-a1-cm5 2026.09.30-1 packages/
+
+# 在已有仓库副本上加入 testing 候选并重新生成/签名 APT
+scripts/build-apt-repository.sh testing dshanpi-a1-cm5 2026.09.30-1 \
+  packages/ repository/ "$APT_GPG_KEY_FINGERPRINT"
+
+# 真机验证后，将完全相同的候选包晋级 stable；不重新编译
+scripts/promote-apt-release.sh dshanpi-a1-cm5 2026.09.30-1 \
+  repository/ "$APT_GPG_KEY_FINGERPRINT"
+
+# testing 候选失败时只撤回其产品索引，pool 文件和 stable 均不删除
+scripts/withdraw-testing-release.sh dshanpi-a1-cm5 2026.09.30-1 \
+  repository/ "$APT_GPG_KEY_FINGERPRINT"
+
+# 上传完整签名仓库候选；下载站只验签并原子导入
+scripts/publish-apt.sh repository/
+```
+
+APT 地址统一为 `https://apt.100ask.net`。stable suite 为 `noble`，testing suite 为
+`noble-testing`；公共包位于 `common` component，板卡包位于产品同名 component。
+testing 设置 `NotAutomatic`，不会被普通升级命令误装；stable 保持正常 APT 优先级。
+所有历史版本默认保留。U-Boot 和 `linux-libc-dev` 不进入在线升级集合。
+
+`DSHANPI_APT_BASE_URL` 表示完整仓库根地址，默认 `https://apt.100ask.net`；
+`build-client-packages.sh` 的 `BASE_URL` 参数使用同样语义，不再自动追加 `/apt`。
+下载站独立 APT 虚拟主机将该域名的 `/dists/`、`/pool/` 和 `/catalog/` 映射到已有仓库。
+域名变更后的客户端包必须使用新的发行版本；历史 release lock 和已发布 deb 不应覆盖。
+
+构建镜像时，本仓库通过 Armbian 的 `EXT` 接口追加板卡 profile、`dspi-config`、产品软件
+源和 release 元包安装扩展，不覆盖板卡原有的相机、多媒体或固件扩展。产品 profile 随
+板级 BSP 包安装到 `/usr/share/dspi-config/boards/<product>/`；软件源客户端包名为
+`<product>-repository`，版本入口为 `<product>-release-core` 与
+`<product>-release-desktop`。
+
+## 发布门禁
+
+所有产品同时受 [三仓统一交付门禁](../DELIVERY_POLICY.md) 约束。完整系统发行必须自动发布
+到 `dshanpi/ArmBianOS` GitHub Releases，并关联相同 DEB 的 APT 发布与公开下载验证。
+后续维护发行可只构建 DEB 和精确元包。每次构建/发布入口与 CI 均先执行政策一致性检查。
+
+新增或更新普通 DEB 不要求用户重刷镜像。提交带 `maintenance_adapter` 的 release lock，
+仍运行同一个 `release.yml`：testing 路径通过受控 adapter 构建变化包、复用基础发行中其余
+固定 SHA-256 的包、生成新发行元包并发布 APT，不构建或上传镜像。新增组件只增加包配方和
+`scripts/build-maintenance-release.py` 的 adapter 映射，不再复制整套发布 workflow。
+用户切换 testing 后执行 `dspi-config update install <version>`；stable 验收后使用相同包晋级。
+
+`release.yml` 的 testing 路径按同一 release lock 构建 ArmBianOS、dspi-config、AXCL、
+精确发行元包和 CLI/Desktop 镜像，先发布签名 APT 候选，再发布并验证固定的 GitHub
+镜像 Release 资产。stable 路径不重新构建，只允许晋级相同 SHA-256 的候选。
+
+### GitHub Pages 发布
+
+仓库为 `dshanpi/dshanpi-build`。域名 DNS 配置为 `apt` CNAME → `dshanpi.github.io`，
+Pages 使用 Actions 部署，Custom domain 设置为 `apt.100ask.net`。
+
+```bash
+# 公钥和指纹纳入源码，私钥只保存在受保护签名环境与 Actions Secrets。
+scripts/fetch-pages.sh output/repository keys/dshanpi-archive.asc
+# 按上面的 build-apt-repository / promote 命令修改并签名该副本，然后：
+scripts/publish-pages.sh output/repository keys/dshanpi-archive.asc
+```
+
+`feature/apt-pages-state` 分支保存完整签名仓库快照。大文件按 64 MiB 分块存储，
+Actions 重组后验证 GPG、各级元数据及每个 deb 的 SHA-256，再部署到 Pages。
+发布前检查旧状态哈希与历史 pool 不变性，普通 Git push 拒绝并发覆盖。
+快照不依赖会过期的 Actions artifacts；Pages 内容预算为 950 MB，超限直接停止。
+这适用于首阶段闭环；更多板卡和长期版本历史增长后应切换大容量托管。
+
+Actions `Build and publish DShanPI product` 的 `backend` 选择 `github-pages`，即可全程
+使用 GitHub；`ssh` 保留原服务器通道。GitHub 分支部署策略需允许运行发布工作流的源码分支，
+以及 `feature/apt-pages-state`。testing 与 stable 的构建发布共用串行队列。
+
+签名公钥：[`keys/dshanpi-archive.asc`](../keys/dshanpi-archive.asc)，
+指纹：[`keys/dshanpi-archive.fingerprint`](../keys/dshanpi-archive.fingerprint)。
+本次 `2026.10.08-1` / `2026.10.08-2` CM5 候选的精确输入记录在
+`products/dshanpi-a1-cm5/releases/*.packages.json`；复用已记录的 9 月 30 日内核产物，
+新增包含板卡 profile 的 BSP 和独立域名客户端。两组候选分别使用 dspi-config
+`1.0.1-2` / `1.0.2-1`，保留真实升级与降级路径；它们均不代表真机验证已完成。
+
+CM5 `2026.10.08-3` 的 21 个软件包已发布到 testing，精确文件校验值记录在
+`products/dshanpi-a1-cm5/releases/2026.10.08-3.packages.json`。A1、R1 和 Avaota A1
+也分别提供 `2026.10.08-1` 候选；网站支持按板卡、版本和 CLI／桌面类型生成整组
+精确安装命令。HTTPS、签名、四款板卡页面和全部 12 组版本／类型依赖解析均已验证。
+
+CM5 `2026.10.08-3` 的 CLI 和 GNOME 桌面镜像已完成构建及只读验收，原始镜像与
+gzip 压缩包的校验值见 `products/dshanpi-a1-cm5/releases/2026.10.08-3.images.json`。
+验收包括完整精确依赖、启动 DTB、AIC8800 模块、三路相机节点、IQ 文件和签名源配置。
+本次镜像保存在构建工作区 `output/dshanpi-a1-cm5/2026.10.08-3/images/`，未上传 GitHub
+Release；实际硬件启动、外设和升级／重启／回滚测试仍待完成。
+
+后续构建先提交新的 release lock，使用尚未发布的版本号和单调递增的 Armbian revision，
+再在 Actions 中选择对应 `product`、`version`、`channel=testing`、`backend=github-pages`。
+不要复用已发布版本号写入不同内容。Pages 预算检查会保留历史并停止超限发布。
+
+testing 发布必须先通过包集、身份冲突、权限、RPATH、签名和本地 APT 客户端测试。
+stable 只能读取 testing 的候选清单并复用相同 SHA-256。验收记录固定为
+`products/<product>/releases/<version>.hardware-acceptance.json`，并绑定该候选的软件包清单
+SHA-256；引用的日志也必须存在且哈希吻合。硬件启动、显示、相机、无线、USB/PCIe、
+DKMS、AXCL SMI/NPU、重启恢复和回滚未验证前不得晋级 stable。格式和操作步骤见
+[真机发行验收](../docs/hardware-acceptance.md)。
+
+生产私钥只放在本仓库 GitHub Actions Secrets 中；下载站只安装公钥。首版 Debian
+源码包为可选项，DShanPI 自研源码包门禁将在后续版本启用。
+
+## 发行管理与镜像验收
+
+网站 `apt.100ask.net` 根据已验签的发布清单生成板卡、版本和软件包列表。
+仓库管理员从 Actions 的 **Build and publish DShanPI product** 选择产品和版本：
+
+- `testing`：按 release lock 构建包和 CLI/Desktop 镜像，再发布候选。
+- `stable`：提交固定格式的真机验收记录，仅晋级已经发布的相同包；不重新编译。
+- `withdraw`：撤回指定 testing 候选，保留其他版本仍需要的依赖和所有历史 pool 文件。
+
+完整构建只收集当前 `REVISION` 的生成包，继续拒绝同一版本的多个候选，
+不会从缓存里猜选“最新”包。未发布的无压缩 deb 会转为 xz；控制 tar 和数据 tar
+分别核对 SHA-256，不改文件内容，也不重写已发布的包。A1 的 RKAIQ 适配器使用
+已经固定输入 SHA-256 的清理脚本，不修改原 A1 板卡配置或相机安装扩展。
+
+最终镜像从本地安装 release 元包及其所有精确依赖，不要求候选先出现在公开源。
+构建时可设置 `DSHANPI_PUBLISHED_REPOSITORY` 指向已签名的历史仓库；Actions 自动传入。
+工具验证签名后，对相同版本、相同安装内容的软件包复用已发布文件，仅容许
+`Installed-Size` 和校验清单排序等打包元数据差异。安装文件、权限、依赖或维护脚本
+发生变化仍会拒绝复用，必须提高软件包版本号。
+`verify-image.sh PRODUCT VERSION IMAGE.img` 只读挂载镜像，检查元包、每个依赖的
+已安装版本、板卡身份、DTB、配置工具 profile、域名和签名配置。CLI 和 Desktop
+都通过后才复制到本次发行的输出目录。Actions 构建产物保留 7 天；长期镜像托管
+仍使用独立下载渠道，不计入 Pages 的 1 GB 配额。
+
+示例：
+
+```bash
+sudo scripts/verify-image.sh dshanpi-a1-cm5 2026.10.08-3 /absolute/path/to/image.img
+```
+
+镜像内容检查和 APT 安装测试不能替代真机启动、外设、升级后重启和回滚验证。
+
+</details>

@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+<title id="title">DShanPI 构建与发行架构</title><desc id="desc">固定输入 → 唯一编排入口 → 签名 APT 与系统镜像；软件包按产品隔离。</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" fill="#64748b"/></marker></defs>
+<rect width="1200" height="800" rx="20" fill="#f4f7fb"/>
+<text x="44" y="52" font-family="Noto Sans CJK SC, sans-serif" font-size="30" font-weight="700" fill="#10243a">DShanPI 构建与发行架构</text>
+<text x="44" y="85" font-family="Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#52677b">固定输入 → 唯一编排入口 → 签名 APT 与系统镜像；软件包按产品隔离。</text>
+<rect x="44" y="124" width="314" height="126" rx="14" fill="#fff5df" stroke="#e6c881" stroke-width="1.5"/>
+<text x="64" y="158" font-family="Noto Sans CJK SC, sans-serif" font-size="21" font-weight="700" fill="#805b14">产品配置与 release lock</text>
+<text x="64" y="190" font-family="Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#334155">板型、版本、revision</text>
+<text x="64" y="217" font-family="Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#334155">源码 commit、镜像计划</text>
+<rect x="44" y="276" width="314" height="126" rx="14" fill="#eaf2ff" stroke="#9ab9ee" stroke-width="1.5"/>
+<text x="64" y="310" font-family="Noto Sans CJK SC, sans-serif" font-size="21" font-weight="700" fill="#154a91">ArmBianOS</text>
+<text x="64" y="342" font-family="Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#334155">Kernel / DTB / BSP / headers</text>
+<text x="64" y="369" font-family="Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#334155">提供构建引擎与镜像组装</text>
+<rect x="44" y="428" width="314" height="126" rx="14" fill="#eaf2ff" stroke="#9ab9ee" stroke-width="1.5"/>
+<text x="64" y="462" font-family="Noto Sans CJK SC, sans-serif" font-size="21" font-weight="700" fill="#154a91">dspi-config</text>
+<text x="64" y="494" font-family="Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#334155">板端命令与中文终端菜单</text>
+<text x="64" y="521" font-family="Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#334155">构建通用 all 架构 DEB</text>
+<rect x="420" y="212" width="360" height="292" rx="14" fill="#eaf2ff" stroke="#9ab9ee" stroke-width="1.5"/>
+<text x="440" y="246" font-family="Noto Sans CJK SC, sans-serif" font-size="21" font-weight="700" fill="#154a91">dshanpi-build</text>
+<text x="440" y="278" font-family="Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#334155">1. 校验输入与固定源码</text>
+<text x="440" y="305" font-family="Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#334155">2. 调用构建 / 复用历史 DEB</text>
+<text x="440" y="332" font-family="Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#334155">3. 收集、审计、生成精确元包</text>
+<text x="440" y="359" font-family="Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#334155">4. 签名索引与发行证据</text>
+<text x="440" y="386" font-family="Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#334155">5. 编排镜像及 Release 交付</text>
+<rect x="842" y="160" width="314" height="154" rx="14" fill="#e7f6f0" stroke="#98cebb" stroke-width="1.5"/>
+<text x="862" y="194" font-family="Noto Sans CJK SC, sans-serif" font-size="21" font-weight="700" fill="#14654e">签名 APT</text>
+<text x="862" y="226" font-family="Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#334155">apt.100ask.net</text>
+<text x="862" y="253" font-family="Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#334155">common + 本板 component</text>
+<text x="862" y="280" font-family="Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#334155">testing → 验收 → stable</text>
+<rect x="842" y="368" width="314" height="154" rx="14" fill="#e7f6f0" stroke="#98cebb" stroke-width="1.5"/>
+<text x="862" y="402" font-family="Noto Sans CJK SC, sans-serif" font-size="21" font-weight="700" fill="#14654e">GitHub Releases</text>
+<text x="862" y="434" font-family="Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#334155">CLI / GNOME 镜像与校验文件</text>
+<text x="862" y="461" font-family="Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#334155">release lock / 来源记录</text>
+<text x="862" y="488" font-family="Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#334155">dshanpi/ArmBianOS</text>
+<polyline points="358,187 388,187 388,260 420,260" fill="none" stroke="#64748b" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<polyline points="358,339 420,339" fill="none" stroke="#64748b" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<polyline points="358,491 388,491 388,455 420,455" fill="none" stroke="#64748b" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<polyline points="780,284 810,284 810,237 842,237" fill="none" stroke="#64748b" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<polyline points="780,430 842,430" fill="none" stroke="#64748b" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<rect x="44" y="600" width="1112" height="148" rx="14" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+<text x="64" y="634" font-family="Noto Sans CJK SC, sans-serif" font-size="21" font-weight="700" fill="#233a52">设备端消费同一套发行包</text>
+<text x="64" y="666" font-family="Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#334155">首次使用：校验并烧录镜像 → 启动预装 dspi-config 的系统</text>
+<text x="64" y="693" font-family="Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#334155">后续维护：dspi-config 调用 APT → 安装 / 降级 release 元包及整组精确依赖</text>
+<text x="64" y="720" font-family="Noto Sans CJK SC, sans-serif" font-size="16" font-weight="400" fill="#334155">当前执行边界：Actions 发布 DEB/APT；完整镜像由受控本机构建。</text>
+<polyline points="1000,522 1000,600" fill="none" stroke="#64748b" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<polyline points="1156,237 1174,237 1174,580 1100,580 1100,600" fill="none" stroke="#64748b" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow)"/>
+</svg>
