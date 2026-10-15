@@ -58,8 +58,11 @@ def main():
             if hashlib.file_digest(f, 'sha256').hexdigest() != package['sha256']:
                 raise SystemExit('historical package hash mismatch')
         shutil.copyfile(source, output / source.name)
-    retained = axcl_lock['retained_packages']
-    source_driver = axcl_lock['source_driver']
+    complete_cohort = lock.get('axcl_complete_cohort', False)
+    source_inputs = lock['axcl_source_packages'] if complete_cohort else axcl_lock
+    retained = source_inputs['retained_packages']
+    source_driver = source_inputs['source_driver']
+    previous_payloads = {}
     previous_driver = None
     copied_retained = set()
     for package in json.loads(axcl_manifest.read_text())['packages']:
@@ -84,7 +87,9 @@ def main():
         else:
             if package['package'] in copied_retained:
                 raise SystemExit(f'duplicate retained AXCL package: {package["package"]}')
-            shutil.copyfile(source, output / source.name)
+            previous_payloads[package['package']] = source
+            if not complete_cohort:
+                shutil.copyfile(source, output / source.name)
             copied_retained.add(package['package'])
     if previous_driver is None or copied_retained != set(retained):
         raise SystemExit('AXCL historical source cohort is incomplete')
@@ -93,11 +98,25 @@ def main():
         cmd += ['--upstream', args.upstream]
     else:
         cmd += ['--previous-driver', previous_driver]
+        if complete_cohort:
+            cmd += [
+                '--previous-runtime', previous_payloads['dshanpi-axcl-runtime-16g'],
+                '--previous-firmware', previous_payloads['dshanpi-axcl-firmware-16g'],
+                '--previous-release-lock', lock_path,
+            ]
     cmd += [
         '--package-version', axcl_lock['version'],
         '--platform-version', lock['revision'],
     ]
     run(*cmd)
+    if complete_cohort:
+        expected = lock['axcl_expected_packages']
+        actual = {}
+        for deb in output.glob('*axcl*16g*.deb'):
+            name = subprocess.check_output(['dpkg-deb', '-f', str(deb), 'Package'], text=True).strip()
+            actual[name] = hashlib.sha256(deb.read_bytes()).hexdigest()
+        if actual != expected:
+            raise SystemExit('AXCL release bytes differ from the hardware-tested cohort')
     run(ROOT / 'scripts/build-release-meta.sh', 'dshanpi-a1', args.version, output)
     run(ROOT / 'scripts/audit-packages.sh', output)
     with (output / 'SHA256SUMS').open('w') as sums:

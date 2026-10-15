@@ -70,6 +70,8 @@ def main():
     source.add_argument('--previous-driver', type=Path)
     parser.add_argument('--previous-runtime', type=Path)
     parser.add_argument('--previous-firmware', type=Path)
+    parser.add_argument('--previous-release-lock', type=Path,
+                        help='Pinned maintenance plan selecting the historical input cohort')
     parser.add_argument('--package-version')
     parser.add_argument('--platform-version')
     args = parser.parse_args()
@@ -85,6 +87,16 @@ def main():
     if subprocess.run(['dpkg', '--compare-versions', version, 'ge', lock['version']]).returncode:
         raise SystemExit('permission-enabled packages require a new version >= ' + lock['version'])
     kernel = lock['kernel_release']
+    source_inputs = lock
+    if args.previous_release_lock:
+        plan = json.loads(args.previous_release_lock.read_text())
+        if (plan.get('product') != lock['product'] or
+                plan.get('axcl_complete_cohort') is not True or
+                plan.get('axcl_16g_lock_sha256') != sha(ROOT / 'packages/axcl-16g/upstream.lock.json')):
+            raise SystemExit('invalid previous AXCL release plan')
+        if not all((args.previous_driver, args.previous_runtime, args.previous_firmware)):
+            raise SystemExit('previous release plan requires all three input packages')
+        source_inputs = plan['axcl_source_packages']
     previous_payloads = (args.previous_runtime, args.previous_firmware)
     if any(previous_payloads) and not (args.previous_driver and all(previous_payloads)):
         raise SystemExit('previous driver, runtime, and firmware must be supplied together')
@@ -95,9 +107,9 @@ def main():
         extracted = work / 'source'
         if args.previous_driver:
             previous_driver = args.previous_driver.resolve()
-            verify_previous_package(previous_driver, lock['source_driver'])
+            verify_previous_package(previous_driver, source_inputs['source_driver'])
             run('dpkg-deb', '--raw-extract', previous_driver, extracted)
-            prior = lock['source_driver']['version']
+            prior = source_inputs['source_driver']['version']
             source_tree = extracted / ('usr/src/axcl-' + prior)
             embedded = json.loads((extracted / 'usr/share/doc/dshanpi-axcl-dkms-16g/upstream.json').read_text())
             for field in ('url', 'sha256', 'upstream_commit', 'upstream_version'):
@@ -116,7 +128,7 @@ def main():
         firmware = work / 'firmware'
         complete_cohort = not args.previous_driver or all(previous_payloads)
         if complete_cohort and args.previous_runtime:
-            retained = lock['retained_packages']
+            retained = source_inputs['retained_packages']
             runtime_expected = {
                 'package': 'dshanpi-axcl-runtime-16g',
                 **retained['dshanpi-axcl-runtime-16g'],
