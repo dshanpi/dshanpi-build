@@ -1,10 +1,37 @@
 # A1 AX8850 16GB
 
-## 普通用户权限修复候选
+## 安装普通用户权限修复版本
 
-`3.16.0+dshanpi.2026.10.15.1` 在 16GB selector 包中内置权限配置，解决
+`3.16.0+dshanpi.2026.10.15.2` 在 16GB selector 包中内置权限配置，解决
 普通用户 `axcl-smi` 无法打开 `/dev/axcl_host`、消息设备和日志文件的问题。
 新版本不改变上游运行库、驱动来源或 PAC，不扩大板卡与容量适用范围。
+
+维护发行 `2026.10.15-2` 已发布到默认 `noble` 源，配套镜像无需添加 testing 源。
+确认安装 16GB 卡并开启风扇后执行：
+
+```sh
+sudo apt update
+sudo apt install -y dshanpi-a1-axcl-16g
+sudo systemctl enable --now dshanpi-axcl.service
+axcl-smi
+axcl_ut_npu
+```
+
+若全量 `apt update` 下载 Ubuntu 文件索引耗时较长，可只刷新镜像内置配套源：
+
+```sh
+sudo apt-get update \
+  -o Dir::Etc::sourcelist=sources.list.d/dshanpi.sources \
+  -o Dir::Etc::sourceparts=- \
+  -o APT::Get::List-Cleanup=0
+```
+
+这不会添加软件源；适用于已具备构建依赖的配套镜像。
+
+设备查询应列出 AX8850，普通用户 NPU 自检应显示 `20 tests` 全部通过。
+无需手动创建 `/etc` 权限规则或复制 PAC。适配平台版本为
+`25.11.0-trunk.20261010.1`，内核为 `6.1.115-vendor-rk35xx`。
+
 
 | 包内配置 | 行为 |
 | --- | --- |
@@ -38,7 +65,7 @@ timeout 180 ./ut/axcl_ut_npu
 
 ```sh
 python3 scripts/build-axcl-16g-packages.py output/axcl-access/packages \
-  --package-version 3.16.0+dshanpi.2026.10.15.1 \
+  --package-version 3.16.0+dshanpi.2026.10.15.2 \
   --platform-version 25.11.0-trunk.20261010.1
 ```
 
@@ -47,16 +74,28 @@ python3 scripts/build-axcl-16g-packages.py output/axcl-access/packages \
 driver 的旧维护路径仍复用锁定的历史 runtime/PAC 字节。不能只升级 selector 而忽略其
 精确依赖。低于本次修复版本的构建请求会被拒绝，历史重建须使用对应历史源码。
 
-本候选已在 16GB A1 上完成四包升级、普通用户 20 项 NPU 自检、重启、旧版整套回滚、
-清除四包后的重新安装及最终重启。验收全程没有 /etc 手动权限补丁，旧版回滚后可复现
-权限错误，新版恢复后普通用户调用正常。结果与包哈希见
-[实板验证清单](../../docs/validation/2026-10-15-axcl-user-access/hardware-verification.json)。
+正式发行已完成公开 APT 下载及签名校验、22 个已安装包的精确版本核对、普通用户
+NPU 自检、重启、上一正式发行回滚和新版恢复。全程没有 `/etc` 手动权限补丁。
+验收记录见 [2026.10.15-2 实板验收](../../products/dshanpi-a1/releases/2026.10.15-2.hardware-acceptance.json)，
+发布记录见 [testing](https://github.com/dshanpi/dshanpi-build/actions/runs/38692942310) 和
+[stable](https://github.com/dshanpi/dshanpi-build/actions/runs/38697178592)。
 
-这是候选源码与包验证，不表示已经进入公共 APT。正式发行还需新增 maintenance lock、
-固定组件锁哈希和签名基础清单，生成新的 core/desktop 精确元包，走现有 testing 发布
-流程并验签、核对公开下载；stable 只能晋级同一组完成实板验收的包。不要修改历史
-release lock 或覆盖旧包。当前验证范围与未完成项见
-[权限修复变更记录](../../docs/change-records/CR-2026-10-15-axcl-user-access.md)。
+`3.16.0+dshanpi.2026.10.15.1` 是先前本地候选；其清除四包后重装等历史结果保留在
+[本地候选验证清单](../../docs/validation/2026-10-15-axcl-user-access/hardware-verification.json)。
+该版未公开发布；正式修订 `.15.2` 修正 Installed-Size 的可复现计算，并重新完成 APT
+验收。不要将历史候选说明作为当前 APT 版本。
+
+当前维护发行从签名的基础发行中提取固定输入，生成新 core/desktop 元包，并强制比对
+四个 AXCL 包的预期 SHA-256。维护构建使用：
+
+```sh
+python3 scripts/build-maintenance-release.py dshanpi-a1 2026.10.15-2 output/repository
+```
+
+`output/repository` 必须是已验证的签名仓库快照。stable 只晋级 testing 中已验收的相同
+字节，不重新构建。历史 lock 与包保留不变；完整过程见
+[APT 发布与验收记录](../../docs/change-records/CR-2026-10-15-axcl-apt-publication.md)。
+
 
 
 Explicit 16GB option, paired AXCL 3.16.0 runtime and PAC from the immutable

@@ -134,3 +134,30 @@ root NPU test passed. This is expected historical behavior, not a claim that the
 was fixed. The board is restored to the new cohort. No 8GB, other-board, all-model or long-duration
 hardware claim is made. Stable promotion and default-noble installation remain pending at this
 acceptance commit; the promotion must reuse these exact bytes without rebuilding.
+
+## Stable publication and default-source installation
+
+Stable run 38697178592 from acceptance commit merge 22b2a8e50bda4c296c17380b1bc548479a888037
+passed the hardware-evidence gate, promoted the exact same 26 package records, deployed Pages,
+and verified all public downloads. The promoted manifest SHA-256 is
+519e1730062cd9f84a9cf2f20a52ead403da34e2badbe9943c3334f1031202bf. No package was rebuilt.
+
+| 类型 | 命令/检查 | 结果 | 证据 |
+| --- | --- | --- | --- |
+| Stable public | release.yml stable; verify-product-public.py | PASS, signatures and 26 exact DEBs | Actions 38697178592; 2026.10.15-2.public-validation.json |
+| Default source | Refresh only existing dshanpi.sources; apt-cache policy | PASS, version .15.2 from noble at priority 500; original source file hash unchanged | stable-board.log |
+| APT reinstall | Standard apt install, then apt-get --reinstall for all four AXCL packages | PASS, default sources only, driver rebuilt, no extra suite/version argument | stable-board.log |
+| Ordinary user | axcl-smi; axcl_ut_npu | PASS, 20/20, 10215 ms total, 47 C | stable-board.log |
+| Final cohort | Exact installed desktop plus AXCL dependencies | PASS, 22 packages; active/enabled service; no /etc overrides | stable-board.log |
+
+Stable reinstall reused the previously signed APT downloads from the system cache; it did not pretend
+to download another 50 MB. A full `apt update` was interrupted during slow Ubuntu Contents download,
+then the existing DShanPI source was refreshed successfully using Dir::Etc::sourcelist/sourceparts
+and List-Cleanup=0. The package README and standalone concise guide retain normal apt update and
+provide this bounded source-refresh alternative. No testing source was added under /etc, and no
+signature verification was disabled. The separate guide was updated outside the customer website.
+
+Publication, source push, public APT installation and guide update are complete. The board retains
+3.16.0+dshanpi.2026.10.15.2 and release 2026.10.15-2. The hardware scope remains A1 16GB and basic
+NPU/package lifecycle checks; 8GB, other-board hardware, all-model stress tests and new images are
+outside this request. Previous pending statements above record their historical commit-time state.
