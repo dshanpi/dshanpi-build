@@ -1,0 +1,12 @@
+{
+  "verdict": "passed",
+  "release": "2026.10.15-3",
+  "package_version": "3.16.0+dshanpi.2026.10.15.3",
+  "suite": "noble",
+  "all_30_testing_package_hashes_preserved": true,
+  "all_preexisting_pool_bytes_preserved": true,
+  "manifest_sha256": "94ca89be6af2fb3c27a94e6140520c046c2dba7c84ac5a24f6c723779307f1bf",
+  "snapshot_total_bytes": 513404560,
+  "pool_files": 87,
+  "workflow": "https://github.com/dshanpi/dshanpi-build/actions/runs/38716589966"
+}
