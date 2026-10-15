@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "product": "dshanpi-a1-cm5",
+  "suite": "noble-testing",
+  "replacement_version": "2026.10.09-1",
+  "purge_versions": [
+    "2026.10.08-1",
+    "2026.10.08-2"
+  ],
+  "reason": "User-approved retirement of these two legacy CM5 testing cohorts only. Preserve CM5 2026.10.08-3 and 2026.10.09-1, all promoted cohorts and other products. Release capacity for A1 AXCL 8GB."
+}
