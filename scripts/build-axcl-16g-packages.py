@@ -57,7 +57,7 @@ def package_dependencies(lock, version=None, revision=None, complete_cohort=Fals
             f'dshanpi-axcl-runtime-16g (= {runtime_version}), '
             f'dshanpi-axcl-dkms-16g (= {version}), '
             f'linux-image-vendor-rk35xx (= {revision}), '
-            f'armbian-bsp-cli-dshanpi-a1-vendor (= {revision}), pciutils, coreutils'
+            f'armbian-bsp-cli-dshanpi-a1-vendor (= {revision}), pciutils, coreutils, adduser, systemd, udev'
         ),
     }
 
@@ -81,6 +81,9 @@ def main():
         raise SystemExit('invalid AXCL package version')
     if not revision or any(character.isspace() for character in revision):
         raise SystemExit('invalid platform package version')
+    # New permission payloads must never reuse a historical package identity.
+    if subprocess.run(['dpkg', '--compare-versions', version, 'ge', lock['version']]).returncode:
+        raise SystemExit('permission-enabled packages require a new version >= ' + lock['version'])
     kernel = lock['kernel_release']
     previous_payloads = (args.previous_runtime, args.previous_firmware)
     if any(previous_payloads) and not (args.previous_driver and all(previous_payloads)):
@@ -184,21 +187,16 @@ esac
 ''', 0o755)
         # Do not auto-load before the exact card PAC has been reviewed.
         write(meta, 'usr/sbin/dshanpi-axcl', (ROOT / 'packages/axcl-16g/dshanpi-axcl').read_text(), 0o755)
-        write(meta, 'lib/systemd/system/dshanpi-axcl.service', '''[Unit]
-Description=DShanPI AXCL card initialization
-After=systemd-udev-settle.service
-ConditionPathExists=/usr/share/dshanpi-axcl/firmware.sha256
-
-[Service]
-Type=oneshot
-ExecStart=/usr/sbin/dshanpi-axcl start
-RemainAfterExit=yes
-
-[Install]
-WantedBy=multi-user.target
-''')
-        # Firmware installation will explicitly enable the service only when
-        # a reviewed card-specific package is available.
+        component = ROOT / 'packages/axcl-16g'
+        for filename, destination, mode in (
+            ('70-dshanpi-axcl-access.rules', 'usr/lib/udev/rules.d/70-dshanpi-axcl-access.rules', 0o644),
+            ('dshanpi-axcl-access.conf', 'usr/lib/tmpfiles.d/dshanpi-axcl-access.conf', 0o644),
+            ('dshanpi-axcl.service', 'lib/systemd/system/dshanpi-axcl.service', 0o644),
+            ('postinst', 'DEBIAN/postinst', 0o755),
+            ('postrm', 'DEBIAN/postrm', 0o755),
+        ):
+            write(meta, destination, (component / filename).read_text(), mode)
+        # Installation configures access only. Activation remains explicit.
         retained = lock['retained_packages']
         dependencies = package_dependencies(lock, version, revision, complete_cohort)
         packages = [

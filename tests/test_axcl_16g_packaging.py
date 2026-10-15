@@ -23,7 +23,7 @@ class Axcl16gPackagingTests(unittest.TestCase):
         cls.dependencies = MODULE.package_dependencies(cls.lock)
 
     def test_new_driver_identity_does_not_overwrite_published_package(self):
-        self.assertEqual(self.lock['version'], '3.16.0+dshanpi3')
+        self.assertEqual(self.lock['version'], '3.16.0+dshanpi.2026.10.15.1')
         self.assertEqual(self.lock['source_driver']['version'], '3.16.0+dshanpi2')
         self.assertNotEqual(self.lock['version'], self.lock['source_driver']['version'])
 
@@ -48,7 +48,7 @@ class Axcl16gPackagingTests(unittest.TestCase):
         revision = self.lock['kernel_package_version']
         self.assertIn('dshanpi-axcl-runtime-16g (= 3.16.0+dshanpi2)', depends)
         self.assertIn('dshanpi-axcl-firmware-16g (= 3.16.0+dshanpi2)', depends)
-        self.assertIn('dshanpi-axcl-dkms-16g (= 3.16.0+dshanpi3)', depends)
+        self.assertIn('dshanpi-axcl-dkms-16g (= 3.16.0+dshanpi.2026.10.15.1)', depends)
         self.assertIn(f'linux-image-vendor-rk35xx (= {revision})', depends)
         self.assertIn(f'armbian-bsp-cli-dshanpi-a1-vendor (= {revision})', depends)
 
