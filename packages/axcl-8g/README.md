@@ -4,6 +4,29 @@
 配套平台为 `25.11.0-trunk.20261010.1`，运行内核 `6.1.115-vendor-rk35xx`。
 维护包版本为 `3.16.0+dshanpi.2026.10.15.3`；发布及实板状态见本次变更记录。
 
+## 当前交付状态
+
+四包构建与 A1 8GB 实板安装、普通用户 NPU 20/20、重启恢复、卸载及重装均通过。
+云端构建的四个 DEB 与实测包逐字节一致，但 APT 发布被仓库总容量检查阻止，当前
+`noble` 和 `noble-testing` 尚无 8GB 包，不能直接按包名从公开源安装。
+
+在保存四个候选 DEB 的开发板目录中，可执行已实测的本地安装路径：
+
+```sh
+sudo apt install -y ./dshanpi-*8g*.deb
+sudo systemctl enable --now dshanpi-axcl.service
+axcl-smi
+axcl_ut_npu
+```
+
+8GB 四包共 50,000,632 字节；16GB 已发布四包共 50,003,704 字节，采用同一拆分规则。
+容量问题发生在整个仓库：当前快照 926,431,337 字节，加上 8GB 四包至少
+976,431,969 字节，超过 `scripts/pages/snapshot.py` 的 950,000,000 字节预算。
+`apt.100ask.net` 的 CNAME 为 `dshanpi.github.io`；公开 DEB 由 GitHub.com 提供。
+没有把完整系统镜像或原厂 DEB 重复塞入 8GB 包。原包、历史回滚路径和公开索引未变。
+
+[实板验证清单](../../docs/validation/2026-10-15-axcl-8gb/verification.json)
+
 ## 安装与自检
 
 确认卡为 8GB，断电安装，开启风扇后启动开发板。包公开到所选 APT 通道后执行：

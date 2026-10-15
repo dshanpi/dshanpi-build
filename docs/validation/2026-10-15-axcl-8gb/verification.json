@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "product": "dshanpi-a1",
+  "capacity_gb": 8,
+  "package_version": "3.16.0+dshanpi.2026.10.15.3",
+  "release_candidate": "2026.10.15-3",
+  "source_commit": "cf62f1c6824430b63e3bbd2027c1f462112eda7d",
+  "build_merge_commit": "8845b312324a9641a5b3142c9a372f6471d9268b",
+  "verdict": "local_package_hardware_passed_publication_blocked",
+  "package_hashes": {
+    "dshanpi-axcl-firmware-8g": "ef4b5e712c9cfd215fe7d24da5198480220b033fce26c0731831d7c95f9f520c",
+    "dshanpi-axcl-runtime-8g": "8d4e219ade8596d719a70742e90d2eb62680c1805e47bdb1c5dbbf8bd00fe29f",
+    "dshanpi-axcl-dkms-8g": "85b206151d186f40d53daf1c26d53fa73c993a0f867bc6edf08135253ecd2c41",
+    "dshanpi-a1-axcl-8g": "802ee0908d38e64b55edead595c23ef014b7907f87322906e4b4f25e72ef2dc9"
+  },
+  "npu_runs": [
+    {
+      "stage": "04-npu",
+      "passed": 20,
+      "total": 20,
+      "elapsed_ms": 10124,
+      "temperature_after_c": 41,
+      "user": "baiwen (render group)"
+    },
+    {
+      "stage": "06-reboot-check",
+      "passed": 20,
+      "total": 20,
+      "elapsed_ms": 10090,
+      "temperature_after_c": 40,
+      "user": "baiwen (render group)"
+    },
+    {
+      "stage": "11-restore-local",
+      "passed": 20,
+      "total": 20,
+      "elapsed_ms": 10186,
+      "temperature_after_c": 40,
+      "user": "baiwen (render group)"
+    }
+  ],
+  "checks": {
+    "local_apt_install": "passed",
+    "ordinary_user_permissions": "passed",
+    "dkms_five_modules": "passed",
+    "reboot_recovery": "passed",
+    "purge_and_reboot_to_no_axcl": "passed",
+    "local_reinstall": "passed",
+    "cross_capacity_conflict_simulation": "passed",
+    "python_84_tests": "passed",
+    "shell_tests": "passed",
+    "16gb_four_package_byte_identity": "passed",
+    "8gb_pac_source_reproducibility": "passed",
+    "cloud_four_package_byte_identity": "passed",
+    "public_apt_install": "not_run",
+    "stable_promotion": "not_run"
+  },
+  "cmm_total_mib": 7040,
+  "board_kernel": "6.1.115-vendor-rk35xx",
+  "platform_version": "25.11.0-trunk.20261010.1",
+  "unchanged_default_source_sha256": "9e00e649bd0c681e5f1836a2b7e2b9559d3f459e2f109d1afe9ee348f06d579a",
+  "publication": {
+    "workflow": "https://github.com/dshanpi/dshanpi-build/actions/runs/38707613018",
+    "stage": "Publish signed GitHub Pages snapshot",
+    "result": "blocked_by_size_budget",
+    "existing_repository_bytes": 926431337,
+    "new_8gb_debs_bytes": 50000632,
+    "candidate_lower_bound_bytes": 976431969,
+    "configured_budget_bytes": 950000000,
+    "domain_cname": "dshanpi.github.io",
+    "public_index_8gb_present": false
+  },
+  "evidence": [
+    {
+      "path": "board.log",
+      "sha256": "581e3c4b04bf78633f23f650002df15e1a0e229b25458a034b950824223ee39c"
+    }
+  ],
+  "scope": "A1 with supplied 8GB 4266 PAC; software and basic NPU package lifecycle. No 16GB or other-board hardware retest. No model stress qualification or new image. Public APT remains unchanged.",
+  "log_normalization": "Terminal carriage returns normalized to LF and trailing whitespace trimmed; original SSH JSON logs retained in the local task evidence directory."
+}
