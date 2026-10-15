@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "channel": "stable",
+  "suite": "noble",
+  "product": "dshanpi-a1",
+  "component": "dshanpi-a1",
+  "version": "2026.10.15-3",
+  "expected_base_state_sha256": "2991903080dac6bbf2ad2ad06c20008f3f40d48bdf9749bb9d4117b2a1519244"
+}

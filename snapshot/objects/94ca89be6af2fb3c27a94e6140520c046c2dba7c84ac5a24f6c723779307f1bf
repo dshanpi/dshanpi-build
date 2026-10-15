@@ -243,6 +243,7 @@
     }
   ],
   "product": "dshanpi-a1",
+  "promoted_to": "noble",
   "schema_version": 1,
   "suite": "noble-testing",
   "version": "2026.10.15-3"
