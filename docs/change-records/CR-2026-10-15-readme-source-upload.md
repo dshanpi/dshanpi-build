@@ -52,10 +52,15 @@ flowchart TD
 | static | 本地链接、README 锚点、Bash 示例、完整原文比对，以及 Mermaid 11.4.1 `parse` | PASS | 两仓原文均完整保留，仅相对链接重定位；7 份流程图语法通过 |
 | software | `python3 -m unittest discover -s tests -p 'test_*.py'`、`bash tests/test.sh`（构建仓库）；客户端 `bash tests/test.sh` | PASS | 隔离 main 基线 70 项 Python 通过（8.906 秒），两仓 Shell 回归通过；本机构建日志 `/tmp/dshanpi-docs-upload-{python,shell}.log` |
 | build | `(umask 0002; bash packaging/build-deb.sh output)`；解包字节及权限比较 | PASS | 隔离 checkout 重建 1.0.3-4，与先前本地包哈希相同；README/两份 SVG 完整、图片 0644，运行脚本字节等于 main |
-| public | 源码分支/PR/CI 状态核对 | NOT-RUN | 推送后更新，不等同 APT 或镜像验证 |
+| public | GitHub API 核对分支 HEAD 及 README/AGENTS/指南/两图的 Git blob SHA | PASS | 首次上传提交 `7e70a4c2fa73bc152e6b2e017ccf2380c99064da` 与远端一致，5 份文档文件逐一匹配；PR 见下文；CI 最终状态以 PR checks 为准 |
 | hardware | 四板实板安装、重启、外设与回滚 | NOT-RUN | 本任务不连接实板、不发布运行包 |
 
 本轮客户端包 SHA-256：`c6e68a3a9d43c9f84ab6ed682226f5337e56a65e8ae757133e2b1aa63ced2449`。
+
+源码上传与关联 PR：
+
+- https://github.com/dshanpi/dshanpi-build/pull/47
+- 关联仓库：https://github.com/dshanpi/dspi-config/pull/11
 
 ## 未完成项
 
