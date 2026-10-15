@@ -100,3 +100,37 @@ in the new 2026.10.15-2 lock. Historical 2026.10.15-1 lock and evidence remain u
 output/permissions-reproducible-python.log and output/permissions-reproducible-shell.log; package
 manifests: output/reproducible-source-{current,original}/axcl-16g-build.json. Public APT and board
 acceptance remain NOT-RUN for revision 2 at this implementation commit.
+
+## Public testing and hardware acceptance
+
+Testing release 2026.10.15-2 succeeded in Actions run 38692942310 from commit
+62d967a0f62af3aaa209337bd0f73209283b2b5d. Signing, Pages deployment and public verification of all
+26 DEBs passed. The signed manifest SHA-256 is
+aa6bf062b149befb0755cbfbc9fc0ffac2f255a976487ab52cc0ab77c6d8141d.
+Only four AXCL DEBs and two release markers changed; the other 20 package hashes match prior stable.
+
+| 类型 | 命令/检查 | 结果 | 证据 |
+| --- | --- | --- | --- |
+| Public | release.yml testing; verify-product-public.py | PASS, 26 public DEBs and signature | Actions 38692942310 |
+| Board APT | apt-get -t noble-testing install exact selector and desktop release | PASS, signed public download and four expected hashes | 2026.10.15-2.hardware-acceptance/board.log |
+| Cohort | dpkg-query exact required desktop plus AXCL set | PASS, 22 installed packages match | same board log |
+| Ordinary user | axcl-smi; axcl_ut_npu | PASS, 20/20, 10252 ms, 49 C | same board log |
+| Reboot | SSH reboot; repeat ordinary-user NPU | PASS, 20/20, 10239 ms, 48 C | same board log |
+| Rollback | exact 2026.10.14-1 desktop and old AXCL four-package APT downgrade; reboot | PASS, 22 package versions match; root NPU 20/20, 10129 ms | same board log |
+| Recovery | APT restore 2026.10.15-2; reboot; ordinary-user NPU | PASS, 20/20, 10193 ms, 48 C | same board log |
+| Evidence gate | validate-hardware-evidence.py against signed testing manifest | PASS, exact manifest and log hashes | 2026.10.15-2.hardware-acceptance.json |
+
+The first testing install simulation omitted a target suite and was rejected because testing has
+NotAutomatic priority 1. Selecting -t noble-testing resolved the exact dependency cohort. No package
+was changed by the failed simulation. The test image also held older dspi-config/camera packages;
+installing the exact release marker aligned them with the existing published platform base.
+A slow download-only APT operation was interrupted before dpkg, then resumed through the user's
+proxy. An _apt warning concerned the temporary cache under the tester's home, not AXCL access;
+subsequent transactions used the system APT cache. Signatures and hashes were never bypassed.
+
+No /etc permission overrides were present. New packages configure root:render devices and logs;
+old-version ordinary-user Permission denied was deliberately reproduced after rollback, while its
+root NPU test passed. This is expected historical behavior, not a claim that the old permission bug
+was fixed. The board is restored to the new cohort. No 8GB, other-board, all-model or long-duration
+hardware claim is made. Stable promotion and default-noble installation remain pending at this
+acceptance commit; the promotion must reuse these exact bytes without rebuilding.
