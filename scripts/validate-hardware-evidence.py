@@ -38,11 +38,22 @@ def validate(product: str, version: str, evidence_path: Path, repository: Path) 
     for name in BASE_CHECKS:
         require(checks.get(name) == 'passed', f'hardware check did not pass: {name}')
     config = json.loads((ROOT / 'products' / product / 'product.json').read_text())
-    if 'axcl-16g' in config.get('release_package_sets', []):
-        axcl = checks.get('axcl-16g')
-        require(isinstance(axcl, dict), 'AXCL 16GB hardware checks are missing')
+    selected = config.get('release_package_sets', [])
+    plan_path = ROOT / 'products' / product / 'releases' / f'{version}.lock.json'
+    if plan_path.is_file():
+        plan = json.loads(plan_path.read_text())
+        # An 8GB-only maintenance release retains the exact previously tested
+        # 16GB bytes. Require evidence for the changed capacity, never substitute
+        # the old 16GB hardware result for testing the new 8GB PAC/runtime.
+        if plan.get('maintenance_adapter') == 'axcl-8g':
+            selected = ['axcl-8g']
+    for capacity in ('axcl-8g', 'axcl-16g'):
+        if capacity not in selected:
+            continue
+        axcl = checks.get(capacity)
+        require(isinstance(axcl, dict), f'{capacity} hardware checks are missing')
         for name in AXCL_CHECKS:
-            require(axcl.get(name) == 'passed', f'AXCL hardware check did not pass: {name}')
+            require(axcl.get(name) == 'passed', f'{capacity} hardware check did not pass: {name}')
     artifacts = evidence.get('evidence')
     require(isinstance(artifacts, list) and artifacts, 'hardware evidence artifact list is empty')
     for item in artifacts:
