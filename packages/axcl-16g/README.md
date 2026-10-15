@@ -47,6 +47,11 @@ python3 scripts/build-axcl-16g-packages.py output/axcl-access/packages \
 driver 的旧维护路径仍复用锁定的历史 runtime/PAC 字节。不能只升级 selector 而忽略其
 精确依赖。低于本次修复版本的构建请求会被拒绝，历史重建须使用对应历史源码。
 
+本候选已在 16GB A1 上完成四包升级、普通用户 20 项 NPU 自检、重启、旧版整套回滚、
+清除四包后的重新安装及最终重启。验收全程没有 /etc 手动权限补丁，旧版回滚后可复现
+权限错误，新版恢复后普通用户调用正常。结果与包哈希见
+[实板验证清单](../../docs/validation/2026-10-15-axcl-user-access/hardware-verification.json)。
+
 这是候选源码与包验证，不表示已经进入公共 APT。正式发行还需新增 maintenance lock、
 固定组件锁哈希和签名基础清单，生成新的 core/desktop 精确元包，走现有 testing 发布
 流程并验签、核对公开下载；stable 只能晋级同一组完成实板验收的包。不要修改历史

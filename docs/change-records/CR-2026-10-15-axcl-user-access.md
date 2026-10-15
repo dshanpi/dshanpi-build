@@ -70,13 +70,19 @@ flowchart TD
 | 干净源码 | 固定功能提交重新检出，运行三仓政策、变更记录及源码卫生门禁 | PASS | docs/validation/2026-10-15-axcl-user-access/verification.json |
 | 干净源码回归 | unittest discover：77 项；bash tests/test.sh | PASS，与同事未提交文件隔离 | 同上；15-clean-regression.json |
 | 可复现构建 | 固定提交重建四包并逐一比较 SHA256 | PASS，四包一致 | 同上；14-freeze.json |
-| 实板 | 原测试板 SSH 探测 | BLOCKED，连接超时，等待用户确认开机/IP | 当前任务板端连接记录 |
+| 实板初始连接 | 原板初次不可达；用户确认重新刷机后更新独立 SSH 密钥记录 | PASS，后续恢复连接；初始阻断已解除 | 本地 board/evidence/01-baseline.json |
+| 实板升级与重启 | 四包升级；普通用户 SMI/NPU；SSH reboot 后同项检查 | PASS，两次均 20/20，无手工 /etc 补丁 | docs/validation/2026-10-15-axcl-user-access/hardware-verification.json |
+| 实板重复配置 | 将现有节点与日志恢复旧权限，dpkg-reconfigure selector | PASS，权限自动修复，日志哈希不变 | 同上 existing_permissions_repair_log_preserved |
+| 实板回滚 | 四包降级至旧版并重启，管理员 NPU 检查 | PASS，20/20；普通用户旧权限错误重新出现，符合旧版行为 | 同上 root_npu_after_rollback_reboot |
+| 实板无包重装 | 停止服务、卸载模块、purge 四包后重新安装新四包 | PASS，无包状态已核对，日志保留，安装未自动启动服务 | 同上 purge_four_packages_then_install |
+| 实板最终状态 | 新版重装及最后一次重启后的普通用户 SMI/NPU | PASS，两次均 20/20；最终保留新版并启用开机初始化 | 同上 nonroot_after_final_reboot |
 | 公开端点 | testing 发布后验签与包下载 | NOT-RUN，本次未发布 | 不适用 |
 
 ## 未完成项
 
-等待原板恢复连接后移开既有 /etc 手动补丁，测试候选包升级、普通用户访问和重启；
-未验证新包前不能引用旧板端补丁的成功作为本包验收。干净安装和回滚单独记录。
+本次实板验证已完成升级、重复配置、重启、整套旧版回滚，以及清除四包后的重装和
+最终重启。新刷镜像已预装旧版四包，因此“清除四包后重装”不是再次刷机后从零安装
+所有系统依赖的验证。全程没有 /etc 手动权限补丁；长期业务负载和日志轮转压力未测。
 正式 APT 发行需新 release lock、基础签名清单、精确元包、testing 发布及公共验证；
 本次本地候选包不代表在线交付完成。其他板卡与 8GB 未执行硬件验证。
 
@@ -88,3 +94,14 @@ flowchart TD
 包进入正式 testing 并通过验收后，独立客户指南方可移除该新版本的手工权限配置。
 
 功能提交：`847653d271e529ec29059d047c5283979e8dbe55`。候选包身份、哈希及验证范围保存在 [verification.json](../validation/2026-10-15-axcl-user-access/verification.json)。原始会话构建与测试日志已另存任务证据目录，不提交凭据或大文件。
+
+## 实板复测补充
+
+本次候选包仍为功能提交 847653d271e529ec29059d047c5283979e8dbe55 构建的相同四包，
+未因实测重打包或变更 SHA256。最终板端保留 3.16.0+dshanpi.2026.10.15.1，
+卡端 CMM 总量 15232 MiB。该实板结果支持本包权限修复，不表示已完成公共 APT 交付。
+
+测试执行中遇到两项 APT 命令行为：相对本地路径配合 --no-download 报错，尚未安装；
+改用绝对本地路径后成功。回滚同版本同时存在于在线源时，APT 优先下载远端包；在确认
+未运行 dpkg 后中断下载，将已校验旧包放入 APT 缓存，以精确版本和 --no-download
+完成离线回滚。两项均保留本地原始日志，没有关闭签名验证或改变软件源。

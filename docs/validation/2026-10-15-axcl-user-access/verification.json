@@ -62,7 +62,11 @@
       }
     },
     "old_version_request": "PASS: rejected before creating output",
-    "hardware_install_reboot_rollback": "BLOCKED: target SSH unreachable; candidate not installed",
+    "hardware_install_reboot_rollback": {
+      "result": "PASS",
+      "evidence": "hardware-verification.json",
+      "scope": "16GB A1: upgrade, existing-node reconfiguration, reboot, old-cohort rollback, package-purge reinstall, final reboot; no /etc manual overrides"
+    },
     "public_apt_install": "NOT-RUN: no publication requested or performed"
   },
   "scope": "16GB A1 candidate only; no 8GB/other-board claim; no kernel or PAC modification"
