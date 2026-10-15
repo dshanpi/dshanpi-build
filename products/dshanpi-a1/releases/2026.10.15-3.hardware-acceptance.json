@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "product": "dshanpi-a1",
+  "release": "2026.10.15-3",
+  "verdict": "passed",
+  "package_manifest_sha256": "67d5c927b2f4da95065d35dd0d36cd323b1f27880f2987140794b29193e358c6",
+  "checks": {
+    "apt_install": "passed",
+    "release_meta": "passed",
+    "boot": "passed",
+    "reboot": "passed",
+    "rollback": "passed",
+    "axcl-8g": {
+      "dkms": "passed",
+      "module_load": "passed",
+      "axcl_smi": "passed",
+      "npu": "passed",
+      "reboot_recovery": "passed"
+    }
+  },
+  "evidence": [
+    {
+      "path": "2026.10.15-3.hardware-acceptance/board.log",
+      "sha256": "17051c5a2e83f9b25d46458abe69929a1e956c9dfb326d587b240cb5a8ae237d"
+    }
+  ],
+  "testing_workflow": "https://github.com/dshanpi/dshanpi-build/actions/runs/38714648985",
+  "build_commit": "a14990f4002643c7f88b717cee3f328db3b07a79",
+  "package_version": "3.16.0+dshanpi.2026.10.15.3",
+  "package_hashes": {
+    "dshanpi-a1-axcl-8g": "802ee0908d38e64b55edead595c23ef014b7907f87322906e4b4f25e72ef2dc9",
+    "dshanpi-axcl-dkms-8g": "85b206151d186f40d53daf1c26d53fa73c993a0f867bc6edf08135253ecd2c41",
+    "dshanpi-axcl-firmware-8g": "ef4b5e712c9cfd215fe7d24da5198480220b033fce26c0731831d7c95f9f520c",
+    "dshanpi-axcl-runtime-8g": "8d4e219ade8596d719a70742e90d2eb62680c1805e47bdb1c5dbbf8bd00fe29f"
+  },
+  "npu_runs": [
+    {
+      "stage": "15-public-testing-install",
+      "user": "ordinary render member",
+      "passed": 20,
+      "total": 20,
+      "elapsed_ms": 10120,
+      "temperature_after_c": 41
+    },
+    {
+      "stage": "17-public-reboot-check",
+      "user": "ordinary render member",
+      "passed": 20,
+      "total": 20,
+      "elapsed_ms": 10121,
+      "temperature_after_c": 41
+    },
+    {
+      "stage": "21-public-restore",
+      "user": "ordinary render member",
+      "passed": 20,
+      "total": 20,
+      "elapsed_ms": 10194,
+      "temperature_after_c": 39
+    }
+  ],
+  "scope": "DShanPI A1 RK3576 with AX8850 M.2 8GB/4266, kernel 6.1.115-vendor-rk35xx, platform revision 25.11.0-trunk.20261010.1. Public APT download and hash equality verified. Prior stable platform and 16GB package bytes retained. No new image.",
+  "rollback": "First 8GB release: remove all four 8GB packages and restore previous stable release-desktop 2026.10.15-2; reboot; verify all 18 installed cohort packages and absence of AXCL devices/modules; restore 2026.10.15-3 with four 8GB packages and verify all 22 installed cohort packages. Never initialize 16GB firmware on 8GB hardware.",
+  "observations": [
+    "First APT refresh briefly saw pre-deployment edge cache; refresh with No-Cache found exact new versions and signed install passed.",
+    "Original image camera-engine-rkaiq 6.6.3+dshanpi2 is unavailable in public APT; that simulation made no changes. Actual rollback targets the complete previous stable 2026.10.15-2 cohort, not an unreproducible image package set.",
+    "Persistent noble source file hash unchanged. Testing source was a per-command evaluation file outside /etc/apt/sources.list.d. No manual /etc permission overrides."
+  ],
+  "not_tested": [
+    "Other boards or cards",
+    "All models or extended stress tests",
+    "Restoring original image-specific unpublished camera package"
+  ]
+}
