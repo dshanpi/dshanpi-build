@@ -67,6 +67,9 @@ flowchart TD
 | 软件回归 | unittest discover -s tests -p 'test_*.py'；bash tests/test.sh | PASS，79 项 Python 及 Shell 回归 | 10-regression.json |
 | 构建/包 | 解包核对模板、0644/0755 权限、无 /etc 覆盖；对比历史 runtime/PAC | PASS，182 个运行时文件及 1 个 PAC 内容未变 | output/axcl-access-20261015/package-verification.json |
 | 工作区门禁 | check-change-record.py | BLOCKED，同事已有未提交 CR-2026-10-14-public-verifier-range-download.md 缺少流程章节；本次记录单独校验 PASS | 12-docs.json；13-package-check.json |
+| 干净源码 | 固定功能提交重新检出，运行三仓政策、变更记录及源码卫生门禁 | PASS | docs/validation/2026-10-15-axcl-user-access/verification.json |
+| 干净源码回归 | unittest discover：77 项；bash tests/test.sh | PASS，与同事未提交文件隔离 | 同上；15-clean-regression.json |
+| 可复现构建 | 固定提交重建四包并逐一比较 SHA256 | PASS，四包一致 | 同上；14-freeze.json |
 | 实板 | 原测试板 SSH 探测 | BLOCKED，连接超时，等待用户确认开机/IP | 当前任务板端连接记录 |
 | 公开端点 | testing 发布后验签与包下载 | NOT-RUN，本次未发布 | 不适用 |
 
@@ -83,3 +86,5 @@ flowchart TD
 内核/设备树或 dspi-config。8GB 不借此扩大支持范围；其历史包仍要求管理员访问。
 本机候选与源码改动供评审，旧源包、历史 DEB、release lock 和 tag 均保留。
 包进入正式 testing 并通过验收后，独立客户指南方可移除该新版本的手工权限配置。
+
+功能提交：`847653d271e529ec29059d047c5283979e8dbe55`。候选包身份、哈希及验证范围保存在 [verification.json](../validation/2026-10-15-axcl-user-access/verification.json)。原始会话构建与测试日志已另存任务证据目录，不提交凭据或大文件。
