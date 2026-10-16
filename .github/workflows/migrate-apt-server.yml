@@ -1,0 +1,52 @@
+name: Migrate APT repository to SSH server
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Share the publication queue with every product and component release.
+concurrency:
+  group: apt-repository-publication
+  cancel-in-progress: false
+
+jobs:
+  migrate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Check delivery policy
+        run: python3 tools/check-delivery-policy.py
+      - name: Install transfer and verification tools
+        run: sudo apt-get update && sudo apt-get install -y rsync sshpass dpkg-dev gnupg xz-utils
+      - name: Configure read-only GitHub authentication
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config --global http.https://github.com/.extraheader "AUTHORIZATION: basic $(printf 'x-access-token:%s' "$GH_TOKEN" | base64 -w0)"
+      - name: Fetch and verify existing Pages repository
+        run: |
+          scripts/fetch-pages.sh output/repository keys/dshanpi-archive.asc
+          test -s output/repository/SHA256SUMS
+      - name: Upload existing signed bytes without rebuilding or resigning
+        env:
+          HOST: ${{ secrets.HOST }}
+          USERNAME: ${{ secrets.USERNAME }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+          PORT: ${{ secrets.PORT }}
+        run: scripts/publish-apt.sh output/repository keys/dshanpi-archive.asc --bootstrap
+      - name: Read back and verify the migrated repository
+        env:
+          HOST: ${{ secrets.HOST }}
+          USERNAME: ${{ secrets.USERNAME }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+          PORT: ${{ secrets.PORT }}
+        run: |
+          scripts/fetch-apt.sh output/read-back keys/dshanpi-archive.asc
+          cmp output/repository/SHA256SUMS output/read-back/SHA256SUMS
+          cmp output/repository/SHA256SUMS.asc output/read-back/SHA256SUMS.asc
+          echo 'Signed APT state migrated and read back successfully. Configure the website root as /www/wwwroot/apt.100ask.net/current, validate HTTPS against the new server, then switch apt.100ask.net DNS. Public cutover is not performed by this workflow.' >> "$GITHUB_STEP_SUMMARY"
