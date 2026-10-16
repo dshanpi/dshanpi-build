@@ -73,14 +73,18 @@ def verify_release(upload: Path, keyring: Path, suite_dir: Path) -> None:
     for path in (release, inrelease, detached):
         if not path.is_file():
             fail(f"suite is missing {path.name}: {suite_dir.name}")
-    with tempfile.NamedTemporaryFile() as cleartext:
-        result = subprocess.run(
-            ["gpgv", "--keyring", str(keyring), "--output", cleartext.name, str(inrelease)],
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
-        )
-        if result.returncode != 0 or Path(cleartext.name).read_bytes() != release.read_bytes():
-            fail(f"InRelease verification failed: {suite_dir.name}")
+    # Capture plaintext on stdout: older gpgv releases may refuse to replace
+    # an already-created temporary file passed through --output.
+    result = subprocess.run(
+        ["gpgv", "--keyring", str(keyring), "--output", "-", str(inrelease)],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    if result.returncode != 0:
+        detail = result.stderr.decode("utf-8", errors="replace").strip()
+        fail(f"InRelease signature verification failed: {suite_dir.name}: {detail}")
+    if result.stdout != release.read_bytes():
+        fail(f"InRelease signed content differs from Release: {suite_dir.name}")
     verify_detached(keyring, detached, release)
     release_text = release.read_text()
     not_automatic = "NotAutomatic: yes\n" in release_text
