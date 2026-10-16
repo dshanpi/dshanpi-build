@@ -1,0 +1,83 @@
+test_checksum_mismatch_preserves_target_and_can_retry (test_public_repository_download.PublicRepositoryDownloadTests.test_checksum_mismatch_preserves_target_and_can_retry) ... ERROR
+test_concurrent_downloads_use_independent_temporary_files (test_public_repository_download.PublicRepositoryDownloadTests.test_concurrent_downloads_use_independent_temporary_files) ... ERROR
+test_ignores_stale_parts_from_another_download (test_public_repository_download.PublicRepositoryDownloadTests.test_ignores_stale_parts_from_another_download) ... FAIL
+test_large_object_uses_complete_bounded_ranges (test_public_repository_download.PublicRepositoryDownloadTests.test_large_object_uses_complete_bounded_ranges) ... ok
+test_rejects_range_with_wrong_object_size (test_public_repository_download.PublicRepositoryDownloadTests.test_rejects_range_with_wrong_object_size) ... FAIL
+test_rejects_repository_path_traversal (test_public_repository_download.PublicRepositoryDownloadTests.test_rejects_repository_path_traversal) ... ok
+test_rejects_truncated_stream (test_public_repository_download.PublicRepositoryDownloadTests.test_rejects_truncated_stream) ... ok
+test_rejects_unrequested_partial_response (test_public_repository_download.PublicRepositoryDownloadTests.test_rejects_unrequested_partial_response) ... ok
+test_small_object_uses_complete_stream (test_public_repository_download.PublicRepositoryDownloadTests.test_small_object_uses_complete_stream) ... ok
+
+======================================================================
+ERROR: test_checksum_mismatch_preserves_target_and_can_retry (test_public_repository_download.PublicRepositoryDownloadTests.test_checksum_mismatch_preserves_target_and_can_retry)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/dshanpi-workspace/dshanpi-build/tests/test_public_repository_download.py", line 142, in test_checksum_mismatch_preserves_target_and_can_retry
+    fetch(url, "payload.bin", target, expected_sha256=expected)
+TypeError: fetch() got an unexpected keyword argument 'expected_sha256'
+
+======================================================================
+ERROR: test_concurrent_downloads_use_independent_temporary_files (test_public_repository_download.PublicRepositoryDownloadTests.test_concurrent_downloads_use_independent_temporary_files)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/dshanpi-workspace/dshanpi-build/tests/test_public_repository_download.py", line 133, in test_concurrent_downloads_use_independent_temporary_files
+    future.result()
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 456, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/dshanpi-workspace/dshanpi-build/scripts/public_repository_download.py", line 117, in fetch
+    future.result()
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 456, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/dshanpi-workspace/dshanpi-build/scripts/public_repository_download.py", line 53, in _fetch_range
+    _fail(f"range download exceeds expected size: {relative}")
+  File "/home/ubuntu/dshanpi-workspace/dshanpi-build/scripts/public_repository_download.py", line 14, in _fail
+    raise ValueError(message)
+ValueError: range download exceeds expected size: payload.bin
+
+======================================================================
+FAIL: test_ignores_stale_parts_from_another_download (test_public_repository_download.PublicRepositoryDownloadTests.test_ignores_stale_parts_from_another_download)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/dshanpi-workspace/dshanpi-build/tests/test_public_repository_download.py", line 126, in test_ignores_stale_parts_from_another_download
+    self.assertEqual(target.read_bytes(), RangeHandler.payload)
+AssertionError: b'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx[9437139 chars]xtur' != b'dshanpi-range-fixture-dshanpi-range-fixtu[9437139 chars]xtur'
+
+======================================================================
+FAIL: test_rejects_range_with_wrong_object_size (test_public_repository_download.PublicRepositoryDownloadTests.test_rejects_range_with_wrong_object_size)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/dshanpi-workspace/dshanpi-build/tests/test_public_repository_download.py", line 109, in test_rejects_range_with_wrong_object_size
+    self.download_fixture(handler, failure="range response mismatch")
+  File "/home/ubuntu/dshanpi-workspace/dshanpi-build/tests/test_public_repository_download.py", line 98, in download_fixture
+    self.assertEqual(list(target.parent.iterdir()), [target])
+AssertionError: Lists differ: [Posi[32 chars]bin'), PosixPath('/tmp/tmpqjq5b4qi/payload.bin[61 chars]t0')] != [Posi[32 chars]bin')]
+
+First list contains 2 additional elements.
+First extra element 1:
+PosixPath('/tmp/tmpqjq5b4qi/payload.bin.tmp.part1')
+
+- [PosixPath('/tmp/tmpqjq5b4qi/payload.bin'),
+?                                           ^
+
++ [PosixPath('/tmp/tmpqjq5b4qi/payload.bin')]
+?                                           ^
+
+-  PosixPath('/tmp/tmpqjq5b4qi/payload.bin.tmp.part1'),
+-  PosixPath('/tmp/tmpqjq5b4qi/payload.bin.tmp.part0')]
+
+----------------------------------------------------------------------
+Ran 9 tests in 5.221s
+
+FAILED (failures=2, errors=2)

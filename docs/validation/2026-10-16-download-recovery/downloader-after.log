@@ -1,0 +1,16 @@
+test_checksum_mismatch_preserves_target_and_can_retry (test_public_repository_download.PublicRepositoryDownloadTests.test_checksum_mismatch_preserves_target_and_can_retry) ... ok
+test_concurrent_downloads_use_independent_temporary_files (test_public_repository_download.PublicRepositoryDownloadTests.test_concurrent_downloads_use_independent_temporary_files) ... ok
+test_ignores_stale_parts_from_another_download (test_public_repository_download.PublicRepositoryDownloadTests.test_ignores_stale_parts_from_another_download) ... ok
+test_large_object_uses_complete_bounded_ranges (test_public_repository_download.PublicRepositoryDownloadTests.test_large_object_uses_complete_bounded_ranges) ... ok
+test_missing_object_fails_without_retries (test_public_repository_download.PublicRepositoryDownloadTests.test_missing_object_fails_without_retries) ... ok
+test_range_retry_resumes_incomplete_parts (test_public_repository_download.PublicRepositoryDownloadTests.test_range_retry_resumes_incomplete_parts) ... ok
+test_rejects_range_with_wrong_object_size (test_public_repository_download.PublicRepositoryDownloadTests.test_rejects_range_with_wrong_object_size) ... ok
+test_rejects_repository_path_traversal (test_public_repository_download.PublicRepositoryDownloadTests.test_rejects_repository_path_traversal) ... ok
+test_rejects_truncated_stream (test_public_repository_download.PublicRepositoryDownloadTests.test_rejects_truncated_stream) ... ok
+test_rejects_unrequested_partial_response (test_public_repository_download.PublicRepositoryDownloadTests.test_rejects_unrequested_partial_response) ... ok
+test_small_object_uses_complete_stream (test_public_repository_download.PublicRepositoryDownloadTests.test_small_object_uses_complete_stream) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 5.227s
+
+OK

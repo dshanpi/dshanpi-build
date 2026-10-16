@@ -1,0 +1,85 @@
+test_fetches_only_signed_exact_cohort (test_fetch_public_release.PublicReleaseFetchTests.test_fetches_only_signed_exact_cohort) ... ok
+test_rejects_existing_unsigned_extra_package (test_fetch_public_release.PublicReleaseFetchTests.test_rejects_existing_unsigned_extra_package) ... ok
+test_rejects_package_changed_after_signed_manifest (test_fetch_public_release.PublicReleaseFetchTests.test_rejects_package_changed_after_signed_manifest) ... ok
+test_checksum_mismatch_preserves_target_and_can_retry (test_public_repository_download.PublicRepositoryDownloadTests.test_checksum_mismatch_preserves_target_and_can_retry) ... ok
+test_concurrent_downloads_use_independent_temporary_files (test_public_repository_download.PublicRepositoryDownloadTests.test_concurrent_downloads_use_independent_temporary_files) ... ok
+test_ignores_stale_parts_from_another_download (test_public_repository_download.PublicRepositoryDownloadTests.test_ignores_stale_parts_from_another_download) ... ok
+test_large_object_uses_complete_bounded_ranges (test_public_repository_download.PublicRepositoryDownloadTests.test_large_object_uses_complete_bounded_ranges) ... ok
+test_missing_object_fails_without_retries (test_public_repository_download.PublicRepositoryDownloadTests.test_missing_object_fails_without_retries) ... ok
+test_range_retry_resumes_incomplete_parts (test_public_repository_download.PublicRepositoryDownloadTests.test_range_retry_resumes_incomplete_parts) ... ok
+test_rejects_range_with_wrong_object_size (test_public_repository_download.PublicRepositoryDownloadTests.test_rejects_range_with_wrong_object_size) ... ok
+test_rejects_repository_path_traversal (test_public_repository_download.PublicRepositoryDownloadTests.test_rejects_repository_path_traversal) ... ok
+test_rejects_truncated_stream (test_public_repository_download.PublicRepositoryDownloadTests.test_rejects_truncated_stream) ... ok
+test_rejects_unrequested_partial_response (test_public_repository_download.PublicRepositoryDownloadTests.test_rejects_unrequested_partial_response) ... ok
+test_small_object_uses_complete_stream (test_public_repository_download.PublicRepositoryDownloadTests.test_small_object_uses_complete_stream) ... ok
+test_cached_readback_reuses_content_and_fetches_changed_state (test_ssh_publication.SSHPublicationTest.test_cached_readback_reuses_content_and_fetches_changed_state) ... verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+ok
+test_corrupt_upload_does_not_switch (test_ssh_publication.SSHPublicationTest.test_corrupt_upload_does_not_switch) ... verified testing publication for dshanpi-a1 2026.10.15-1
+verify-apt-upload: publication checksum mismatch: pool/common/f/fixture/fixture_1_arm64.deb
+ok
+test_empty_server_requires_explicit_migration (test_ssh_publication.SSHPublicationTest.test_empty_server_requires_explicit_migration) ... ok
+test_failed_atomic_switch_keeps_previous_release (test_ssh_publication.SSHPublicationTest.test_failed_atomic_switch_keeps_previous_release) ... verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+ok
+test_full_shell_transport_migration_fetch_and_update (test_ssh_publication.SSHPublicationTest.test_full_shell_transport_migration_fetch_and_update) ... ok
+test_legacy_gpgv_does_not_need_an_output_option (test_ssh_publication.SSHPublicationTest.test_legacy_gpgv_does_not_need_an_output_option) ... ok
+test_migration_preserves_signed_bytes_and_retries_identical_state (test_ssh_publication.SSHPublicationTest.test_migration_preserves_signed_bytes_and_retries_identical_state) ... verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+ok
+test_migration_refuses_to_overwrite_different_existing_state (test_ssh_publication.SSHPublicationTest.test_migration_refuses_to_overwrite_different_existing_state) ... verified testing publication for dshanpi-a1 2026.10.15-1
+ok
+test_missing_server_tool_fails_before_storage_creation (test_ssh_publication.SSHPublicationTest.test_missing_server_tool_fails_before_storage_creation) ... ok
+test_real_sshpass_authentication_and_nested_environment_scrubbing (test_ssh_publication.SSHPublicationTest.test_real_sshpass_authentication_and_nested_environment_scrubbing) ... ok
+test_resume_refuses_different_expected_repository_without_changing_upload (test_ssh_publication.SSHPublicationTest.test_resume_refuses_different_expected_repository_without_changing_upload) ... ok
+test_resume_verifies_existing_upload_without_retransferring_payload (test_ssh_publication.SSHPublicationTest.test_resume_verifies_existing_upload_without_retransferring_payload) ... ok
+test_signed_historical_payload_change_rejected_without_mutating_live_hardlink (test_ssh_publication.SSHPublicationTest.test_signed_historical_payload_change_rejected_without_mutating_live_hardlink) ... verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+ok
+test_stale_candidate_cannot_overwrite_new_publication (test_ssh_publication.SSHPublicationTest.test_stale_candidate_cannot_overwrite_new_publication) ... verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+verify-apt-upload: repository state changed: expected 59be9716673e8492e68d1225ea418691798b098f299576cafc42cfc2f05a8e92, found 43f0dde27acc62f128b49c20139d8d6e987af3a1718e4193292bb5f66247c4cf
+ok
+test_symlink_upload_and_escaped_current_rejected (test_ssh_publication.SSHPublicationTest.test_symlink_upload_and_escaped_current_rejected) ... ok
+test_unsigned_pool_removal_rejected_and_explicit_signed_purge_allowed (test_ssh_publication.SSHPublicationTest.test_unsigned_pool_removal_rejected_and_explicit_signed_purge_allowed) ... verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+ok
+test_unverified_readback_cache_is_rejected_before_download (test_ssh_publication.SSHPublicationTest.test_unverified_readback_cache_is_rejected_before_download) ... verified testing publication for dshanpi-a1 2026.10.15-1
+ok
+test_update_reuses_hardlinks_and_preserves_previous_snapshot (test_ssh_publication.SSHPublicationTest.test_update_reuses_hardlinks_and_preserves_previous_snapshot) ... verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+ok
+test_verifier_imports_without_runtime_builtin_generic_support (test_ssh_publication.SSHPublicationTest.test_verifier_imports_without_runtime_builtin_generic_support) ... ok
+test_wrong_signature_does_not_switch (test_ssh_publication.SSHPublicationTest.test_wrong_signature_does_not_switch) ... verified testing publication for dshanpi-a1 2026.10.15-1
+verify-apt-upload: signature verification failed: /tmp/tmp9dmlzagu/server/incoming/20261015T120000Z-837eb5b239c8db50-2/repository/SHA256SUMS
+ok
+
+----------------------------------------------------------------------
+Ran 34 tests in 34.938s
+
+OK
+Current signed repository: /tmp/tmpwvebsia1/server/releases/20261015T120000Z-f1c13ad3b228d677-1
+Current signed repository: /tmp/tmpwvebsia1/server/releases/20261015T120000Z-09c4287586ccbac3-2
+Current signed repository: /tmp/tmpnbq6lffc/server/releases/20261015T120000Z-65d8c0dc2d9ff417-1
+Current signed repository: /tmp/tmplswqjwdd/server/releases/20261015T120000Z-6b17c6627d7cf5ef-1
+Current signed repository: /tmp/tmp80t3xf9l/server/releases/20261015T120000Z-33c9b4f51512e599-1
+The identical signed repository is already current; no switch needed.
+Current signed repository: /tmp/tmp9onncvuj/server/releases/20261015T120000Z-a439e5af76f98a0d-1
+Current signed repository: /tmp/tmp_a0t4544/server/releases/20261015T120000Z-c7fcb8bf9d36b170-1
+Current signed repository: /tmp/tmpk46kixgn/server/releases/20261015T120000Z-59be9716673e8492-1
+Current signed repository: /tmp/tmpk46kixgn/server/releases/20261015T120000Z-43f0dde27acc62f1-3
+Current signed repository: /tmp/tmp8na29x8t/server/releases/20261015T120000Z-565d746230252e92-1
+Current signed repository: /tmp/tmp8na29x8t/server/releases/20261015T120000Z-abd700d3a754622a-3
+Current signed repository: /tmp/tmpyjee2cx_/server/releases/20261015T120000Z-2c7630fa9314b79a-1
+Current signed repository: /tmp/tmpg7ncs8xx/server/releases/20261015T120000Z-9a981c0583304128-1
+Current signed repository: /tmp/tmpg7ncs8xx/server/releases/20261015T120000Z-32e2954b8e678d25-2
+Current signed repository: /tmp/tmp9dmlzagu/server/releases/20261015T120000Z-ac57ef4eb2982c98-1

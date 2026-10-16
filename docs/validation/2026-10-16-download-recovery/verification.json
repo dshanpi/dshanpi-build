@@ -1,0 +1,147 @@
+{
+  "date": "2026-10-16",
+  "baseline_commit": "ad615ca21653b680eea26713fb058e0b830ac7df",
+  "regression": {
+    "python": {
+      "count": 119,
+      "result": "PASS",
+      "log": "python-tests.log"
+    },
+    "final_focused": {
+      "count": 34,
+      "result": "PASS"
+    },
+    "downloader": {
+      "count": 11,
+      "result": "PASS"
+    },
+    "signed_cohort": {
+      "count": 3,
+      "result": "PASS"
+    },
+    "shell_integration": "PASS",
+    "workflow_actionlint": "PASS",
+    "syntax": "PASS",
+    "cross_repository_policy": "PASS",
+    "repository_hygiene": "PASS",
+    "public_verifier_cache": {
+      "count": 4,
+      "result": "PASS",
+      "log": "verifier-cache-tests.log"
+    }
+  },
+  "before_fix": {
+    "downloader": {
+      "count": 9,
+      "result": "FAIL",
+      "failures": 2,
+      "errors": 2,
+      "notes": "stale bytes, leaked fragments, concurrent writes; new hash API absent"
+    },
+    "signed_cohort": {
+      "count": 3,
+      "result": "FAIL",
+      "failures": 1,
+      "notes": "corrupt final package persisted after rejection"
+    }
+  },
+  "public_full_cohort": {
+    "result": "PASS",
+    "product": "avaota-a1",
+    "version": "2026.10.14-1",
+    "base_url": "https://apt.100ask.net",
+    "command": "timeout 300 python3 -u scripts/verify-product-public.py avaota-a1 2026.10.14-1 --cache-dir output/public-verification-cache",
+    "exit_code": 0,
+    "package_count": 12,
+    "packages": [
+      {
+        "package": "armbian-bsp-cli-avaota-a1-legacy",
+        "version": "25.11.0-trunk.20261014.1",
+        "sha256": "4604774d5daeeee276324b20725c1b1dfbff7d4c36baf048a48388fba74ffa48"
+      },
+      {
+        "package": "armbian-bsp-desktop-avaota-a1-legacy",
+        "version": "25.11.0-trunk.20261014.1",
+        "sha256": "99bb5e4514de8d4d3b9080d2737557462d66ed9454e7b814586d2aced3b698a5"
+      },
+      {
+        "package": "armbian-firmware",
+        "version": "25.11.0-trunk.20261014.1",
+        "sha256": "e5e0413876b8f2d6d36fb334897f60c7a910ac135b65c6a5567b5fb57996803d"
+      },
+      {
+        "package": "avaota-a1-release-core",
+        "version": "2026.10.14-1",
+        "sha256": "f0a870251868e2b5c590a134e635a09b13baa35f9fa405fc06e4ff6aae3a2f82"
+      },
+      {
+        "package": "avaota-a1-release-desktop",
+        "version": "2026.10.14-1",
+        "sha256": "c23e29ba419c1db8b8378330bcc2147940a00d1cc83dcb8a59b5ca2bfbeb2818"
+      },
+      {
+        "package": "avaota-a1-repository",
+        "version": "1:2026.10.14-1",
+        "sha256": "77a68f312b58e6f007abde4f963084f9bd160056e75634ee7e86d35b7a0f61b8"
+      },
+      {
+        "package": "base-files",
+        "version": "25.11.0-trunk.20261014.1-13ubuntu10-noble",
+        "sha256": "1eaa98476268f49a2559cf5797b82945e2cb365353c2f7f294e5b4551d562c4f"
+      },
+      {
+        "package": "dshanpi-archive-keyring",
+        "version": "1:2026.10.14-1",
+        "sha256": "2edc66be73e0114160fda10a40a10f99f763198d4e29cd4c77d38bbcd2ed77e1"
+      },
+      {
+        "package": "dspi-config",
+        "version": "1.0.3-1",
+        "sha256": "dd536919b4c2ec73a7d03a3e9b3ff14577169cd94b8c6d0b60bbfc0b02ee770a"
+      },
+      {
+        "package": "linux-dtb-legacy-sun55iw3-syterkit",
+        "version": "25.11.0-trunk.20261014.1",
+        "sha256": "2298cb4e54fbe860c22961e5a9137c2af3076867884fbbf39772cea95c89b388"
+      },
+      {
+        "package": "linux-headers-legacy-sun55iw3-syterkit",
+        "version": "25.11.0-trunk.20261014.1",
+        "sha256": "da3f27b6d5fe3a757295ee04be160a3728de0ec8b5f7cec6953bd1aec543c272"
+      },
+      {
+        "package": "linux-image-legacy-sun55iw3-syterkit",
+        "version": "25.11.0-trunk.20261014.1",
+        "sha256": "d55de73a25932a2e1d6218121dcbf8697dbceb5d6534ce4b69e1f0cf72b9b31b"
+      }
+    ],
+    "cache_provenance": "11 complete public downloads from the initial 300-second run were rechecked against the committed key and signed manifest before seeding the cache; the final kernel image was downloaded on the successful cached retry. All 12 cached or newly downloaded packages were rehashed and checked with dpkg-deb."
+  },
+  "release_or_hardware": "NOT-RUN; source-only downloader change",
+  "implementation_commits": [
+    "e75560f6dcfe6e61dca939da8ee79c01d67d7544",
+    "d9322b4cea0b5fa2d0e06f695b666552708e8ff3"
+  ],
+  "initial_public_attempt": {
+    "exit_code": 124,
+    "verified_packages": 11,
+    "log": "public-initial-timeout.log"
+  },
+  "source_ci": [
+    {
+      "commit": "e75560f6dcfe6e61dca939da8ee79c01d67d7544",
+      "result": "PASS",
+      "url": "https://github.com/dshanpi/dshanpi-build/actions/runs/38854867061"
+    },
+    {
+      "commit": "d9322b4cea0b5fa2d0e06f695b666552708e8ff3",
+      "result": "PASS",
+      "url": "https://github.com/dshanpi/dshanpi-build/actions/runs/38855425230"
+    }
+  ],
+  "source_sha256": {
+    "scripts/public_repository_download.py": "7f319a124ec158ce88ea124451a51533c8631977581c3dbd638f487d8f4d3cb4",
+    "scripts/fetch-public-release.py": "669c2b6048647b8a274ef8d0e933a9af62a1d35756ca8fd8fde40656ebfdb856",
+    "scripts/verify-product-public.py": "36403dcfefd094bebe5d9b9972c71a013682336526803a1176d27bc322043edd"
+  }
+}

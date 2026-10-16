@@ -52,6 +52,16 @@ git diff --check
 
 新会话修改需附 `docs/change-records/` 记录，包含需求、流程、失败分支和测试报告。临时日志、构建目录和私钥不提交；暂存后再运行索引卫生检查。
 
+公共包集复核可以缓存已经完整下载的包，避免网络中断后从头下载整组：
+
+```bash
+python3 scripts/verify-product-public.py avaota-a1 2026.10.14-1 \
+  --cache-dir output/public-verification-cache
+```
+
+每次运行仍重新下载并验证清单签名。缓存按签名清单中的 SHA-256 命名，复用前重新计算哈希，
+损坏项重新下载，之后继续检查 DEB 身份。缓存不提交；未完成分片不跨调用续传。
+
 
 ## 改写前 README 原文保留
 

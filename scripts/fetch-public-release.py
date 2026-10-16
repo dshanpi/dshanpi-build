@@ -2,19 +2,16 @@
 """Fetch one exact DEB cohort after verifying the signed public repository manifest."""
 
 import argparse
-from concurrent.futures import ThreadPoolExecutor
 import hashlib
-import http.client
 import json
 from pathlib import Path, PurePosixPath
 import re
 import shutil
 import subprocess
 import tempfile
-import time
-from urllib.parse import quote, urlparse
-from urllib.error import HTTPError
-from urllib.request import Request, urlopen
+from urllib.parse import urlparse
+
+from public_repository_download import fetch
 
 
 SAFE_NAME = re.compile(r"[a-z0-9][a-z0-9+.-]*")
@@ -35,95 +32,6 @@ def safe_relative(value: str) -> PurePosixPath:
     if path.is_absolute() or not value or str(path) != value or ".." in path.parts:
         fail(f"unsafe repository path: {value}")
     return path
-
-
-def fetch_stream(request: str | Request, temporary: Path, relative: str, expected_status: int) -> None:
-    for attempt in range(5):
-        try:
-            with urlopen(request, timeout=120) as response, temporary.open("wb") as output:
-                if response.status != expected_status:
-                    fail(f"download failed with HTTP {response.status}: {relative}")
-                shutil.copyfileobj(response, output, 1024 * 1024)
-            return
-        except HTTPError as error:
-            temporary.unlink(missing_ok=True)
-            if error.code in {400, 401, 403, 404}:
-                fail(f"download failed with HTTP {error.code}: {relative}")
-            if attempt == 4:
-                raise
-        except (OSError, http.client.IncompleteRead):
-            temporary.unlink(missing_ok=True)
-            if attempt == 4:
-                raise
-        time.sleep(2 ** attempt)
-
-
-def fetch_range(url: str, part: Path, relative: str, start: int, end: int) -> None:
-    expected_size = end - start + 1
-    for attempt in range(5):
-        current = part.stat().st_size if part.exists() else 0
-        if current == expected_size:
-            return
-        if current > expected_size:
-            fail(f"range download exceeds expected size: {relative}")
-        request = Request(url, headers={"Range": f"bytes={start + current}-{end}"})
-        try:
-            with urlopen(request, timeout=120) as response, part.open("ab") as output:
-                if response.status != 206:
-                    fail(f"range download failed with HTTP {response.status}: {relative}")
-                shutil.copyfileobj(response, output, 1024 * 1024)
-            if part.stat().st_size == expected_size:
-                return
-        except HTTPError as error:
-            if error.code in {400, 401, 403, 404, 416}:
-                fail(f"range download failed with HTTP {error.code}: {relative}")
-            if attempt == 4:
-                raise
-        except (OSError, http.client.IncompleteRead):
-            if attempt == 4:
-                raise
-        time.sleep(2 ** attempt)
-    fail(f"range download remained incomplete: {relative}")
-
-
-def fetch(base_url: str, relative: str, destination: Path) -> None:
-    url = base_url.rstrip("/") + "/" + quote(relative, safe="/")
-    temporary = destination.with_suffix(destination.suffix + ".tmp")
-    size = 0
-    accepts_ranges = False
-    try:
-        with urlopen(Request(url, method="HEAD"), timeout=30) as response:
-            size = int(response.headers.get("Content-Length", "0"))
-            accepts_ranges = response.headers.get("Accept-Ranges", "").lower() == "bytes"
-    except (OSError, ValueError):
-        pass
-    if size >= 8 * 1024 * 1024 and accepts_ranges:
-        workers = min(8, max(2, (size + 16 * 1024 * 1024 - 1) // (16 * 1024 * 1024)))
-        chunk = (size + workers - 1) // workers
-        parts = []
-        with ThreadPoolExecutor(max_workers=workers) as executor:
-            futures = []
-            for index in range(workers):
-                start = index * chunk
-                end = min(size, start + chunk) - 1
-                part = temporary.with_suffix(temporary.suffix + f".part{index}")
-                parts.append(part)
-                futures.append((executor.submit(fetch_range, url, part, relative, start, end), part, end - start + 1))
-            for future, part, expected_size in futures:
-                future.result()
-                if part.stat().st_size != expected_size:
-                    fail(f"range download size mismatch: {relative}")
-        with temporary.open("wb") as output:
-            for part in parts:
-                with part.open("rb") as stream:
-                    shutil.copyfileobj(stream, output, 1024 * 1024)
-        if temporary.stat().st_size != size:
-            fail(f"download size mismatch: {relative}")
-        for part in parts:
-            part.unlink()
-    else:
-        fetch_stream(url, temporary, relative, 200)
-    temporary.replace(destination)
 
 
 def make_keyring(public_key: Path, output: Path) -> None:
@@ -250,7 +158,7 @@ def fetch_release(
                     fail(f"existing package differs from the signed cohort: {relative.name}")
                 print(f"reused verified package: {relative.name}")
             else:
-                fetch(base_url, str(relative), destination)
+                fetch(base_url, str(relative), destination, expected_sha256=expected)
             if digest(destination) != expected:
                 fail(f"downloaded package checksum mismatch: {relative}")
             actual = tuple(package_field(destination, field) for field in ("Package", "Version", "Architecture"))

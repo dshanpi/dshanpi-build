@@ -7,29 +7,14 @@ import json
 from pathlib import Path
 import re
 import subprocess
+import sys
 import tempfile
-import time
-import urllib.request
+
+from public_repository_download import fetch
 
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_BASE = "https://apt.100ask.net/"
-
-
-def fetch(base: str, relative: str, destination: Path) -> None:
-    if relative.startswith("/") or ".." in relative.split("/"):
-        raise SystemExit("unsafe public repository path")
-    for attempt in range(6):
-        try:
-            request = urllib.request.Request(base + relative, headers={"Cache-Control": "no-cache"})
-            with urllib.request.urlopen(request, timeout=60) as response, destination.open("wb") as stream:
-                while chunk := response.read(1024 * 1024):
-                    stream.write(chunk)
-            return
-        except OSError:
-            if attempt == 5:
-                raise
-            time.sleep(10)
 
 
 def main() -> None:
@@ -37,6 +22,7 @@ def main() -> None:
     parser.add_argument("product")
     parser.add_argument("version")
     parser.add_argument("--base-url", default=DEFAULT_BASE)
+    parser.add_argument("--cache-dir", type=Path, help="reuse complete packages after verifying their signed SHA-256")
     args = parser.parse_args()
     if not re.fullmatch(r"[a-z0-9][a-z0-9-]*", args.product):
         raise SystemExit("invalid product")
@@ -84,9 +70,19 @@ def main() -> None:
             raise SystemExit(f"public package cohort mismatch; missing={missing}, extra={extra}")
 
         results = []
+        cache = args.cache_dir or work
+        cache.mkdir(parents=True, exist_ok=True)
         for index, package in enumerate(data["packages"]):
-            target = work / f"package-{index}.deb"
-            fetch(base, package["filename"], target)
+            expected_hash = package["sha256"]
+            if not isinstance(expected_hash, str) or not re.fullmatch(r"[0-9a-f]{64}", expected_hash):
+                raise SystemExit("invalid public package hash")
+            target = cache / f"{expected_hash}.deb"
+            cached = False
+            if target.is_file():
+                with target.open("rb") as stream:
+                    cached = hashlib.file_digest(stream, "sha256").hexdigest() == expected_hash
+            if not cached:
+                fetch(base, package["filename"], target, expected_sha256=expected_hash)
             with target.open("rb") as stream:
                 checksum = hashlib.file_digest(stream, "sha256").hexdigest()
             if checksum != package["sha256"]:
@@ -103,6 +99,11 @@ def main() -> None:
             if fields != expected:
                 raise SystemExit(f"public package identity mismatch: {package['package']}")
             results.append({"package": package["package"], "version": package["version"], "sha256": checksum})
+            print(
+                f"Verified {index + 1}/{len(data['packages'])}: {package['package']}",
+                file=sys.stderr,
+                flush=True,
+            )
         print(json.dumps({"public_manifest_signature": "verified", "packages": results}, indent=2))
 
 
