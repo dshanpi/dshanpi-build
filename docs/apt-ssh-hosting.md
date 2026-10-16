@@ -2,11 +2,12 @@
 
 GitHub Actions 继续构建、审计和签名；签名后的完整仓库通过 SSH/rsync 发布到
 `/www/wwwroot/apt.100ask.net/`。服务器只运行 CI 传来的命令，不需要安装自定义导入程序。
+连接时先检查 Python 版本及 rsync、gpg、gpgv，缺少基础工具时停止。
 所有板型、AXCL、AXCL 16GB、AIC 维护发行共用 `release.yml`，默认 `backend=ssh`。
 
 ## 服务器与 Secrets
 
-服务器需要 Linux、Python 3.9 或更新版本（包括 lzma）、rsync、gpg 和 gpgv。
+服务器需要 Linux、Python 3.6 或更新版本（包括 lzma）、rsync、gpg 和 gpgv。
 Ubuntu/Debian 可执行 `sudo apt-get install python3 rsync gnupg`。
 SSH 登录账户需要创建、读写站点目录的权限；CI 不调用 sudo。
 Web 服务账户需要读取目录及文件的权限，站点目录及其父目录应允许目录遍历。

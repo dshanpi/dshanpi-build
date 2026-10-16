@@ -31,7 +31,7 @@ def safe_relative(value: str) -> Path:
     return path
 
 
-def parse_control(data: str) -> list[dict[str, str]]:
+def parse_control(data: str) -> "list[dict[str, str]]":
     records = []
     for paragraph in data.strip().split("\n\n") if data.strip() else []:
         record: dict[str, str] = {}
