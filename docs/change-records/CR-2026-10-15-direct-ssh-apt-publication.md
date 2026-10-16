@@ -8,6 +8,7 @@ requirements:
   - REQ-APT-SSH-20261015-003
   - REQ-APT-SSH-20261015-004
   - REQ-APT-SSH-20261015-005
+  - REQ-APT-SSH-20261015-006
 ---
 # Direct CI upload to the apt.100ask.net server
 
@@ -21,6 +22,8 @@ R1 and Avaota A1 and the three A1 optional-component entry points. No DEB bytes,
 client package versions, signing trust, hardware acceptance rules or other repositories are changed.
 
 ## 业务逻辑
+
+Verified local-cache readback implementation: `ef901ba1e395cae278b0553a7d963f9645a8e452`.
 
 Legacy gpgv command-set fix: `fa4e86302fa8a2fbbb7e4ffee796527c0076955e`.
 
@@ -73,7 +76,14 @@ then performs all original checks against the locally fetched expected complete 
 never rewrites the staged payload or skips its expected SHA256SUMS/signature/history checks.
 
 The migration workflow reads and verifies the existing Pages snapshot, uploads those exact signed
-bytes with an explicit bootstrap operation, then downloads and verifies the resulting server snapshot.
+bytes with an explicit bootstrap operation, then reconciles and verifies the resulting server snapshot.
+REQ-APT-SSH-20261015-006 adds an optional third argument to fetch-apt.sh: a local cache that must
+pass complete signed-snapshot verification before any transfer. Rsync compares remote contents using
+--checksum and reuses identical files with --link-dest, without timestamp preservation or inplace
+writes. Changed files are downloaded. The resulting snapshot still undergoes complete signature,
+index and package SHA verification and exact signed-manifest comparison. Two-argument fetch retains
+its original full-download behavior. This reduces duplicate migration egress without skipping remote
+content comparison or trusting an unverified local cache.
 Bootstrap refuses to replace a different initialized state. Ordinary release refuses an empty server.
 DNS/HTTPS changes remain administrator operations. The old Pages backend remains available explicitly
 but SSH releases never write or encode its size-limited state.
@@ -107,7 +117,12 @@ flowchart TD
   O --> P{Server empty or identical state}
   P -->|no| X
   P -->|yes| F
-  J --> Q[Migration reads back exact signed state before DNS cutover]
+  J --> Q{Local readback cache fully verifies}
+  Q -->|no| X
+  Q -->|yes| T[Compare remote contents and reuse identical local files]
+  T --> W{Complete reconstructed signatures hashes and exact state match}
+  W -->|no| X
+  W -->|yes| Y[Migration verified before public URL cutover]
 ```
 
 ## 安全与失败分支
@@ -159,7 +174,12 @@ flowchart TD
 | Policy | `python3 tools/check-delivery-policy.py --peer ../ArmBianOS --peer ../dspi-config` | PASS | Existing shared policy copies match; policy is unchanged |
 | Source hygiene | `python3 tools/check-repository-hygiene.py` and `git diff --check` | PASS | Local index and whitespace checks; no credentials added |
 | Change record | `python3 tools/check-change-record.py` | PASS | Clean worktree based on main; unrelated uncommitted changes excluded |
-| Remote deployment | Migration, real SSH authentication, domain/TLS cutover and public cohort verification | NOT-RUN | SSH, transfer and Python preflight now pass; legacy gpgv verification retry/readback and public object verification remain pending; TLS corrected by administrator |
+| Real signed migration | [Actions run 38845327278](https://github.com/dshanpi/dshanpi-build/actions/runs/38845327278) | PASS | Server verified and activated 87 historical DEBs; complete SSH readback and signed-manifest comparison succeeded |
+| Public metadata through current path | HTTPS downloads, GPG verification and SHA-256 comparison of SHA256SUMS, PUBLICATION.json and both suite InRelease files | PASS | Signed state c192740eeb194a5486f94f5363c88c16de8963f891c0056804d547dc4b2a8f2b; `/tmp/dshanpi-apt-new-host-metadata/`; valid TLS |
+| Original public APT paths | `curl https://apt.100ask.net/dists/noble/InRelease` | FAIL | HTTP 404 while `/current/dists/noble/InRelease` returns 200; administrator website-root adjustment pending |
+| Cached-readback regression | `python3 -m unittest discover -s tests -p 'test_*.py'` | PASS | 104 tests; identical cache files reused by inode, changed signed server state downloaded, tampered cache rejected before transfer; `/tmp/dshanpi-cached-readback-tests.log` |
+| Final DEB integration | `DL_APT_VERIFY_SCRIPT="$PWD/scripts/verify-repository.py" bash tests/test.sh` | PASS | Real synthetic DEB testing/stable cohorts pass; `/tmp/dshanpi-apt-final-integration.log` |
+| Public cohort after root adjustment | Verify original-path metadata and DEB downloads | NOT-RUN | Administrator must expose current as the website root first |
 | Hardware | Four-product physical-board update and rollback | NOT-RUN | Hosting-only implementation; no board execution or new cohort publication |
 
 These tests use real GPG signatures, repository verification, rsync and filesystem hardlinks. The
@@ -170,29 +190,22 @@ commands in `tests/test_ssh_publication.py` reproduce the results in CI.
 
 ## 未完成项
 
-The four deployment Secrets are confirmed present. The first migration fetched and verified the
-existing Pages state, but failed at HOST format validation before connecting to the server. The boundary-trim follow-up passed CI and was merged; the second real attempt connected to SSH,
-but authentication was rejected (sshpass exit 5). A further credential retry also failed. After the password was corrected, run `38842701635`
-successfully completed the initial SSH prepare, proving authentication and directory access. Its rsync
-connection failed because the script nested sshpass and inherited a scrubbed password; the follow-up
-removed that duplicate layer and passed CI. Run `38843832881` uploaded the repository and control
-files, then stopped before enabling current because the old Python could not import a builtin generic
-annotation. The compatibility follow-up quotes that annotation and adds server-tool preflight checks.
-The Python compatibility fix passed CI and run `38844385100` progressed to InRelease verification,
-which failed on the older gpgv path. The next follow-up added detailed failure reporting and a verification-only retry of the existing
-upload. Run `38844953439` identified the exact cause: this gpgv has no --output option. The final
-compatibility path verifies with gpgv normally and uses gpg in an isolated home for plaintext extraction. The administrator
-has corrected TLS; public repository objects currently return 404 pending enablement/root validation. The user must grant directory
-permissions, install server base tools and point the website root at
-`/www/wwwroot/apt.100ask.net/current` with valid HTTPS.
-Both implementation PRs are merged. After the gpgv output compatibility fix, retry verification of the existing upload, validate
-the new host and switch DNS while pausing legacy publishers. The first real release must pass public signature,
-index and DEB verification. The earlier credential failures changed no server files. The later prepare created staging directories,
-and the single-helper retry uploaded to staging. No signed snapshot was enabled by these failed
-attempts; the agent has not changed DNS or website settings. Public DNS now resolves to a server
-serving a mismatched certificate, which requires the administrator website correction.
-Physical-board acceptance for future package cohorts remains separately required. Implementation is
-isolated in a clean worktree based on main, preserving unrelated changes in the original workspace.
+The four Secrets, real SSH authentication, payload transfer, server Python/GPG compatibility,
+complete remote verification and SSH readback are now proven by successful migration run
+`38845327278`. The server activated `releases/20261016T031314Z-c192740eeb194a54-28877`
+through its atomic current symlink. All 87 historical DEBs remain unchanged. DNS resolves to the new
+server and the administrator corrected TLS. Signed public metadata verifies through `/current/`,
+but original APT paths still return 404: the administrator must change the website root to
+`/www/wwwroot/apt.100ask.net/current`. Full public URL cutover cannot be declared complete yet.
+The agent has not changed DNS or website configuration. Earlier failed runs retained staging only;
+the successful run subsequently verified and enabled that staged snapshot.
+
+The cached-readback optimization has passed local regression and DEB integration; its GitHub CI
+and review remain pending at this record revision. A new real migration is unnecessary to establish
+initial migration success; the completed run already downloaded and verified the entire snapshot.
+The first future normal release must pass complete public cohort verification. Physical-board
+acceptance for future package cohorts remains separately required. Implementation stays isolated
+in a clean worktree, preserving unrelated changes in the original workspace.
 
 ## 交付影响
 
