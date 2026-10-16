@@ -326,7 +326,7 @@ fi
 | `channel=stable` | 核验实板证据，晋级 testing 中的同一组包 |
 | `channel=withdraw` | 撤回指定 testing 发行索引，保留历史 pool |
 | `channel=purge` | 执行已评审的专用清理计划，见下文 |
-| `backend` | `github-pages` 或预先配置的 `ssh` 后端 |
+| `backend` | 默认 `ssh`，自动上传服务器；`github-pages` 保留兼容入口 |
 
 **当前执行边界：GitHub 托管 Actions 负责 DEB / APT，完整镜像在受控本机构建。** 即使 lock 包含 `image_release`，testing 工作流也采用 `--packages-only`，不会构建或上传新镜像。stable 可在 APT 晋级及公共验证后处理已存在的计划镜像 Release。
 
@@ -347,7 +347,7 @@ flowchart TD
   L --> M[存在镜像计划时晋级已验证 Release]
 ```
 
-签名环境配置 `APT_GPG_PRIVATE_KEY` 与 `APT_GPG_KEY_FINGERPRINT`；操作目标 ArmBianOS Releases 时配置受保护的 `ARMBIANOS_RELEASE_TOKEN`。SSH 后端另需主机、端口、用户、认证及已验证 host key，参数见工作流。私钥与令牌不写入源码、镜像或文档。
+签名环境配置 `APT_GPG_PRIVATE_KEY` 与 `APT_GPG_KEY_FINGERPRINT`；操作目标 ArmBianOS Releases 时配置受保护的 `ARMBIANOS_RELEASE_TOKEN`。SSH 后端使用 `HOST`、`USERNAME`、`PASSWORD`、`PORT` 四个 Actions Secrets。首次迁移、服务器目录及网站配置见 [APT 服务器托管说明](docs/apt-ssh-hosting.md)。私钥与令牌不写入源码、镜像或文档。
 
 ## 本机构建和交付镜像
 
@@ -454,7 +454,7 @@ scripts/withdraw-testing-release.sh "$PRODUCT" "$VERSION" \
   output/repository "$APT_GPG_KEY_FINGERPRINT"
 
 scripts/publish-pages.sh output/repository keys/dshanpi-archive.asc
-# SSH 接收端作为另一种后端：scripts/publish-apt.sh output/repository
+# 默认 SSH 后端：scripts/publish-apt.sh output/repository keys/dshanpi-archive.asc
 ```
 
 这些命令按目标分步选择，不能将“加入候选 → 晋级 → 撤回”作为连续发布脚本。底层 promote 命令不能代替工作流的实板证据门禁；验收格式见 [硬件验收手册](docs/hardware-acceptance.md)。

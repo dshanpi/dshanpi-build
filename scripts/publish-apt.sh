@@ -1,27 +1,25 @@
 #!/usr/bin/env bash
 set -euo pipefail
-source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/lib.sh"
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/ssh-transport.sh"
 python3 "$repo_root/tools/check-delivery-policy.py" >/dev/null
-
-[[ $# -eq 1 ]] || die "usage: $0 SIGNED_REPOSITORY_DIRECTORY"
+[[ $# -ge 1 && $# -le 3 ]] || die "usage: $0 SIGNED_REPOSITORY [PUBLIC_KEY] [--bootstrap]"
 repository=$(safe_realpath "$1")
-require_command jq
-require_command sshpass
-require_command rsync
-for variable in DL_HOST DL_PORT DL_USERNAME DL_PASSWORD; do
-	[[ -n "${!variable:-}" ]] || die "$variable is required"
-done
-jq -e '.schema_version == 1 and (.channel == "testing" or .channel == "stable")' \
-	"$repository/PUBLICATION.json" >/dev/null || die "invalid publication manifest"
-[[ -s "$repository/SHA256SUMS" && -s "$repository/SHA256SUMS.asc" ]] || die "repository is not signed"
-publication_hash=$(sha256sum "$repository/SHA256SUMS" | awk '{print $1}')
-job_id="$(date -u +%Y%m%dT%H%M%SZ)-${publication_hash:0:16}"
-[[ "$job_id" =~ ^[0-9]{8}T[0-9]{6}Z-[0-9a-f]{16}$ ]] || die "unsafe upload job id"
-remote="${DL_USERNAME}@${DL_HOST}"
-remote_dir="/home1/dlfile/_apt-upload/$job_id"
-export SSHPASS=$DL_PASSWORD
-ssh_options=(-p "$DL_PORT" -o StrictHostKeyChecking=yes -o UserKnownHostsFile="${DL_KNOWN_HOSTS:?DL_KNOWN_HOSTS is required}")
-sshpass -e rsync -az --delete -e "ssh ${ssh_options[*]}" "$repository/" "$remote:$remote_dir/"
-sshpass -e ssh "${ssh_options[@]}" "$remote" \
-	"sudo /usr/local/libexec/dl-apt-import '$job_id'"
-echo "published APT job $job_id"
+public_key=$(safe_realpath "${2:-$repo_root/keys/dshanpi-archive.asc}")
+mode=${3:-publish}
+[[ "$mode" == publish || "$mode" == --bootstrap ]] || die "invalid publication mode"
+"$script_dir/prepare-apt-site.sh" "$repository" "$public_key"
+apt_ssh_init
+publication_hash=$(sha256sum "$repository/SHA256SUMS" | cut -d ' ' -f 1)
+job_id="$(date -u +%Y%m%dT%H%M%SZ)-${publication_hash:0:16}-${RANDOM}"
+previous=$(apt_remote_run prepare "$apt_server_root" "$job_id" "$mode")
+upload="$apt_server_root/incoming/$job_id"
+# --link-dest reuses verified files in the previous snapshot. Never use
+# --inplace: it could modify files hard-linked to a live or retained release.
+link_options=()
+[[ "$previous" == none ]] || link_options=(--link-dest="$previous")
+sshpass -e rsync -rlp --checksum --chmod=D755,F644 --delay-updates \
+    "${link_options[@]}" -e "$apt_rsync_shell" "$repository/" "$apt_remote:$upload/repository/"
+sshpass -e rsync -rt -e "$apt_rsync_shell" \
+    "$script_dir/verify-repository.py" "$public_key" "$apt_remote:$upload/control/"
+apt_remote_run "$mode" "$apt_server_root" "$job_id" "$publication_hash" "$(basename "$public_key")"
+echo "Published signed APT snapshot $job_id to $apt_server_root/current"

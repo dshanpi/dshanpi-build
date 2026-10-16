@@ -132,7 +132,8 @@ APT_PUBLIC_KEY_FILE="$PWD/keys/dshanpi-archive.asc" \
 | contents/pages/id-token 工作流权限 | 状态分支写入与 Pages 发布 |
 
 服务器只做本地构建、哈希对比和验签时无需私钥。已有 Secrets 在 GitHub 仓库端，换构建服务器
-无需把它们下载到本地。若采用 SSH 后端，再按 publish-apt.sh 配置 DL_*，不得复用文档示例为真实密码。
+无需把它们下载到本地。APT 默认通过 SSH 上传服务器，配置 `HOST`、`USERNAME`、`PASSWORD`、`PORT` 四个 Secrets；
+首次迁移与网站目录见 [APT 服务器托管说明](apt-ssh-hosting.md)。不得将真实密码写入文档。
 
 **当前 release.yml 尚未实现镜像自动上传 ArmBianOS GitHub Release 及公开资产校验。**
 它的镜像 artifact 只有临时保存期限，不能算正式镜像发行。跨仓 Release 发布身份和版本计划
