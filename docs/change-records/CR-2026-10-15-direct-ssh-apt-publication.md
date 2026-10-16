@@ -22,6 +22,8 @@ client package versions, signing trust, hardware acceptance rules or other repos
 
 ## 业务逻辑
 
+Legacy gpgv command-set fix: `fa4e86302fa8a2fbbb7e4ffee796527c0076955e`.
+
 Gpgv output and verification-resume fix: `bf7b0b2cdd713fb2525c8e547f0cc368390cc4ef`.
 
 Older-server compatibility fix: `d301ca9ff2122e1d7897420248d38ccf160d4377`.
@@ -62,8 +64,9 @@ Only explicit signed purge removal lists may remove pool files from a new snapsh
 snapshot or history deletion is introduced. The web root is the `current` subdirectory. Remote initialization checks the Python version and
 required tools before creating storage or transferring packages. The verifier quotes its generic
 return annotation so Python before 3.9 can import the same verification code without evaluating
-unsupported builtin generic types; signature and package checks are unchanged. Clear-signed plaintext is captured from gpgv stdout
-instead of an already-created temporary output file, avoiding legacy overwrite behavior. Signature
+unsupported builtin generic types; signature and package checks are unchanged. Clear signatures are verified by gpgv without any output option; the verified plaintext is then
+extracted by gpg in an isolated temporary home and compared byte-for-byte with Release. This works
+with legacy gpgv versions that do not implement --output. Signature
 failure diagnostics include the actual gpgv error; a signed-content mismatch is reported separately.
 An optional migration resume_job updates only verifier/key control files in a known failed upload,
 then performs all original checks against the locally fetched expected complete signed state. It
@@ -150,6 +153,8 @@ flowchart TD
 | Server index verification | Migration run `38844385100` | FAIL | Python/tool preflight and upload passed; InRelease verification failed with legacy gpgv output-file handling still under investigation; current not enabled |
 | HTTPS after administrator update | `curl --head https://apt.100ask.net/archive-key.asc` | PASS | TLS now verifies; HTTP 404 remains until the repository is enabled and the web root is confirmed |
 | Gpgv/resume regression | `python3 -m unittest discover -s tests -p 'test_*.py'` | PASS | 102 tests, including legacy non-overwrite gpgv simulation, resume without retransmission, expected-state mismatch and invalid-job rejection; `/tmp/dshanpi-gpg-compat-tests.log` |
+| Definitive legacy gpgv diagnostic | Migration run `38844953439` | FAIL | Verification-only retry exposed `gpgv: invalid option --output`; no payload retransmission and no current switch |
+| Exact legacy command-set regression | `python3 -m unittest discover -s tests -p 'test_*.py'` | PASS | 102 tests, including a gpgv wrapper rejecting every --output invocation; `/tmp/dshanpi-legacy-gpgv-tests.log` |
 | Workflow semantics | `actionlint -shellcheck= -pyflakes=` on the six changed workflows | PASS | Official actionlint v1.7.12, downloaded and SHA-256 verified in `/tmp/dshanpi-ci-tools/` |
 | Policy | `python3 tools/check-delivery-policy.py --peer ../ArmBianOS --peer ../dspi-config` | PASS | Existing shared policy copies match; policy is unchanged |
 | Source hygiene | `python3 tools/check-repository-hygiene.py` and `git diff --check` | PASS | Local index and whitespace checks; no credentials added |
@@ -174,8 +179,9 @@ removed that duplicate layer and passed CI. Run `38843832881` uploaded the repos
 files, then stopped before enabling current because the old Python could not import a builtin generic
 annotation. The compatibility follow-up quotes that annotation and adds server-tool preflight checks.
 The Python compatibility fix passed CI and run `38844385100` progressed to InRelease verification,
-which failed on the older gpgv path. The next follow-up uses stdout output and detailed failure
-reporting, and allows a verification-only retry of the existing uploaded snapshot. The administrator
+which failed on the older gpgv path. The next follow-up added detailed failure reporting and a verification-only retry of the existing
+upload. Run `38844953439` identified the exact cause: this gpgv has no --output option. The final
+compatibility path verifies with gpgv normally and uses gpg in an isolated home for plaintext extraction. The administrator
 has corrected TLS; public repository objects currently return 404 pending enablement/root validation. The user must grant directory
 permissions, install server base tools and point the website root at
 `/www/wwwroot/apt.100ask.net/current` with valid HTTPS.

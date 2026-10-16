@@ -272,7 +272,7 @@ sys.exit(0 if value.rstrip(b'\\r\\n') == os.environ['APT_TEST_EXPECT_PASSWORD'].
                                     capture_output=True, timeout=10)
             self.assertEqual(result.returncode, expected)
 
-    def test_legacy_gpgv_output_does_not_require_overwriting_a_file(self):
+    def test_legacy_gpgv_does_not_need_an_output_option(self):
         candidate = self.fixture('legacy-gpgv')
         bin_dir = self.root / 'bin'
         bin_dir.mkdir()
@@ -281,9 +281,7 @@ sys.exit(0 if value.rstrip(b'\\r\\n') == os.environ['APT_TEST_EXPECT_PASSWORD'].
         wrapper.write_text('#!/usr/bin/env python3\nimport os, sys\nfrom pathlib import Path\n'
                            'args = sys.argv[1:]\n'
                            'if "--output" in args:\n'
-                           '    target = args[args.index("--output") + 1]\n'
-                           '    if target != "-" and Path(target).exists():\n'
-                           '        sys.exit(23)\n'
+                           '    sys.exit(23)\n'
                            + 'os.execv(' + repr(gpgv) + ', [' + repr(gpgv) + '] + args)\n')
         wrapper.chmod(0o755)
         env = dict(self.env, PATH=str(bin_dir) + ':' + os.environ['PATH'])
