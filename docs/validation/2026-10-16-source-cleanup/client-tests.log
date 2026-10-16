@@ -1,0 +1,3 @@
+Delivery policy wiring passed: dspi-config (dshanpi-delivery-v1); not a release/hardware verdict
+Source lock, concurrent writer and real APT scanner tests passed
+dspi-config tests passed

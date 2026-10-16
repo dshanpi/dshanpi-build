@@ -1,0 +1,51 @@
+........................................................................................verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+.verified testing publication for dshanpi-a1 2026.10.15-1
+verify-apt-upload: publication checksum mismatch: pool/common/f/fixture/fixture_1_arm64.deb
+..verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+...verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+.verified testing publication for dshanpi-a1 2026.10.15-1
+.....verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+.verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+verify-apt-upload: repository state changed: expected 694698b899de01ed91a94318b4e2b7dd181ee40a8a36da871356b5457656f00f, found 739b4aa3e52e31f4eb5247042d068199c687e8b28b99ecf25a21c52d83589b9b
+..verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+.verified testing publication for dshanpi-a1 2026.10.15-1
+.verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+..verified testing publication for dshanpi-a1 2026.10.15-1
+verify-apt-upload: signature verification failed: /tmp/tmp3bj23eko/server/incoming/20261015T120000Z-cc3d0b11d4edbe37-2/repository/SHA256SUMS
+...
+----------------------------------------------------------------------
+Ran 110 tests in 39.948s
+
+OK
+Current signed repository: /tmp/tmpj1yzwc4x/server/releases/20261015T120000Z-7cc7569d6d8e11e1-1
+Current signed repository: /tmp/tmpj1yzwc4x/server/releases/20261015T120000Z-42e30d46ad176795-2
+Current signed repository: /tmp/tmp5txx95ry/server/releases/20261015T120000Z-4ecd2cbe6a6e42e7-1
+Current signed repository: /tmp/tmpp19ase6u/server/releases/20261015T120000Z-9d034eb349d41f82-1
+Current signed repository: /tmp/tmpojcc9e96/server/releases/20261015T120000Z-e68c9dc78a8ff265-1
+The identical signed repository is already current; no switch needed.
+Current signed repository: /tmp/tmpzd05dlmg/server/releases/20261015T120000Z-a1f0db37f573b874-1
+Current signed repository: /tmp/tmp3vvmph96/server/releases/20261015T120000Z-58d45d41b1a6eabd-1
+Current signed repository: /tmp/tmpklns74em/server/releases/20261015T120000Z-694698b899de01ed-1
+Current signed repository: /tmp/tmpklns74em/server/releases/20261015T120000Z-739b4aa3e52e31f4-3
+Current signed repository: /tmp/tmpkd4_i5oq/server/releases/20261015T120000Z-f1ffe55fc1379102-1
+Current signed repository: /tmp/tmpkd4_i5oq/server/releases/20261015T120000Z-50f83b23deccac3e-3
+Current signed repository: /tmp/tmpid2kpt1r/server/releases/20261015T120000Z-5a84c169dd4e39da-1
+Current signed repository: /tmp/tmp0wbmtixt/server/releases/20261015T120000Z-5a84c169dd4e39da-1
+Current signed repository: /tmp/tmp0wbmtixt/server/releases/20261015T120000Z-2965ab10204e0a01-2
+Current signed repository: /tmp/tmp3bj23eko/server/releases/20261015T120000Z-23010db5f20f354c-1

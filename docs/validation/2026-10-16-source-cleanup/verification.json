@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-16",
+  "source_commit": "5ab00b714bbba1c271c08859b1ea255000a6898f",
+  "base_commits": {
+    "dshanpi-build": "8e6422d",
+    "dspi-config": "687a405",
+    "ArmBianOS": "5a8a000b9"
+  },
+  "tests": {
+    "python_unittest": {
+      "result": "PASS",
+      "count": 110
+    },
+    "build_shell_integration": "PASS",
+    "dspi_config_shell_integration": "PASS",
+    "shell_syntax": "PASS",
+    "cross_repository_policy": "PASS",
+    "change_record_gate": "PASS",
+    "indexed_source_hygiene": "PASS",
+    "diff_check": "PASS"
+  },
+  "public_verification": {
+    "public_manifest_signature": "verified by gpgv",
+    "complete_packages_verified": [
+      {
+        "package": "armbian-bsp-cli-avaota-a1-legacy",
+        "sha256": "4604774d5daeeee276324b20725c1b1dfbff7d4c36baf048a48388fba74ffa48"
+      },
+      {
+        "package": "armbian-bsp-desktop-avaota-a1-legacy",
+        "sha256": "99bb5e4514de8d4d3b9080d2737557462d66ed9454e7b814586d2aced3b698a5"
+      }
+    ],
+    "large_object_range": {
+      "package": "armbian-firmware",
+      "status": 206,
+      "content_range": "bytes 0-1023/164280264",
+      "bytes": 1024
+    },
+    "full_cohort": "incomplete; slow large-object transfer"
+  },
+  "hardware": "NOT-RUN; downloader-only source change",
+  "package_image_publication": "NOT-RUN; source-only cleanup"
+}
