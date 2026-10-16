@@ -20,6 +20,8 @@ Web 服务账户需要读取目录及文件的权限，站点目录及其父目�
 | `PASSWORD` | SSH 密码 |
 | `PORT` | SSH 端口 |
 
+脚本自动去掉 `HOST`、`USERNAME`、`PORT` 前后的空白；`PASSWORD` 始终保持原样，
+填写密码时不要额外粘贴空格。迁移在下载历史仓库前先检查连接字段格式。
 连接使用 `HOST`，不依赖 `apt.100ask.net` 已经完成 DNS 切换。
 这些是四个新增的部署凭据；构建发布仍沿用 `APT_GPG_PRIVATE_KEY`、
 `APT_GPG_KEY_FINGERPRINT` 等已有 Secrets。APT 私钥留在 GitHub，服务器只有验签公钥。
