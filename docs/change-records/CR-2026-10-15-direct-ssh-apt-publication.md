@@ -5,6 +5,7 @@ repository: dshanpi-build
 requirements:
   - REQ-APT-SSH-20261015-001
   - REQ-APT-SSH-20261015-002
+  - REQ-APT-SSH-20261015-003
 ---
 # Direct CI upload to the apt.100ask.net server
 
@@ -19,6 +20,8 @@ client package versions, signing trust, hardware acceptance rules or other repos
 
 ## 业务逻辑
 
+Rsync authentication fix: `54c98bc55311b9deddf6f79b22412eb562abfb0c`.
+
 Whitespace compatibility follow-up: `771b7598287435682fbeb5f5ad3f7586aef18583`.
 
 Implementation commit: `8f0dbefc12a868ce205b210d059a4ca96315d6fb`.
@@ -29,6 +32,10 @@ then uses the existing package/release builders and signing path. Signing finger
 the committed archive identity. The shared site preparation builds the browser index and public
 key assets for both backends. SSH retains small signed metadata artifacts instead of repacking
 and retaining the complete historical repository on every testing release.
+
+Rsync is wrapped in exactly one sshpass process, while its remote shell is plain SSH. sshpass
+scrubs SSHPASS in its child environment; nesting another copy would authenticate with the scrubbed
+value. A real PTY/password-prompt regression reproduces that behavior without a network server.
 
 SSH/rsync uses the four requested credentials, the new site root and a per-checkout known-hosts
 file. An optional committed, independently verified host public key pins it across runners without
@@ -114,11 +121,14 @@ flowchart TD
 | First real migration | Actions run `38841374351` | FAIL | Existing Pages state fetched and verified; HOST format rejected before SSH or any server mutation |
 | Follow-up GitHub CI | `Validate APT tooling` run `38841578628` | PASS | PR #58 merged as `765d4c704eb12133888c457ea5e2115df0b3e64b` |
 | Real SSH authentication | Actions run `38841733893` | FAIL | Field validation and Pages verification passed; SSH server rejected credentials with Permission denied, sshpass exit 5; upload never started |
+| User-requested credential retry | Actions run `38842527056` | FAIL | Updated host/account still rejected during initial SSH authentication; no upload |
+| Retry after password correction | Actions run `38842701635` | FAIL | Initial SSH prepare succeeded and staging directories were created; nested sshpass then sent a scrubbed password during rsync; current was never switched |
+| Single-helper regression | `python3 -m unittest discover -s tests -p 'test_*.py'` | PASS | 97 tests, including real sshpass PTY authentication and nested-password scrubbing reproduction; `/tmp/dshanpi-single-sshpass-regression.log` |
 | Workflow semantics | `actionlint -shellcheck= -pyflakes=` on the six changed workflows | PASS | Official actionlint v1.7.12, downloaded and SHA-256 verified in `/tmp/dshanpi-ci-tools/` |
 | Policy | `python3 tools/check-delivery-policy.py --peer ../ArmBianOS --peer ../dspi-config` | PASS | Existing shared policy copies match; policy is unchanged |
 | Source hygiene | `python3 tools/check-repository-hygiene.py` and `git diff --check` | PASS | Local index and whitespace checks; no credentials added |
 | Change record | `python3 tools/check-change-record.py` | PASS | Clean worktree based on main; unrelated uncommitted changes excluded |
-| Remote deployment | Migration, real SSH authentication, domain/TLS cutover and public cohort verification | NOT-RUN | Four Secrets confirmed; second attempt reached SSH but authentication failed, so upload/readback and website cutover remain unverified |
+| Remote deployment | Migration, real SSH authentication, domain/TLS cutover and public cohort verification | NOT-RUN | Updated password allows initial SSH preparation; upload/readback awaits the single-sshpass fix, and website cutover remains unverified |
 | Hardware | Four-product physical-board update and rollback | NOT-RUN | Hosting-only implementation; no board execution or new cohort publication |
 
 These tests use real GPG signatures, repository verification, rsync and filesystem hardlinks. The
@@ -131,13 +141,16 @@ commands in `tests/test_ssh_publication.py` reproduce the results in CI.
 
 The four deployment Secrets are confirmed present. The first migration fetched and verified the
 existing Pages state, but failed at HOST format validation before connecting to the server. The boundary-trim follow-up passed CI and was merged; the second real attempt connected to SSH,
-but authentication was rejected (sshpass exit 5). The user has been asked to check the account,
-password including accidental leading spaces, and server password-login policy before another retry. The user must grant directory
+but authentication was rejected (sshpass exit 5). A further credential retry also failed. After the password was corrected, run `38842701635`
+successfully completed the initial SSH prepare, proving authentication and directory access. Its rsync
+connection failed because the script nested sshpass and inherited a scrubbed password; the follow-up
+removes that duplicate layer and awaits retry. No further Secrets change is required for this issue. The user must grant directory
 permissions, install server base tools and point the website root at
 `/www/wwwroot/apt.100ask.net/current` with valid HTTPS.
-Both implementation PRs are merged. After correcting SSH authentication, retry migration, validate
+Both implementation PRs are merged. After fixing rsync authentication layering, retry migration, validate
 the new host and switch DNS while pausing legacy publishers. The first real release must pass public signature,
-index and DEB verification. Neither failed attempt uploaded repository bytes or changed server files, DNS or website settings.
+index and DEB verification. The earlier credential failures changed no server files. The later prepare created staging directories,
+but no signed snapshot was enabled and DNS/website settings remain unchanged.
 Physical-board acceptance for future package cohorts remains separately required. Implementation is
 isolated in a clean worktree based on main, preserving unrelated changes in the original workspace.
 

@@ -35,7 +35,9 @@ apt_ssh_init() {
     apt_ssh_options=(-p "$PORT" -o StrictHostKeyChecking=accept-new
         -o "UserKnownHostsFile=$apt_known_hosts" -o ConnectTimeout=30
         -o ServerAliveInterval=15 -o ServerAliveCountMax=4 -o LogLevel=ERROR)
-    printf -v apt_rsync_shell '%q ' sshpass -e ssh "${apt_ssh_options[@]}"
+    # The rsync invocation already has sshpass. Nesting it here would read
+    # the scrubbed SSHPASS inherited from the outer process and send a bad password.
+    printf -v apt_rsync_shell '%q ' ssh "${apt_ssh_options[@]}"
 }
 
 apt_remote_run() {

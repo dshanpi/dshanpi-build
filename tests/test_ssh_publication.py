@@ -226,12 +226,38 @@ class SSHPublicationTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'outside release'):
             SERVER.current_release(self.server)
 
+    def test_real_sshpass_authentication_and_nested_environment_scrubbing(self):
+        # Exercise the real PTY/password helper without network or system users.
+        # sshpass scrubs SSHPASS before spawning its child: a nested copy would
+        # therefore send that scrubbed value, not the actual supplied password.
+        prompt = self.root / 'password-prompt.py'
+        prompt.write_text("""import os, sys, termios
+fd = os.open('/dev/tty', os.O_RDWR)
+original = termios.tcgetattr(fd)
+noecho = original.copy()
+noecho[3] &= ~termios.ECHO
+termios.tcsetattr(fd, termios.TCSANOW, noecho)
+os.write(fd, b'Password: ')
+value = b''
+while not value.endswith(b'\\n'):
+    value += os.read(fd, 1)
+termios.tcsetattr(fd, termios.TCSANOW, original)
+os.close(fd)
+sys.exit(0 if value.rstrip(b'\\r\\n') == os.environ['APT_TEST_EXPECT_PASSWORD'].encode() else 5)
+""")
+        env = dict(self.env, SSHPASS=' fixture-token ', APT_TEST_EXPECT_PASSWORD=' fixture-token ')
+        for command, expected in [(['sshpass', '-e'], 0),
+                                  (['sshpass', '-e', 'sshpass', '-e'], 5)]:
+            result = subprocess.run(command + ['python3', str(prompt)], env=env,
+                                    capture_output=True, timeout=10)
+            self.assertEqual(result.returncode, expected)
+
     def test_full_shell_transport_migration_fetch_and_update(self):
         # Real rsync and streamed remote Python, with SSH/auth transport replaced
         # by a local command adapter. This exercises shell argument handling too.
         bin_dir = self.root / 'bin'
         bin_dir.mkdir()
-        (bin_dir / 'sshpass').write_text('#!/bin/sh\n[ "$1" = -e ] || exit 90\n[ "$SSHPASS" = "$APT_TEST_EXPECT_PASSWORD" ] || exit 91\nshift\nexec "$@"\n')
+        (bin_dir / 'sshpass').write_text('#!/bin/sh\n[ "$1" = -e ] || exit 90\n[ "${APT_TEST_SSHPASS_ACTIVE:-}" != 1 ] || exit 92\nexport APT_TEST_SSHPASS_ACTIVE=1\n[ "$SSHPASS" = "$APT_TEST_EXPECT_PASSWORD" ] || exit 91\nshift\nexec "$@"\n')
         (bin_dir / 'ssh').write_text('''#!/bin/sh
 while [ "$1" = -p ] || [ "$1" = -o ] || [ "$1" = -l ]; do shift 2; done
 shift
