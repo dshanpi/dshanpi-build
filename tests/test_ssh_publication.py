@@ -344,6 +344,42 @@ exec sh -c "$*"
                    APT_TEST_EXPECT_PASSWORD=' fixture-password ',
                    APT_SERVER_ROOT=str(self.server))
 
+    def test_cached_readback_reuses_content_and_fetches_changed_state(self):
+        previous = self.bootstrap()
+        cache = self.root / 'initial'
+        relative = Path('pool/common/f/fixture/fixture_1_arm64.deb')
+        env = self.transport_environment()
+        def fetch(name):
+            output = self.root / name
+            result = subprocess.run([str(ROOT / 'scripts/fetch-apt.sh'), str(output),
+                                     str(self.public), str(cache)], env=env,
+                                    capture_output=True, text=True)
+            self.assertEqual(result.returncode, 0, result.stderr + result.stdout)
+            return output
+        fetched = fetch('cached-readback')
+        self.assertEqual((fetched / relative).stat().st_ino, (cache / relative).stat().st_ino)
+        original_sums = (cache / 'SHA256SUMS').read_bytes()
+        candidate = self.fixture('new-server-state', SERVER.digest(previous / 'SHA256SUMS'), {
+            'fixture_1_arm64.deb': b'original bytes', 'fixture_2_arm64.deb': b'new bytes'})
+        self.commit(candidate, self.stage(candidate))
+        fetched = fetch('cached-new-state')
+        self.assertEqual((fetched / 'SHA256SUMS').read_bytes(), (candidate / 'SHA256SUMS').read_bytes())
+        self.assertEqual((fetched / relative).stat().st_ino, (cache / relative).stat().st_ino)
+        self.assertEqual((cache / 'SHA256SUMS').read_bytes(), original_sums)
+        self.assertEqual((fetched / 'pool/common/f/fixture/fixture_2_arm64.deb').read_bytes(), b'new bytes')
+
+    def test_unverified_readback_cache_is_rejected_before_download(self):
+        self.bootstrap()
+        cache = self.root / 'initial'
+        (cache / 'pool/common/f/fixture/fixture_1_arm64.deb').write_bytes(b'tampered cache')
+        output = self.root / 'unverified-cache-output'
+        result = subprocess.run([str(ROOT / 'scripts/fetch-apt.sh'), str(output),
+                                 str(self.public), str(cache)], env=self.transport_environment(),
+                                capture_output=True, text=True)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('publication checksum mismatch', result.stderr)
+        self.assertFalse(output.exists())
+
     def test_full_shell_transport_migration_fetch_and_update(self):
         env = self.transport_environment()
         candidate = self.fixture('transport')
