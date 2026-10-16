@@ -112,11 +112,13 @@ flowchart TD
 | Syntax | Parse workflow YAML and run `bash -n` on embedded commands and all shell scripts | PASS | Local command output |
 | GitHub PR CI | `Validate APT tooling` run `38841214252` | PASS | PR #57 merged as `373bb302949270c39b8c1c6dbb5b363c19eb0853` |
 | First real migration | Actions run `38841374351` | FAIL | Existing Pages state fetched and verified; HOST format rejected before SSH or any server mutation |
+| Follow-up GitHub CI | `Validate APT tooling` run `38841578628` | PASS | PR #58 merged as `765d4c704eb12133888c457ea5e2115df0b3e64b` |
+| Real SSH authentication | Actions run `38841733893` | FAIL | Field validation and Pages verification passed; SSH server rejected credentials with Permission denied, sshpass exit 5; upload never started |
 | Workflow semantics | `actionlint -shellcheck= -pyflakes=` on the six changed workflows | PASS | Official actionlint v1.7.12, downloaded and SHA-256 verified in `/tmp/dshanpi-ci-tools/` |
 | Policy | `python3 tools/check-delivery-policy.py --peer ../ArmBianOS --peer ../dspi-config` | PASS | Existing shared policy copies match; policy is unchanged |
 | Source hygiene | `python3 tools/check-repository-hygiene.py` and `git diff --check` | PASS | Local index and whitespace checks; no credentials added |
 | Change record | `python3 tools/check-change-record.py` | PASS | Clean worktree based on main; unrelated uncommitted changes excluded |
-| Remote deployment | Migration, real SSH authentication, domain/TLS cutover and public cohort verification | NOT-RUN | Four Secrets confirmed; first attempt stopped before SSH, so upload/readback and website cutover remain unverified |
+| Remote deployment | Migration, real SSH authentication, domain/TLS cutover and public cohort verification | NOT-RUN | Four Secrets confirmed; second attempt reached SSH but authentication failed, so upload/readback and website cutover remain unverified |
 | Hardware | Four-product physical-board update and rollback | NOT-RUN | Hosting-only implementation; no board execution or new cohort publication |
 
 These tests use real GPG signatures, repository verification, rsync and filesystem hardlinks. The
@@ -128,13 +130,14 @@ commands in `tests/test_ssh_publication.py` reproduce the results in CI.
 ## 未完成项
 
 The four deployment Secrets are confirmed present. The first migration fetched and verified the
-existing Pages state, but failed at HOST format validation before connecting to the server. A follow-up
-trims only the connection fields and is awaiting a real migration retry. The user must grant directory
+existing Pages state, but failed at HOST format validation before connecting to the server. The boundary-trim follow-up passed CI and was merged; the second real attempt connected to SSH,
+but authentication was rejected (sshpass exit 5). The user has been asked to check the account,
+password including accidental leading spaces, and server password-login policy before another retry. The user must grant directory
 permissions, install server base tools and point the website root at
 `/www/wwwroot/apt.100ask.net/current` with valid HTTPS.
-After publishing the reviewed workflow changes, run the migration once, validate the new host and
-switch DNS while pausing legacy publishers. The first real release must pass public signature,
-index and DEB verification. The failed first attempt did not connect to the server or change its files, DNS or website.
+Both implementation PRs are merged. After correcting SSH authentication, retry migration, validate
+the new host and switch DNS while pausing legacy publishers. The first real release must pass public signature,
+index and DEB verification. Neither failed attempt uploaded repository bytes or changed server files, DNS or website settings.
 Physical-board acceptance for future package cohorts remains separately required. Implementation is
 isolated in a clean worktree based on main, preserving unrelated changes in the original workspace.
 
