@@ -23,6 +23,15 @@ jobs:
         run: python3 tools/check-delivery-policy.py
       - name: Install transfer and verification tools
         run: sudo apt-get update && sudo apt-get install -y rsync sshpass dpkg-dev gnupg xz-utils
+      - name: Validate SSH deployment settings before downloading history
+        env:
+          HOST: ${{ secrets.HOST }}
+          USERNAME: ${{ secrets.USERNAME }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+          PORT: ${{ secrets.PORT }}
+        run: |
+          source scripts/ssh-transport.sh
+          apt_ssh_init
       - name: Configure read-only GitHub authentication
         env:
           GH_TOKEN: ${{ github.token }}

@@ -3,10 +3,19 @@
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/lib.sh"
 
 apt_ssh_init() {
+    local variable value
+    # Pasted connection fields can have surrounding spaces or CRLF. Passwords
+    # are opaque: never trim or otherwise transform PASSWORD.
+    for variable in HOST USERNAME PORT; do
+        value=${!variable:-}
+        value="${value#"${value%%[![:space:]]*}"}"
+        value="${value%"${value##*[![:space:]]}"}"
+        printf -v "$variable" '%s' "$value"
+    done
     for variable in HOST USERNAME PASSWORD PORT; do
         [[ -n "${!variable:-}" ]] || die "$variable is required"
     done
-    [[ "$HOST" =~ ^[a-zA-Z0-9][a-zA-Z0-9.-]*$ ]] || die "invalid HOST"
+    [[ "$HOST" =~ ^[a-zA-Z0-9][a-zA-Z0-9.-]*$ ]] || die "HOST must be a hostname or IPv4 address without protocol, path, username or port"
     [[ "$USERNAME" =~ ^[a-zA-Z0-9_][a-zA-Z0-9_.-]*$ ]] || die "invalid USERNAME"
     [[ "$PORT" =~ ^[0-9]{1,5}$ ]] && ((10#$PORT >= 1 && 10#$PORT <= 65535)) || die "invalid PORT"
     require_command sshpass
