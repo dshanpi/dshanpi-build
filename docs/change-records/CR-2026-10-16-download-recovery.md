@@ -27,6 +27,9 @@ A1、A1 CM5、R1 和 Avaota A1；不修改板级源码、客户端有效负载�
 
 不可重试的 HEAD HTTP 400/401/403/404 立即失败，避免重复请求和退避等待；网络错误及
 暂时性服务器失败继续有限重试。公网校验器逐包向 stderr 输出进度，stdout 保持最终 JSON。
+公网检查首次限时重试完成 11/12 个包，最后一个内核包尚未完成即超时。因此新增可选
+`--cache-dir`：每次仍验签清单，完整包按签名 SHA-256 命名、重新哈希后复用；损坏缓存
+重新下载，随后仍验证包身份。完整缓存可以跨次复用，未完成分片继续按调用隔离。
 维护 skill 增加相同的不变量，后续维护不得重新引入跨调用分片或校验前替换。
 
 ## 流程
@@ -47,6 +50,10 @@ flowchart TD
   I -->|不匹配| H
   I -->|匹配或未提供| J[原子替换目标 并清理临时目录]
   J --> K[调用者继续签名和包身份验证]
+  L[公网 verifier 重试] --> M[重新下载并验签清单]
+  M --> N{本包完整缓存哈希是否匹配}
+  N -->|是| K
+  N -->|否或无缓存| A
 ```
 
 ## 安全与失败分支
@@ -68,6 +75,7 @@ flowchart TD
 | 修复前复现 | 在基线实现运行扩展的 downloader/cohort 测试 | FAIL | `downloader-before.log` 与 `cohort-before.log`：旧分片混入、并发冲突、分片泄漏和损坏目标留存 |
 | 下载器回归 | `python3 -m unittest discover -s tests -p 'test_public_repository_download.py' -v` | PASS | 11 项，覆盖并发、旧分片、失败清理、哈希保护、有限续传和 HEAD 404 立即失败 |
 | 签名整组回归 | `python3 -m unittest discover -s tests -p 'test_fetch_public_release.py' -v` | PASS | 3 项；损坏下载后不留目标，恢复服务器原包后原目录重试成功 |
+| 公网 verifier 缓存软件模拟 | `python3 -m unittest discover -s tests -p 'test_verify_product_public.py' -v` | PASS | 4 项，真实 GPG 签名/本地 HTTP：默认校验、缓存无包请求、损坏项修复、异常签名哈希拒绝 |
 | 静态检查 | Python 编译、shell `bash -n`、`actionlint -shellcheck= -pyflakes=`、`git diff --check` | PASS | 本地命令输出；workflow 无修改 |
 | 政策 | `python3 tools/check-delivery-policy.py --peer ../ArmBianOS --peer ../dspi-config` | PASS | 三仓政策一致，无政策副本修改 |
 | 历史 PR CI | PR #64 的 `ad615ca` 检查 | PASS | Actions run `38854104469`；不代替本轮新提交的 CI |
