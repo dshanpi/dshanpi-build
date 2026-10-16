@@ -23,6 +23,11 @@ def digest(path):
 
 
 def initialize(root):
+    if sys.version_info < (3, 6):
+        raise ValueError('server requires Python 3.6 or newer')
+    for command in ('rsync', 'gpg', 'gpgv'):
+        if shutil.which(command) is None:
+            raise ValueError('missing server tool: ' + command + '; install rsync and gnupg before migration')
     if not root.is_absolute() or root == Path('/') or root.is_symlink():
         raise ValueError('unsafe server root')
     root.mkdir(parents=True, exist_ok=True)
