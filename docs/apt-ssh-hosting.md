@@ -71,7 +71,9 @@ location /pool/ {
 2. 在包含这些脚本的分支运行 Actions **Migrate APT repository to SSH server**。
 3. 工作流取得 `feature/apt-pages-state` 中完整的历史仓库，核对已有签名和所有包哈希，
    生成首页/公钥下载文件，再上传；不重建、不重签、不删除任何历史 DEB。
-4. 工作流在服务器验签并切换 current，然后通过 SSH 下载已发布快照，核对签名及原始校验清单。
+4. 工作流在服务器验签并切换 current，然后通过 SSH 核对已发布快照。先完整验证本地候选缓存，
+   再用远端内容校验和比较，通过硬链接复用相同文件、下载差异；最后完整验签、核对所有包哈希
+   和原始校验清单，避免重复下载整个历史仓库。普通发行的首次拉取仍下载完整快照。
 5. 核对站点根目录与 HTTPS。可在域名切换前使用
    `curl --resolve apt.100ask.net:443:服务器IPv4 https://apt.100ask.net/archive-key.asc`
    检查新服务器站点路由；这只是连接检查，不代替包集验证。

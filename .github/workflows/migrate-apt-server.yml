@@ -55,14 +55,14 @@ jobs:
           PASSWORD: ${{ secrets.PASSWORD }}
           PORT: ${{ secrets.PORT }}
         run: scripts/publish-apt.sh output/repository keys/dshanpi-archive.asc --bootstrap
-      - name: Read back and verify the migrated repository
+      - name: Reconcile and verify the migrated repository
         env:
           HOST: ${{ secrets.HOST }}
           USERNAME: ${{ secrets.USERNAME }}
           PASSWORD: ${{ secrets.PASSWORD }}
           PORT: ${{ secrets.PORT }}
         run: |
-          scripts/fetch-apt.sh output/read-back keys/dshanpi-archive.asc
+          scripts/fetch-apt.sh output/read-back keys/dshanpi-archive.asc output/repository
           cmp output/repository/SHA256SUMS output/read-back/SHA256SUMS
           cmp output/repository/SHA256SUMS.asc output/read-back/SHA256SUMS.asc
           echo 'Signed APT state migrated and read back successfully. Configure the website root as /www/wwwroot/apt.100ask.net/current, validate HTTPS against the new server, then switch apt.100ask.net DNS. Public cutover is not performed by this workflow.' >> "$GITHUB_STEP_SUMMARY"
