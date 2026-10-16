@@ -8,28 +8,12 @@ from pathlib import Path
 import re
 import subprocess
 import tempfile
-import time
-import urllib.request
+
+from public_repository_download import fetch
 
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_BASE = "https://apt.100ask.net/"
-
-
-def fetch(base: str, relative: str, destination: Path) -> None:
-    if relative.startswith("/") or ".." in relative.split("/"):
-        raise SystemExit("unsafe public repository path")
-    for attempt in range(6):
-        try:
-            request = urllib.request.Request(base + relative, headers={"Cache-Control": "no-cache"})
-            with urllib.request.urlopen(request, timeout=60) as response, destination.open("wb") as stream:
-                while chunk := response.read(1024 * 1024):
-                    stream.write(chunk)
-            return
-        except OSError:
-            if attempt == 5:
-                raise
-            time.sleep(10)
 
 
 def main() -> None:
