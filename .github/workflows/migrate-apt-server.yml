@@ -2,6 +2,12 @@ name: Migrate APT repository to SSH server
 
 on:
   workflow_dispatch:
+    inputs:
+      resume_job:
+        description: Optional failed upload job to verify again without retransferring payloads
+        type: string
+        required: false
+        default: ''
 
 permissions:
   contents: read
@@ -43,6 +49,7 @@ jobs:
           test -s output/repository/SHA256SUMS
       - name: Upload existing signed bytes without rebuilding or resigning
         env:
+          APT_RESUME_JOB_ID: ${{ inputs.resume_job }}
           HOST: ${{ secrets.HOST }}
           USERNAME: ${{ secrets.USERNAME }}
           PASSWORD: ${{ secrets.PASSWORD }}
