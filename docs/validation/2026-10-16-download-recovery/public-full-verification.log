@@ -1,0 +1,80 @@
+gpgv: Signature made Thu Oct 15 05:56:31 2026 EDT
+gpgv:                using RSA key 476BF598CA47F12146EF18620F6EDF1B5C41F3EC
+gpgv: Good signature from "DShanPI APT Archive <apt@dshanpi.com>"
+Verified 1/12: armbian-bsp-cli-avaota-a1-legacy
+Verified 2/12: armbian-bsp-desktop-avaota-a1-legacy
+Verified 3/12: armbian-firmware
+Verified 4/12: avaota-a1-release-core
+Verified 5/12: avaota-a1-release-desktop
+Verified 6/12: avaota-a1-repository
+Verified 7/12: base-files
+Verified 8/12: dshanpi-archive-keyring
+Verified 9/12: dspi-config
+Verified 10/12: linux-dtb-legacy-sun55iw3-syterkit
+Verified 11/12: linux-headers-legacy-sun55iw3-syterkit
+Verified 12/12: linux-image-legacy-sun55iw3-syterkit
+{
+  "public_manifest_signature": "verified",
+  "packages": [
+    {
+      "package": "armbian-bsp-cli-avaota-a1-legacy",
+      "version": "25.11.0-trunk.20261014.1",
+      "sha256": "4604774d5daeeee276324b20725c1b1dfbff7d4c36baf048a48388fba74ffa48"
+    },
+    {
+      "package": "armbian-bsp-desktop-avaota-a1-legacy",
+      "version": "25.11.0-trunk.20261014.1",
+      "sha256": "99bb5e4514de8d4d3b9080d2737557462d66ed9454e7b814586d2aced3b698a5"
+    },
+    {
+      "package": "armbian-firmware",
+      "version": "25.11.0-trunk.20261014.1",
+      "sha256": "e5e0413876b8f2d6d36fb334897f60c7a910ac135b65c6a5567b5fb57996803d"
+    },
+    {
+      "package": "avaota-a1-release-core",
+      "version": "2026.10.14-1",
+      "sha256": "f0a870251868e2b5c590a134e635a09b13baa35f9fa405fc06e4ff6aae3a2f82"
+    },
+    {
+      "package": "avaota-a1-release-desktop",
+      "version": "2026.10.14-1",
+      "sha256": "c23e29ba419c1db8b8378330bcc2147940a00d1cc83dcb8a59b5ca2bfbeb2818"
+    },
+    {
+      "package": "avaota-a1-repository",
+      "version": "1:2026.10.14-1",
+      "sha256": "77a68f312b58e6f007abde4f963084f9bd160056e75634ee7e86d35b7a0f61b8"
+    },
+    {
+      "package": "base-files",
+      "version": "25.11.0-trunk.20261014.1-13ubuntu10-noble",
+      "sha256": "1eaa98476268f49a2559cf5797b82945e2cb365353c2f7f294e5b4551d562c4f"
+    },
+    {
+      "package": "dshanpi-archive-keyring",
+      "version": "1:2026.10.14-1",
+      "sha256": "2edc66be73e0114160fda10a40a10f99f763198d4e29cd4c77d38bbcd2ed77e1"
+    },
+    {
+      "package": "dspi-config",
+      "version": "1.0.3-1",
+      "sha256": "dd536919b4c2ec73a7d03a3e9b3ff14577169cd94b8c6d0b60bbfc0b02ee770a"
+    },
+    {
+      "package": "linux-dtb-legacy-sun55iw3-syterkit",
+      "version": "25.11.0-trunk.20261014.1",
+      "sha256": "2298cb4e54fbe860c22961e5a9137c2af3076867884fbbf39772cea95c89b388"
+    },
+    {
+      "package": "linux-headers-legacy-sun55iw3-syterkit",
+      "version": "25.11.0-trunk.20261014.1",
+      "sha256": "da3f27b6d5fe3a757295ee04be160a3728de0ec8b5f7cec6953bd1aec543c272"
+    },
+    {
+      "package": "linux-image-legacy-sun55iw3-syterkit",
+      "version": "25.11.0-trunk.20261014.1",
+      "sha256": "d55de73a25932a2e1d6218121dcbf8697dbceb5d6534ce4b69e1f0cf72b9b31b"
+    }
+  ]
+}

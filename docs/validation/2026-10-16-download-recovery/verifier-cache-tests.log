@@ -1,0 +1,27 @@
+test_cache_reuses_verified_bytes_without_package_requests (test_verify_product_public.PublicProductVerifyTests.test_cache_reuses_verified_bytes_without_package_requests) ... gpgv: Signature made Fri Oct 16 01:20:29 2026 EDT
+gpgv:                using RSA key 18831DBCCC57290C1806F359147F9E491D716489
+gpgv: Good signature from "Fetch Test <fetch@example.invalid>"
+gpgv: Signature made Fri Oct 16 01:20:29 2026 EDT
+gpgv:                using RSA key 18831DBCCC57290C1806F359147F9E491D716489
+gpgv: Good signature from "Fetch Test <fetch@example.invalid>"
+ok
+test_corrupt_cache_is_refetched (test_verify_product_public.PublicProductVerifyTests.test_corrupt_cache_is_refetched) ... gpgv: Signature made Fri Oct 16 01:20:30 2026 EDT
+gpgv:                using RSA key 01EFF9F118D5DD9F2945E04CFA42B12516456876
+gpgv: Good signature from "Fetch Test <fetch@example.invalid>"
+gpgv: Signature made Fri Oct 16 01:20:30 2026 EDT
+gpgv:                using RSA key 01EFF9F118D5DD9F2945E04CFA42B12516456876
+gpgv: Good signature from "Fetch Test <fetch@example.invalid>"
+ok
+test_default_verifies_public_cohort (test_verify_product_public.PublicProductVerifyTests.test_default_verifies_public_cohort) ... gpgv: Signature made Fri Oct 16 01:20:31 2026 EDT
+gpgv:                using RSA key 9A533183E2FCD983D39A195670C36ED3134E48C9
+gpgv: Good signature from "Fetch Test <fetch@example.invalid>"
+ok
+test_rejects_unsafe_signed_hash_before_cache_access (test_verify_product_public.PublicProductVerifyTests.test_rejects_unsafe_signed_hash_before_cache_access) ... gpgv: Signature made Fri Oct 16 01:20:32 2026 EDT
+gpgv:                using RSA key 9B9D68DAFFE0660FF8104A209CE9CB01C2615A5A
+gpgv: Good signature from "Fetch Test <fetch@example.invalid>"
+ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 4.440s
+
+OK

@@ -1,0 +1,16 @@
+test_fetches_only_signed_exact_cohort (test_fetch_public_release.PublicReleaseFetchTests.test_fetches_only_signed_exact_cohort) ... ok
+test_rejects_existing_unsigned_extra_package (test_fetch_public_release.PublicReleaseFetchTests.test_rejects_existing_unsigned_extra_package) ... ok
+test_rejects_package_changed_after_signed_manifest (test_fetch_public_release.PublicReleaseFetchTests.test_rejects_package_changed_after_signed_manifest) ... FAIL
+
+======================================================================
+FAIL: test_rejects_package_changed_after_signed_manifest (test_fetch_public_release.PublicReleaseFetchTests.test_rejects_package_changed_after_signed_manifest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/dshanpi-workspace/dshanpi-build/tests/test_fetch_public_release.py", line 188, in test_rejects_package_changed_after_signed_manifest
+    self.assertFalse((output / package.name).exists())
+AssertionError: True is not false
+
+----------------------------------------------------------------------
+Ran 3 tests in 5.335s
+
+FAILED (failures=1)

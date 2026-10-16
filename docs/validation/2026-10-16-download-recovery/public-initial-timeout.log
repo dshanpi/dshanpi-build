@@ -1,0 +1,14 @@
+gpgv: Signature made Thu Oct 15 05:56:31 2026 EDT
+gpgv:                using RSA key 476BF598CA47F12146EF18620F6EDF1B5C41F3EC
+gpgv: Good signature from "DShanPI APT Archive <apt@dshanpi.com>"
+Verified 1/12: armbian-bsp-cli-avaota-a1-legacy
+Verified 2/12: armbian-bsp-desktop-avaota-a1-legacy
+Verified 3/12: armbian-firmware
+Verified 4/12: avaota-a1-release-core
+Verified 5/12: avaota-a1-release-desktop
+Verified 6/12: avaota-a1-repository
+Verified 7/12: base-files
+Verified 8/12: dshanpi-archive-keyring
+Verified 9/12: dspi-config
+Verified 10/12: linux-dtb-legacy-sun55iw3-syterkit
+Verified 11/12: linux-headers-legacy-sun55iw3-syterkit

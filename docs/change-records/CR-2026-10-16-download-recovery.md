@@ -79,14 +79,18 @@ flowchart TD
 | 静态检查 | Python 编译、shell `bash -n`、`actionlint -shellcheck= -pyflakes=`、`git diff --check` | PASS | 本地命令输出；workflow 无修改 |
 | 政策 | `python3 tools/check-delivery-policy.py --peer ../ArmBianOS --peer ../dspi-config` | PASS | 三仓政策一致，无政策副本修改 |
 | 历史 PR CI | PR #64 的 `ad615ca` 检查 | PASS | Actions run `38854104469`；不代替本轮新提交的 CI |
+| 本轮源码 CI | PR #64 的 `e75560f`、`d9322b4` 检查 | PASS | Actions runs `38854867061`、`38855425230`，验证清单固定源码 SHA 和任务 URL |
 | 公网历史全量检查 | 上轮 Avaota `2026.10.14-1` 完整下载 | BLOCKED | 上轮记录已说明下载缓慢；本轮独立重试的实际结果见验证清单 |
-| 软件全回归及本轮公网重试 | 完整单元、shell 集成与 `timeout 300` 公网 verifier | NOT-RUN | 提交前由后续证据提交记录最终实际结果 |
+| 软件全回归 | `python3 -m unittest discover -s tests -p 'test_*.py'` 与 `bash tests/test.sh` | PASS | 最终 119 项单元测试；`python-tests.log`、`shell-tests.log` |
+| 本轮公网首次重试 | `timeout 300 python3 -u scripts/verify-product-public.py avaota-a1 2026.10.14-1` | BLOCKED | 11/12 个包通过，最后一个内核包下载超时；`public-initial-timeout.log` |
+| 本轮公网完整复核 | 同一命令加 `--cache-dir output/public-verification-cache` | PASS | 清单重新验签，11 个已公开下载的完整包重新哈希，补齐最后内核包，12/12 哈希与身份通过；`public-full-verification.log` |
 | DEB/镜像发布与实板 | 新包发布、升级、重启、回滚 | NOT-RUN | 本轮只修改下载/验证工具与维护资料，无包或板端操作 |
 
 ## 未完成项
 
-本轮完整回归、公开端点重试和最终提交 CI 的结果由后续独立证据提交补齐。若公网全量下载
-仍未完成，PR 保持草稿并明确未验证的包；不得用测试 fixture 或区间响应替代完整公网哈希。
+本轮软件回归和公网完整复核已经完成，补齐上一轮缺失的 12 包验证。后续最终远端 CI 状态
+见 PR #64；本地测试与已确认源码 CI 记录在验证清单中。本轮不涉及新的 DEB/镜像发布及
+实板操作，相关历史未验收项仍按原发行记录维护。
 
 ## 交付影响
 

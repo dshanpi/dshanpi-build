@@ -1,0 +1,69 @@
+.............................................................................................verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+.verified testing publication for dshanpi-a1 2026.10.15-1
+verify-apt-upload: publication checksum mismatch: pool/common/f/fixture/fixture_1_arm64.deb
+..verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+...verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+.verified testing publication for dshanpi-a1 2026.10.15-1
+.....verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+.verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+verify-apt-upload: repository state changed: expected 1a82168a65217ba73fcb313f7ae027806e19614be56b4f5c495f47983ef481ec, found 39ebe40bb0bdc90bedf75e2edbfd62c8d08d75bcd23a875c2788fd94a396e207
+..verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+.verified testing publication for dshanpi-a1 2026.10.15-1
+.verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+verified testing publication for dshanpi-a1 2026.10.15-1
+..verified testing publication for dshanpi-a1 2026.10.15-1
+verify-apt-upload: signature verification failed: /tmp/tmpahzihkpx/server/incoming/20261015T120000Z-bf6bd7080528517a-2/repository/SHA256SUMS
+.gpgv: Signature made Fri Oct 16 01:21:40 2026 EDT
+gpgv:                using RSA key 41ACC1F0F3D701F124915D19A94E6EDA0CE3758F
+gpgv: Good signature from "Fetch Test <fetch@example.invalid>"
+gpgv: Signature made Fri Oct 16 01:21:40 2026 EDT
+gpgv:                using RSA key 41ACC1F0F3D701F124915D19A94E6EDA0CE3758F
+gpgv: Good signature from "Fetch Test <fetch@example.invalid>"
+.gpgv: Signature made Fri Oct 16 01:21:41 2026 EDT
+gpgv:                using RSA key 98E1988879D0C7B827E71013FE5809C99C3AE9B8
+gpgv: Good signature from "Fetch Test <fetch@example.invalid>"
+gpgv: Signature made Fri Oct 16 01:21:41 2026 EDT
+gpgv:                using RSA key 98E1988879D0C7B827E71013FE5809C99C3AE9B8
+gpgv: Good signature from "Fetch Test <fetch@example.invalid>"
+.gpgv: Signature made Fri Oct 16 01:21:42 2026 EDT
+gpgv:                using RSA key 3FF993B213F3330CAEDDB79858B6C19A783D6037
+gpgv: Good signature from "Fetch Test <fetch@example.invalid>"
+.gpgv: Signature made Fri Oct 16 01:21:44 2026 EDT
+gpgv:                using RSA key 183CC4EBBC1D378C1A2DFB43504E53E8F24DA474
+gpgv: Good signature from "Fetch Test <fetch@example.invalid>"
+...
+----------------------------------------------------------------------
+Ran 119 tests in 43.241s
+
+OK
+Current signed repository: /tmp/tmpvag6gibe/server/releases/20261015T120000Z-025493e825596d43-1
+Current signed repository: /tmp/tmpvag6gibe/server/releases/20261015T120000Z-ce7de471cbb315cd-2
+Current signed repository: /tmp/tmpck8mlahw/server/releases/20261015T120000Z-33a703cc4b984548-1
+Current signed repository: /tmp/tmpgqsjtp2k/server/releases/20261015T120000Z-27d0f3d2772462d5-1
+Current signed repository: /tmp/tmpl4cg_khm/server/releases/20261015T120000Z-284175c758c136f4-1
+The identical signed repository is already current; no switch needed.
+Current signed repository: /tmp/tmpukl54o56/server/releases/20261015T120000Z-e4ec8025378b3ade-1
+Current signed repository: /tmp/tmp9hct9qeo/server/releases/20261015T120000Z-b2219db3689976c6-1
+Current signed repository: /tmp/tmp1brn_c11/server/releases/20261015T120000Z-1a82168a65217ba7-1
+Current signed repository: /tmp/tmp1brn_c11/server/releases/20261015T120000Z-39ebe40bb0bdc90b-3
+Current signed repository: /tmp/tmp3eimi9ez/server/releases/20261015T120000Z-4adca6aa2f695296-1
+Current signed repository: /tmp/tmp3eimi9ez/server/releases/20261015T120000Z-764e0fe633564983-3
+Current signed repository: /tmp/tmpv1o88gje/server/releases/20261015T120000Z-01fdf78e8f455e33-1
+Current signed repository: /tmp/tmprrpzsmcq/server/releases/20261015T120000Z-436a4c5c262f06ca-1
+Current signed repository: /tmp/tmprrpzsmcq/server/releases/20261015T120000Z-8b1e73565afe02d7-2
+Current signed repository: /tmp/tmpahzihkpx/server/releases/20261015T120000Z-cffae614a0d57a25-1

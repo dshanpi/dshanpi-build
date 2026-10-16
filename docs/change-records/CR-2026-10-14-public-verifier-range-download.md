@@ -82,6 +82,11 @@ verified its signature and two complete packages, but did not complete the large
 full public-cohort acceptance remains outstanding before merge. This change does not add new hardware evidence and does not alter the existing
 prerelease/stable decisions.
 
+2026-10-16 follow-up: the complete 12-package Avaota public cohort passed signature, SHA-256
+and DEB identity checks after the download-recovery/cache changes. The original failed or incomplete
+attempts remain recorded above; see `CR-2026-10-16-download-recovery.md` and its full public log
+for the completion evidence. This closes the public-cohort prerequisite before review.
+
 ## 交付影响
 
 Post-publication verification now consumes public objects with the same bounded transport semantics as
