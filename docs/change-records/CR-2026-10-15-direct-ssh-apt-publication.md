@@ -6,6 +6,7 @@ requirements:
   - REQ-APT-SSH-20261015-001
   - REQ-APT-SSH-20261015-002
   - REQ-APT-SSH-20261015-003
+  - REQ-APT-SSH-20261015-004
 ---
 # Direct CI upload to the apt.100ask.net server
 
@@ -19,6 +20,8 @@ R1 and Avaota A1 and the three A1 optional-component entry points. No DEB bytes,
 client package versions, signing trust, hardware acceptance rules or other repositories are changed.
 
 ## 业务逻辑
+
+Older-server compatibility fix: `d301ca9ff2122e1d7897420248d38ccf160d4377`.
 
 Rsync authentication fix: `54c98bc55311b9deddf6f79b22412eb562abfb0c`.
 
@@ -46,14 +49,17 @@ before downloading repository history.
 
 CI streams `ssh-repository.py` over SSH and uploads the existing verifier and public key alongside
 the job's private control directory; the server installs no custom service or importer and CI uses
-no sudo. Base packages Python 3.9+, rsync, gpg and gpgv must be installed on the server.
+no sudo. Base packages Python 3.6+, rsync, gpg and gpgv must be installed on the server.
 
 Rsync compares checksums and uses `--link-dest` to reuse identical previous files without retransmission
 or duplicate DEB storage, even when candidate timestamps differ. It never uses inplace writes to
 hard-linked live files. A server lock covers predecessor verification, signature/index/package checks,
 history comparison and the atomic `current` symlink replacement. Old releases remain available on disk.
 Only explicit signed purge removal lists may remove pool files from a new snapshot; no automatic
-snapshot or history deletion is introduced. The web root is the `current` subdirectory.
+snapshot or history deletion is introduced. The web root is the `current` subdirectory. Remote initialization checks the Python version and
+required tools before creating storage or transferring packages. The verifier quotes its generic
+return annotation so Python before 3.9 can import the same verification code without evaluating
+unsupported builtin generic types; signature and package checks are unchanged.
 
 The migration workflow reads and verifies the existing Pages snapshot, uploads those exact signed
 bytes with an explicit bootstrap operation, then downloads and verifies the resulting server snapshot.
@@ -124,11 +130,15 @@ flowchart TD
 | User-requested credential retry | Actions run `38842527056` | FAIL | Updated host/account still rejected during initial SSH authentication; no upload |
 | Retry after password correction | Actions run `38842701635` | FAIL | Initial SSH prepare succeeded and staging directories were created; nested sshpass then sent a scrubbed password during rsync; current was never switched |
 | Single-helper regression | `python3 -m unittest discover -s tests -p 'test_*.py'` | PASS | 97 tests, including real sshpass PTY authentication and nested-password scrubbing reproduction; `/tmp/dshanpi-single-sshpass-regression.log` |
+| Single-helper GitHub CI | Actions run `38843837341` | PASS | PR #60 merged as `6e964b47c87ccb5bcde710ffe0c63e799ebaf6ed` |
+| Actual upload and server verification | Migration run `38843832881` | FAIL | SSH and repository/control transfer succeeded; older server Python could not evaluate the verifier generic return annotation, so no current switch occurred |
+| Public HTTPS | `curl --head https://apt.100ask.net/archive-key.asc` and TLS certificate inspection | FAIL | Served certificate covers only 1v1.100ask.net; user asked to configure matching TLS and current web root |
+| Older-server compatibility regression | `python3 -m unittest discover -s tests -p 'test_*.py'` | PASS | 99 tests, including pre-3.9 annotation import behavior and missing-tool rejection before storage creation; `/tmp/dshanpi-python-compat-tests.log` |
 | Workflow semantics | `actionlint -shellcheck= -pyflakes=` on the six changed workflows | PASS | Official actionlint v1.7.12, downloaded and SHA-256 verified in `/tmp/dshanpi-ci-tools/` |
 | Policy | `python3 tools/check-delivery-policy.py --peer ../ArmBianOS --peer ../dspi-config` | PASS | Existing shared policy copies match; policy is unchanged |
 | Source hygiene | `python3 tools/check-repository-hygiene.py` and `git diff --check` | PASS | Local index and whitespace checks; no credentials added |
 | Change record | `python3 tools/check-change-record.py` | PASS | Clean worktree based on main; unrelated uncommitted changes excluded |
-| Remote deployment | Migration, real SSH authentication, domain/TLS cutover and public cohort verification | NOT-RUN | Updated password allows initial SSH preparation; upload/readback awaits the single-sshpass fix, and website cutover remains unverified |
+| Remote deployment | Migration, real SSH authentication, domain/TLS cutover and public cohort verification | NOT-RUN | SSH and transfer succeeded; old Python blocked verification, and public TLS is mismatched. Compatibility retry/readback and public endpoint verification remain pending |
 | Hardware | Four-product physical-board update and rollback | NOT-RUN | Hosting-only implementation; no board execution or new cohort publication |
 
 These tests use real GPG signatures, repository verification, rsync and filesystem hardlinks. The
@@ -144,13 +154,18 @@ existing Pages state, but failed at HOST format validation before connecting to 
 but authentication was rejected (sshpass exit 5). A further credential retry also failed. After the password was corrected, run `38842701635`
 successfully completed the initial SSH prepare, proving authentication and directory access. Its rsync
 connection failed because the script nested sshpass and inherited a scrubbed password; the follow-up
-removes that duplicate layer and awaits retry. No further Secrets change is required for this issue. The user must grant directory
+removed that duplicate layer and passed CI. Run `38843832881` uploaded the repository and control
+files, then stopped before enabling current because the old Python could not import a builtin generic
+annotation. The compatibility follow-up quotes that annotation and adds server-tool preflight checks.
+The real-server retry and public TLS correction are still pending. The user must grant directory
 permissions, install server base tools and point the website root at
 `/www/wwwroot/apt.100ask.net/current` with valid HTTPS.
-Both implementation PRs are merged. After fixing rsync authentication layering, retry migration, validate
+Both implementation PRs are merged. After the Python compatibility fix, retry migration, validate
 the new host and switch DNS while pausing legacy publishers. The first real release must pass public signature,
 index and DEB verification. The earlier credential failures changed no server files. The later prepare created staging directories,
-but no signed snapshot was enabled and DNS/website settings remain unchanged.
+and the single-helper retry uploaded to staging. No signed snapshot was enabled by these failed
+attempts; the agent has not changed DNS or website settings. Public DNS now resolves to a server
+serving a mismatched certificate, which requires the administrator website correction.
 Physical-board acceptance for future package cohorts remains separately required. Implementation is
 isolated in a clean worktree based on main, preserving unrelated changes in the original workspace.
 

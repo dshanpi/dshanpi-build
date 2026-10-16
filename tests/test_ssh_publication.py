@@ -5,6 +5,7 @@ import importlib.util
 import json
 import lzma
 import os
+import runpy
 from pathlib import Path
 import shutil
 import subprocess
@@ -225,6 +226,25 @@ class SSHPublicationTest(unittest.TestCase):
         (self.server / 'current').symlink_to(self.root)
         with self.assertRaisesRegex(ValueError, 'outside release'):
             SERVER.current_release(self.server)
+
+    def test_verifier_imports_without_runtime_builtin_generic_support(self):
+        # Model the import-time behavior of Python before 3.9 without requiring
+        # an obsolete interpreter on the CI runner.
+        class LegacyBuiltin:
+            @classmethod
+            def __class_getitem__(cls, item):
+                raise TypeError("'type' object is not subscriptable")
+        namespace = runpy.run_path(str(ROOT / 'scripts/verify-repository.py'),
+                                  init_globals={'list': LegacyBuiltin, 'dict': LegacyBuiltin})
+        self.assertEqual(namespace['parse_control']('Package: fixture\nVersion: 1\n'),
+                         [{'Package': 'fixture', 'Version': '1'}])
+
+    def test_missing_server_tool_fails_before_storage_creation(self):
+        root = self.root / 'missing-tool-server'
+        with mock.patch.object(SERVER.shutil, 'which', return_value=None):
+            with self.assertRaisesRegex(ValueError, 'missing server tool: rsync'):
+                SERVER.initialize(root)
+        self.assertFalse(root.exists())
 
     def test_real_sshpass_authentication_and_nested_environment_scrubbing(self):
         # Exercise the real PTY/password helper without network or system users.
