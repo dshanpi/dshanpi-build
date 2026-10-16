@@ -7,6 +7,7 @@ requirements:
   - REQ-APT-SSH-20261015-002
   - REQ-APT-SSH-20261015-003
   - REQ-APT-SSH-20261015-004
+  - REQ-APT-SSH-20261015-005
 ---
 # Direct CI upload to the apt.100ask.net server
 
@@ -20,6 +21,8 @@ R1 and Avaota A1 and the three A1 optional-component entry points. No DEB bytes,
 client package versions, signing trust, hardware acceptance rules or other repositories are changed.
 
 ## 业务逻辑
+
+Gpgv output and verification-resume fix: `bf7b0b2cdd713fb2525c8e547f0cc368390cc4ef`.
 
 Older-server compatibility fix: `d301ca9ff2122e1d7897420248d38ccf160d4377`.
 
@@ -59,7 +62,12 @@ Only explicit signed purge removal lists may remove pool files from a new snapsh
 snapshot or history deletion is introduced. The web root is the `current` subdirectory. Remote initialization checks the Python version and
 required tools before creating storage or transferring packages. The verifier quotes its generic
 return annotation so Python before 3.9 can import the same verification code without evaluating
-unsupported builtin generic types; signature and package checks are unchanged.
+unsupported builtin generic types; signature and package checks are unchanged. Clear-signed plaintext is captured from gpgv stdout
+instead of an already-created temporary output file, avoiding legacy overwrite behavior. Signature
+failure diagnostics include the actual gpgv error; a signed-content mismatch is reported separately.
+An optional migration resume_job updates only verifier/key control files in a known failed upload,
+then performs all original checks against the locally fetched expected complete signed state. It
+never rewrites the staged payload or skips its expected SHA256SUMS/signature/history checks.
 
 The migration workflow reads and verifies the existing Pages snapshot, uploads those exact signed
 bytes with an explicit bootstrap operation, then downloads and verifies the resulting server snapshot.
@@ -88,6 +96,10 @@ flowchart TD
   J --> K[Verify exact public APT cohort]
   K -->|failure| L[Mark CI failed and inspect DNS TLS cache and public downloads]
   K -->|success| M[Public package delivery verified]
+  R[Explicit failed upload job] --> U{Safe job identifier}
+  U -->|no| X
+  U -->|yes| V[Refresh verifier and public key only]
+  V --> H
   N[Explicit migration workflow] --> O[Fetch and verify existing signed Pages state]
   O --> P{Server empty or identical state}
   P -->|no| X
@@ -134,11 +146,15 @@ flowchart TD
 | Actual upload and server verification | Migration run `38843832881` | FAIL | SSH and repository/control transfer succeeded; older server Python could not evaluate the verifier generic return annotation, so no current switch occurred |
 | Public HTTPS | `curl --head https://apt.100ask.net/archive-key.asc` and TLS certificate inspection | FAIL | Served certificate covers only 1v1.100ask.net; user asked to configure matching TLS and current web root |
 | Older-server compatibility regression | `python3 -m unittest discover -s tests -p 'test_*.py'` | PASS | 99 tests, including pre-3.9 annotation import behavior and missing-tool rejection before storage creation; `/tmp/dshanpi-python-compat-tests.log` |
+| Python-compatibility GitHub CI | Actions run `38844443806` | PASS | PR #61 merged as `ddcd9abc5b1acad1edd3999fa7b90679433c73d1` |
+| Server index verification | Migration run `38844385100` | FAIL | Python/tool preflight and upload passed; InRelease verification failed with legacy gpgv output-file handling still under investigation; current not enabled |
+| HTTPS after administrator update | `curl --head https://apt.100ask.net/archive-key.asc` | PASS | TLS now verifies; HTTP 404 remains until the repository is enabled and the web root is confirmed |
+| Gpgv/resume regression | `python3 -m unittest discover -s tests -p 'test_*.py'` | PASS | 102 tests, including legacy non-overwrite gpgv simulation, resume without retransmission, expected-state mismatch and invalid-job rejection; `/tmp/dshanpi-gpg-compat-tests.log` |
 | Workflow semantics | `actionlint -shellcheck= -pyflakes=` on the six changed workflows | PASS | Official actionlint v1.7.12, downloaded and SHA-256 verified in `/tmp/dshanpi-ci-tools/` |
 | Policy | `python3 tools/check-delivery-policy.py --peer ../ArmBianOS --peer ../dspi-config` | PASS | Existing shared policy copies match; policy is unchanged |
 | Source hygiene | `python3 tools/check-repository-hygiene.py` and `git diff --check` | PASS | Local index and whitespace checks; no credentials added |
 | Change record | `python3 tools/check-change-record.py` | PASS | Clean worktree based on main; unrelated uncommitted changes excluded |
-| Remote deployment | Migration, real SSH authentication, domain/TLS cutover and public cohort verification | NOT-RUN | SSH and transfer succeeded; old Python blocked verification, and public TLS is mismatched. Compatibility retry/readback and public endpoint verification remain pending |
+| Remote deployment | Migration, real SSH authentication, domain/TLS cutover and public cohort verification | NOT-RUN | SSH, transfer and Python preflight now pass; legacy gpgv verification retry/readback and public object verification remain pending; TLS corrected by administrator |
 | Hardware | Four-product physical-board update and rollback | NOT-RUN | Hosting-only implementation; no board execution or new cohort publication |
 
 These tests use real GPG signatures, repository verification, rsync and filesystem hardlinks. The
@@ -157,10 +173,13 @@ connection failed because the script nested sshpass and inherited a scrubbed pas
 removed that duplicate layer and passed CI. Run `38843832881` uploaded the repository and control
 files, then stopped before enabling current because the old Python could not import a builtin generic
 annotation. The compatibility follow-up quotes that annotation and adds server-tool preflight checks.
-The real-server retry and public TLS correction are still pending. The user must grant directory
+The Python compatibility fix passed CI and run `38844385100` progressed to InRelease verification,
+which failed on the older gpgv path. The next follow-up uses stdout output and detailed failure
+reporting, and allows a verification-only retry of the existing uploaded snapshot. The administrator
+has corrected TLS; public repository objects currently return 404 pending enablement/root validation. The user must grant directory
 permissions, install server base tools and point the website root at
 `/www/wwwroot/apt.100ask.net/current` with valid HTTPS.
-Both implementation PRs are merged. After the Python compatibility fix, retry migration, validate
+Both implementation PRs are merged. After the gpgv output compatibility fix, retry verification of the existing upload, validate
 the new host and switch DNS while pausing legacy publishers. The first real release must pass public signature,
 index and DEB verification. The earlier credential failures changed no server files. The later prepare created staging directories,
 and the single-helper retry uploaded to staging. No signed snapshot was enabled by these failed

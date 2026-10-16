@@ -272,7 +272,57 @@ sys.exit(0 if value.rstrip(b'\\r\\n') == os.environ['APT_TEST_EXPECT_PASSWORD'].
                                     capture_output=True, timeout=10)
             self.assertEqual(result.returncode, expected)
 
-    def test_full_shell_transport_migration_fetch_and_update(self):
+    def test_legacy_gpgv_output_does_not_require_overwriting_a_file(self):
+        candidate = self.fixture('legacy-gpgv')
+        bin_dir = self.root / 'bin'
+        bin_dir.mkdir()
+        gpgv = shutil.which('gpgv')
+        wrapper = bin_dir / 'gpgv'
+        wrapper.write_text('#!/usr/bin/env python3\nimport os, sys\nfrom pathlib import Path\n'
+                           'args = sys.argv[1:]\n'
+                           'if "--output" in args:\n'
+                           '    target = args[args.index("--output") + 1]\n'
+                           '    if target != "-" and Path(target).exists():\n'
+                           '        sys.exit(23)\n'
+                           + 'os.execv(' + repr(gpgv) + ', [' + repr(gpgv) + '] + args)\n')
+        wrapper.chmod(0o755)
+        env = dict(self.env, PATH=str(bin_dir) + ':' + os.environ['PATH'])
+        result = subprocess.run(['python3', str(ROOT / 'scripts/verify-repository.py'),
+                                 '--snapshot', str(candidate), str(self.public), str(candidate)],
+                                env=env, capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stderr)
+
+    def test_resume_verifies_existing_upload_without_retransferring_payload(self):
+        candidate = self.fixture('resume')
+        job = self.stage(candidate, bootstrap=True)
+        relative = Path('pool/common/f/fixture/fixture_1_arm64.deb')
+        inode = (self.server / 'incoming' / job / 'repository' / relative).stat().st_ino
+        env = self.transport_environment()
+        env.update(APT_RESUME_JOB_ID=job, APT_TEST_BLOCK_REPOSITORY='1')
+        result = subprocess.run([str(ROOT / 'scripts/publish-apt.sh'), str(candidate),
+                                 str(self.public), '--bootstrap'], env=env,
+                                capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stderr + result.stdout)
+        self.assertEqual((SERVER.current_release(self.server) / relative).stat().st_ino, inode)
+        env['APT_RESUME_JOB_ID'] = '../invalid'
+        result = subprocess.run([str(ROOT / 'scripts/publish-apt.sh'), str(candidate),
+                                 str(self.public), '--bootstrap'], env=env, capture_output=True)
+        self.assertNotEqual(result.returncode, 0)
+
+    def test_resume_refuses_different_expected_repository_without_changing_upload(self):
+        staged = self.fixture('staged-resume')
+        job = self.stage(staged, bootstrap=True)
+        different = self.fixture('different-resume', payloads={'fixture_2_arm64.deb': b'different bytes'})
+        env = self.transport_environment()
+        env.update(APT_RESUME_JOB_ID=job, APT_TEST_BLOCK_REPOSITORY='1')
+        result = subprocess.run([str(ROOT / 'scripts/publish-apt.sh'), str(different),
+                                 str(self.public), '--bootstrap'], env=env, capture_output=True)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIsNone(SERVER.current_release(self.server))
+        self.assertEqual((self.server / 'incoming' / job / 'repository/SHA256SUMS').read_bytes(),
+                         (staged / 'SHA256SUMS').read_bytes())
+
+    def transport_environment(self):
         # Real rsync and streamed remote Python, with SSH/auth transport replaced
         # by a local command adapter. This exercises shell argument handling too.
         bin_dir = self.root / 'bin'
@@ -284,14 +334,20 @@ shift
 if [ "${APT_TEST_FAIL_RSYNC:-}" = 1 ]; then
     case "$*" in *--server*) exit 77 ;; esac
 fi
+if [ "${APT_TEST_BLOCK_REPOSITORY:-}" = 1 ]; then
+    case "$*" in *--server*"/repository/"*) exit 78 ;; esac
+fi
 exec sh -c "$*"
 ''')
         for p in bin_dir.iterdir():
             p.chmod(0o755)
-        env = dict(self.env, PATH=str(bin_dir) + ':' + os.environ['PATH'], HOST=' \tlocalhost\r\n ',
+        return dict(self.env, PATH=str(bin_dir) + ':' + os.environ['PATH'], HOST=' \tlocalhost\r\n ',
                    USERNAME=' fixture ', PASSWORD=' fixture-password ', PORT=' 22\r\n',
                    APT_TEST_EXPECT_PASSWORD=' fixture-password ',
                    APT_SERVER_ROOT=str(self.server))
+
+    def test_full_shell_transport_migration_fetch_and_update(self):
+        env = self.transport_environment()
         candidate = self.fixture('transport')
         def run(*args, success=True):
             result = subprocess.run(args, env=env, capture_output=True, text=True)
