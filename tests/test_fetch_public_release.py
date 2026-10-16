@@ -179,10 +179,16 @@ class PublicReleaseFetchTests(unittest.TestCase):
 
     def test_rejects_package_changed_after_signed_manifest(self):
         package = next(self.repository.glob("pool/**/*.deb"))
-        package.write_bytes(package.read_bytes() + b"tampered")
-        result = self.run_fetch(self.root / "tampered/packages")
+        original = package.read_bytes()
+        package.write_bytes(original + b"tampered")
+        output = self.root / "tampered/packages"
+        result = self.run_fetch(output)
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("checksum mismatch", result.stderr)
+        self.assertFalse((output / package.name).exists())
+        package.write_bytes(original)
+        retry = self.run_fetch(output)
+        self.assertEqual(retry.returncode, 0, retry.stderr)
 
 
 if __name__ == "__main__":

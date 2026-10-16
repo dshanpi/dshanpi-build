@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 import re
 import subprocess
+import sys
 import tempfile
 
 from public_repository_download import fetch
@@ -70,7 +71,7 @@ def main() -> None:
         results = []
         for index, package in enumerate(data["packages"]):
             target = work / f"package-{index}.deb"
-            fetch(base, package["filename"], target)
+            fetch(base, package["filename"], target, expected_sha256=package["sha256"])
             with target.open("rb") as stream:
                 checksum = hashlib.file_digest(stream, "sha256").hexdigest()
             if checksum != package["sha256"]:
@@ -87,6 +88,11 @@ def main() -> None:
             if fields != expected:
                 raise SystemExit(f"public package identity mismatch: {package['package']}")
             results.append({"package": package["package"], "version": package["version"], "sha256": checksum})
+            print(
+                f"Verified {index + 1}/{len(data['packages'])}: {package['package']}",
+                file=sys.stderr,
+                flush=True,
+            )
         print(json.dumps({"public_manifest_signature": "verified", "packages": results}, indent=2))
 
 

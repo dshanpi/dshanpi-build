@@ -1,9 +1,11 @@
 """Bounded, resumable downloads from the public DShanPI repository."""
 
 from concurrent.futures import ThreadPoolExecutor
+import hashlib
 import http.client
 from pathlib import Path, PurePosixPath
 import shutil
+import tempfile
 import time
 from urllib.error import HTTPError
 from urllib.parse import quote
@@ -77,13 +79,46 @@ def _fetch_range(url: str, part: Path, relative: str, start: int, end: int, tota
     _fail(f"range download remained incomplete: {relative}")
 
 
-def fetch(base_url: str, relative: str, destination: Path) -> None:
-    """Download one relative path atomically, using bounded ranges when supported."""
+def _fetch_parts(url: str, relative: str, temporary: Path, size: int) -> None:
+    workers = min(8, max(2, (size + 16 * 1024 * 1024 - 1) // (16 * 1024 * 1024)))
+    chunk = (size + workers - 1) // workers
+    parts = []
+    with ThreadPoolExecutor(max_workers=workers) as executor:
+        futures = []
+        for index in range(workers):
+            start = index * chunk
+            end = min(size, start + chunk) - 1
+            part = temporary.parent / f"part{index}"
+            parts.append(part)
+            futures.append(executor.submit(_fetch_range, url, part, relative, start, end, size))
+        for future in futures:
+            future.result()
+    with temporary.open("wb") as output:
+        for part in parts:
+            with part.open("rb") as stream:
+                shutil.copyfileobj(stream, output, 1024 * 1024)
+    if temporary.stat().st_size != size:
+        _fail(f"download size mismatch: {relative}")
+
+
+def fetch(
+    base_url: str,
+    relative: str,
+    destination: Path,
+    *,
+    expected_sha256: str | None = None,
+) -> None:
+    """Download atomically; when given a signed hash, verify it before replacement."""
     relative_path = PurePosixPath(relative)
     if relative_path.is_absolute() or relative in {"", "."} or str(relative_path) != relative or ".." in relative_path.parts:
         _fail(f"unsafe repository path: {relative}")
+    if expected_sha256 is not None and (
+        not isinstance(expected_sha256, str)
+        or len(expected_sha256) != 64
+        or any(character not in "0123456789abcdef" for character in expected_sha256)
+    ):
+        _fail("invalid expected SHA-256")
     url = base_url.rstrip("/") + "/" + quote(relative, safe="/")
-    temporary = destination.with_suffix(destination.suffix + ".tmp")
     size = 0
     accepts_ranges = False
     for attempt in range(5):
@@ -97,35 +132,28 @@ def fetch(base_url: str, relative: str, destination: Path) -> None:
                     _fail(f"object metadata has no positive size: {relative}")
                 accepts_ranges = response.headers.get("Accept-Ranges", "").lower() == "bytes"
             break
+        except HTTPError as error:
+            if error.code in {400, 401, 403, 404}:
+                _fail(f"object metadata failed with HTTP {error.code}: {relative}")
+            if attempt == 4:
+                raise
+            time.sleep(2 ** attempt)
         except (OSError, ValueError):
             if attempt == 4:
                 _fail(f"cannot determine public object size: {relative}")
             time.sleep(2 ** attempt)
-    if size >= 8 * 1024 * 1024 and accepts_ranges:
-        workers = min(8, max(2, (size + 16 * 1024 * 1024 - 1) // (16 * 1024 * 1024)))
-        chunk = (size + workers - 1) // workers
-        parts = []
-        with ThreadPoolExecutor(max_workers=workers) as executor:
-            futures = []
-            for index in range(workers):
-                start = index * chunk
-                end = min(size, start + chunk) - 1
-                part = temporary.with_suffix(temporary.suffix + f".part{index}")
-                parts.append(part)
-                futures.append((executor.submit(_fetch_range, url, part, relative, start, end, size), part, end - start + 1))
-            for future, part, expected_size in futures:
-                future.result()
-                if part.stat().st_size != expected_size:
-                    _fail(f"range download size mismatch: {relative}")
-        with temporary.open("wb") as output:
-            for part in parts:
-                with part.open("rb") as stream:
-                    shutil.copyfileobj(stream, output, 1024 * 1024)
-        if temporary.stat().st_size != size:
-            _fail(f"download size mismatch: {relative}")
-        for part in parts:
-            part.unlink()
-    else:
-        request = Request(url, headers={"Cache-Control": "no-cache"})
-        _fetch_stream(request, temporary, relative, 200, size)
-    temporary.replace(destination)
+    # Use the destination filesystem for atomic replacement, with private files
+    # per invocation. A failed or concurrent fetch cannot reuse another URL's parts.
+    with tempfile.TemporaryDirectory(prefix=".dshanpi-download-", dir=destination.parent) as work:
+        temporary = Path(work) / "download"
+        if size >= 8 * 1024 * 1024 and accepts_ranges:
+            _fetch_parts(url, relative, temporary, size)
+        else:
+            request = Request(url, headers={"Cache-Control": "no-cache"})
+            _fetch_stream(request, temporary, relative, 200, size)
+        if expected_sha256 is not None:
+            with temporary.open("rb") as stream:
+                actual = hashlib.file_digest(stream, "sha256").hexdigest()
+            if actual != expected_sha256:
+                _fail(f"downloaded package checksum mismatch: {relative}")
+        temporary.replace(destination)

@@ -158,7 +158,7 @@ def fetch_release(
                     fail(f"existing package differs from the signed cohort: {relative.name}")
                 print(f"reused verified package: {relative.name}")
             else:
-                fetch(base_url, str(relative), destination)
+                fetch(base_url, str(relative), destination, expected_sha256=expected)
             if digest(destination) != expected:
                 fail(f"downloaded package checksum mismatch: {relative}")
             actual = tuple(package_field(destination, field) for field in ("Package", "Version", "Architecture"))
