@@ -231,7 +231,7 @@ class SSHPublicationTest(unittest.TestCase):
         # by a local command adapter. This exercises shell argument handling too.
         bin_dir = self.root / 'bin'
         bin_dir.mkdir()
-        (bin_dir / 'sshpass').write_text('#!/bin/sh\n[ "$1" = -e ] || exit 90\nshift\nexec "$@"\n')
+        (bin_dir / 'sshpass').write_text('#!/bin/sh\n[ "$1" = -e ] || exit 90\n[ "$SSHPASS" = "$APT_TEST_EXPECT_PASSWORD" ] || exit 91\nshift\nexec "$@"\n')
         (bin_dir / 'ssh').write_text('''#!/bin/sh
 while [ "$1" = -p ] || [ "$1" = -o ] || [ "$1" = -l ]; do shift 2; done
 shift
@@ -242,8 +242,9 @@ exec sh -c "$*"
 ''')
         for p in bin_dir.iterdir():
             p.chmod(0o755)
-        env = dict(self.env, PATH=str(bin_dir) + ':' + os.environ['PATH'], HOST='localhost',
-                   USERNAME='fixture', PASSWORD='fixture-password', PORT='22',
+        env = dict(self.env, PATH=str(bin_dir) + ':' + os.environ['PATH'], HOST=' \tlocalhost\r\n ',
+                   USERNAME=' fixture ', PASSWORD=' fixture-password ', PORT=' 22\r\n',
+                   APT_TEST_EXPECT_PASSWORD=' fixture-password ',
                    APT_SERVER_ROOT=str(self.server))
         candidate = self.fixture('transport')
         def run(*args, success=True):

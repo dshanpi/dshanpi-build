@@ -4,6 +4,7 @@ date: 2026-10-15
 repository: dshanpi-build
 requirements:
   - REQ-APT-SSH-20261015-001
+  - REQ-APT-SSH-20261015-002
 ---
 # Direct CI upload to the apt.100ask.net server
 
@@ -18,6 +19,8 @@ client package versions, signing trust, hardware acceptance rules or other repos
 
 ## 业务逻辑
 
+Whitespace compatibility follow-up: `771b7598287435682fbeb5f5ad3f7586aef18583`.
+
 Implementation commit: `8f0dbefc12a868ce205b210d059a4ca96315d6fb`.
 
 `release.yml` defaults to SSH and is reusable by AXCL, AXCL 16GB and AIC entry points. Each release
@@ -30,6 +33,10 @@ and retaining the complete historical repository on every testing release.
 SSH/rsync uses the four requested credentials, the new site root and a per-checkout known-hosts
 file. An optional committed, independently verified host public key pins it across runners without
 a fifth secret; otherwise the first observed key is accepted and later changes in that checkout fail.
+Connection fields HOST, USERNAME and PORT are trimmed at their boundaries to tolerate pasted
+spaces and CRLF. PASSWORD is opaque and preserved byte-for-byte. Migration validates these fields
+before downloading repository history.
+
 CI streams `ssh-repository.py` over SSH and uploads the existing verifier and public key alongside
 the job's private control directory; the server installs no custom service or importer and CI uses
 no sudo. Base packages Python 3.9+, rsync, gpg and gpgv must be installed on the server.
@@ -51,9 +58,11 @@ but SSH releases never write or encode its size-limited state.
 
 ```mermaid
 flowchart TD
-  A[Release or component workflow] --> B[Resolve and fetch server current snapshot]
+  A[Release or component workflow] --> S{Connection fields valid after boundary trim}
+  S -->|no| X[Stop without publishing]
+  S -->|yes| B[Resolve and fetch server current snapshot]
   B --> C{Existing signed state valid}
-  C -->|no| X[Stop without publishing]
+  C -->|no| X
   C -->|yes| D[Build or promote exact cohort and sign]
   D --> E[Verify and prepare public site assets]
   E --> F[Upload to isolated incoming job using rsync link-dest]
@@ -97,14 +106,17 @@ flowchart TD
 | 类型 | 命令/检查 | 结果 | 证据 |
 | --- | --- | --- | --- |
 | Signed publication simulation | `python3 -m unittest tests.test_ssh_publication -v` | PASS | 12 tests including atomic-switch/transfer failure; `/tmp/dshanpi-ssh-tests.log` |
+| Connection-field regression | `python3 -m unittest discover -s tests -p 'test_*.py'` | PASS | 96 tests, including spaces/CRLF in routing fields and exact preservation of password whitespace; `/tmp/dshanpi-apt-whitespace-tests.log` |
 | Regression | `python3 -m unittest discover -s tests -p 'test_*.py'` | PASS | 96 tests passed on clean main-based worktree, including 12 SSH cases; `/tmp/dshanpi-apt-clean-regression.log` |
 | Integration | `bash tests/test.sh` | PASS | `dshanpi-build tests passed` on clean worktree; `/tmp/dshanpi-apt-clean-integration.log` |
 | Syntax | Parse workflow YAML and run `bash -n` on embedded commands and all shell scripts | PASS | Local command output |
+| GitHub PR CI | `Validate APT tooling` run `38841214252` | PASS | PR #57 merged as `373bb302949270c39b8c1c6dbb5b363c19eb0853` |
+| First real migration | Actions run `38841374351` | FAIL | Existing Pages state fetched and verified; HOST format rejected before SSH or any server mutation |
 | Workflow semantics | `actionlint -shellcheck= -pyflakes=` on the six changed workflows | PASS | Official actionlint v1.7.12, downloaded and SHA-256 verified in `/tmp/dshanpi-ci-tools/` |
 | Policy | `python3 tools/check-delivery-policy.py --peer ../ArmBianOS --peer ../dspi-config` | PASS | Existing shared policy copies match; policy is unchanged |
 | Source hygiene | `python3 tools/check-repository-hygiene.py` and `git diff --check` | PASS | Local index and whitespace checks; no credentials added |
 | Change record | `python3 tools/check-change-record.py` | PASS | Clean worktree based on main; unrelated uncommitted changes excluded |
-| Remote deployment | Migration, real SSH authentication, domain/TLS cutover and public cohort verification | NOT-RUN | User still configures credentials, directory and website; no remote state changed |
+| Remote deployment | Migration, real SSH authentication, domain/TLS cutover and public cohort verification | NOT-RUN | Four Secrets confirmed; first attempt stopped before SSH, so upload/readback and website cutover remain unverified |
 | Hardware | Four-product physical-board update and rollback | NOT-RUN | Hosting-only implementation; no board execution or new cohort publication |
 
 These tests use real GPG signatures, repository verification, rsync and filesystem hardlinks. The
@@ -115,11 +127,14 @@ commands in `tests/test_ssh_publication.py` reproduce the results in CI.
 
 ## 未完成项
 
-The user must configure the four deployment Secrets, grant directory permissions, install server
-base tools and point the website root at `/www/wwwroot/apt.100ask.net/current` with valid HTTPS.
+The four deployment Secrets are confirmed present. The first migration fetched and verified the
+existing Pages state, but failed at HOST format validation before connecting to the server. A follow-up
+trims only the connection fields and is awaiting a real migration retry. The user must grant directory
+permissions, install server base tools and point the website root at
+`/www/wwwroot/apt.100ask.net/current` with valid HTTPS.
 After publishing the reviewed workflow changes, run the migration once, validate the new host and
 switch DNS while pausing legacy publishers. The first real release must pass public signature,
-index and DEB verification. None of these external steps has been executed in this local change.
+index and DEB verification. The failed first attempt did not connect to the server or change its files, DNS or website.
 Physical-board acceptance for future package cohorts remains separately required. Implementation is
 isolated in a clean worktree based on main, preserving unrelated changes in the original workspace.
 
